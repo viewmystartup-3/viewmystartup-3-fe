@@ -1,9 +1,15 @@
 import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Temporary from "./Pages/Temporary";
 
 function App() {
   return (
     <>
-      <div>안녕</div>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Temporary />} />
+        </Routes>
+      </BrowserRouter>
     </>
   );
 }

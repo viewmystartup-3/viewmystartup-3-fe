@@ -11,6 +11,7 @@
   --brand-orange: #eb5230;
   --blue: #eb5230;
   --red-error: #c41013;
+  --white: #ffffff;
 
   /* 글씨 설정 */
   --text-xl-b: 700 1.25rem/1 "Pretendard";
@@ -42,7 +43,7 @@
 body {
   background-color: var(--black-400);
   font: var(--text) !important;
-  color: #ffffff;
+  color: var(--white);
 }
 
 ul {
