@@ -1,6 +1,6 @@
 import React from "react";
 import "./Buttons.css";
-import icRestart from "./../../assets/ic_restart.png";
+import icRestart from "../../assets/ic_restart.png";
 
 export function RoundButton({ children }) {
   return <button className="roundButton">{children}</button>;
