@@ -44,7 +44,7 @@ ul {
   }
 }
 
-@media (max-width: 744px) {
+@media (max-width: 743px) {
   header {
     gap: 20px;
   }

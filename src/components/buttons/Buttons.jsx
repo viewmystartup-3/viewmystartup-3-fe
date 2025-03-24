@@ -1,20 +1,75 @@
 import React from "react";
+import { useState } from "react";
 import "./Buttons.css";
-import icRestart from "../../assets/ic_restart.png";
+import icCheck from "../../assets/ic_check.png";
+import icCheckS from "../../assets/ic_check_s.png";
+import { GrRotateLeft } from "react-icons/gr";
 
+// 안에 색이 차 있는 둥근 버튼
 export function RoundButton({ children }) {
-  return <button className="roundButton">{children}</button>;
-}
+  const [isActive, setIsActive] = useState(false);
 
-export function RestartButton({ children }) {
+  const handleButtonClick = () => {
+    setIsActive((previous) => !previous);
+  };
+
   return (
-    <button className="restartButton">
-      <img src={icRestart} alt="재시작 버튼 이미지" className="buttonImg" />
+    <button
+      className={`roundButton ${isActive ? "active" : ""}`}
+      onClick={handleButtonClick}
+    >
       {children}
     </button>
   );
 }
 
-export function BasicButton({ children }) {
-  return <button className="basicButton">{children}</button>;
+// 안에 색 없는 둥근 버튼
+export function RoundOutlineButton({ children }) {
+  return <button className="roundOutlineButton">{children}</button>;
+}
+
+// 초기화 버튼
+export function RestartButton({ children }) {
+  const [isActive, setIsActive] = useState(false);
+
+  const handleButtonClick = () => {
+    setIsActive((previous) => !previous);
+  };
+
+  return (
+    <button
+      className={`restartButton ${isActive ? "active" : ""}`}
+      onClick={handleButtonClick}
+    >
+      <GrRotateLeft className="restartIcon" />
+      {children}
+    </button>
+  );
+}
+
+// modal창에 쓰는 선택 버튼
+export function ModalButton({ children }) {
+  const [isActive, setIsActive] = useState(false);
+
+  const handleClick = () => {
+    setIsActive((previous) => !previous);
+  };
+
+  return (
+    <button
+      className={`modalButton ${isActive ? "active" : ""}`}
+      onClick={handleClick}
+    >
+      <picture>
+        <source srcSet={icCheckS} media="(max-width: 743px)" />
+        <img src={icCheck} alt="체크 표시" className="checkIcon" />
+      </picture>
+      {children}
+    </button>
+  );
+}
+
+// modal창에 쓰는 선택 취소 버튼
+export function ModalCancelButton({ children }) {
+  return <button className="modalButton cancel">{children}</button>;
 }

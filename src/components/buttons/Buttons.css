@@ -5,19 +5,100 @@
   border-radius: 50px;
   padding: 13px 48px;
   border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.roundButton.active {
+  background-color: var(--brandOrange);
+  color: var(--white);
+}
+
+.roundOutlineButton {
+  background-color: rgba(0, 0, 0, 0);
+  color: var(--brandOrange);
+  font: var(--textLSb);
+  border-radius: 50px;
+  padding: 13px 48px;
+  border: 1px solid var(--brandOrange);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .restartButton {
   background-color: var(--black100);
-  color: var(--gray-200);
+  color: var(--gray200);
   font: var(--textSb);
   border-radius: 50px;
   padding: 8px 24px;
   border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
 }
 
-.buttonImg {
-  width: 16px;
-  height: 16px;
-  margin-right: 10px;
+.restartButton.active {
+  background-color: var(--brandOrange);
+  color: var(--white);
+}
+
+.restartIcon {
+  transform: rotate(50deg);
+}
+
+.modalButton {
+  background-color: rgba(0, 0, 0, 0);
+  color: var(--brandOrange);
+  font: var(--textM);
+  border-radius: 10px;
+  padding: 13px 24px;
+  border: 1px solid var(--brandOrange);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+}
+
+.checkIcon {
+  display: none;
+}
+
+.modalButton.active {
+  border: 1px solid var(--gray100);
+  color: var(--gray100);
+  padding: 8px 12px;
+}
+
+.modalButton.active .checkIcon {
+  display: inline-block;
+}
+
+.cancel {
+  color: var(--gray200);
+  border: 1px solid var(--gray200);
+}
+
+@media (max-width: 743px) {
+  .roundButton {
+    font: var(--textSSb);
+    padding: 13px 24px;
+  }
+
+  .roundOutlineButton {
+    font: var(--textSSb);
+    padding: 12px 24px;
+  }
+
+  .restartButton {
+    font: var(--textSSb);
+    padding: 4px 12px;
+  }
+
+  .modalButton {
+    font: var(--textSM);
+    padding: 13px 12px;
+  }
 }
