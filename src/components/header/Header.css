@@ -5,7 +5,7 @@ header {
   height: 60px;
   width: 100%;
   padding: 9px 20%;
-  border-bottom: 1px solid var(--black-100);
+  border-bottom: 1px solid var(--black100);
   gap: 50px;
   align-items: center;
 }
@@ -22,7 +22,7 @@ ul {
 
 .headerLink {
   text-decoration: none;
-  color: var(--gray-200);
+  color: var(--gray200);
   font: 600 0.9375rem/1 "Pretendard";
 }
 
@@ -60,6 +60,6 @@ ul {
   .headerLink:hover,
   .headerLink:focus,
   .headerLink:active {
-    font: var(--text-xs-b);
+    font: var(--textXsB);
   }
 }
