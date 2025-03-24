@@ -16,7 +16,7 @@
 }
 
 .roundOutlineButton {
-  background-color: rgba(0, 0, 0, 0);
+  background-color: transparent;
   color: var(--brandOrange);
   font: var(--textLSb);
   border-radius: 50px;
@@ -50,7 +50,7 @@
 }
 
 .modalButton {
-  background-color: rgba(0, 0, 0, 0);
+  background-color: transparent;
   color: var(--brandOrange);
   font: var(--textM);
   border-radius: 10px;
