@@ -1,4 +1,5 @@
 header {
+  background-color: var(--black400);
   display: flex;
   position: fixed;
   z-index: 2;
