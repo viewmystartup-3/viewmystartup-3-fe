@@ -1,37 +1,37 @@
 :root {
   /* 색상 설정 */
-  --black-400: #131313;
-  --black-300: #212121;
-  --black-200: #282828;
-  --black-100: #2e2e2e;
-  --gray-400: #333333;
-  --gray-300: #4b4b4b;
-  --gray-200: #747474;
-  --gray-100: #d8d8d8;
-  --brand-orange: #eb5230;
+  --black400: #131313;
+  --black300: #212121;
+  --black200: #282828;
+  --black100: #2e2e2e;
+  --gray400: #333333;
+  --gray300: #4b4b4b;
+  --gray200: #747474;
+  --gray100: #d8d8d8;
+  --brandOrange: #eb5230;
   --blue: #eb5230;
-  --red-error: #c41013;
+  --redError: #c41013;
   --white: #ffffff;
 
   /* 글씨 설정 */
-  --text-xl-b: 700 1.25rem/1 "Pretendard";
-  --text-xl-sb: 600 1.25rem/1 "Pretendard";
-  --text-xl-m: 500 1.25rem/1 "Pretendard";
-  --text-l-b: 700 1.125rem/1 "Pretendard";
-  --text-l-sb: 600 1.125rem/1 "Pretendard";
-  --text-l-m: 500 1.125rem/1 "Pretendard";
-  --text-l: 400 1.125rem/1 "Pretendard";
-  --text-b: 700 1rem/1 "Pretendard";
-  --text-sb: 600 1rem/1 "Pretendard";
-  --text-m: 500 1rem/1 "Pretendard";
+  --textXlB: 700 1.25rem/1 "Pretendard";
+  --textXlSb: 600 1.25rem/1 "Pretendard";
+  --textXlM: 500 1.25rem/1 "Pretendard";
+  --textLB: 700 1.125rem/1 "Pretendard";
+  --textBSb: 600 1.125rem/1 "Pretendard";
+  --textLM: 500 1.125rem/1 "Pretendard";
+  --textL: 400 1.125rem/1 "Pretendard";
+  --textB: 700 1rem/1 "Pretendard";
+  --textSb: 600 1rem/1 "Pretendard";
+  --textM: 500 1rem/1 "Pretendard";
   --text: 400 1rem/1 "Pretendard";
-  --text-s-b: 700 0.875rem/1 "Pretendard";
-  --text-s-sb: 600 0.875rem/1 "Pretendard";
-  --text-s-m: 500 0.875rem/1 "Pretendard";
-  --text-s: 400 0.875rem/1 "Pretendard";
-  --text-xs-b: 700 0.75rem/1 "Pretendard";
-  --text-xs-m: 500 0.75rem/1 "Pretendard";
-  --text-xs: 400 0.75rem/1 "Pretendard";
+  --textSB: 700 0.875rem/1 "Pretendard";
+  --textSSb: 600 0.875rem/1 "Pretendard";
+  --textSB: 500 0.875rem/1 "Pretendard";
+  --textS: 400 0.875rem/1 "Pretendard";
+  --textXsB: 700 0.75rem/1 "Pretendard";
+  --textXsM: 500 0.75rem/1 "Pretendard";
+  --textXs: 400 0.75rem/1 "Pretendard";
 }
 
 * {
@@ -41,7 +41,7 @@
 }
 
 body {
-  background-color: var(--black-400);
+  background-color: var(--black400);
   font: var(--text) !important;
   color: var(--white);
 }
