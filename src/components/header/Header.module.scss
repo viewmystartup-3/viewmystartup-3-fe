@@ -1,0 +1,65 @@
+.header {
+  display: flex;
+  position: fixed;
+  z-index: 2;
+  height: 60px;
+  width: 100%;
+  padding: 9px 20%;
+  border-bottom: 1px solid var(--black100);
+  gap: 50px;
+  align-items: center;
+}
+
+/* header와 본문 사이의 공백 */
+.headerHeight {
+  padding-top: 60px;
+}
+
+.ul {
+  display: flex;
+  gap: 40px;
+}
+
+.headerLink {
+  text-decoration: none;
+  color: var(--gray200);
+  font: 600 0.9375rem/1 "Pretendard";
+
+  &:hover,
+  &:focus,
+  &:active {
+    color: var(--white);
+    font-weight: 700;
+  }
+}
+
+@media (max-width: 1199px) {
+  .header {
+    padding: 9px 24px;
+    gap: 32px;
+  }
+
+  .ul {
+    gap: 24px;
+  }
+}
+
+@media (max-width: 743px) {
+  .header {
+    gap: 20px;
+  }
+
+  .ul {
+    gap: 16px;
+  }
+
+  .headerLink {
+    font: 700 0.8125rem/1 "Pretendard";
+
+    &:hover,
+    &:focus,
+    &:active {
+      font: var(--textXsB);
+    }
+  }
+}
