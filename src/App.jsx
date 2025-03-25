@@ -1,13 +1,13 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Temporary from "./Pages/Temporary";
+import Homepage from "./components/homepage/Homepage";
 
 function App() {
   return (
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Temporary />} />
+          <Route path="/" element={<Homepage />} />
         </Routes>
       </BrowserRouter>
     </>

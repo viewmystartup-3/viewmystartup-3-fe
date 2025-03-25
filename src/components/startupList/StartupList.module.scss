@@ -1,0 +1,140 @@
+.startuplistForm {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin-top: 16px;
+  position: relative;
+  padding-bottom: 16px;
+  box-sizing: border-box;
+
+  .startuplistHeader {
+    display: flex;
+    background-color: var(--black100);
+    height: 39px;
+    border-radius: 4px;
+    top: 0;
+    z-index: 1;
+    margin-bottom: 16px;
+
+    p {
+      padding: 13px 0;
+      text-align: center;
+    }
+  }
+
+  .startuplistContents {
+    display: flex;
+    flex-direction: column;
+
+    .startuplistContent {
+      width: fit-content;
+      display: flex;
+      height: 64px;
+      padding: 23.5px 0;
+      color: var(--gray100);
+      font: var(--textS);
+      border-top: 1px solid var(--gray300);
+      min-width: 100%;
+      background-color: var(--black300);
+
+      &:nth-child(1) {
+        border-top: none;
+      }
+    }
+  }
+
+  p {
+    flex-shrink: 0;
+  }
+
+  .ranking {
+    width: 68px;
+    text-align: center;
+  }
+
+  .name {
+    width: 213px;
+    text-align: left;
+    padding-left: 12px;
+  }
+
+  .description {
+    width: 304px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .info {
+    width: 153.75px;
+    text-align: center;
+  }
+}
+
+/* tablet */
+@media (max-width: 1199px) {
+  .startuplistForm {
+    width: 700px;
+    .startuplistHeader p {
+      font: var(--textS);
+    }
+
+    .ranking {
+      display: none;
+    }
+    .name {
+      width: 150px;
+    }
+    .description {
+      width: 180px;
+    }
+
+    .info {
+      width: 91.5px;
+    }
+  }
+}
+
+/* Mobile */
+@media (max-width: 744px) {
+  .startuplistForm {
+    overflow-x: auto;
+    margin-top: 48px;
+    width: 700px;
+
+    .startuplistHeader {
+      width: fit-content;
+      display: flex;
+      background-color: var(--black100);
+      height: 39px;
+      border-radius: 4px;
+      flex-shrink: 0;
+      background-clip: padding-box;
+
+      p {
+        font: var(--textSB);
+        padding: 13.5px 0;
+        text-align: center;
+        flex-shrink: 0;
+        scroll-snap-align: start;
+      }
+    }
+
+    .ranking {
+      display: none;
+    }
+
+    .name {
+      width: 150px;
+    }
+
+    .description {
+      width: 180px;
+    }
+
+    .info {
+      width: 91.5px;
+    }
+  }
+}
