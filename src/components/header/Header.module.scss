@@ -1,4 +1,4 @@
-header {
+.header {
   display: flex;
   position: fixed;
   z-index: 2;
@@ -8,6 +8,7 @@ header {
   border-bottom: 1px solid var(--black100);
   gap: 50px;
   align-items: center;
+  background-color: var(--black400);
 }
 
 /* header와 본문 사이의 공백 */
@@ -15,7 +16,7 @@ header {
   padding-top: 60px;
 }
 
-ul {
+.ul {
   display: flex;
   gap: 40px;
 }
@@ -24,42 +25,42 @@ ul {
   text-decoration: none;
   color: var(--gray200);
   font: 600 0.9375rem/1 "Pretendard";
-}
 
-.headerLink:hover,
-.headerLink:focus,
-.headerLink:active {
-  color: var(--white);
-  font-weight: 700;
+  &:hover,
+  &:focus,
+  &:active {
+    color: var(--white);
+    font-weight: 700;
+  }
 }
 
 @media (max-width: 1199px) {
-  header {
+  .header {
     padding: 9px 24px;
     gap: 32px;
   }
 
-  ul {
+  .ul {
     gap: 24px;
   }
 }
 
-@media (max-width: 744px) {
-  header {
+@media (max-width: 743px) {
+  .header {
     gap: 20px;
   }
 
-  ul {
+  .ul {
     gap: 16px;
   }
 
   .headerLink {
     font: 700 0.8125rem/1 "Pretendard";
-  }
 
-  .headerLink:hover,
-  .headerLink:focus,
-  .headerLink:active {
-    font: var(--textXsB);
+    &:hover,
+    &:focus,
+    &:active {
+      font: var(--textXsB);
+    }
   }
 }

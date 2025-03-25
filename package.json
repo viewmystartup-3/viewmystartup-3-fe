@@ -1,5 +1,5 @@
 {
-  "name": "package.json",
+  "name": "6--viewmystartup-3--fe",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -23,6 +23,8 @@
     "eslint-plugin-react-hooks": "^5.1.0",
     "eslint-plugin-react-refresh": "^0.4.19",
     "globals": "^15.15.0",
-    "vite": "^6.2.0"
-  }
+    "sass-embedded": "^1.86.0",
+    "vite": "^6.2.2"
+  },
+  "proxy": "https://port-0-viewmystartup-3-m8ml2ohm3e1c28b1.sel4.cloudtype.app"
 }

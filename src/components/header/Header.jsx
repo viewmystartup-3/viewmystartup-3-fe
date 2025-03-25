@@ -2,12 +2,12 @@ import React from "react";
 import { Link } from "react-router-dom";
 import pcLogo from "../../assets/pc_logo.png";
 import mobileLogo from "../../assets/mobile_logo.png";
-import "./Header.css";
+import styles from "./Header.module.scss";
 
 function Header() {
   return (
     <>
-      <header>
+      <header className={styles.header}>
         <Link to="/">
           <picture>
             <source srcSet={mobileLogo} alt="logo" media="(max-width: 743px)" />
@@ -15,20 +15,21 @@ function Header() {
           </picture>
         </Link>
         <nav>
-          <ul>
-            <Link to="/" className="headerLink">
+          <ul className={styles.ul}>
+            <Link to="/" className={styles.headerLink}>
               <li>나의 기업 비교</li>
             </Link>
-            <Link to="/" className="headerLink">
+            <Link to="/" className={styles.headerLink}>
               <li>비교 현황</li>
             </Link>
-            <Link to="/" className="headerLink">
+            <Link to="/" className={styles.headerLink}>
               <li>투자 현황</li>
             </Link>
           </ul>
         </nav>
       </header>
-      <div className="headerHeight"></div>
+
+      <div className={styles.headerHeight}></div>
     </>
   );
 }
