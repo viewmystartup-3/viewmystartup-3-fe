@@ -18,7 +18,7 @@
   --textXlSb: 600 1.25rem/1 "Pretendard";
   --textXlM: 500 1.25rem/1 "Pretendard";
   --textLB: 700 1.125rem/1 "Pretendard";
-  --textBSb: 600 1.125rem/1 "Pretendard";
+  --textLSb: 600 1.125rem/1 "Pretendard";
   --textLM: 500 1.125rem/1 "Pretendard";
   --textL: 400 1.125rem/1 "Pretendard";
   --textB: 700 1rem/1 "Pretendard";
@@ -27,7 +27,7 @@
   --text: 400 1rem/1 "Pretendard";
   --textSB: 700 0.875rem/1 "Pretendard";
   --textSSb: 600 0.875rem/1 "Pretendard";
-  --textSB: 500 0.875rem/1 "Pretendard";
+  --textSM: 500 0.875rem/1 "Pretendard";
   --textS: 400 0.875rem/1 "Pretendard";
   --textXsB: 700 0.75rem/1 "Pretendard";
   --textXsM: 500 0.75rem/1 "Pretendard";
@@ -35,8 +35,6 @@
 }
 
 * {
-  margin: 0;
-  padding: 0;
   box-sizing: border-box;
 }
 
@@ -44,8 +42,4 @@ body {
   background-color: var(--black400);
   font: var(--text) !important;
   color: var(--white);
-}
-
-ul {
-  list-style: none;
 }
