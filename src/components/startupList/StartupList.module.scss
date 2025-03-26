@@ -7,92 +7,123 @@
   position: relative;
   padding-bottom: 16px;
   box-sizing: border-box;
+}
 
-  .startuplistHeader {
-    display: flex;
-    background-color: var(--black100);
-    height: 39px;
-    border-radius: 4px;
-    top: 0;
-    z-index: 1;
-    margin-bottom: 16px;
-
-    p {
-      padding: 13px 0;
-      text-align: center;
-    }
-  }
-
-  .startuplistContents {
-    display: flex;
-    flex-direction: column;
-
-    .startuplistContent {
-      width: fit-content;
-      display: flex;
-      height: 64px;
-      padding: 23.5px 0;
-      color: var(--gray100);
-      font: var(--textS);
-      border-top: 1px solid var(--gray300);
-      min-width: 100%;
-      background-color: var(--black300);
-
-      &:nth-child(1) {
-        border-top: none;
-      }
-    }
-  }
+.startuplistHeader {
+  display: flex;
+  background-color: var(--black100);
+  height: 39px;
+  border-radius: 4px;
+  top: 0;
+  z-index: 1;
+  margin-bottom: 16px;
 
   p {
-    flex-shrink: 0;
-  }
-
-  .ranking {
-    width: 68px;
+    padding: 13px 0;
     text-align: center;
   }
+}
 
-  .name {
-    width: 213px;
-    text-align: left;
-    padding-left: 12px;
-  }
+.startuplistContents {
+  display: flex;
+  flex-direction: column;
+}
 
-  .description {
-    width: 304px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
+.startuplistContent {
+  width: fit-content;
+  display: flex;
+  height: 64px;
+  padding: 23.5px 0;
+  color: var(--gray100);
+  font: var(--textS);
+  border-top: 1px solid var(--gray300);
+  min-width: 100%;
+  background-color: var(--black300);
 
-  .info {
-    width: 153.75px;
-    text-align: center;
+  &:nth-child(1) {
+    border-top: none;
   }
+}
+
+.headerName {
+  width: 213px;
+}
+
+p {
+  flex-shrink: 0;
+}
+
+.ranking {
+  width: 68px;
+  text-align: center;
+}
+
+.nameWrapper {
+  display: flex;
+  align-items: center;
+  width: 213px;
+  padding-left: 24px;
+  gap: 8px;
+
+  img {
+    width: 32px;
+    height: 32px;
+    border-radius: 16px;
+    object-fit: cover;
+  }
+}
+
+.name {
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.description {
+  font: var(--textS);
+  width: 304px;
+  white-space: normal;
+  overflow: hidden;
+  text-overflow: ellipsis; /* 넘칠 경우 '...' 표시 */
+  line-height: 1.5;
+  align-self: center;
+  @supports (-webkit-line-clamp: 2) {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+}
+
+.info {
+  width: 153.75px;
+  text-align: center;
 }
 
 /* tablet */
 @media (max-width: 1199px) {
   .startuplistForm {
     width: 700px;
-    .startuplistHeader p {
-      font: var(--textS);
-    }
+  }
+  .startuplistHeader p {
+    font: var(--textS);
+  }
+  .headerName {
+    width: 150px;
+  }
+  .ranking {
+    display: none;
+  }
+  .nameWrapper {
+    width: 150px;
+  }
+  .description {
+    margin-left: 15px;
+    width: 180px;
+  }
 
-    .ranking {
-      display: none;
-    }
-    .name {
-      width: 150px;
-    }
-    .description {
-      width: 180px;
-    }
-
-    .info {
-      width: 91.5px;
-    }
+  .info {
+    width: 91.5px;
   }
 }
 
@@ -102,39 +133,48 @@
     overflow-x: auto;
     margin-top: 48px;
     width: 700px;
+  }
+  .startuplistHeader {
+    width: fit-content;
+    display: flex;
+    background-color: var(--black100);
+    height: 39px;
+    border-radius: 4px;
+    flex-shrink: 0;
+    background-clip: padding-box;
 
-    .startuplistHeader {
-      width: fit-content;
-      display: flex;
-      background-color: var(--black100);
-      height: 39px;
-      border-radius: 4px;
+    p {
+      font: var(--textSB);
+      padding: 13.5px 0;
+      text-align: center;
       flex-shrink: 0;
-      background-clip: padding-box;
-
-      p {
-        font: var(--textSB);
-        padding: 13.5px 0;
-        text-align: center;
-        flex-shrink: 0;
-        scroll-snap-align: start;
-      }
+      scroll-snap-align: start;
     }
-
-    .ranking {
-      display: none;
-    }
-
-    .name {
+    .headerName {
       width: 150px;
     }
+  }
 
-    .description {
-      width: 180px;
-    }
+  .ranking {
+    display: none;
+  }
 
-    .info {
-      width: 91.5px;
-    }
+  .nameWrapper {
+    width: 150px;
+  }
+
+  .name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .description {
+    margin-left: 15px;
+    width: 180px;
+  }
+
+  .info {
+    width: 91.5px;
   }
 }
