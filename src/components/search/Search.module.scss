@@ -1,0 +1,73 @@
+.searchContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.componentSearch {
+  position: relative;
+  width: 448px;
+  height: 48px;
+  border-radius: 10px;
+  border: 1px solid var(--gray200);
+
+  /* 입력창 스타일 */
+  input {
+    font: var(--textS);
+    line-height: 100%;
+    color: var(--gray100);
+    background-color: transparent;
+    padding: 15.5px 0;
+    padding-left: 44px;
+    border: none;
+    width: 100%;
+    transition: padding-left 0.3s ease, text-align 0.3s ease;
+
+    &.focusRight {
+      padding-left: 12px;
+      text-align: left;
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  /* X 버튼 스타일 */
+  .clearButton {
+    position: absolute;
+    right: 48px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--gray200);
+    border: none;
+    border-radius: 50%;
+    color: var(--gray100);
+    font-size: 6px;
+    width: 16px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+
+  /* 왼쪽 아이콘 */
+  .searchIconLeft {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 15px;
+    height: 15px;
+  }
+
+  /* 오른쪽 아이콘 */
+  .searchIconRight {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 15px;
+    height: 15px;
+  }
+}
