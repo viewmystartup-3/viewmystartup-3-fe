@@ -21,7 +21,7 @@
   gap: 40px;
 }
 
-.headerLink {
+.link {
   text-decoration: none;
   color: var(--gray200);
   font: 600 0.9375rem/1 "Pretendard";
@@ -36,8 +36,8 @@
 
 @media (max-width: 1199px) {
   .header {
-    padding: 9px 24px;
     gap: 32px;
+    padding: 9px 20px;
   }
 
   .ul {
@@ -54,7 +54,7 @@
     gap: 16px;
   }
 
-  .headerLink {
+  .link {
     font: 700 0.8125rem/1 "Pretendard";
 
     &:hover,
