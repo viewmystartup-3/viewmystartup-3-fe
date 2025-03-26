@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import styles from "./StartupList.module.scss";
 import { dataUrl } from "../../env.js";
 import Pagination from "../pagination/pagination.jsx";
+import axios from "axios";
 
 const StartupList = () => {
   const [startupList, setStartupList] = useState([]);
@@ -15,10 +16,14 @@ const StartupList = () => {
   const fetchStartupList = async () => {
     setLoading(true); // 로딩 시작
     try {
-      const response = await fetch(
-        `${dataUrl}/api/companies?page=${currentPage}&limit=10`
-      );
-      const data = await response.json();
+      const response = await axios.get(`${dataUrl}/api/companies`, {
+        params: {
+          page: currentPage,
+          limit: 10,
+        },
+      });
+
+      const data = response.data;
 
       // 데이터 형식 확인 후 처리
       if (data && data.data) {
