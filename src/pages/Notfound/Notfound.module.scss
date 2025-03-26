@@ -1,0 +1,26 @@
+.notfoundForm {
+  text-align: center;
+  width: 1200px;
+  margin: 0 auto;
+}
+.header {
+  margin-top: 2rem;
+  font: var(--textXlB);
+  font-size: 50px;
+  color: var(--redError);
+}
+
+.message {
+  font: var(--textXlM);
+  margin: 1.5rem 0;
+  color: var(--gray100);
+}
+
+.link {
+  font: var(--textL);
+  color: var(--white);
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
+}
