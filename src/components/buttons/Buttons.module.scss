@@ -1,0 +1,117 @@
+// 버튼 기본 flex 설정 적용
+@mixin button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+// 둥근 버튼 설정 : 공통 속성 + 미디어 쿼리
+@mixin round($breakpoint) {
+  border-radius: 50px;
+  background-color: var(--black100);
+  color: var(--gray200);
+  font: var(--textSb);
+  border: none;
+
+  @if $breakpoint == mobile {
+    @media (max-width: 744px) {
+      font: var(--textSSb);
+      @content;
+    }
+  }
+}
+
+// 일반 둥근 버튼
+.round {
+  @include button;
+  @include round(mobile) {
+    padding: 13px 24px;
+  }
+
+  padding: 13px 48px;
+
+  &.active {
+    background-color: var(--brandOrange);
+    color: var(--white);
+  }
+}
+
+// 초기화 버튼(안이 차 있는 둥근 버튼)
+.restart {
+  @include button;
+  @include round(mobile) {
+    padding: 4px 12px;
+  }
+
+  padding: 8px 24px;
+  gap: 3px;
+
+  &.active {
+    background-color: var(--brandOrange);
+    color: var(--white);
+  }
+}
+
+.restartIcon {
+  transform: rotate(50deg);
+  stroke-width: 1;
+}
+
+// 투명하고 테두리 있는 버튼 공통 설정
+@mixin outline {
+  background-color: transparent;
+  color: var(--brandOrange);
+  border: 1px solid var(--brandOrange);
+}
+
+// 투자 모달창 취소 버튼(일반 + Outline 버튼)
+.roundOutline {
+  @include button;
+  @include round(mobile) {
+    padding: 12px 24px;
+  }
+
+  padding: 13px 48px;
+  font: var(--textLSb);
+
+  @include outline;
+}
+
+// 모달창에 쓰는 선택 버튼
+.modalButton {
+  @include button;
+  @include outline;
+
+  font: var(--textM);
+  border-radius: 10px;
+  padding: 13px 24px;
+
+  &.active {
+    border: 1px solid var(--gray100);
+    color: var(--gray100);
+    padding: 8px 12px;
+
+    .checkIcon {
+      display: inline;
+    }
+  }
+
+  @media (max-width: 744px) {
+    font: var(--textSM);
+    padding: 13px 12px;
+
+    &.active {
+      padding: 11px 4px;
+    }
+  }
+}
+
+.checkIcon {
+  display: none;
+}
+
+// 선택 해제 버튼 스타일 추가
+.cancel {
+  color: var(--gray200);
+  border: 1px solid var(--gray200);
+}
