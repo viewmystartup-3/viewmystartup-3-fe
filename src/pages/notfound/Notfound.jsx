@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom"; // Link를 사용하여 홈으로 돌아가는 링크 추가
 import styles from "./Notfound.module.scss";
+import Temporary from "./Temporary";
 
 const Notfound = () => {
   return (
@@ -10,6 +11,7 @@ const Notfound = () => {
       <Link to="/" className={styles.link}>
         홈으로 돌아가기
       </Link>
+      <Temporary />
     </div>
   );
 };
