@@ -72,7 +72,7 @@ const StartupList = () => {
     <div className={styles.startuplistForm}>
       <div className={styles.startuplistHeader}>
         <p className={styles.ranking}>순위</p>
-        <p className={styles.name}>기업 명</p>
+        <p className={styles.headerName}>기업 명</p>
         <p className={styles.description}>기업 소개</p>
         <p className={styles.info}>카테고리</p>
         <p className={styles.info}>누적 투자 금액</p>
@@ -90,12 +90,25 @@ const StartupList = () => {
               <p className={styles.ranking}>
                 {(currentPage - 1) * 10 + index + 1}위
               </p>
-              <p className={styles.name}>{startup.name}</p>
-              <p className={styles.description}>{startup.description}</p>
-              <p className={styles.info}>{startup.category}</p>
-              <p className={styles.info}>{startup.totalInvestment}억 원</p>
-              <p className={styles.info}>{startup.revenue}억 원</p>
-              <p className={styles.info}>{startup.employees}명</p>
+              {/* 순위 */}
+              <div className={styles.nameWrapper}>
+                <img
+                  src={startup.imageUrl || "/images/logo.png"}
+                  alt={startup.name}
+                  className={styles.startupImage}
+                />
+                {/* 이미지 */}
+                <p className={styles.name}>{startup.name}</p> {/* 회사 이름 */}
+              </div>
+              <p className={styles.description}>{startup.description}</p>{" "}
+              {/* 회사 설명 */}
+              <p className={styles.info}>{startup.category}</p> {/* 카테고리 */}
+              <p className={styles.info}>{startup.totalInvestment}억 원</p>{" "}
+              {/* 누적 투자 금액 */}
+              <p className={styles.info}>{startup.revenue}억 원</p>{" "}
+              {/* 매출액 */}
+              <p className={styles.info}>{startup.employees}명</p>{" "}
+              {/* 고용인원 */}
             </div>
           ))
         ) : (

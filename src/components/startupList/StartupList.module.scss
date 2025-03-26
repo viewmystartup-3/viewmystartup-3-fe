@@ -45,6 +45,10 @@
   }
 }
 
+.headerName {
+  width: 213px;
+}
+
 p {
   flex-shrink: 0;
 }
@@ -54,17 +58,41 @@ p {
   text-align: center;
 }
 
-.name {
+.nameWrapper {
+  display: flex;
+  align-items: center;
   width: 213px;
-  text-align: left;
-  padding-left: 12px;
+  padding-left: 24px;
+  gap: 8px;
+
+  img {
+    width: 32px;
+    height: 32px;
+    border-radius: 16px;
+    object-fit: cover;
+  }
 }
 
-.description {
-  width: 304px;
+.name {
+  text-align: left;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.description {
+  font: var(--textS);
+  width: 304px;
+  white-space: normal;
+  overflow: hidden;
+  text-overflow: ellipsis; /* 넘칠 경우 '...' 표시 */
+  line-height: 1.5;
+  align-self: center;
+  @supports (-webkit-line-clamp: 2) {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
 }
 
 .info {
@@ -80,14 +108,17 @@ p {
   .startuplistHeader p {
     font: var(--textS);
   }
-
+  .headerName {
+    width: 150px;
+  }
   .ranking {
     display: none;
   }
-  .name {
+  .nameWrapper {
     width: 150px;
   }
   .description {
+    margin-left: 15px;
     width: 180px;
   }
 
@@ -119,17 +150,27 @@ p {
       flex-shrink: 0;
       scroll-snap-align: start;
     }
+    .headerName {
+      width: 150px;
+    }
   }
 
   .ranking {
     display: none;
   }
 
-  .name {
+  .nameWrapper {
     width: 150px;
   }
 
+  .name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
   .description {
+    margin-left: 15px;
     width: 180px;
   }
 
