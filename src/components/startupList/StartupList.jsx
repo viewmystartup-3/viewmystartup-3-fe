@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import styles from "./StartupList.module.scss";
-import { dataUrl } from "../../env.js";
 import Pagination from "../pagination/pagination.jsx";
 import axios from "axios";
+import { dataUrl } from "../../env.js";
 
 const StartupList = () => {
   const [startupList, setStartupList] = useState([]);
