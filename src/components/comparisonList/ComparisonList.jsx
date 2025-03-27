@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Pagination from "../pagination/pagination";
-import styles from "./Investment.module.scss";
-import { dataUrl } from "../../env.js";
+import styles from "./Comparison.module.scss"; // 파일명도 변경
 import axios from "axios";
+import { dataUrl } from "../../env";
 
-const InvestmentList = () => {
-  const [investmentList, setInvestmentList] = useState([]);
+const Comparison = () => {
+  const [comparisonList, setComparisonList] = useState([]);
   const [currentPageData, setCurrentPageData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
@@ -13,7 +13,7 @@ const InvestmentList = () => {
   const [totalCount, setTotalCount] = useState(0);
 
   // 페이지 데이터 가져오기
-  const fetchInvestmentList = async () => {
+  const fetchComparisonList = async () => {
     setLoading(true); // 로딩 시작
     try {
       const response = await axios.get(`${dataUrl}/api/companies`, {
@@ -27,13 +27,13 @@ const InvestmentList = () => {
 
       // 데이터 형식 확인 후 처리
       if (data && data.data) {
-        setInvestmentList(data.data);
+        setComparisonList(data.data);
         setTotalCount(data.totalCount || 0);
         setTotalPages(data.totalPages || 1);
 
         setCurrentPageData(data.data);
       } else if (Array.isArray(data)) {
-        setInvestmentList(data);
+        setComparisonList(data);
         setTotalCount(data.length);
         setTotalPages(Math.ceil(data.length / 10));
 
@@ -43,12 +43,12 @@ const InvestmentList = () => {
         );
       } else {
         console.error("Expected data format is missing.");
-        setInvestmentList([]); // 데이터가 없으면 빈 배열로 설정
+        setComparisonList([]); // 데이터가 없으면 빈 배열로 설정
         setCurrentPageData([]);
       }
     } catch (error) {
       console.error("Error fetching data: ", error);
-      setInvestmentList([]); // 에러 발생 시 빈 배열로 설정
+      setComparisonList([]); // 에러 발생 시 빈 배열로 설정
       setCurrentPageData([]);
     } finally {
       setLoading(false); // 로딩 끝
@@ -64,7 +64,7 @@ const InvestmentList = () => {
 
   // 페이지가 변경될 때마다 데이터를 새로 가져옴
   useEffect(() => {
-    fetchInvestmentList();
+    fetchComparisonList();
   }, [currentPage]); // currentPage가 변경될 때마다 호출
 
   return (
@@ -74,47 +74,45 @@ const InvestmentList = () => {
         <p className={styles.headerName}>기업 명</p>
         <p className={styles.description}>기업 소개</p>
         <p className={styles.category}>카테고리</p>
-        <p className={styles.info}>View My Startup 투자 금액</p>
-        <p className={styles.info}>실제 누적 투자 금액</p>
+        <p className={styles.info}>나의 기업 선택 횟수</p>
+        <p className={styles.info}>비교 기업 선택 횟수</p>
       </div>
 
-      {/* 투자 목록 렌더링 */}
+      {/* 비교 목록 렌더링 */}
       <div className={styles.listContents}>
         {loading ? (
           <p>로딩 중...</p> // 로딩 중일 때 메시지
         ) : currentPageData.length > 0 ? (
-          currentPageData.map((investment, index) => (
-            <div className={styles.listContent} key={investment.id}>
+          currentPageData.map((comparison, index) => (
+            <div className={styles.listContent} key={comparison.id}>
               <p className={styles.ranking}>
                 {(currentPage - 1) * 10 + index + 1}위
               </p>
               {/* 순위 */}
               <div className={styles.nameWrapper}>
                 <img
-                  src={investment.imageUrl || "/images/logo.png"}
-                  alt={investment.name}
+                  src={comparison.imageUrl || "/images/logo.png"}
+                  alt={comparison.name}
                   className={styles.startupImage}
                 />
                 {/* 이미지 */}
-                <p className={styles.name}>{investment.name}</p>
+                <p className={styles.name}>{comparison.name}</p>
                 {/* 회사 이름 */}
               </div>
-              <p className={styles.description}>{investment.description}</p>
+              <p className={styles.description}>{comparison.description}</p>
               {/* 회사 설명 */}
-              <p className={styles.category}>{investment.category}</p>
+              <p className={styles.category}>{comparison.category}</p>
               {/* 카테고리 */}
-              <p className={styles.info}>{investment.investmentAmount}억 원</p>
-              {/* View My Startup 투자 금액 */}
-              <p className={styles.info}>{investment.totalInvestment}억 원</p>
-              {/* 실제 누적 투자 금액 */}
+              <p className={styles.info}>{comparison.comparedCompany}</p>
+              {/* 나의 기업 선택 횟수 */}
+              <p className={styles.info}>{comparison.selectedCompany}</p>
+              {/* 비교 기업 선택 횟수 */}
             </div>
           ))
         ) : (
           <p>데이터가 없습니다.</p> // 데이터가 없을 때 메시지
         )}
       </div>
-
-      {/* 페이지네이션 컴포넌트 */}
       <Pagination
         currentPage={currentPage}
         totalPages={totalPages}
@@ -124,4 +122,4 @@ const InvestmentList = () => {
   );
 };
 
-export default InvestmentList;
+export default Comparison;
