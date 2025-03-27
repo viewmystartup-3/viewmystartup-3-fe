@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import styles from "./StartupList.module.scss";
+import Pagination from "../pagination/pagination";
+import styles from "./InvestmentList.module.scss";
 import { dataUrl } from "../../env.js";
-import Pagination from "../pagination/pagination.jsx";
 import axios from "axios";
 
-const StartupList = () => {
-  const [startupList, setStartupList] = useState([]);
+const InvestmentList = () => {
+  const [investmentList, setInvestmentList] = useState([]);
   const [currentPageData, setCurrentPageData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
@@ -13,7 +13,7 @@ const StartupList = () => {
   const [totalCount, setTotalCount] = useState(0);
 
   // 페이지 데이터 가져오기
-  const fetchStartupList = async () => {
+  const fetchInvestmentList = async () => {
     setLoading(true); // 로딩 시작
     try {
       const response = await axios.get(`${dataUrl}/api/companies`, {
@@ -27,16 +27,15 @@ const StartupList = () => {
 
       // 데이터 형식 확인 후 처리
       if (data && data.data) {
-        setStartupList(data.data); // 전체 기업 목록 저장
-        setTotalCount(data.totalCount || 0); // 총 ID 수
-        setTotalPages(data.totalPages || 1); // 총 페이지 수
+        setInvestmentList(data.data);
+        setTotalCount(data.totalCount || 0);
+        setTotalPages(data.totalPages || 1);
 
-        // 현재 페이지에 해당하는 데이터만 추출해서 상태에 저장
         setCurrentPageData(data.data);
       } else if (Array.isArray(data)) {
-        setStartupList(data); // data가 바로 배열일 경우 처리
-        setTotalCount(data.length); // 배열 길이를 총 기업 수로 설정
-        setTotalPages(Math.ceil(data.length / 10)); // 데이터에 맞게 페이지 수 계산
+        setInvestmentList(data);
+        setTotalCount(data.length);
+        setTotalPages(Math.ceil(data.length / 10));
 
         // 현재 페이지에 해당하는 데이터만 추출해서 상태에 저장
         setCurrentPageData(
@@ -44,12 +43,12 @@ const StartupList = () => {
         );
       } else {
         console.error("Expected data format is missing.");
-        setStartupList([]); // 데이터가 없으면 빈 배열로 설정
+        setInvestmentList([]); // 데이터가 없으면 빈 배열로 설정
         setCurrentPageData([]);
       }
     } catch (error) {
       console.error("Error fetching data: ", error);
-      setStartupList([]); // 에러 발생 시 빈 배열로 설정
+      setInvestmentList([]); // 에러 발생 시 빈 배열로 설정
       setCurrentPageData([]);
     } finally {
       setLoading(false); // 로딩 끝
@@ -65,7 +64,7 @@ const StartupList = () => {
 
   // 페이지가 변경될 때마다 데이터를 새로 가져옴
   useEffect(() => {
-    fetchStartupList(); // 데이터 가져오기
+    fetchInvestmentList();
   }, [currentPage]); // currentPage가 변경될 때마다 호출
 
   return (
@@ -74,41 +73,42 @@ const StartupList = () => {
         <p className={styles.ranking}>순위</p>
         <p className={styles.headerName}>기업 명</p>
         <p className={styles.description}>기업 소개</p>
-        <p className={styles.info}>카테고리</p>
-        <p className={styles.info}>누적 투자 금액</p>
-        <p className={styles.info}>매출액</p>
-        <p className={styles.info}>고용 인원</p>
+        <p className={styles.category}>카테고리</p>
+        <p className={styles.info}>View My Startup 투자 금액</p>
+        <p className={styles.info}>실제 누적 투자 금액</p>
       </div>
 
-      {/* 스타트업 목록 렌더링 */}
+      {/* 투자 목록 렌더링 */}
       <div className={styles.listContents}>
         {loading ? (
           <p>로딩 중...</p> // 로딩 중일 때 메시지
         ) : currentPageData.length > 0 ? (
-          currentPageData.map((startup, index) => (
-            <div className={styles.listContent} key={startup.id}>
+          currentPageData.map((investment, index) => (
+            <div className={styles.listContent} key={investment.id}>
               <p className={styles.ranking}>
                 {(currentPage - 1) * 10 + index + 1}위
               </p>
               {/* 순위 */}
               <div className={styles.nameWrapper}>
                 <img
-                  src={startup.imageUrl || "/images/logo.png"}
-                  alt={startup.name}
+                  src={investment.imageUrl || "/images/logo.png"}
+                  alt={investment.name}
                   className={styles.startupImage}
                 />
                 {/* 이미지 */}
-                <p className={styles.name}>{startup.name}</p> {/* 회사 이름 */}
+                <p className={styles.name}>{investment.name}</p>
+                {/* 회사 이름 */}
               </div>
-              <p className={styles.description}>{startup.description}</p>{" "}
+              <p className={styles.description}>{investment.description}</p>
               {/* 회사 설명 */}
-              <p className={styles.info}>{startup.category}</p> {/* 카테고리 */}
-              <p className={styles.info}>{startup.totalInvestment}억 원</p>{" "}
-              {/* 누적 투자 금액 */}
-              <p className={styles.info}>{startup.revenue}억 원</p>{" "}
-              {/* 매출액 */}
-              <p className={styles.info}>{startup.employees}명</p>{" "}
-              {/* 고용인원 */}
+              <p className={styles.category}>{investment.category}</p>
+              {/* 카테고리 */}
+              <p className={styles.info}>
+                {investment.myInvestmentAmount}억 원
+              </p>
+              {/* View My Startup 투자 금액 */}
+              <p className={styles.info}>{investment.totalInvestment}억 원</p>
+              {/* 실제 누적 투자 금액 */}
             </div>
           ))
         ) : (
@@ -126,4 +126,4 @@ const StartupList = () => {
   );
 };
 
-export default StartupList;
+export default InvestmentList;

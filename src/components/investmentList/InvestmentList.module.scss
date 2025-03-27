@@ -7,6 +7,9 @@
   position: relative;
   padding-bottom: 16px;
   box-sizing: border-box;
+  p {
+    flex-shrink: 0;
+  }
 }
 
 .listHeader {
@@ -25,6 +28,7 @@
 }
 
 .listContents {
+  border-radius: 4px;
   display: flex;
   flex-direction: column;
 }
@@ -45,17 +49,13 @@
   }
 }
 
-.headerName {
-  width: 213px;
-}
-
-p {
-  flex-shrink: 0;
-}
-
 .ranking {
   width: 68px;
   text-align: center;
+}
+
+.headerName {
+  width: 213px;
 }
 
 .nameWrapper {
@@ -95,8 +95,13 @@ p {
   }
 }
 
-.info {
+.category {
   width: 153.75px;
+  text-align: center;
+}
+
+.info {
+  width: 230.63px;
   text-align: center;
 }
 
@@ -108,26 +113,28 @@ p {
   .listHeader p {
     font: var(--textS);
   }
-  .headerName {
-    width: 150px;
-  }
   .ranking {
-    display: none;
+    width: 60px;
+  }
+  .headerName {
+    width: 140px;
   }
   .nameWrapper {
-    width: 150px;
+    width: 140px;
   }
   .description {
     width: 180px;
   }
   .listContent {
     .description {
-      padding: 0 15px;
+      padding: 0 30px;
     }
   }
-
+  .category {
+    width: 84px;
+  }
   .info {
-    width: 91.5px;
+    width: 116px;
   }
 }
 
@@ -155,18 +162,15 @@ p {
       scroll-snap-align: start;
     }
     .headerName {
-      width: 150px;
+      width: 140px;
     }
   }
-
   .ranking {
-    display: none;
+    width: 64px;
   }
-
   .nameWrapper {
-    width: 150px;
+    width: 140px;
   }
-
   .name {
     overflow: hidden;
     text-overflow: ellipsis;
@@ -177,11 +181,13 @@ p {
   }
   .listContent {
     .description {
-      padding: 0 15px;
+      padding: 0 30px;
     }
   }
-
+  .category {
+    width: 84px;
+  }
   .info {
-    width: 91.5px;
+    width: 116px;
   }
 }
