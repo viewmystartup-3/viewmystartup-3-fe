@@ -42,7 +42,7 @@ export default function SelectBox({
         />
       </button>
       {isOpen && (
-        <ul className={styles.selectBoxOptions}>
+        <ul className={`${styles.selectBoxOptions} ${styles[size]}`}>
           {options.map((option) => (
             <li
               key={option.value}

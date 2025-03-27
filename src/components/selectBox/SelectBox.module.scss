@@ -32,7 +32,6 @@
 
   &Options {
     position: absolute;
-    width: 100%;
     margin-top: 6px;
     border: 1px solid var(--gray200);
     border-radius: 10px;
@@ -46,9 +45,8 @@
       padding: 12px 14px;
       cursor: pointer;
       border-bottom: 1px solid var(--gray200);
-      box-sizing: border-box; /* ✅ 패딩 포함해서 전체 width를 맞춤 */
-      font: var(--textXs);
-      width: 100%; /* ✅ 부모(.selectbox-options)에 맞춰서 꽉 채우기 */
+      box-sizing: border-box; /* 패딩 포함해서 전체 width를 맞춤 */
+      font: var(--textS);
       text-align: center;
 
       &:last-child {
@@ -59,8 +57,22 @@
 }
 
 .small {
-  width: 168px;
+  width: 170px;
 }
 .large {
   width: 264px;
+}
+
+//모바일용
+@media (max-width: 375px) {
+  .small {
+    width: 146px;
+    height: 40px;
+    font: var(--textXs);
+  }
+  .large {
+    width: 241px;
+    height: 40px;
+    font: var(--textXs);
+  }
 }
