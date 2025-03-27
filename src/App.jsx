@@ -4,6 +4,7 @@ import Homepage from "./pages/homepage/Homepage";
 import Notfound from "./pages/notfound/Notfound";
 import Layout from "./components/Layout";
 import InvestmentStatus from "./pages/investmentStatus/InvestmentStatus";
+import CompanyDetailPage from "./pages/companyDetailPage/CompanyDetailPage";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
           <Route element={<Layout />}>
             <Route path="/" element={<Homepage />} />
             <Route path="/Investment" element={<InvestmentStatus />} />
+            <Route path="/companies/:id" element={<CompanyDetailPage />} />
           </Route>
           <Route path="*" element={<Notfound />} />
         </Routes>
