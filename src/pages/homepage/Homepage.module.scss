@@ -20,20 +20,6 @@
   display: flex;
   gap: 1rem;
 
-  input {
-    width: 448px;
-    height: 48px;
-    border-radius: 10px;
-    border: 1px solid var(--white);
-    font: var(--textS);
-    line-height: 100%;
-    color: var(--gray100);
-    padding: 15.5px 0;
-    padding-left: 44px;
-    border: none;
-    width: 100%;
-  }
-
   select {
     width: 168px;
     height: 48px;
