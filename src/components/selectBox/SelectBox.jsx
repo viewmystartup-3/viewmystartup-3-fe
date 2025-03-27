@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./SelectBox.css";
+import styles from "./SelectBox.module.scss";
 import toggle from "../../assets/ic_toggle.png";
 
 /**
@@ -28,18 +28,18 @@ export default function SelectBox({
   };
 
   return (
-    <div className="selectbox">
-      <button className="selectbox-button" onClick={() => setIsOpen(!isOpen)}>
+    <div className={styles.selectBox}>
+      <button className={styles.selectBoxButton} onClick={() => setIsOpen(!isOpen)}>
         {selected.label}
         <img src={toggle} alt="화살표" />
       </button>
       {isOpen && (
-        <ul className="selectbox-options">
+        <ul className={styles.selectBoxOptions}>
           {options.map((option) => (
             <li
               key={option.value}
               onClick={() => handleSelect(option)}
-              className="selectbox-option"
+              className={styles.selectBoxOption}
             >
               {option.label}
             </li>

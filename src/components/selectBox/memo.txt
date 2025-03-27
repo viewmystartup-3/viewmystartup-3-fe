@@ -1,4 +1,5 @@
 가져가서 재사용하세요!
+1. 백엔드 밑에두개 구현안됨.
 
 const options = [
   {label: "누적 투자금액 높은순", value: "investment_desc"},

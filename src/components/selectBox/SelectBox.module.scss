@@ -1,0 +1,52 @@
+.selectBox {
+  position: relative;
+  padding: 10px;
+  width: 168px;
+
+  &Button {
+    color: var(--gray100);
+    font: var(--textS);
+    background-color: var(--black400);
+
+    width: 168px;
+    height: 48px;
+    padding: 9.25px 13.25px;
+    border: 1px solid var(--gray200);
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+
+    &:hover {
+      border-color: var(--white);
+    }
+  }
+
+  &Options {
+    position: absolute;
+    width: 100%;
+    margin-top: 6px;
+    border: 1px solid var(--gray200);
+    border-radius: 10px;
+
+    z-index: 100;
+    list-style: none;
+    padding: 6px 0;
+    display: block;
+
+    .selectBoxOption {
+      padding: 12px 14px;
+      cursor: pointer;
+      border-bottom: 1px solid var(--gray200);
+      box-sizing: border-box; /* ✅ 패딩 포함해서 전체 width를 맞춤 */
+      font: var(--textXs);
+      width: 100%; /* ✅ 부모(.selectbox-options)에 맞춰서 꽉 채우기 */
+      text-align: center;
+
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+  }
+}

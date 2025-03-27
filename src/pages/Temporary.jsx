@@ -1,5 +1,5 @@
 import React from "react";
-import SelectBox from "../../components/selectBox/SelectBox";
+import SelectBox from "../components/selectBox/SelectBox";
 import axios from "axios";
 
 const options = [
@@ -14,6 +14,7 @@ const options = [
 function Temporary() {
   return (
     <div>
+      <h2>필터 박스 테스트</h2>
       <SelectBox
         options={options}
         defaultValue="investment_desc"
