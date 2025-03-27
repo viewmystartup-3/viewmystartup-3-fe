@@ -1,0 +1,45 @@
+// container 설정
+@mixin basic {
+  display: flex;
+  height: 48px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.container {
+  @include basic;
+  width: 100%;
+  margin: 20px 0;
+}
+
+.companyContainer {
+  @include basic;
+  gap: 10px;
+
+  // 글씨 등 자잘한 설정
+  .title {
+    font: var(--textM);
+    text-align: center;
+  }
+
+  .category {
+    font: var(--textSM);
+    color: var(--gray200);
+  }
+
+  .imageContainer {
+    @include basic;
+    width: 48px;
+    height: 48px;
+    justify-content: center;
+    background-color: var(--white);
+    border-radius: 50%;
+    overflow: hidden;
+  }
+
+  .image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}

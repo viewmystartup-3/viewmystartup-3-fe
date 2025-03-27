@@ -3,6 +3,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  white-space: nowrap;
 }
 
 // 둥근 버튼 설정 : 공통 속성 + 미디어 쿼리
@@ -85,6 +86,8 @@
   font: var(--textM);
   border-radius: 10px;
   padding: 13px 24px;
+  min-width: 104px;
+  height: 48px;
 
   &.active {
     border: 1px solid var(--gray100);
@@ -99,6 +102,8 @@
   @media (max-width: 744px) {
     font: var(--textSM);
     padding: 13px 12px;
+    min-width: 73px;
+    height: 32px;
 
     &.active {
       padding: 11px 4px;
