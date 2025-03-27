@@ -1,14 +1,13 @@
 .selectBox {
   position: relative;
   padding: 10px;
-  width: 168px;
 
   &Button {
     color: var(--gray100);
     font: var(--textS);
     background-color: var(--black400);
 
-    width: 168px;
+    // width: 168px;
     height: 48px;
     padding: 9.25px 13.25px;
     border: 1px solid var(--gray200);
@@ -20,6 +19,14 @@
 
     &:hover {
       border-color: var(--white);
+    }
+    .toggleIcon {
+      transition: transform 0.3s ease;
+      transform: rotate(0deg);
+    }
+
+    .rotated {
+      transform: rotate(180deg);
     }
   }
 
@@ -49,4 +56,11 @@
       }
     }
   }
+}
+
+.small {
+  width: 168px;
+}
+.large {
+  width: 264px;
 }

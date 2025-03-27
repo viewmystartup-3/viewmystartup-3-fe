@@ -15,6 +15,7 @@ export default function SelectBox({
   options = [],
   onChange,
   defaultValue = options[0]?.value || "",
+  size = "small",
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const [selected, setSelected] = useState(
@@ -29,9 +30,16 @@ export default function SelectBox({
 
   return (
     <div className={styles.selectBox}>
-      <button className={styles.selectBoxButton} onClick={() => setIsOpen(!isOpen)}>
+      <button
+        className={`${styles.selectBoxButton} ${styles[size]}`}
+        onClick={() => setIsOpen(!isOpen)}
+      >
         {selected.label}
-        <img src={toggle} alt="화살표" />
+        <img
+          src={toggle}
+          alt="화살표"
+          className={`${styles.toggleIcon} ${isOpen ? styles.rotated : ""}`}
+        />
       </button>
       {isOpen && (
         <ul className={styles.selectBoxOptions}>

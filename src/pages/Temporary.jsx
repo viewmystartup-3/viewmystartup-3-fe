@@ -1,27 +1,28 @@
 import React from "react";
 import SelectBox from "../components/selectBox/SelectBox";
 import axios from "axios";
-
-const options = [
-  { label: "누적 투자금액 높은순", value: "investment_desc" },
-  { label: "누적 투자금액 낮은순", value: "investment_asc" },
-  { label: "매출액 높은순", value: "revenue_desc" },
-  { label: "매출액 낮은순", value: "revenue_asc" },
-  { label: "고용 인원 많은순", value: "employee_desc" },
-  { label: "고용 인원 적은순", value: "employee_asc" },
-];
+import {
+  basicSortOptions,
+  myCompanySelectOptions,
+  viewMyStartupOptions,
+} from "../components/selectBox/sortOptions";
 
 function Temporary() {
   return (
     <div>
       <h2>필터 박스 테스트</h2>
       <SelectBox
-        options={options}
+        size="small"
+        options={basicSortOptions}
         defaultValue="investment_desc"
         onChange={(value) => {
-          axios.get(`http://localhost:5000/api/companies?sort=${value}`).then(res =>{
-            console.log("정렬된 회사 목록:", res.data)
-          })
+          axios
+            .get(
+              `https://port-0-viewmystartup-3-m8ml2ohm3e1c28b1.sel4.cloudtype.app/api/companies?sort=${value}`
+            )
+            .then((res) => {
+              console.log("정렬된 회사 목록:", res.data);
+            });
         }}
       />
     </div>
