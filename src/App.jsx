@@ -5,6 +5,7 @@ import Notfound from "./pages/notfound/Notfound";
 import Layout from "./components/Layout";
 import CompanyDetailPage from "./pages/companyDetailPage/CompanyDetailPage";
 import InvestmentStatusPage from "./pages/investmentStatusPage/InvestmentStatusPage";
+import ComparisonStatusPage from "./pages/comparisonStatusPage/ComparisonStatusPage";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
             <Route path="/" element={<Homepage />} />
             <Route path="/companies/:id" element={<CompanyDetailPage />} />
             <Route path="/investment" element={<InvestmentStatusPage />} />
+            <Route path="/comparison" element={<ComparisonStatusPage />} />
           </Route>
           <Route path="*" element={<Notfound />} />
         </Routes>

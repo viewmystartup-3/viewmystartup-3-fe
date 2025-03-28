@@ -19,22 +19,12 @@
 .headerComponents {
   display: flex;
   gap: 1rem;
-
-  select {
-    width: 168px;
-    height: 48px;
-    border-radius: 10px;
-    border: 1px solid var(--black400);
-  }
 }
 
 /* tablet */
 @media (max-width: 1199px) {
   .homepageForm {
     width: 700px;
-  }
-  input {
-    width: 270px;
   }
 }
 
@@ -48,17 +38,6 @@
 
     h1 {
       font: var(--textB);
-    }
-    input {
-      width: 190px;
-      height: 40px;
-      padding: 12px 0;
-      padding-left: 44px;
-    }
-
-    select {
-      width: 148px;
-      height: 40px;
     }
   }
 }
