@@ -14,14 +14,14 @@ const Homepage = () => {
   const [totalPages, setTotalPages] = useState(1); // 전체 페이지 수
   const [currentPage, setCurrentPage] = useState(1); // 현재 페이지
   const [selectedSortValue, setSelectedSortValue] = useState(
-    "investmentAmount_desc"
+    "totalInvestment_desc"
   ); // 선택된 정렬 값
 
   // 페이지당 아이템 수
   const itemsPerPage = 10;
 
   // 데이터 가져오기
-  const fetchStartupList = async (sortOrder = "investmentAmount_desc") => {
+  const fetchStartupList = async (sortOrder = "totalInvestment_desc") => {
     try {
       const response = await axios.get(
         `${dataUrl}/api/companies?sort=${sortOrder}`
