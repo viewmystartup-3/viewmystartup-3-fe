@@ -64,6 +64,8 @@
   width: 213px;
   padding-left: 24px;
   gap: 8px;
+  text-decoration: none;
+  color: var(--gray100);
 
   img {
     width: 32px;
@@ -152,7 +154,6 @@
 @media (max-width: 744px) {
   .form {
     overflow-x: auto;
-    margin-top: 48px;
     width: 700px;
   }
   .listHeader {

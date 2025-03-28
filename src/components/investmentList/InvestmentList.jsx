@@ -3,6 +3,7 @@ import Pagination from "../pagination/pagination";
 import styles from "./Investment.module.scss";
 import { dataUrl } from "../../env.js";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const InvestmentList = () => {
   const [investmentList, setInvestmentList] = useState([]);
@@ -89,7 +90,10 @@ const InvestmentList = () => {
                 {(currentPage - 1) * 10 + index + 1}위
               </p>
               {/* 순위 */}
-              <div className={styles.nameWrapper}>
+              <Link
+                to={`/companies/${investment.id}`}
+                className={styles.nameWrapper}
+              >
                 <img
                   src={investment.imageUrl || "/images/logo.png"}
                   alt={investment.name}
@@ -98,7 +102,7 @@ const InvestmentList = () => {
                 {/* 이미지 */}
                 <p className={styles.name}>{investment.name}</p>
                 {/* 회사 이름 */}
-              </div>
+              </Link>
               <p className={styles.description}>{investment.description}</p>
               {/* 회사 설명 */}
               <p className={styles.category}>{investment.category}</p>

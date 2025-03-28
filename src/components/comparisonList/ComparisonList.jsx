@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import Pagination from "../pagination/pagination";
+import Pagination from "../../components/pagination/pagination";
 import styles from "./Comparison.module.scss"; // 파일명도 변경
 import axios from "axios";
 import { dataUrl } from "../../env";
+import { Link } from "react-router-dom";
 
 const Comparison = () => {
   const [comparisonList, setComparisonList] = useState([]);
@@ -89,7 +90,10 @@ const Comparison = () => {
                 {(currentPage - 1) * 10 + index + 1}위
               </p>
               {/* 순위 */}
-              <div className={styles.nameWrapper}>
+              <Link
+                to={`/companies/${comparison.id}`}
+                className={styles.nameWrapper}
+              >
                 <img
                   src={comparison.imageUrl || "/images/logo.png"}
                   alt={comparison.name}
@@ -98,7 +102,7 @@ const Comparison = () => {
                 {/* 이미지 */}
                 <p className={styles.name}>{comparison.name}</p>
                 {/* 회사 이름 */}
-              </div>
+              </Link>
               <p className={styles.description}>{comparison.description}</p>
               {/* 회사 설명 */}
               <p className={styles.category}>{comparison.category}</p>

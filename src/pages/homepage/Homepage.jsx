@@ -4,6 +4,8 @@ import Search from "../../components/search/Search";
 import styles from "./Homepage.module.scss";
 import axios from "axios";
 import { dataUrl } from "../../env.js";
+import SelectBox from "../../components/selectBox/SelectBox";
+import { basicSortOptions } from "../../components/selectBox/sortOptions.js";
 
 const Homepage = () => {
   const [startupList, setStartupList] = useState([]); // 전체 데이터
@@ -14,9 +16,21 @@ const Homepage = () => {
     try {
       const response = await axios.get(`${dataUrl}/api/companies`);
       setStartupList(response.data); // 전체 데이터를 'startupList'에 저장
-      setFilteredData(response.data); // 초기에 필터링된 데이터도 전체 데이터를 사용한다
+      setFilteredData(response.data); // 초기에 필터링된 데이터도 전체 데이터를 사용
     } catch (error) {
       console.error("Error fetching data:", error);
+    }
+  };
+
+  // 매출액 높은 순으로 필터링하는 함수
+  const handleSortChange = async (sortOrder) => {
+    try {
+      const response = await axios.get(
+        `${dataUrl}/api/companies?sort=${sortOrder}`
+      );
+      setFilteredData(response.data); // 정렬된 데이터를 필터링된 데이터로 설정
+    } catch (error) {
+      console.error("Error fetching sorted data:", error);
     }
   };
 
@@ -26,8 +40,8 @@ const Homepage = () => {
   };
 
   useEffect(() => {
-    fetchStartupList(); // 컴포넌트가 마운트 될 때 API를 통해서 목록을 가져온다
-  }, []); // 컴포넌트가 처음 랜더링될 때만 호출된다
+    fetchStartupList(); // 컴포넌트가 마운트될 때 API를 통해 목록을 가져옴
+  }, []); // 컴포넌트가 처음 렌더링될 때만 호출
 
   return (
     <div>
@@ -37,11 +51,14 @@ const Homepage = () => {
           <div className={styles.headerComponents}>
             <Search
               startups={startupList} // 전체 기업 목록을 전달
-              onFilteredData={handleFilteredData} // 필터링된 데이터 데이터를 처리할 함수를 전달
+              onFilteredData={handleFilteredData} // 필터링된 데이터를 처리할 함수를 전달
             />
-            <select>
-              <option value="High">매출액 높은순</option>
-            </select>
+            <SelectBox
+              size="small"
+              options={basicSortOptions}
+              defaultValue="investment_desc"
+              onChange={handleSortChange} // 정렬 변경 시 처리할 함수 전달
+            />
           </div>
         </div>
         <StartupList startups={filteredData} /> {/* 필터링된 데이터를 불러옴 */}

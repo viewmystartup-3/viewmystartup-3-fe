@@ -4,7 +4,7 @@
   justify-content: center;
   align-items: center;
   gap: 8px;
-  
+
   button {
     padding: 5px 10px;
     border: none;
@@ -23,6 +23,12 @@
     }
 
     &:active {
+      background-color: var(--brandOrange);
+      color: var(--white);
+    }
+
+    /* active 스타일 */
+    &.active {
       background-color: var(--brandOrange);
       color: var(--white);
     }

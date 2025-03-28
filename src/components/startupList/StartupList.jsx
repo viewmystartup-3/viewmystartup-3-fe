@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "./StartupList.module.scss";
 import Pagination from "../pagination/pagination.jsx";
+import { Link } from "react-router-dom"; // Link import 추가
 
 const StartupList = ({ startups }) => {
   const [currentPageData, setCurrentPageData] = useState([]); // 현재 페이지에 해당하는 데이터
@@ -39,14 +40,17 @@ const StartupList = ({ startups }) => {
               <p className={styles.ranking}>
                 {(currentPage - 1) * 10 + index + 1}위
               </p>
-              <div className={styles.nameWrapper}>
+              <Link
+                to={`/companies/${startup.id}`}
+                className={styles.nameWrapper}
+              >
                 <img
                   src={startup.imageUrl || "/images/logo.png"}
                   alt={startup.name}
                   className={styles.startupImage}
                 />
                 <p className={styles.name}>{startup.name}</p>
-              </div>
+              </Link>
               <p className={styles.description}>{startup.description}</p>
               <p className={styles.info}>{startup.category}</p>
               <p className={styles.info}>{startup.totalInvestment}억 원</p>
