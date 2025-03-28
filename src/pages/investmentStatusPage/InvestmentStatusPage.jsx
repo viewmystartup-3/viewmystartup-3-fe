@@ -7,7 +7,9 @@ import axios from "axios";
 import { dataUrl } from "../../env";
 
 const InvestmentStatusPage = () => {
-  const [selectedSortValue, setSelectedSortValue] = useState("investment_desc");
+  const [selectedSortValue, setSelectedSortValue] = useState(
+    "investmentAmount_desc"
+  );
   const [investmentData, setInvestmentData] = useState([]); // 데이터를 관리할 상태
 
   // SelectBox에서 값이 변경되면 호출되는 함수

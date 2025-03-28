@@ -8,8 +8,8 @@ export const basicSortOptions = [
 ];
 
 export const viewMyStartupOptions = [
-  { label: "View My Startup 투자 금액 높은순", value: "investment_desc" },
-  { label: "View My Startup 투자 금액 낮은순", value: "investment_asc" },
+  { label: "View My Startup 투자 금액 높은순", value: "investmentAmount_desc" },
+  { label: "View My Startup 투자 금액 낮은순", value: "investmentAmount_asc" },
   { label: "실제 누적 투자 금액 높은순", value: "totalInvestment_desc" },
   { label: "실제 누적 투자 금액 낮은순", value: "totalInvestment_asc" },
 ];
