@@ -16,7 +16,7 @@ function Header() {
         </Link>
         <nav>
           <ul className={styles.ul}>
-            <Link to="/" className={styles.link}>
+            <Link to="/my-company" className={styles.link}>
               <li>나의 기업 비교</li>
             </Link>
             <Link to="/comparison" className={styles.link}>
