@@ -2,13 +2,19 @@ import React, { useState } from "react";
 import styles from "./Search.module.scss"; // 스타일 모듈을 import
 import searchIcon from "../../assets/ic_search.png";
 
-const Search = ({ startups, onFilteredData, onClearSearch }) => {
+const Search = ({ startups, onFilteredData, onClearSearch, isModal }) => {
   const [isFocused, setIsFocused] = useState(false); // focus 상태
   const [searchTerm, setSearchTerm] = useState(""); // 검색어 상태
 
   const handleSearchChange = (event) => {
     const value = event.target.value;
     setSearchTerm(value);
+
+    //검색어가 없을 경우 빈 배열을 반환
+    if (value === "") {
+      onFilteredData(isModal ? [] : startups);
+      return;
+    }
 
     // 검색어에 따라서 데이터를 필터링
     const filteredData = startups.filter((startup) => {
@@ -29,7 +35,7 @@ const Search = ({ startups, onFilteredData, onClearSearch }) => {
   // X 버튼 클릭 시 검색어 초기화 및 데이터 초기화
   const clearSearch = () => {
     setSearchTerm(""); // 검색어를 초기화
-    onFilteredData(startups); // 필터링된 데이터를 전체 기업 목록으로 초기화
+    onFilteredData(startups);
     onClearSearch(); // 추가적인 초기화 작업이 필요하면 부모 컴포넌트로 전달
   };
 

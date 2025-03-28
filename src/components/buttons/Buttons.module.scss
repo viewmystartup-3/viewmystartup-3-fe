@@ -73,7 +73,9 @@
   }
 
   padding: 13px 48px;
-  font: var(--textLSb);
+  & {
+    font: var(--textLSb);
+  }
 
   @include outline;
 }
