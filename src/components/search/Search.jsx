@@ -2,13 +2,23 @@ import React, { useState } from "react";
 import styles from "./Search.module.scss"; // 스타일 모듈을 import
 import searchIcon from "../../assets/ic_search.png";
 
-const Search = ({ startups, onFilteredData, onClearSearch }) => {
+const Search = ({ startups, onFilteredData, onClearSearch, isModal }) => {
   const [isFocused, setIsFocused] = useState(false); // focus 상태
   const [searchTerm, setSearchTerm] = useState(""); // 검색어 상태
 
   const handleSearchChange = (event) => {
     const value = event.target.value;
     setSearchTerm(value);
+
+    // 검색어가 없을 경우 빈 배열을 반환
+    if (value === "") {
+      if (isModal) {
+        onFilteredData([]); // 모달에서는 빈 배열을 반환
+      } else {
+        onFilteredData(startups); // Homepage에서는 전체 기업 목록 반환
+      }
+      return;
+    }
 
     // 검색어에 따라서 데이터를 필터링
     const filteredData = startups.filter((startup) => {

@@ -52,6 +52,7 @@ const Homepage = () => {
             <Search
               startups={startupList} // 전체 기업 목록을 전달
               onFilteredData={handleFilteredData} // 필터링된 데이터를 처리할 함수를 전달
+              isModal={false}
             />
             <SelectBox
               size="small"
