@@ -1,0 +1,19 @@
+.body{
+  display: flex;
+  width: 100%;
+  max-width: 1200px;
+  flex-direction: column;
+  height: auto;
+  padding: 50px;
+  margin: 0 auto;
+  gap: 32px;
+  .header {
+    width: 100%;
+    height: 104px;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--gray200);
+    padding-bottom: 50px;
+    gap: 18px;
+  }
+}

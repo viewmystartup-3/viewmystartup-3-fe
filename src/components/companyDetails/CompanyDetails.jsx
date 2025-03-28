@@ -32,7 +32,11 @@ const CompanyDetails = () => {
     <div>
       <div className={styles.body}>
         <div className={styles.header}>
-        <img src={company.imageUrl} alt={company.name} className={styles.image} />
+          <img
+            src={company.imageUrl}
+            alt={company.name}
+            className={styles.image}
+          />
 
           <div>
             <p className={styles.name}>{company.name}</p>
