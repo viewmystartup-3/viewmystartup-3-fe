@@ -1,5 +1,5 @@
 .pagination {
-  margin-top: 40px;
+  margin: 40px 0;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -21,13 +21,6 @@
       opacity: 0.5;
       color: var(--gray200);
     }
-
-    &:active {
-      background-color: var(--brandOrange);
-      color: var(--white);
-    }
-
-    /* active 스타일 */
     &.active {
       background-color: var(--brandOrange);
       color: var(--white);

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Pagination from "../../components/pagination/pagination";
 import styles from "./Comparison.module.scss";
 import { Link } from "react-router-dom";
 
@@ -19,12 +18,6 @@ const ComparisonList = ({ companies }) => {
     setTotalPages(Math.ceil(companies.length / 10)); // 총 페이지 수 계산
     setLoading(false); // 로딩 끝
   }, [companies, currentPage]); // companies나 currentPage가 변경될 때마다 실행
-
-  const handlePageChange = (page) => {
-    if (page >= 1 && page <= totalPages) {
-      setCurrentPage(page); // 페이지 변경
-    }
-  };
 
   return (
     <div className={styles.form}>
@@ -68,12 +61,6 @@ const ComparisonList = ({ companies }) => {
           <p>데이터가 없습니다.</p> // 데이터가 없을 때 메시지
         )}
       </div>
-
-      <Pagination
-        currentPage={currentPage}
-        totalPages={totalPages}
-        onPageChange={handlePageChange}
-      />
     </div>
   );
 };
