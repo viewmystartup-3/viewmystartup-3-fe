@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import styles from "./ComparisonStatusPage.module.scss";
 import ComparisonList from "../../components/comparisonList/ComparisonList";
@@ -7,10 +7,12 @@ import { myCompanySelectOptions } from "../../components/selectBox/sortOptions";
 import { dataUrl } from "../../env.js";
 
 const ComparisonStatusPage = () => {
-  const [sortedCompanies, setSortedCompanies] = useState([]); // 정렬된 회사 목록 상태 추가
-  const [selectedSortValue, setSelectedSortValue] = useState("investment_desc"); // 선택된 정렬 기준 상태 추가
+  const [sortedCompanies, setSortedCompanies] = useState([]); // 정렬된 회사 목록 상태
+  const [selectedSortValue, setSelectedSortValue] = useState(
+    "selectedCompany_desc"
+  ); // 선택된 정렬 기준 상태
 
-  // axios 요청 함수
+  // axios 요청 함수 (정렬된 회사 목록을 가져오는 함수)
   const fetchSortedCompanies = (sortValue) => {
     axios
       .get(`${dataUrl}/api/companies?sort=${sortValue}`)
@@ -32,6 +34,10 @@ const ComparisonStatusPage = () => {
     fetchSortedCompanies(newSortValue); // 선택된 값으로 데이터를 다시 가져오기
   };
 
+  useEffect(() => {
+    fetchSortedCompanies(selectedSortValue); // 초기 데이터 불러오기
+  }, [selectedSortValue]); // 선택된 값이 바뀔 때마다 데이터를 새로 요청
+
   return (
     <div className={styles.form}>
       <div className={styles.header}>
@@ -39,11 +45,12 @@ const ComparisonStatusPage = () => {
         <SelectBox
           size="large"
           options={myCompanySelectOptions}
-          defaultValue="investment_desc"
+          defaultValue={selectedSortValue}
           onChange={handleSelectChange} // 셀렉트박스에서 값이 변경되면 호출
         />
       </div>
-      <ComparisonList companies={sortedCompanies} />
+      <ComparisonList companies={sortedCompanies} />{" "}
+      {/* axios로 받은 데이터를 ComparisonList에 전달 */}
     </div>
   );
 };

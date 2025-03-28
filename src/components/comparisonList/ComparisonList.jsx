@@ -1,72 +1,30 @@
 import React, { useState, useEffect } from "react";
 import Pagination from "../../components/pagination/pagination";
-import styles from "./Comparison.module.scss"; // 파일명도 변경
-import axios from "axios";
-import { dataUrl } from "../../env";
+import styles from "./Comparison.module.scss";
 import { Link } from "react-router-dom";
 
-const Comparison = () => {
-  const [comparisonList, setComparisonList] = useState([]);
-  const [currentPageData, setCurrentPageData] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
-  const [totalCount, setTotalCount] = useState(0);
+const ComparisonList = ({ companies }) => {
+  const [currentPageData, setCurrentPageData] = useState([]); // 현재 페이지 데이터
+  const [loading, setLoading] = useState(false); // 로딩 상태
+  const [currentPage, setCurrentPage] = useState(1); // 현재 페이지
+  const [totalPages, setTotalPages] = useState(1); // 총 페이지 수
 
-  // 페이지 데이터 가져오기
-  const fetchComparisonList = async () => {
+  // 페이지 데이터 업데이트
+  useEffect(() => {
     setLoading(true); // 로딩 시작
-    try {
-      const response = await axios.get(`${dataUrl}/api/companies`, {
-        params: {
-          page: currentPage,
-          limit: 10,
-        },
-      });
+    const startIdx = (currentPage - 1) * 10;
+    const endIdx = currentPage * 10;
+    setCurrentPageData(companies.slice(startIdx, endIdx)); // 데이터 슬라이싱
 
-      const data = response.data;
+    setTotalPages(Math.ceil(companies.length / 10)); // 총 페이지 수 계산
+    setLoading(false); // 로딩 끝
+  }, [companies, currentPage]); // companies나 currentPage가 변경될 때마다 실행
 
-      // 데이터 형식 확인 후 처리
-      if (data && data.data) {
-        setComparisonList(data.data);
-        setTotalCount(data.totalCount || 0);
-        setTotalPages(data.totalPages || 1);
-
-        setCurrentPageData(data.data);
-      } else if (Array.isArray(data)) {
-        setComparisonList(data);
-        setTotalCount(data.length);
-        setTotalPages(Math.ceil(data.length / 10));
-
-        // 현재 페이지에 해당하는 데이터만 추출해서 상태에 저장
-        setCurrentPageData(
-          data.slice((currentPage - 1) * 10, currentPage * 10)
-        );
-      } else {
-        console.error("Expected data format is missing.");
-        setComparisonList([]); // 데이터가 없으면 빈 배열로 설정
-        setCurrentPageData([]);
-      }
-    } catch (error) {
-      console.error("Error fetching data: ", error);
-      setComparisonList([]); // 에러 발생 시 빈 배열로 설정
-      setCurrentPageData([]);
-    } finally {
-      setLoading(false); // 로딩 끝
-    }
-  };
-
-  // 페이지 변경 시 데이터를 가져오는 함수
   const handlePageChange = (page) => {
     if (page >= 1 && page <= totalPages) {
       setCurrentPage(page); // 페이지 변경
     }
   };
-
-  // 페이지가 변경될 때마다 데이터를 새로 가져옴
-  useEffect(() => {
-    fetchComparisonList();
-  }, [currentPage]); // currentPage가 변경될 때마다 호출
 
   return (
     <div className={styles.form}>
@@ -89,7 +47,6 @@ const Comparison = () => {
               <p className={styles.ranking}>
                 {(currentPage - 1) * 10 + index + 1}위
               </p>
-              {/* 순위 */}
               <Link
                 to={`/companies/${comparison.id}`}
                 className={styles.nameWrapper}
@@ -99,24 +56,19 @@ const Comparison = () => {
                   alt={comparison.name}
                   className={styles.startupImage}
                 />
-                {/* 이미지 */}
                 <p className={styles.name}>{comparison.name}</p>
-                {/* 회사 이름 */}
               </Link>
               <p className={styles.description}>{comparison.description}</p>
-              {/* 회사 설명 */}
               <p className={styles.category}>{comparison.category}</p>
-              {/* 카테고리 */}
               <p className={styles.info}>{comparison.comparedCompany}</p>
-              {/* 나의 기업 선택 횟수 */}
               <p className={styles.info}>{comparison.selectedCompany}</p>
-              {/* 비교 기업 선택 횟수 */}
             </div>
           ))
         ) : (
           <p>데이터가 없습니다.</p> // 데이터가 없을 때 메시지
         )}
       </div>
+
       <Pagination
         currentPage={currentPage}
         totalPages={totalPages}
@@ -126,4 +78,4 @@ const Comparison = () => {
   );
 };
 
-export default Comparison;
+export default ComparisonList;
