@@ -1,0 +1,61 @@
+.card {
+  width: 126px;
+  height: 187px;
+  border-radius: 8px;
+  background-color: var(--gray400);
+
+  position: relative; //로고와 글사이 너무먼디???
+}
+.myCard {
+  background-color: var(--black300); ///이거 어케적용????
+}
+
+.removeBtn {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: 8px;
+  left: 94px;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 2px;
+  justify-content: center;
+  border-radius: 8px;
+
+
+  background-color: var(--black300);
+}
+
+.logoWrapper {
+  width: 126px;
+  // height: 130px; //높이가 먼거 조정???
+  gap: 10px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.logo {
+  width: 82.96px;
+  height: 82.96px;
+  object-fit: contain;
+}
+
+.name {
+  font: var(--textM);
+  text-align: center;
+  margin-top: 10px;
+}
+.category {
+  color: var(--gray200);
+  font: var(--textSM);
+  text-align: center;
+  margin-top: 4px;
+}

@@ -1,7 +1,6 @@
 .wrapper {
   margin: 0 auto;
   width: 1200px;
-  
 }
 .sectionTitle {
   font: var(--textXlB);
@@ -26,10 +25,41 @@
   background-color: var(--black300);
   align-items: center;
   margin: 16px;
-  
+
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.selectedBox {
+  position: relative;
+
+  width: 1200px;
+  height: 300px;
+  border-radius: 4px;
+  background-color: var(--black300);
+  align-items: center;
+  margin: 16px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cancelBtn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  font: var(--text);
+  text-align: right;
+  color: var(--gray100);
+  border: none;
+  background: none;
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline solid;
+  }
 }
 
 .plusImgBtn {
@@ -41,11 +71,7 @@
   gap: 16px;
   border: none;
 }
-.plusTxt{
+.plusTxt {
   font: var(--textLM);
   color: var(--white);
-}
-.compareBtn{
-  display: flex;
-  justify-content: center;
 }
