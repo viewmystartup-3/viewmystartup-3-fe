@@ -2,7 +2,7 @@ import React from "react";
 import { AiOutlineMinus } from "react-icons/ai";
 import style from "./Card.module.scss";
 
-function CompanyCard({ logo, name, category, onRemove, className }) {
+function Card({ logo, name, category, onRemove, className }) {
   return (
     <div className={`${className} ${style.card}`}>
       {onRemove && (
@@ -19,4 +19,4 @@ function CompanyCard({ logo, name, category, onRemove, className }) {
   );
 }
 
-export default CompanyCard;
+export default Card;

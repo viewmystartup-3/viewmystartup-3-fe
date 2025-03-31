@@ -1,7 +1,7 @@
 import React from "react";
 import style from "./MyCompanySection.module.scss";
 import btnPlus from "../../assets/btn_plus.png";
-import CompanyCard from "./Card";
+import Card from "./Card";
 
 function MyCompanySection({ myCompany, setMyCompany, onAddClick }) {
   return (
@@ -22,7 +22,7 @@ function MyCompanySection({ myCompany, setMyCompany, onAddClick }) {
         ) : (
           <div className={style.selectedBox}>
             <button className={style.cancelBtn} onClick={() => setMyCompany(null)}>선택 취소</button>
-            <CompanyCard
+            <Card
               logo={myCompany.logo}
               name={myCompany.name}
               category={myCompany.category}

@@ -5,8 +5,11 @@
 .sectionTitle {
   font: var(--textXlB);
   color: var(--white);
-  margin-bottom: 16px;
+  // margin-bottom: 16px;
   margin-top: 80px;
+}
+.myCard {
+  background-color: var(--black300) !important;
 }
 
 .outerBox {
@@ -24,7 +27,7 @@
   border-radius: 4px;
   background-color: var(--black300);
   align-items: center;
-  margin: 16px;
+  // margin: 16px;
 
   display: flex;
   align-items: center;

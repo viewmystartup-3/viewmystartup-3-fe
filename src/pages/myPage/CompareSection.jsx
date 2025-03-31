@@ -1,7 +1,7 @@
 import React from "react";
 import { RoundButton } from "../../components/buttons/Buttons";
 import style from "./CompareSection.module.scss";
-import CompanyCard from "./Card";
+import Card from "./Card";
 
 function CompareSection({ compareCompanies, onRemove, onAddCompareCompany }) {
   return (
@@ -33,7 +33,7 @@ function CompareSection({ compareCompanies, onRemove, onAddCompareCompany }) {
           <div className={style.selectBox}>
             {compareCompanies.map((company) => {
               return (
-                <CompanyCard
+                <Card
                   id={company.id}
                   logo={company.logo}
                   name={company.name}
