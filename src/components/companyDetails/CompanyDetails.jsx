@@ -3,6 +3,7 @@ import styles from "./CompanyDetails.module.scss";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { dataUrl } from "../../env";
+import logo from"../../../public/images/logo.png"
 
 const CompanyDetails = () => {
   const [company, setCompany] = useState(null);
@@ -33,7 +34,7 @@ const CompanyDetails = () => {
       <div className={styles.body}>
         <div className={styles.header}>
           <img
-            src={company.imageUrl}
+            src={company.imageUrl || logo}
             alt={company.name}
             className={styles.image}
           />

@@ -4,7 +4,9 @@
   max-width: 1200px;
   flex-direction: column;
   height: auto;
-  padding: 50px;
+  padding-top: 50px;
+  padding-left: 20px;
+  padding-right: 20px;
   margin: 0 auto;
   gap: 32px;
 
@@ -59,6 +61,9 @@
         font: var(--textL);
         color: var(--gray100);
       }
+      .value{
+        font: var(--textLSb)
+      }
     }
   }
 
@@ -69,6 +74,7 @@
     border: 1px var(--black200);
     border-radius: 8px;
     background-color: var(--black200);
+    
 
     .content {
       padding: 16px;
@@ -81,6 +87,7 @@
 
     .descriptionText {
       font: var(--text);
+      line-height: 1.5;
       color: var(--gray100);
     }
   }
@@ -100,7 +107,7 @@
 
       .stat {
         width: 30%;
-        height: 93px;
+        height: 140px;
         display: flex;
         flex-direction: column;
         justify-content: space-around;
@@ -110,8 +117,11 @@
         background-color: var(--black200);
 
         .title {
-          font: var(--textL);
+          font: var(--text);
           color: var(--gray100);
+        }
+        .value{
+          font: var(--textB)
         }
       }
     }
@@ -131,7 +141,7 @@
 
       .stat {
         width: 30%;
-        height: 93px;
+        height: 140px;
         display: flex;
         flex-direction: column;
         justify-content: space-around;
@@ -141,8 +151,11 @@
         background-color: var(--black200);
 
         .title {
-          font: var(--textL);
+          font: var(--text);
           color: var(--gray100);
+        }
+        .value{
+          font: var(--textB)
         }
       }
     }
