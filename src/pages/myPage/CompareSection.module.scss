@@ -1,0 +1,39 @@
+.section {
+  margin: 0 auto;
+  width: 1200px;
+}
+.sectionTitle {
+  font: var(--textXlB);
+  color: var(--white);
+  margin-top: 40px;
+  span {
+    font: var(--text);
+    color: var(--white);
+  }
+}
+.compareBtn {
+  //버튼이 딱 오른쪽으로 안감감
+  display: flex;
+  justify-content: space-between;
+}
+.selectBox {
+  position: relative;
+
+  width: 1200px;
+  height: 300px;
+  border-radius: 4px;
+  background-color: var(--black300);
+  align-items: center;
+  margin: 16px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+.emptyMsg {
+  font: var(--textS);
+  color: var(--gray200);
+  text-align: center;
+
+}
