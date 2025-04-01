@@ -1,9 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import style from "./MyCompanySection.module.scss";
 import btnPlus from "../../assets/btn_plus.png";
 import Card from "./Card";
+import { MyCompanyModal } from "../../components/modals/select/Modals";
 
-function MyCompanySection({ myCompany, setMyCompany, onAddClick }) {
+function MyCompanySection({ myCompany, setMyCompany }) {
+  const [isModalOpen, setIsModalOpen] = useState(false); // 모달 상태
+
+  const handleSelectCompany = (company) => {
+    const mappedCompany = {
+      id: company.id,
+      name: company.name,
+      category: company.category,
+      logo: company.imageUrl,
+    };
+
+    // 모달 제어
+    console.log("선택된 기업:", mappedCompany); // ✅ 이거 찍히는지 확인
+    setMyCompany(mappedCompany); // 여기서 선택된 기업 외부 상태에 저장
+    setIsModalOpen(false); // 모달 닫기
+  };
+
   return (
     <section className={style.wrapper}>
       <h2 className={style.sectionTitle}>나의 기업을 선택해 주세요!</h2>
@@ -13,7 +30,10 @@ function MyCompanySection({ myCompany, setMyCompany, onAddClick }) {
         {!myCompany ? (
           <div className={style.outerBox}>
             <div className={style.selectBox}>
-              <button className={style.plusImgBtn} onClick={onAddClick}>
+              <button
+                className={style.plusImgBtn}
+                onClick={() => setIsModalOpen(true)} //버튼클릭시 모달 열고고
+              >
                 <img src={btnPlus} alt="기업 추가 버튼" />
                 <span className={style.plusTxt}>기업 추가</span>
               </button>
@@ -21,7 +41,12 @@ function MyCompanySection({ myCompany, setMyCompany, onAddClick }) {
           </div>
         ) : (
           <div className={style.selectedBox}>
-            <button className={style.cancelBtn} onClick={() => setMyCompany(null)}>선택 취소</button>
+            <button
+              className={style.cancelBtn}
+              onClick={() => setMyCompany(null)}
+            >
+              선택 취소
+            </button>
             <Card
               logo={myCompany.logo}
               name={myCompany.name}
@@ -31,6 +56,15 @@ function MyCompanySection({ myCompany, setMyCompany, onAddClick }) {
           </div>
         )}
       </div>
+
+      {/* 4. 모달 렌더링 */}
+      {isModalOpen && (
+        <MyCompanyModal
+          className={style.modaldal}
+          onClose={() => setIsModalOpen(false)}
+          onSelect={handleSelectCompany} //myCompanyModal에서 선택한 기업 넘겨줄수 있도록!
+        />
+      )}
     </section>
   );
 }
