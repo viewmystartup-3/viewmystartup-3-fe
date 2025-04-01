@@ -3,32 +3,37 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  white-space: nowrap;
 }
 
 // 둥근 버튼 설정 : 공통 속성 + 미디어 쿼리
-@mixin round($breakpoint) {
+@mixin round {
   border-radius: 50px;
   background-color: var(--black100);
   color: var(--gray200);
   font: var(--textSb);
   border: none;
-
-  @if $breakpoint == mobile {
-    @media (max-width: 744px) {
-      font: var(--textSSb);
-      @content;
-    }
-  }
 }
 
 // 일반 둥근 버튼
 .round {
   @include button;
-  @include round(mobile) {
-    padding: 13px 24px;
-  }
-
+  @include round;
   padding: 13px 48px;
+  height: 43px;
+
+  &.active {
+    background-color: var(--brandOrange);
+    color: var(--white);
+  }
+}
+
+// 작고 둥근 버튼
+.roundSmall {
+  @include button;
+  @include round;
+  padding: 13px 24px;
+  height: 40px;
 
   &.active {
     background-color: var(--brandOrange);
@@ -39,10 +44,7 @@
 // 초기화 버튼(안이 차 있는 둥근 버튼)
 .restart {
   @include button;
-  @include round(mobile) {
-    padding: 4px 12px;
-  }
-
+  @include round;
   padding: 8px 24px;
   gap: 3px;
 
@@ -67,24 +69,21 @@
 // 투자 모달창 취소 버튼(일반 + Outline 버튼)
 .roundOutline {
   @include button;
-  @include round(mobile) {
-    padding: 12px 24px;
-  }
-
+  @include round;
+  @include outline;
   padding: 13px 48px;
   font: var(--textLSb);
-
-  @include outline;
 }
 
 // 모달창에 쓰는 선택 버튼
 .modalButton {
   @include button;
   @include outline;
-
   font: var(--textM);
   border-radius: 10px;
   padding: 13px 24px;
+  min-width: 104px;
+  height: 48px;
 
   &.active {
     border: 1px solid var(--gray100);
@@ -92,16 +91,7 @@
     padding: 8px 12px;
 
     .checkIcon {
-      display: inline;
-    }
-  }
-
-  @media (max-width: 744px) {
-    font: var(--textSM);
-    padding: 13px 12px;
-
-    &.active {
-      padding: 11px 4px;
+      display: block;
     }
   }
 }
@@ -114,4 +104,39 @@
 .cancel {
   color: var(--gray200);
   border: 1px solid var(--gray200);
+}
+
+@media (max-width: 744px) {
+  .round {
+    font: var(--textSSb);
+    padding: 13px 24px;
+    width: 135px;
+    height: 40px;
+  }
+
+  .roundSmall {
+    font: var(--textSSb);
+    padding: 13px 24px;
+    width: 100px;
+    height: 32px;
+  }
+
+  .restart {
+    padding: 4px 12px;
+  }
+
+  .roundOutline {
+    padding: 12px 24px;
+  }
+
+  .modalButton {
+    font: var(--textSM);
+    padding: 13px 12px;
+    min-width: 73px;
+    height: 32px;
+
+    &.active {
+      padding: 11px 4px;
+    }
+  }
 }

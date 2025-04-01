@@ -9,7 +9,6 @@
   --gray200: #747474;
   --gray100: #d8d8d8;
   --brandOrange: #eb5230;
-  --blue: #eb5230;
   --redError: #c41013;
   --white: #ffffff;
 
@@ -43,4 +42,3 @@ body {
   font: var(--text) !important;
   color: var(--white);
 }
-

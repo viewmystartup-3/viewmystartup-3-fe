@@ -1,0 +1,14 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 496px;
+  background-color: var(--black300);
+  padding: 24px;
+  border-radius: 16px;
+
+  @media (max-width: 744px) {
+    width: 343px;
+    padding: 16px;
+  }
+}
