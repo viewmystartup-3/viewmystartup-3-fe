@@ -1,5 +1,5 @@
 .pagination {
-  margin: 16px 0 32px 0;
+  margin: 40px 0;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -7,7 +7,6 @@
 
   button {
     padding: 5px 10px;
-    text-align: center;
     border: none;
     background-color: var(--black100);
     border-radius: 10px;

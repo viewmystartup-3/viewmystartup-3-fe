@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import styles from "../../styles/table.module.scss";
-import temporarilyImg from "/images/logo.png";
+import styles from "./Comparison.module.scss";
 import { Link } from "react-router-dom";
 
 const ComparisonList = ({ companies }) => {
@@ -21,23 +20,23 @@ const ComparisonList = ({ companies }) => {
   }, [companies, currentPage]); // companies나 currentPage가 변경될 때마다 실행
 
   return (
-    <div className={styles.table}>
-      <div className={styles.tableHeader}>
+    <div className={styles.form}>
+      <div className={styles.listHeader}>
         <p className={styles.ranking}>순위</p>
-        <p className={styles.name}>기업 명</p>
+        <p className={styles.headerName}>기업 명</p>
         <p className={styles.description}>기업 소개</p>
-        <p className={styles.info}>카테고리</p>
-        <p className={styles.investmentAndSelection}>나의 기업 선택 횟수</p>
-        <p className={styles.investmentAndSelection}>비교 기업 선택 횟수</p>
+        <p className={styles.category}>카테고리</p>
+        <p className={styles.info}>나의 기업 선택 횟수</p>
+        <p className={styles.info}>비교 기업 선택 횟수</p>
       </div>
 
       {/* 비교 목록 렌더링 */}
-      <div className={styles.tableContents}>
+      <div className={styles.listContents}>
         {loading ? (
           <p>로딩 중...</p> // 로딩 중일 때 메시지
         ) : currentPageData.length > 0 ? (
           currentPageData.map((comparison, index) => (
-            <div className={styles.tableContent} key={comparison.id}>
+            <div className={styles.listContent} key={comparison.id}>
               <p className={styles.ranking}>
                 {(currentPage - 1) * 10 + index + 1}위
               </p>
@@ -46,20 +45,16 @@ const ComparisonList = ({ companies }) => {
                 className={styles.nameWrapper}
               >
                 <img
-                  src={comparison.imageUrl || `${temporarilyImg}`}
+                  src={comparison.imageUrl || "/images/logo.png"}
                   alt={comparison.name}
-                  className={styles.image}
+                  className={styles.startupImage}
                 />
                 <p className={styles.name}>{comparison.name}</p>
               </Link>
               <p className={styles.description}>{comparison.description}</p>
-              <p className={styles.info}>{comparison.category}</p>
-              <p className={styles.investmentAndSelection}>
-                {comparison.comparedCompany}
-              </p>
-              <p className={styles.investmentAndSelection}>
-                {comparison.selectedCompany}
-              </p>
+              <p className={styles.category}>{comparison.category}</p>
+              <p className={styles.info}>{comparison.comparedCompany}</p>
+              <p className={styles.info}>{comparison.selectedCompany}</p>
             </div>
           ))
         ) : (

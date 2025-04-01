@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
-import styles from "../../styles/table.module.scss";
-import temporarilyImg from "../../../public/images/logo.png";
-import clsx from "clsx";
+import styles from "./StartupList.module.scss";
 import { Link } from "react-router-dom";
 
-const StartupList = ({ startups, currentPage }) => {
+const StartupList = ({ startups, currentPage, totalPages }) => {
   const [currentPageData, setCurrentPageData] = useState([]); // 현재 페이지에 해당하는 데이터
   const [loading, setLoading] = useState(true); // 로딩 상태
 
@@ -14,13 +12,13 @@ const StartupList = ({ startups, currentPage }) => {
     const endIdx = currentPage * 10;
     setCurrentPageData(startups.slice(startIdx, endIdx)); // 페이지별 데이터 갱신
     setLoading(false);
-  }, [startups, currentPage]);
+  }, [startups, currentPage]); // `startups`와 `currentPage`가 변경될 때마다 실행
 
   return (
-    <div className={styles.table}>
-      <div className={clsx(styles.tableHeaderMT, styles.tableHeader)}>
+    <div className={styles.startuplistForm}>
+      <div className={styles.startuplistHeader}>
         <p className={styles.ranking}>순위</p>
-        <p className={styles.name}>기업 명</p>
+        <p className={styles.headerName}>기업 명</p>
         <p className={styles.description}>기업 소개</p>
         <p className={styles.info}>카테고리</p>
         <p className={styles.info}>누적 투자 금액</p>
@@ -29,12 +27,12 @@ const StartupList = ({ startups, currentPage }) => {
       </div>
 
       {/* 스타트업 목록 렌더링 */}
-      <div className={styles.tableContents}>
+      <div className={styles.startuplistContents}>
         {loading ? (
           <p>로딩 중...</p> // 로딩 중일 때 메시지
         ) : currentPageData.length > 0 ? (
           currentPageData.map((startup, index) => (
-            <div className={styles.tableContent} key={startup.id}>
+            <div className={styles.startuplistContent} key={startup.id}>
               <p className={styles.ranking}>
                 {(currentPage - 1) * 10 + index + 1}위
               </p>
@@ -43,9 +41,9 @@ const StartupList = ({ startups, currentPage }) => {
                 className={styles.nameWrapper}
               >
                 <img
-                  src={startup.imageUrl || `${temporarilyImg}`}
+                  src={startup.imageUrl || "/images/logo.png"}
                   alt={startup.name}
-                  className={styles.image}
+                  className={styles.startupImage}
                 />
                 <p className={styles.name}>{startup.name}</p>
               </Link>
