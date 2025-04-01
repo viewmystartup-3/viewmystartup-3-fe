@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { RoundButton } from "../../components/buttons/Buttons";
+import { RoundButton, ResetButton } from "../../components/buttons/Buttons";
 import MyCompanySection from "./MyCompanySection";
 import style from "./MyPage.module.scss";
 import CompareSection from "./CompareSection";
@@ -37,6 +37,13 @@ function MyPage() {
           }
           onAddCompareCompany={handleAddCompareCompany}
         />
+      )}
+
+      {/* 전체 초기화 버튼 조건부 렌더링 */}
+      {showResetButton && (
+        <div className={style.resetContainer}>
+          <ResetButton onReset={handleReset}>전체 초기화</ResetButton>
+        </div>
       )}
 
       {/* 기업 비교하기 버튼 (활성 조건: 최소 1개 선택 시) */}
