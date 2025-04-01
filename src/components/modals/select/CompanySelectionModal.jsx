@@ -6,7 +6,7 @@ import Search from "../../search/Search";
 import axios from "axios";
 import { dataUrl } from "../../../env";
 
-function CompanySelectionModal({ title, titleTypes }) {
+function CompanySelectionModal({ title, titleTypes, onSelect, onClose }) {
   const [isOpen, setIsOpen] = useState(true);
   const [companyList, setCompanyList] = useState([]);
   const [searchResults, setSearchResults] = useState([]);
@@ -15,6 +15,7 @@ function CompanySelectionModal({ title, titleTypes }) {
   // 상단 바 x 눌러서 창 닫기
   const handleCloseWindow = () => {
     setIsOpen(false);
+    onClose?.();
   };
 
   // 데이터 불러오기
@@ -37,6 +38,12 @@ function CompanySelectionModal({ title, titleTypes }) {
       if (prev.some((company) => company.id === companyData.id)) return prev;
       return [...prev, companyData];
     });
+
+    //외부의 onSelect 콜백 호출출
+    onSelect?.(companyData);
+
+    //모달닫기
+    onClose?.();
   };
 
   // "선택 해제" 버튼을 클릭하면 데이터 선택이 해제됨

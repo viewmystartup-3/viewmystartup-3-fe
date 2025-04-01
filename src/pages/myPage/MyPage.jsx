@@ -15,12 +15,6 @@ function MyPage() {
   const [myCompany, setMyCompany] = useState(null);
   const [compareCompanies, setCompareCompanies] = useState([]);
 
-  const handleAddClick = () => {
-    // TODO: 기업선택된거 안에 추가해야함.
-    //예시용, 바로 기업 선택됨.
-    setMyCompany(sampleCompany);
-  };
-
   const handleAddCompareCompany = () => {
     if (compareCompanies.length >= 5) {
       return;
@@ -42,7 +36,6 @@ function MyPage() {
       <MyCompanySection
         myCompany={myCompany}
         setMyCompany={setMyCompany}
-        onAddClick={handleAddClick}
       />
 
       {/* 선택 후 상태 */}

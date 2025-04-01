@@ -8,6 +8,7 @@ function SelectFrame({
   onDeselect,
   titleType,
   selectedCompanies,
+  onClose,
 }) {
   const [isItemSelected, setIsItemSelected] = useState(false);
 
@@ -19,6 +20,8 @@ function SelectFrame({
   }, [selectedCompanies, company.id]);
 
   const handleButton = () => {
+    console.log("버튼 클릭됨 ✅");
+    console.log("onSelect is", onSelect); // ✅ 함수로 찍히는지?
     if (isItemSelected) {
       // 선택 해제
       if (onDeselect) {
@@ -28,8 +31,10 @@ function SelectFrame({
     } else {
       // 선택 추가
       if (onSelect && !isItemSelected) {
-        onSelect(company);
+        console.log("회사 선택됨 ✅", company); // 여기도 찍어보자
+        onSelect(company); //선택한기업 전달달
         setIsItemSelected(true);
+        onClose?.(); //모달닫기기
       }
     }
   };
