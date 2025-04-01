@@ -1,34 +1,22 @@
 import React, { useState } from "react";
-import { RoundButton } from "../../components/buttons/Buttons";
+import { RoundButton, ResetButton } from "../../components/buttons/Buttons";
 import MyCompanySection from "./MyCompanySection";
 import style from "./MyPage.module.scss";
 import CompareSection from "./CompareSection";
 
 function MyPage() {
-  const sampleCompany = {
-    id: 1,
-    name: "코드잇",
-    category: "에듀워크",
-    logo: "/images/logo.png",
-  };
-
   const [myCompany, setMyCompany] = useState(null);
   const [compareCompanies, setCompareCompanies] = useState([]);
 
-  const handleAddCompareCompany = () => {
-    if (compareCompanies.length >= 5) {
-      return;
-    }
-    const count = compareCompanies.length + 1;
+  const showResetButton = myCompany && compareCompanies.length > 0;
 
-    const newCompany = {
-      id: Date.now(), // 고유 ID
-      name: `코드잇 ${count}`, // 이름을 달리함
-      category: "에듀워크",
-      logo: "/images/logo.png",
-    };
-
-    setCompareCompanies([...compareCompanies, newCompany]);
+  const handleAddCompareCompany = (company) => {
+    if (compareCompanies.length >= 5) return;
+    setCompareCompanies((prev) => [...prev, company]);
+  };
+  const handleReset = () => {
+    setMyCompany(null);
+    setCompareCompanies([]);
   };
 
   return (
@@ -44,6 +32,13 @@ function MyPage() {
           }
           onAddCompareCompany={handleAddCompareCompany}
         />
+      )}
+
+      {/* 전체 초기화 버튼 조건부 렌더링 */}
+      {showResetButton && (
+        <div className={style.resetContainer}>
+          <ResetButton onReset={handleReset}>전체 초기화</ResetButton>
+        </div>
       )}
 
       {/* 기업 비교하기 버튼 (활성 조건: 최소 1개 선택 시) */}
