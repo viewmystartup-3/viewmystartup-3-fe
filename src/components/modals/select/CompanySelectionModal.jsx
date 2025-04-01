@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import styles from "./CompanySelectionModal.module.scss";
 import ModalTopBar from "../topBar/ModalTopBar";
 import SearchResult from "./SearchResult";
@@ -11,11 +12,28 @@ function CompanySelectionModal({ title, titleTypes, onSelect, onClose }) {
   const [searchResults, setSearchResults] = useState([]);
   const [selectedCompanies, setSelectedCompanies] = useState([]);
   const modalRef = useRef(null);
+  const modalRef = useRef(null);
 
+  // 상단 바 x 눌러서 창 닫음
   // 상단 바 x 눌러서 창 닫음
   const handleCloseWindow = () => {
     onClose();
+    onClose();
   };
+
+  // 모달창 바깥을 클릭하면 창 닫힘
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (modalRef.current && !modalRef.current.contains(event.target)) {
+        handleCloseWindow();
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   // 모달창 바깥을 클릭하면 창 닫힘
   useEffect(() => {
@@ -60,7 +78,17 @@ function CompanySelectionModal({ title, titleTypes, onSelect, onClose }) {
       return;
     }
 
+  const handleCompanySelection = (companyData) => {
+    if (title === "나의 기업 선택하기") {
+      onSelect(companyData);
+      onClose();
+      return;
+    }
+
     setSelectedCompanies((prev) => {
+      if (prev.length >= 5) return prev; // 최대 다섯 개까지만 선택 가능
+      if (prev.some((company) => company.id === companyData.id)) return prev; // 선택 중복 방지
+
       if (prev.length >= 5) return prev; // 최대 다섯 개까지만 선택 가능
       if (prev.some((company) => company.id === companyData.id)) return prev; // 선택 중복 방지
 
@@ -69,6 +97,7 @@ function CompanySelectionModal({ title, titleTypes, onSelect, onClose }) {
   };
 
   // "선택 해제" 버튼을 클릭하면 데이터 선택이 해제됨
+  const handleCompanyDeselection = (companyData) => {
   const handleCompanyDeselection = (companyData) => {
     setSelectedCompanies((prev) =>
       prev.filter((company) => company.id !== companyData.id)
@@ -92,11 +121,11 @@ function CompanySelectionModal({ title, titleTypes, onSelect, onClose }) {
           companymodal
         />
 
-        {titleTypes.map((type) => {
-          // 검색창 입력 여부에 따라 "검색 결과"가 (안) 보이게
-          if (type === "result" && searchResults.length === 0) {
-            return null;
-          }
+      {titleTypes.map((type) => {
+        // 검색창 입력 여부에 따라 "검색 결과"가 (안) 보이게
+        if (type === "result" && searchResults.length === 0) {
+          return null;
+        }
 
           // "비교할 기업 선택하기"에서 "선택한 기업"
           if (type === "selectedCompany") {
