@@ -11,6 +11,7 @@ function SelectFrame({
   onClose,
 }) {
   const [isItemSelected, setIsItemSelected] = useState(false);
+  const isDisabled = selectedCompanies.length >= 5 && !isItemSelected; // 5개 초과되면 버튼 비활성화
 
   useEffect(() => {
     const isSelected = (selectedCompanies || []).some(
@@ -20,8 +21,8 @@ function SelectFrame({
   }, [selectedCompanies, company.id]);
 
   const handleButton = () => {
-    console.log("버튼 클릭됨 ✅");
-    console.log("onSelect is", onSelect); // ✅ 함수로 찍히는지?
+    if (isDisabled && !isItemSelected) return;
+
     if (isItemSelected) {
       // 선택 해제
       if (onDeselect) {
@@ -31,10 +32,9 @@ function SelectFrame({
     } else {
       // 선택 추가
       if (onSelect && !isItemSelected) {
-        console.log("회사 선택됨 ✅", company); // 여기도 찍어보자
-        onSelect(company); //선택한기업 전달달
+        onSelect(company); //선택한 기업 전달
         setIsItemSelected(true);
-        onClose?.(); //모달닫기기
+        // onClose(); //모달창 닫기
       }
     }
   };
@@ -57,7 +57,11 @@ function SelectFrame({
           선택 해제
         </ModalCancelButton>
       ) : (
-        <ModalButton isSelected={isItemSelected} onSelect={handleButton} />
+        <ModalButton
+          isSelected={isItemSelected}
+          onSelect={handleButton}
+          disabled={isDisabled}
+        />
       )}
     </section>
   );

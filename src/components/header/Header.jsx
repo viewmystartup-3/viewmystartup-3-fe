@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import pcLogo from "../../assets/pc_logo.png";
 import mobileLogo from "../../assets/mobile_logo.png";
 import styles from "./Header.module.scss";
@@ -8,23 +8,44 @@ function Header() {
   return (
     <>
       <header className={styles.header}>
-        <Link to="/">
+        <NavLink to="/">
           <picture>
             <source srcSet={mobileLogo} alt="logo" media="(max-width: 743px)" />
             <img src={pcLogo} alt="logo" />
           </picture>
-        </Link>
+        </NavLink>
         <nav>
           <ul className={styles.ul}>
-            <Link to="/my-company" className={styles.link}>
-              <li>나의 기업 비교</li>
-            </Link>
-            <Link to="/comparison" className={styles.link}>
-              <li>비교 현황</li>
-            </Link>
-            <Link to="/investment" className={styles.link}>
-              <li>투자 현황</li>
-            </Link>
+            <li>
+              <NavLink
+                to="/my-company"
+                className={({ isActive }) =>
+                  isActive ? `${styles.link} ${styles.active}` : styles.link
+                }
+              >
+                나의 기업 비교
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/comparison"
+                className={({ isActive }) =>
+                  isActive ? `${styles.link} ${styles.active}` : styles.link
+                }
+              >
+                비교 현황
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/investment"
+                className={({ isActive }) =>
+                  isActive ? `${styles.link} ${styles.active}` : styles.link
+                }
+              >
+                투자 현황
+              </NavLink>
+            </li>
           </ul>
         </nav>
       </header>
