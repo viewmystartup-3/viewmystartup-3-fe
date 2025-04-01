@@ -45,6 +45,13 @@ function CompanySelectionModal({ title, titleTypes, onSelect, onClose }) {
     fetchData();
   }, []);
 
+  // 선택한 기업이 CompareSection으로 넘어감
+  useEffect(() => {
+    if (selectedCompanies.length > 0) {
+      onSelect?.(selectedCompanies);
+    }
+  }, [selectedCompanies, onSelect]);
+
   // "선택하기" 버튼을 클릭하면 데이터가 넘어감
   const handleCompanySelection = (companyData) => {
     if (title === "나의 기업 선택하기") {
