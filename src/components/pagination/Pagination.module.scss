@@ -1,10 +1,10 @@
 .pagination {
-  margin-top: 40px;
+  margin: 40px 0;
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 8px;
-  
+
   button {
     padding: 5px 10px;
     border: none;
@@ -21,8 +21,7 @@
       opacity: 0.5;
       color: var(--gray200);
     }
-
-    &:active {
+    &.active {
       background-color: var(--brandOrange);
       color: var(--white);
     }

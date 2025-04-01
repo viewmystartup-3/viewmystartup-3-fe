@@ -13,10 +13,11 @@
   /* 입력창 스타일 */
   input {
     font: var(--textS);
+    font-size: 17px;
     line-height: 100%;
     color: var(--gray100);
     background-color: transparent;
-    padding: 15.5px 0;
+    padding: 12px;
     padding-left: 44px;
     border: none;
     width: 100%;
@@ -69,5 +70,31 @@
     transform: translateY(-50%);
     width: 15px;
     height: 15px;
+  }
+}
+
+/* tablet */
+@media (max-width: 1199px) {
+  .componentSearch {
+    width: 269px;
+    height: 46px;
+    input {
+      font-size: 14px;
+      padding: 12px 0;
+      padding-left: 44px;
+    }
+  }
+}
+
+/* Mobile */
+@media (max-width: 744px) {
+  .componentSearch {
+    width: 189px;
+    height: 40px;
+    input {
+      font-size: 13px;
+      padding: 12px 0;
+      padding-left: 44px;
+    }
   }
 }

@@ -16,13 +16,13 @@ function Header() {
         </Link>
         <nav>
           <ul className={styles.ul}>
-            <Link to="/" className={styles.link}>
+            <Link to="/my-company" className={styles.link}>
               <li>나의 기업 비교</li>
             </Link>
-            <Link to="/" className={styles.link}>
+            <Link to="/comparison" className={styles.link}>
               <li>비교 현황</li>
             </Link>
-            <Link to="/" className={styles.link}>
+            <Link to="/investment" className={styles.link}>
               <li>투자 현황</li>
             </Link>
           </ul>
