@@ -2,7 +2,13 @@ import React, { useState } from "react";
 import styles from "./Search.module.scss"; // 스타일 모듈을 import
 import searchIcon from "../../assets/ic_search.png";
 
-const Search = ({ startups, onFilteredData, onClearSearch, isModal }) => {
+const Search = ({
+  startups,
+  onFilteredData,
+  onClearSearch,
+  isModal,
+  companymodal,
+}) => {
   const [isFocused, setIsFocused] = useState(false); // focus 상태
   const [searchTerm, setSearchTerm] = useState(""); // 검색어 상태
 
@@ -18,14 +24,19 @@ const Search = ({ startups, onFilteredData, onClearSearch, isModal }) => {
 
     // 검색어에 따라서 데이터를 필터링
     const filteredData = startups.filter((startup) => {
-      return (
-        startup.name.toLowerCase().includes(value.toLowerCase()) || // 기업명
-        startup.description.toLowerCase().includes(value.toLowerCase()) || // 기업소개
-        startup.category.toLowerCase().includes(value.toLowerCase()) || // 카테고리
-        startup.totalInvestment.toString().includes(value) || // 누적 투자 금액
-        startup.revenue.toString().includes(value) || // 매출액
-        startup.employees.toString().includes(value) // 고용 인원
-      );
+      if (companymodal) {
+        return startup.name.toLowerCase().includes(value.toLowerCase());
+      } else {
+        // 기본적으로 name, description, category 등을 모두 필터링
+        return (
+          startup.name.toLowerCase().includes(value.toLowerCase()) || // 기업명
+          startup.description.toLowerCase().includes(value.toLowerCase()) || // 기업소개
+          startup.category.toLowerCase().includes(value.toLowerCase()) || // 카테고리
+          startup.totalInvestment.toString().includes(value) || // 누적 투자 금액
+          startup.revenue.toString().includes(value) || // 매출액
+          startup.employees.toString().includes(value) // 고용 인원
+        );
+      }
     });
 
     // 부모 컴포넌트로 필터링된 데이터를 전달

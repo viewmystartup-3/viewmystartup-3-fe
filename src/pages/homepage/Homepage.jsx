@@ -4,6 +4,16 @@ import Search from "../../components/search/Search";
 import styles from "./Homepage.module.scss";
 import axios from "axios";
 import { dataUrl } from "../../env.js";
+import {
+  ResetButton,
+  RoundButton,
+  RoundSmallButton,
+} from "../../components/buttons/Buttons.jsx";
+import CompanySelectionModal from "../../components/modals/select/CompanySelectionModal.jsx";
+import {
+  MyCompanyModal,
+  OtherCompaniesModal,
+} from "../../components/modals/select/Modals.jsx";
 
 const Homepage = () => {
   const [startupList, setStartupList] = useState([]); // 전체 데이터
@@ -46,6 +56,8 @@ const Homepage = () => {
         </div>
         <StartupList startups={filteredData} /> {/* 필터링된 데이터를 불러옴 */}
       </div>
+      <MyCompanyModal />
+      <OtherCompaniesModal />
     </div>
   );
 };

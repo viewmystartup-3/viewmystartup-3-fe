@@ -12,12 +12,32 @@ export function RoundButton({ children, onClick }) {
 
   const handleButtonClick = () => {
     setIsActive((prev) => !prev);
-    if (onclick) onClick();
+    if (onClick) onClick();
   };
 
   return (
     <button
       className={clsx(styles.round, isActive && styles.active)}
+      onClick={handleButtonClick}
+    >
+      {children}
+    </button>
+  );
+}
+
+// 둥근 버튼인데 살짝 작음
+
+export function RoundSmallButton({ children, onClick }) {
+  const [isActive, setIsActive] = useState(false);
+
+  const handleButtonClick = () => {
+    setIsActive((prev) => !prev);
+    if (onclick) onClick();
+  };
+
+  return (
+    <button
+      className={clsx(styles.roundSmall, isActive && styles.active)}
       onClick={handleButtonClick}
     >
       {children}
@@ -56,17 +76,16 @@ export function RoundOutlineButton({ children, onCancel }) {
 
 // 모달창에 쓰는 선택 버튼
 export function ModalButton({ isSelected = false, onSelect }) {
-  const [isActive, setIsActive] = useState(false);
-
   const handleButtonClick = () => {
-    setIsActive((prev) => !prev);
+    if (isSelected) return;
     if (onSelect) onSelect();
   };
 
   return (
     <button
-      className={clsx(styles.modalButton, isActive && styles.active)}
+      className={clsx(styles.modalButton, isSelected && styles.active)}
       onClick={handleButtonClick}
+      disabled={isSelected}
     >
       <picture>
         <source srcSet={icCheckS} media="(max-width: 744px)" />
