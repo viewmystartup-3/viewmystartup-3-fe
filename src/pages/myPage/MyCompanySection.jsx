@@ -16,7 +16,6 @@ function MyCompanySection({ myCompany, setMyCompany }) {
     };
 
     // 모달 제어
-    console.log("선택된 기업:", mappedCompany); // ✅ 이거 찍히는지 확인
     setMyCompany(mappedCompany); // 여기서 선택된 기업 외부 상태에 저장
     setIsModalOpen(false); // 모달 닫기
   };
@@ -60,7 +59,6 @@ function MyCompanySection({ myCompany, setMyCompany }) {
       {/* 4. 모달 렌더링 */}
       {isModalOpen && (
         <MyCompanyModal
-          className={style.modaldal}
           onClose={() => setIsModalOpen(false)}
           onSelect={handleSelectCompany} //myCompanyModal에서 선택한 기업 넘겨줄수 있도록!
         />
