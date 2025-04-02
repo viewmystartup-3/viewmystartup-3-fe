@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import StartupList from "../../components/startupList/StartupList";
 import Search from "../../components/search/Search";
 import styles from "../../styles/page.module.scss";
-import axios from "axios";
 import { dataUrl } from "../../env.js";
 import SelectBox from "../../components/selectBox/SelectBox";
 import { basicSortOptions } from "../../components/selectBox/sortOptions.js";
@@ -56,15 +56,23 @@ const Homepage = () => {
     fetchStartupList(selectedSortValue); // 컴포넌트가 마운트될 때 기본 정렬로 데이터를 가져옴
   }, []); // 컴포넌트가 처음 렌더링될 때만 호출
 
+  // 현재 페이지에 맞는 데이터를 계산하여 전달
+  const currentPageData = filteredData.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
+
   return (
     <div className={styles.page}>
       <div className={styles.pageHeader}>
         <h1 className={styles.headerText}>전체 스타트업 목록</h1>
         <div className={styles.headerComponents}>
-          <Search
-            startups={startupList} // 전체 기업 목록을 전달
-            onFilteredData={handleFilteredData} // 필터링된 데이터를 처리할 함수를 전달
-          />
+          <div className={styles.Search}>
+            <Search
+              startups={startupList} // 전체 기업 목록을 전달
+              onFilteredData={handleFilteredData} // 필터링된 데이터를 처리할 함수를 전달
+            />
+          </div>
           <SelectBox
             size="small"
             options={basicSortOptions}
@@ -73,14 +81,8 @@ const Homepage = () => {
           />
         </div>
       </div>
-
       {/* 스타트업 리스트 컴포넌트 */}
-      <StartupList
-        startups={filteredData}
-        currentPage={currentPage}
-        totalPages={totalPages}
-      />
-
+      <StartupList startups={currentPageData} /> {/* 페이지별 데이터만 전달 */}
       {/* 페이지네이션 추가 */}
       <Pagination
         currentPage={currentPage}

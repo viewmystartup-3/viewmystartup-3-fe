@@ -34,6 +34,16 @@
   .page {
     width: 700px;
   }
+  .Search {
+    width: 269px;
+    height: 46px;
+
+    input {
+      font-size: 14px;
+      padding-top: 13.5px;
+      padding-left: 44px;
+    }
+  }
 }
 
 /* Mobile */
@@ -46,6 +56,15 @@
 
     h1 {
       font: var(--textB);
+    }
+  }
+  .Search {
+    width: 189px;
+    height: 40px;
+
+    input {
+      font-size: 13px;
+      padding-top: 10px;
     }
   }
 }

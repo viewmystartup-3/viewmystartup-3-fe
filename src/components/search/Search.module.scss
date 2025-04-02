@@ -73,28 +73,9 @@
   }
 }
 
-/* tablet */
-@media (max-width: 1199px) {
-  .componentSearch {
-    width: 269px;
-    height: 46px;
-    input {
-      font-size: 14px;
-      padding: 12px 0;
-      padding-left: 44px;
-    }
-  }
-}
-
 /* Mobile */
 @media (max-width: 744px) {
   .componentSearch {
-    width: 189px;
     height: 40px;
-    input {
-      font-size: 13px;
-      padding: 12px 0;
-      padding-left: 44px;
-    }
   }
 }
