@@ -33,10 +33,7 @@ function MyPage() {
 
   return (
     <main>
-      <MyCompanySection
-        myCompany={myCompany}
-        setMyCompany={setMyCompany}
-      />
+      <MyCompanySection myCompany={myCompany} setMyCompany={setMyCompany} />
 
       {/* 선택 후 상태 */}
       {myCompany && (
