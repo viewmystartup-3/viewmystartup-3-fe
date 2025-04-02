@@ -3,96 +3,154 @@ import styles from "./InvestmentStatus.module.scss";
 import axios from "axios";
 import { dataUrl } from "../../env";
 import { useParams } from "react-router-dom";
-import { RoundButton } from "../buttons/Buttons";
 import Pagination from "../pagination/pagination";
+import InvestorActions from "../investActions/InvestActions";
+import InvestModal from "../investModal/InvestModal";
+import SuccessModal from "../investModal/SuccessModal";
 
 const InvestmentStatus = () => {
   const { id } = useParams();
+  const [allInvestments, setAllInvestments] = useState([]);
   const [investment, setInvestment] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const [selectInvestor, setSelectedInvestor] = useState(null);
+  const [editModal, setEditModal] = useState(false);
+  const [newModal, setNewModal] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
+  const itemsPerPage = 5;
 
-  // 투자 데이터 가져오기
   const fetchInvestment = async () => {
     setLoading(true);
     try {
       const response = await axios.get(
-        `${dataUrl}/api/companies/${id}/investments`,
-        {
-          params: {
-            page: currentPage,
-            limit: 2,
-          },
-        }
+        `${dataUrl}/api/companies/${id}/investments`
       );
-
       const sortedInvestments = response.data.sort(
         (a, b) => b.amount - a.amount
       );
-
-      // 전체 투자자 수가 아니라, 페이지별로 가져오는 데이터 개수에 맞게 처리
-      const totalInvestors = response.data.length;
-      setTotalPages(Math.ceil(totalInvestors / 2)); // 페이지 계산
-
-      // 페이지에 해당하는 데이터만 setInvestment
-      const startIndex = (currentPage - 1) * 2;
-      const endIndex = startIndex + 2;
-      setInvestment(sortedInvestments.slice(startIndex, endIndex));
+      setAllInvestments(sortedInvestments);
+      setTotalPages(Math.ceil(sortedInvestments.length / itemsPerPage));
     } catch (e) {
       console.error(e);
     } finally {
       setLoading(false);
     }
   };
+  const handleDeleteInvest = async (investorId) => {
+    try {
+      fetchInvestment(); 
+    } catch (e) {
+      console.error(e);
+    }
+  };
+  
+  
 
-  const investmentAmount = investment.reduce((acc, inv) => acc + inv.amount, 0);
+  useEffect(() => {
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    setInvestment(allInvestments.slice(startIndex, endIndex));
+  }, [currentPage, allInvestments]);
 
-  // 컴포넌트가 마운트될 때 데이터 불러오기
   useEffect(() => {
     fetchInvestment();
-  }, [currentPage]);
+  }, []);
 
   const handlePageChange = (page) => setCurrentPage(page);
+
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false); // InvestModal 닫기
+  const closeSuccessModal = () => setIsSuccessModalOpen(false);
+
+  // 투자자 수정 함수 (InvestorActions에서 호출됨)
+  const handleEditInvest = (investor) => {
+    setSelectedInvestor(investor);
+    setEditModal(true);
+  };
+
+  const handleInvestSuccess = () => {
+    setIsModalOpen(false);
+    setIsSuccessModalOpen(true);
+    fetchInvestment()
+  };
+
 
   return (
     <div className={styles.main}>
       <div className={styles.header}>
         <p className={styles.title}>View My StartUP에서 받은 투자</p>
-        <RoundButton>기업투자하기</RoundButton>
+        <button className={styles.investBtn} onClick={openModal}>
+          {" "}
+          기업투자하기
+        </button>
       </div>
       <div>
-        <p className={styles.title}>총 {investmentAmount.toString()}억 원</p>
         <div className={styles.listContainer}>
-          <div className={styles.listHeader}>
-            <p className={styles.into}>투자자 이름</p>
-            <p className={styles.into}>순위</p>
-            <p className={styles.into}>투자 금액</p>
-            <p className={styles.comment}>투자 코멘트</p>
-          </div>
           {loading ? (
             <p>로딩 중...</p>
           ) : investment.length > 0 ? (
-            investment.map((inv, index) => (
-              <div className={styles.container} key={inv.id}>
-                <p className={styles.into}>{inv.name}</p>
-                <p className={styles.into}>{index + 1}위</p>
-                <p className={styles.into}>{inv.amount}억 원</p>
-                <p className={styles.commentTo}>
-                  {inv.comment || "코멘트 없음"}
-                </p>
+            <>
+              <p className={styles.title}>
+                총 {allInvestments.reduce((acc, inv) => acc + inv.amount, 0)}억
+                원
+              </p>
+              <div className={styles.listHeader}>
+                <p className={styles.into}>투자자 이름</p>
+                <p className={styles.into}>순위</p>
+                <p className={styles.into}>투자 금액</p>
+                <p className={styles.comment}>투자 코멘트</p>
               </div>
-            ))
+              {investment.map((inv, index) => (
+                <div className={styles.container} key={inv.id}>
+                  <p className={styles.into}>{inv.name}</p>
+                  <p className={styles.into}>
+                    {index + 1 + (currentPage - 1) * itemsPerPage}위
+                  </p>
+                  <p className={styles.into}>{inv.amount}억 원</p>
+                  <p className={styles.commentTo}>
+                    {inv.comment || "코멘트 없음"}
+                  </p>
+                  <InvestorActions
+                    className={styles.into}
+                    investor={inv}
+                    onEdit={handleEditInvest}
+                    onDelete={handleDeleteInvest}
+                  />
+                </div>
+              ))}
+            </>
           ) : (
-            <p>투자자가 없습니다.</p>
+            <div className={styles.emptyState}>
+              <p>아직 투자한 기업이 없어요.</p>
+              <p>버튼을 눌러 기업에 투자해보세요!</p>
+            </div>
           )}
         </div>
       </div>
-      <Pagination
-        currentPage={currentPage}
-        totalPages={totalPages}
-        onPageChange={handlePageChange}
+      {investment.length > 0 && (
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={handlePageChange}
+        />
+      )}
+      <InvestModal
+        isOpen={isModalOpen}
+        onClose={closeModal}
+        onInvestSuccess={handleInvestSuccess}
       />
+      <SuccessModal isOpen={isSuccessModalOpen} onClose={closeSuccessModal} />
+
+      {/* {editModal && selectInvestor && (
+        <InvestModal
+          isOpen={true}
+          investor={selectInvestor}
+          onClose={() => setEditModal(false)}
+        />
+      )} */}
     </div>
   );
 };

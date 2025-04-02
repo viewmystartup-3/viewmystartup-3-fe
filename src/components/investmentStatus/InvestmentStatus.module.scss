@@ -4,12 +4,13 @@
   max-width: 1200px;
   flex-direction: column;
   height: auto;
-  padding: 20px;
+  padding-left: 24px;
+  padding-right: 24px;
   margin: 0 auto;
   gap: 32px;
   .title {
     font: var(--textXlB);
-    padding-bottom: 20px;
+    margin-bottom: 20px;
   }
   .header {
     width: 100%;
@@ -18,8 +19,27 @@
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid var(--gray200);
-    padding-bottom: 50px;
+    margin-bottom: 24px;
     gap: 18px;
+    
+    }
+    .investBtn{
+      width: 131px;
+      height: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      white-space: nowrap;
+      border-radius: 50px;
+      background-color: var(--brandOrange);
+      color: var(--white);
+      font: var(--text);
+      border: none;
+      padding: 13px 48px;
+      
+      &:active {
+        background-color: var(--gray500);
+      }
   }
 
   .listContainer {
@@ -27,7 +47,7 @@
     overflow-x: auto;
     overflow-y: hidden;
     -webkit-overflow-scrolling: touch;
-    
+
     .listHeader {
       width: fit-content;
       display: flex;
@@ -52,41 +72,54 @@
       height: 64px;
       color: var(--gray100);
       font: var(--textS);
+      align-items: center;
       text-align: center;
       border-top: 1px solid var(--gray300);
       min-width: 100%;
       background-color: var(--black300);
 
       p {
-        padding: 23.5px 16px;
       }
       &:nth-child(1) {
         border-top: none;
       }
     }
+    .emptyState {
+      margin-top: 80px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: var(--gray200);
+      font: var(--textXs);
+    }
   }
 
   .into {
-    width: 84px;
+    width: 7%;
   }
   .comment {
-    width: 884px;
-  }
-  .a {
-    width: 64px;
+    width: 73%;
   }
   .commentTo {
+    padding: 23.5px 16px;
     text-align: left;
-    width: 884px;
+    width: 73%;
   }
-  @media (max-width: 1199px) {
-    .comment {
-      width: 381px;
+
+  @media (max-width: 744px) {
+    .listContainer {
+      width: 697px; 
+      overflow-x: auto; 
+      overflow-y: hidden;
+      
     }
-    .commentTo {
-      text-align: left;
-      width: 381px;
+    .investBtn{
+      width: 97px;
+      height: 32px;
+      font: var(--textSSb);
     }
+  
   }
 }
 
