@@ -3,8 +3,14 @@ import style from "./MyCompanySection.module.scss";
 import btnPlus from "../../assets/btn_plus.png";
 import Card from "./Card";
 import { MyCompanyModal } from "../../components/modals/select/Modals";
+import { ResetButton } from "../../components/buttons/Buttons";
 
-function MyCompanySection({ myCompany, setMyCompany }) {
+function MyCompanySection({
+  myCompany,
+  setMyCompany,
+  showResetButton,
+  onReset,
+}) {
   const [isModalOpen, setIsModalOpen] = useState(false); // 모달 상태
 
   const handleSelectCompany = (company) => {
@@ -23,6 +29,13 @@ function MyCompanySection({ myCompany, setMyCompany }) {
   return (
     <section className={style.wrapper}>
       <h2 className={style.sectionTitle}>나의 기업을 선택해 주세요!</h2>
+
+      {/* 전체 초기화 버튼 조건부 렌더링 */}
+      {showResetButton && (
+        <div className={style.resetContainer}>
+          <ResetButton onReset={onReset}>전체 초기화</ResetButton>
+        </div>
+      )}
 
       <div>
         {/* 선택전상태 */}

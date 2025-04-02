@@ -78,3 +78,16 @@
   font: var(--textLM);
   color: var(--white);
 }
+
+.resetContainer {
+  // text-align: right;
+  left: 1050px;
+  margin-bottom: 16px;
+
+  button {
+    width: 149px;
+    height: 40px;
+    padding: 8px 24px;
+    border-radius: 50px;
+  }
+}
