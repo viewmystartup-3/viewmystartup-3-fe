@@ -76,13 +76,14 @@ function CompanySelectionModal({ title, titleTypes, onSelect, onClose }) {
   };
 
   return (
-    <div className={styles.overlay} onClick={handleCloseWindow}>
+    <div className={styles.overlay}>
       <main
         ref={modalRef}
         className={styles.container}
-        onClick={(e) => e.stopPropagation}
+        onClick={(e) => e.stopPropagation()}
       >
         <ModalTopBar onClose={handleCloseWindow}>{title}</ModalTopBar>
+
         <Search
           startups={companyList}
           onFilteredData={setSearchResults}

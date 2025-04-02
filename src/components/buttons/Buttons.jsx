@@ -31,7 +31,7 @@ export function RoundSmallButton({ children, onClick }) {
 
   const handleButtonClick = () => {
     setIsActive((prev) => !prev);
-    if (onclick) onClick();
+    if (onClick) onClick();
   };
 
   return (
