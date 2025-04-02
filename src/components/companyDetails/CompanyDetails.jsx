@@ -3,7 +3,7 @@ import styles from "./CompanyDetails.module.scss";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { dataUrl } from "../../env";
-import logo from"../../../public/images/logo.png"
+import logo from "../../assets/logo.png";
 
 const CompanyDetails = () => {
   const [company, setCompany] = useState(null);

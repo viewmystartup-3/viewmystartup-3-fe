@@ -1,24 +1,19 @@
 import React, { useState, useEffect } from "react";
 import styles from "../../styles/table.module.scss";
-import temporarilyImg from "/images/logo.png";
+import temporarilyImg from "../../assets/logo.png";
 import { Link } from "react-router-dom";
 
 const ComparisonList = ({ companies }) => {
-  const [currentPageData, setCurrentPageData] = useState([]); // 현재 페이지 데이터
-  const [loading, setLoading] = useState(false); // 로딩 상태
-  const [currentPage, setCurrentPage] = useState(1); // 현재 페이지
-  const [totalPages, setTotalPages] = useState(1); // 총 페이지 수
+  const [loading, setLoading] = useState(true); // 로딩 상태
 
-  // 페이지 데이터 업데이트
+  // 데이터가 변경될 때 로딩 상태 업데이트
   useEffect(() => {
-    setLoading(true); // 로딩 시작
-    const startIdx = (currentPage - 1) * 10;
-    const endIdx = currentPage * 10;
-    setCurrentPageData(companies.slice(startIdx, endIdx)); // 데이터 슬라이싱
-
-    setTotalPages(Math.ceil(companies.length / 10)); // 총 페이지 수 계산
-    setLoading(false); // 로딩 끝
-  }, [companies, currentPage]); // companies나 currentPage가 변경될 때마다 실행
+    if (companies && companies.length > 0) {
+      setLoading(false);
+    } else {
+      setLoading(true);
+    }
+  }, [companies]); // companies 데이터가 변경될 때마다 로딩 상태 갱신
 
   return (
     <div className={styles.table}>
@@ -35,12 +30,10 @@ const ComparisonList = ({ companies }) => {
       <div className={styles.tableContents}>
         {loading ? (
           <p>로딩 중...</p> // 로딩 중일 때 메시지
-        ) : currentPageData.length > 0 ? (
-          currentPageData.map((comparison, index) => (
+        ) : companies.length > 0 ? (
+          companies.map((comparison, index) => (
             <div className={styles.tableContent} key={comparison.id}>
-              <p className={styles.ranking}>
-                {(currentPage - 1) * 10 + index + 1}위
-              </p>
+              <p className={styles.ranking}>{index + 1}위</p>
               <Link
                 to={`/companies/${comparison.id}`}
                 className={styles.nameWrapper}

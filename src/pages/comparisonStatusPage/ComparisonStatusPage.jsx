@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import styles from "./ComparisonStatusPage.module.scss";
+import styles from "../../styles/page.module.scss";
 import ComparisonList from "../../components/comparisonList/ComparisonList";
 import SelectBox from "../../components/selectBox/SelectBox";
 import { myCompanySelectOptions } from "../../components/selectBox/sortOptions";
@@ -58,17 +58,18 @@ const ComparisonStatusPage = () => {
   );
 
   return (
-    <div className={styles.form}>
-      <div className={styles.header}>
+    <div className={styles.page}>
+      <div className={styles.pageHeader2}>
         <h1 className={styles.headerText}>비교 현황</h1>
-        <SelectBox
-          size="large"
-          options={myCompanySelectOptions}
-          defaultValue={selectedSortValue}
-          onChange={handleSelectChange} // 셀렉트박스에서 값이 변경되면 호출
-        />
+        <div className={styles.headerComponents}>
+          <SelectBox
+            size="large"
+            options={myCompanySelectOptions}
+            defaultValue={selectedSortValue}
+            onChange={handleSelectChange} // 셀렉트박스에서 값이 변경되면 호출
+          />
+        </div>
       </div>
-
       {/* ComparisonList에 데이터와 페이지네이션 상태 전달 */}
       <ComparisonList companies={currentPageData} />
 
