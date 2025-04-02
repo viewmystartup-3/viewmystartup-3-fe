@@ -1,7 +1,12 @@
 import React from "react";
+import ResultTable from "./ResultTable";
 
 function MyResultPage() {
-  return <div>MyResultPage</div>;
+  return (
+    <main>
+      <ResultTable />
+    </main>
+  );
 }
 
 export default MyResultPage;
