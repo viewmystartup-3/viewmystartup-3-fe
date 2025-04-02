@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import StartupList from "../../components/startupList/StartupList";
 import Search from "../../components/search/Search";
-import styles from "./Homepage.module.scss";
+import styles from "../../styles/page.module.scss";
 import axios from "axios";
 import { dataUrl } from "../../env.js";
 import SelectBox from "../../components/selectBox/SelectBox";
@@ -57,38 +57,36 @@ const Homepage = () => {
   }, []); // 컴포넌트가 처음 렌더링될 때만 호출
 
   return (
-    <div>
-      <div className={styles.homepageForm}>
-        <div className={styles.homepageHeader}>
-          <h1>전체 스타트업 목록</h1>
-          <div className={styles.headerComponents}>
-            <Search
-              startups={startupList} // 전체 기업 목록을 전달
-              onFilteredData={handleFilteredData} // 필터링된 데이터를 처리할 함수를 전달
-            />
-            <SelectBox
-              size="small"
-              options={basicSortOptions}
-              value={selectedSortValue} // 셀렉트 박스의 현재 값을 상태에서 가져옴
-              onChange={handleSortChange} // 정렬 변경 시 처리할 함수 전달
-            />
-          </div>
+    <div className={styles.page}>
+      <div className={styles.pageHeader}>
+        <h1 className={styles.headerText}>전체 스타트업 목록</h1>
+        <div className={styles.headerComponents}>
+          <Search
+            startups={startupList} // 전체 기업 목록을 전달
+            onFilteredData={handleFilteredData} // 필터링된 데이터를 처리할 함수를 전달
+          />
+          <SelectBox
+            size="small"
+            options={basicSortOptions}
+            value={selectedSortValue} // 셀렉트 박스의 현재 값을 상태에서 가져옴
+            onChange={handleSortChange} // 정렬 변경 시 처리할 함수 전달
+          />
         </div>
-
-        {/* 스타트업 리스트 컴포넌트 */}
-        <StartupList
-          startups={filteredData}
-          currentPage={currentPage}
-          totalPages={totalPages}
-        />
-
-        {/* 페이지네이션 추가 */}
-        <Pagination
-          currentPage={currentPage}
-          totalPages={totalPages}
-          onPageChange={handlePageChange} // 페이지 변경 시 처리할 함수 전달
-        />
       </div>
+
+      {/* 스타트업 리스트 컴포넌트 */}
+      <StartupList
+        startups={filteredData}
+        currentPage={currentPage}
+        totalPages={totalPages}
+      />
+
+      {/* 페이지네이션 추가 */}
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPageChange={handlePageChange} // 페이지 변경 시 처리할 함수 전달
+      />
     </div>
   );
 };
