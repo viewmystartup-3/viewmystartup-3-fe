@@ -24,7 +24,6 @@ function CompanySelectionModal({
       try {
         const response = await axios.get(`${dataUrl}/api/companies`);
         setCompanyList(response.data);
-        setSearchResults(response.data);
       } catch (error) {
         console.error(error);
       }
@@ -68,14 +67,13 @@ function CompanySelectionModal({
 
   const handleCompanySelect = (company) => {
     if (title === "나의 기업 선택하기") {
-      onSelect(company);     // 단일 선택만 즉시 반영
-      onClose();             // 단일 선택은 즉시 닫힘
+      onSelect(company); // 단일 선택만 즉시 반영
+      onClose(); // 단일 선택은 즉시 닫힘
     } else {
       // 비교 기업 선택일 경우엔 그냥 선택 목록에 반영만 (닫지 않음)
-      onSelect(company);     // 외부 상태 업데이트 (compareCompanies에 추가)
+      onSelect(company); // 외부 상태 업데이트 (compareCompanies에 추가)
     }
   };
-  
 
   return (
     <div className={styles.overlay}>
@@ -94,15 +92,15 @@ function CompanySelectionModal({
           companymodal
         />
 
-      {titleTypes.map((type) => {
-        // 검색창 입력 여부에 따라 "검색 결과"가 (안) 보이게
-        if (type === "result" && searchResults.length === 0) {
-          return null;
-        }
+        {titleTypes.map((type) => {
+          // 검색창 입력 여부에 따라 "검색 결과"가 (안) 보이게
+          if (type === "result" && searchResults.length === 0) {
+            return null;
+          }
 
           // "비교할 기업 선택하기"에서 "선택한 기업"
           if (type === "selectedCompany") {
-            if ((selectedCompanies?.length ?? 0) === 0) return null; // 선택한 기업이 없으면 감춰짐
+            if (selectedCompanies.length === 0) return null; // 선택한 기업이 없으면 감춰짐
             return (
               <SearchResult
                 key={type}

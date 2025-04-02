@@ -12,7 +12,7 @@ function CompareSection({ compareCompanies, onRemove, onAddCompareCompany }) {
       id: company.id,
       name: company.name,
       category: company.category,
-      logo: company.imageUrl,
+      imageUrl: company.imageUrl,
     };
 
     // 모달 제어
@@ -53,7 +53,7 @@ function CompareSection({ compareCompanies, onRemove, onAddCompareCompany }) {
                 <Card
                   key={company.id}
                   id={company.id}
-                  logo={company.logo}
+                  imageUrl={company.imageUrl}
                   name={company.name}
                   category={company.category}
                   onRemove={() => onRemove(company.id)}
