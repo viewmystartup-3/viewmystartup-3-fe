@@ -22,7 +22,7 @@ function CompareSection({ compareCompanies, onRemove, onAddCompareCompany }) {
 
   return (
     <section className={style.section}>
-      <div className={style.compareBtn}>
+      <div className={style.comparePart}>
         <h2 className={style.sectionTitle}>
           어떤 기업이 궁금하세요? <span>(최대 5개)</span>
         </h2>
