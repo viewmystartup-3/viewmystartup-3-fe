@@ -26,7 +26,6 @@ export function RoundButton({ children, onClick }) {
 }
 
 // 둥근 버튼인데 살짝 작음
-
 export function RoundSmallButton({ children, onClick }) {
   const [isActive, setIsActive] = useState(false);
 
@@ -75,9 +74,9 @@ export function RoundOutlineButton({ children, onCancel }) {
 }
 
 // 모달창에 쓰는 선택 버튼
-export function ModalButton({ isSelected = false, onSelect }) {
+export function ModalButton({ isSelected = false, onSelect, disabled }) {
   const handleButtonClick = () => {
-    if (isSelected) return;
+    if (isSelected || disabled) return;
     if (onSelect) onSelect();
   };
 
@@ -85,7 +84,7 @@ export function ModalButton({ isSelected = false, onSelect }) {
     <button
       className={clsx(styles.modalButton, isSelected && styles.active)}
       onClick={handleButtonClick}
-      disabled={isSelected}
+      disabled={isSelected || disabled}
     >
       <picture>
         <source srcSet={icCheckS} media="(max-width: 744px)" />

@@ -34,6 +34,11 @@
   }
 }
 
+.active {
+  color: var(--white);
+  font-weight: 700;
+}
+
 @media (max-width: 1199px) {
   .header {
     gap: 32px;
