@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import styles from "./SelectFrame.module.scss";
 import { ModalButton, ModalCancelButton } from "../../buttons/Buttons";
 
@@ -8,20 +8,20 @@ function SelectFrame({
   onDeselect,
   titleType,
   selectedCompanies,
-  onClose,
 }) {
   const isItemSelected = (selectedCompanies || []).some(
     (selectedCompany) => selectedCompany.id === company.id
   );
-  const isDisabled = (selectedCompanies?.length ?? 0) >= 5 && !isItemSelected; // 5개 초과되면 버튼 비활성화
+
+  const isDisabled = (selectedCompanies.length ?? 0) >= 5 && !isItemSelected; // 5개 초과되면 버튼 비활성화
 
   const handleButton = () => {
     if (isDisabled && !isItemSelected) return;
 
     if (isItemSelected) {
-      onDeselect?.(company);
+      onDeselect(company);
     } else {
-      onSelect?.(company);
+      onSelect(company);
     }
   };
 

@@ -18,7 +18,7 @@ function MyCompanySection({
       id: company.id,
       name: company.name,
       category: company.category,
-      logo: company.imageUrl,
+      imageUrl: company.imageUrl,
     };
 
     // 모달 제어
@@ -60,7 +60,7 @@ function MyCompanySection({
               선택 취소
             </button>
             <Card
-              logo={myCompany.logo}
+              imageUrl={myCompany.imageUrl}
               name={myCompany.name}
               category={myCompany.category}
               className={style.myCard} // ← 스타일 다르게 주고 싶으면 여기서 조절

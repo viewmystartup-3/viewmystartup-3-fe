@@ -2,7 +2,7 @@ import React from "react";
 import { AiOutlineMinus } from "react-icons/ai";
 import style from "./Card.module.scss";
 
-function Card({ logo, name, category, onRemove, className }) {
+function Card({ imageUrl, name, category, onRemove, className }) {
   return (
     <div className={`${className} ${style.card}`}>
       {onRemove && (
@@ -11,7 +11,7 @@ function Card({ logo, name, category, onRemove, className }) {
         </button>
       )}
       <div className={style.logoWrapper}>
-        <img src={logo} alt={`${name} 로고`} className={style.logo} />
+        <img src={imageUrl} alt={`${name} 로고`} className={style.logo} />
       </div>
       <div className={style.name}>{name}</div>
       <div className={style.category}>{category}</div>
