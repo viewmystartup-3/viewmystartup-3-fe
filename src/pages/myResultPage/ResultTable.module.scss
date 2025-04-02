@@ -1,0 +1,29 @@
+.form {
+  width: 1200px;
+  margin: 0 auto;
+  margin-top: 40px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  height: 48px;
+  align-items: center;
+  overflow: hidden;
+}
+
+.title {
+  font: var(--textLB);
+}
+
+@media (max-width: 1199px) {
+  .form {
+    width: 700px;
+  }
+}
+
+@media (max-width: 743px) {
+  .form {
+    width: 350px;
+  }
+}
