@@ -1,0 +1,26 @@
+.topBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.titleText {
+  font: var(--textXlB);
+
+  @media (max-width: 744px) {
+    font: var(--textB);
+  }
+}
+
+.xButton {
+  cursor: pointer;
+  color: var(--white);
+  background-color: transparent;
+  border: none;
+  font: var(--textXlB);
+
+  @media (max-width: 744px) {
+    font: var(--textB);
+  }
+}
