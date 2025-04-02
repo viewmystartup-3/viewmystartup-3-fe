@@ -9,7 +9,6 @@ function SearchResult({
   onSelect,
   onDeselect,
   selectedCompanies,
-  onClose,
 }) {
   const [currentPageData, setCurrentPageData] = useState([]); // 현재 페이지에 해당하는 데이터
   const [currentPage, setCurrentPage] = useState(1); // 현재 페이지
@@ -39,13 +38,12 @@ function SearchResult({
       {currentPageData.length > 0 ? (
         currentPageData.map((company) => (
           <SelectFrame
-            key={company.id || company.name}
+            key={`${company.id}-${selectedCompanies.length}`}
             company={company}
             onSelect={onSelect}
             onDeselect={onDeselect}
             titleType={titleType}
             selectedCompanies={selectedCompanies}
-            onClose={onClose}
           />
         ))
       ) : (

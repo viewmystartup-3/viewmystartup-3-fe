@@ -10,32 +10,18 @@ function SelectFrame({
   selectedCompanies,
   onClose,
 }) {
-  const [isItemSelected, setIsItemSelected] = useState(false);
-  const isDisabled = selectedCompanies.length >= 5 && !isItemSelected; // 5개 초과되면 버튼 비활성화
-
-  useEffect(() => {
-    const isSelected = (selectedCompanies || []).some(
-      (selectedCompany) => selectedCompany.id === company.id
-    );
-    setIsItemSelected(isSelected);
-  }, [selectedCompanies, company.id]);
+  const isItemSelected = (selectedCompanies || []).some(
+    (selectedCompany) => selectedCompany.id === company.id
+  );
+  const isDisabled = (selectedCompanies?.length ?? 0) >= 5 && !isItemSelected; // 5개 초과되면 버튼 비활성화
 
   const handleButton = () => {
     if (isDisabled && !isItemSelected) return;
 
     if (isItemSelected) {
-      // 선택 해제
-      if (onDeselect) {
-        onDeselect(company);
-        setIsItemSelected(false);
-      }
+      onDeselect?.(company);
     } else {
-      // 선택 추가
-      if (onSelect && !isItemSelected) {
-        onSelect(company); //선택한 기업 전달
-        setIsItemSelected(true);
-        // onClose(); //모달창 닫기
-      }
+      onSelect?.(company);
     }
   };
 

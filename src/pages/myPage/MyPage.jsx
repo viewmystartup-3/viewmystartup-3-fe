@@ -10,13 +10,23 @@ function MyPage() {
 
   const showResetButton = myCompany && compareCompanies.length > 0;
 
-  const handleAddCompareCompany = (company) => {
-    if (compareCompanies.length >= 5) return;
-    setCompareCompanies((prev) => [...prev, company]);
-  };
+  //초기화
   const handleReset = () => {
     setMyCompany(null);
     setCompareCompanies([]);
+  };
+  // 비교 기업 추가 (1~5개까지 중복 방지)
+  const handleAddCompareCompany = (company) => {
+    setCompareCompanies((prev) => {
+      if (prev.length >= 5 || prev.some((c) => c.id === company.id)) {
+        return prev;
+      }
+      return [...prev, company];
+    });
+  };
+  // 비교 기업 제거
+  const handleRemoveCompareCompany = (id) => {
+    setCompareCompanies((prev) => prev.filter((c) => c.id !== id));
   };
 
   return (
@@ -28,14 +38,12 @@ function MyPage() {
         onReset={handleReset}
       />
 
-      {/* 선택 후 상태 */}
+      {/* 나의 기업을 선택하면 비교 영역 노출 */}
       {myCompany && (
         <CompareSection
           compareCompanies={compareCompanies}
-          onRemove={(id) =>
-            setCompareCompanies(compareCompanies.filter((c) => c.id !== id))
-          }
           onAddCompareCompany={handleAddCompareCompany}
+          onRemove={handleRemoveCompareCompany}
         />
       )}
 
