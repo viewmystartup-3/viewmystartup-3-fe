@@ -24,7 +24,7 @@ function MyPage() {
       return [...prev, company];
     });
   };
-  // 비교 기업 제거
+  // 비교 기업 제거 수영가야해ㅐ해해해해해해해
   const handleRemoveCompareCompany = (id) => {
     setCompareCompanies((prev) => prev.filter((c) => c.id !== id));
   };
