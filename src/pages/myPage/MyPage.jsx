@@ -47,13 +47,6 @@ function MyPage() {
         />
       )}
 
-      {/* 전체 초기화 버튼 조건부 렌더링 */}
-      {showResetButton && (
-        <div className={style.resetContainer}>
-          <ResetButton onReset={handleReset}>전체 초기화</ResetButton>
-        </div>
-      )}
-
       {/* 기업 비교하기 버튼 (활성 조건: 최소 1개 선택 시) */}
       <div className={style.compareBtn}>
         <RoundButton disabled={compareCompanies.length === 0}>

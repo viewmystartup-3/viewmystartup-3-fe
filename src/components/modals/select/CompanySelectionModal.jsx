@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from "react";
-import React, { useState, useEffect, useRef } from "react";
 import styles from "./CompanySelectionModal.module.scss";
 import ModalTopBar from "../topBar/ModalTopBar";
 import SearchResult from "./SearchResult";
@@ -34,7 +33,6 @@ function CompanySelectionModal({
     fetchData();
   }, []);
 
-  // 상단 바 x 눌러서 창 닫음
   // 상단 바 x 눌러서 창 닫음
   const handleCloseWindow = () => {
     onClose?.();
