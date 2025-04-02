@@ -1,48 +1,49 @@
 import React, { useState } from "react";
-import { RoundButton } from "../../components/buttons/Buttons";
+import { RoundButton, ResetButton } from "../../components/buttons/Buttons";
 import MyCompanySection from "./MyCompanySection";
 import style from "./MyPage.module.scss";
 import CompareSection from "./CompareSection";
 
 function MyPage() {
-  const sampleCompany = {
-    id: 1,
-    name: "코드잇",
-    category: "에듀워크",
-    logo: "/images/logo.png",
-  };
-
   const [myCompany, setMyCompany] = useState(null);
   const [compareCompanies, setCompareCompanies] = useState([]);
 
-  const handleAddCompareCompany = () => {
-    if (compareCompanies.length >= 5) {
-      return;
-    }
-    const count = compareCompanies.length + 1;
+  const showResetButton = myCompany && compareCompanies.length > 0;
 
-    const newCompany = {
-      id: Date.now(), // 고유 ID
-      name: `코드잇 ${count}`, // 이름을 달리함
-      category: "에듀워크",
-      logo: "/images/logo.png",
-    };
-
-    setCompareCompanies([...compareCompanies, newCompany]);
+  //초기화
+  const handleReset = () => {
+    setMyCompany(null);
+    setCompareCompanies([]);
+  };
+  // 비교 기업 추가 (1~5개까지 중복 방지)
+  const handleAddCompareCompany = (company) => {
+    setCompareCompanies((prev) => {
+      if (prev.length >= 5 || prev.some((c) => c.id === company.id)) {
+        return prev;
+      }
+      return [...prev, company];
+    });
+  };
+  // 비교 기업 제거 수영가야해ㅐ해해해해해해해
+  const handleRemoveCompareCompany = (id) => {
+    setCompareCompanies((prev) => prev.filter((c) => c.id !== id));
   };
 
   return (
     <main>
-      <MyCompanySection myCompany={myCompany} setMyCompany={setMyCompany} />
+      <MyCompanySection
+        myCompany={myCompany}
+        setMyCompany={setMyCompany}
+        showResetButton={showResetButton}
+        onReset={handleReset}
+      />
 
-      {/* 선택 후 상태 */}
+      {/* 나의 기업을 선택하면 비교 영역 노출 */}
       {myCompany && (
         <CompareSection
           compareCompanies={compareCompanies}
-          onRemove={(id) =>
-            setCompareCompanies(compareCompanies.filter((c) => c.id !== id))
-          }
           onAddCompareCompany={handleAddCompareCompany}
+          onRemove={handleRemoveCompareCompany}
         />
       )}
 

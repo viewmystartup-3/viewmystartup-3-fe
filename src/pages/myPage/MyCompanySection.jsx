@@ -3,8 +3,14 @@ import style from "./MyCompanySection.module.scss";
 import btnPlus from "../../assets/btn_plus.png";
 import Card from "./Card";
 import { MyCompanyModal } from "../../components/modals/select/Modals";
+import { ResetButton } from "../../components/buttons/Buttons";
 
-function MyCompanySection({ myCompany, setMyCompany }) {
+function MyCompanySection({
+  myCompany,
+  setMyCompany,
+  showResetButton,
+  onReset,
+}) {
   const [isModalOpen, setIsModalOpen] = useState(false); // 모달 상태
 
   const handleSelectCompany = (company) => {
@@ -16,7 +22,6 @@ function MyCompanySection({ myCompany, setMyCompany }) {
     };
 
     // 모달 제어
-    console.log("선택된 기업:", mappedCompany); // ✅ 이거 찍히는지 확인
     setMyCompany(mappedCompany); // 여기서 선택된 기업 외부 상태에 저장
     setIsModalOpen(false); // 모달 닫기
   };
@@ -24,6 +29,13 @@ function MyCompanySection({ myCompany, setMyCompany }) {
   return (
     <section className={style.wrapper}>
       <h2 className={style.sectionTitle}>나의 기업을 선택해 주세요!</h2>
+
+      {/* 전체 초기화 버튼 조건부 렌더링 */}
+      {showResetButton && (
+        <div className={style.resetContainer}>
+          <ResetButton onReset={onReset}>전체 초기화</ResetButton>
+        </div>
+      )}
 
       <div>
         {/* 선택전상태 */}
@@ -60,7 +72,6 @@ function MyCompanySection({ myCompany, setMyCompany }) {
       {/* 4. 모달 렌더링 */}
       {isModalOpen && (
         <MyCompanyModal
-          className={style.modaldal}
           onClose={() => setIsModalOpen(false)}
           onSelect={handleSelectCompany} //myCompanyModal에서 선택한 기업 넘겨줄수 있도록!
         />
