@@ -17,7 +17,7 @@ function CompareSection({ compareCompanies, onRemove, onAddCompareCompany }) {
 
     // 모달 제어
     onAddCompareCompany(mappedCompany); // 부모(MyPage)로 전달
-    setIsModalOpen(false); // 모달 닫기
+    // setIsModalOpen(false); // 모달 닫기
   };
 
   return (
@@ -46,6 +46,8 @@ function CompareSection({ compareCompanies, onRemove, onAddCompareCompany }) {
           </div>
         ) : (
           <div className={style.selectBox}>
+            {console.log("🔍 compareCompanies:", compareCompanies)}
+
             {compareCompanies.map((company) => {
               return (
                 <Card
@@ -65,7 +67,9 @@ function CompareSection({ compareCompanies, onRemove, onAddCompareCompany }) {
       {/* 모달 렌더링 */}
       {isModalOpen && (
         <OtherCompaniesModal
+          selectedCompanies={compareCompanies}
           onSelect={handleSelectCompany}
+          onDeselect={(company) => onRemove(company.id)}
           onClose={() => setIsModalOpen(false)}
         />
       )}
