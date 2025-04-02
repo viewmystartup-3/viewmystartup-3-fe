@@ -5,7 +5,7 @@ import { viewMyStartupOptions } from "../../components/selectBox/sortOptions";
 import axios from "axios";
 import { dataUrl } from "../../env";
 import Pagination from "../../components/pagination/pagination";
-import styles from "./InvestmentStatusPage.module.scss";
+import styles from "../../styles/page.module.scss";
 
 const InvestmentStatusPage = () => {
   const [selectedSortValue, setSelectedSortValue] = useState(
@@ -52,15 +52,17 @@ const InvestmentStatusPage = () => {
   };
 
   return (
-    <div className={styles.form}>
-      <div className={styles.header}>
+    <div className={styles.page}>
+      <div className={styles.pageHeader2}>
         <h1 className={styles.headerText}>투자 현황</h1>
-        <SelectBox
-          size="large"
-          options={viewMyStartupOptions}
-          defaultValue={selectedSortValue}
-          onChange={handleSelectChange} // 셀렉트박스에서 값이 변경되면 호출
-        />
+        <div className={styles.headerComponents}>
+          <SelectBox
+            size="large"
+            options={viewMyStartupOptions}
+            defaultValue={selectedSortValue}
+            onChange={handleSelectChange} // 셀렉트박스에서 값이 변경되면 호출
+          />
+        </div>
       </div>
       {/* 투자 데이터 리스트를 InvestmentList로 전달 */}
       <InvestmentList startups={getCurrentPageData()} />

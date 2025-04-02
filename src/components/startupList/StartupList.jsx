@@ -1,20 +1,18 @@
 import React, { useState, useEffect } from "react";
 import styles from "../../styles/table.module.scss";
-import temporarilyImg from "../../../public/images/logo.png";
+import temporarilyImg from "../../assets/logo.png";
 import clsx from "clsx";
 import { Link } from "react-router-dom";
 
-const StartupList = ({ startups, currentPage }) => {
-  const [currentPageData, setCurrentPageData] = useState([]); // 현재 페이지에 해당하는 데이터
+const StartupList = ({ startups }) => {
   const [loading, setLoading] = useState(true); // 로딩 상태
 
-  // 페이지 데이터 업데이트
+  // 데이터가 변경될 때 로딩 상태 갱신
   useEffect(() => {
-    const startIdx = (currentPage - 1) * 10;
-    const endIdx = currentPage * 10;
-    setCurrentPageData(startups.slice(startIdx, endIdx)); // 페이지별 데이터 갱신
-    setLoading(false);
-  }, [startups, currentPage]);
+    if (startups.length > 0) {
+      setLoading(false);
+    }
+  }, [startups]); // startups가 변경될 때마다 로딩 상태 업데이트
 
   return (
     <div className={styles.table}>
@@ -32,12 +30,10 @@ const StartupList = ({ startups, currentPage }) => {
       <div className={styles.tableContents}>
         {loading ? (
           <p>로딩 중...</p> // 로딩 중일 때 메시지
-        ) : currentPageData.length > 0 ? (
-          currentPageData.map((startup, index) => (
+        ) : startups.length > 0 ? (
+          startups.map((startup, index) => (
             <div className={styles.tableContent} key={startup.id}>
-              <p className={styles.ranking}>
-                {(currentPage - 1) * 10 + index + 1}위
-              </p>
+              <p className={styles.ranking}>{index + 1}위</p>
               <Link
                 to={`/companies/${startup.id}`}
                 className={styles.nameWrapper}
