@@ -21,6 +21,8 @@ const InvestorActions = ({
   const [showPassword, setShowPassword] = useState(false);
   const [password, setPassword] = useState("");
   const [errorModal, setErrorModal] = useState(false);
+  const [editModal, setEditModal] = useState(false);
+  const [editPassword, setEditPassword] = useState("");
 
   const isActive = activeInvestorId === investor.id;
   const buttonRef = useRef(null); // 옵션 버튼 참조
@@ -62,6 +64,29 @@ const InvestorActions = ({
     }
   };
 
+  const handleEdit = async () => {
+    try {
+      const response = await axios.post(
+        `${dataUrl}/api/companies/${id}/investments/${investor.id}/password`
+        ,{data: {password}}
+      );
+
+      if (response.status === 200) {
+        setEditModal(false);
+        setEditPassword("");
+        onEdit(investor);
+      }
+    } catch (e) {
+      if (
+        e.response &&
+        (e.response.status === 401 || e.response.status === 403)
+      ) {
+        setErrorModal(true);
+        setEditModal(false);
+      }
+    }
+  };
+
   // 버튼 위치 가져오기
   const buttonRect = buttonRef.current?.getBoundingClientRect();
 
@@ -84,11 +109,10 @@ const InvestorActions = ({
               top: buttonRect
                 ? `${buttonRect.bottom + window.scrollY}px`
                 : "0px", // 버튼 아래로 위치
-              left: buttonRect ? `${buttonRect.left}px` : "0px", // 버튼 왼쪽 정렬
-              zIndex: 9999,
+              left: buttonRect ? `${buttonRect.left}px` : "0px",
             }}
           >
-            <button className={styles.list} onClick={() => onEdit(investor)}>
+            <button className={styles.list} onClick={() => setEditModal(true)}>
               수정하기
             </button>
             <button className={styles.list} onClick={handleDeleteClick}>
@@ -98,82 +122,139 @@ const InvestorActions = ({
           document.body
         )}
 
-      {deleteModal && (
-        <div>
-          <div className={styles.overlay} />
-          <div className={styles.deleteModal}>
-            <div className={styles.container}>
-              <div className={styles.deleteHeader}>
-                <p className={styles.ptage}>삭제 권한 인증</p>
-                <ModalTopBar
-                  onClose={() => {
-                    setDeleteModal(false);
-                    setPassword("");
-                  }}
-                />
-              </div>
-              <div className={styles.passwordBox}>
-                <div>
-                  <p>비밀번호</p>
-                  <div className={styles.passwordWrapper}>
-                    <input
-                      type={showPassword ? "text" : "password"}
-                      placeholder="비밀번호를 입력해 주세요"
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                      className={styles.input}
-                    />
-                    <button
-                      type="button"
-                      className={styles.eyeButton}
-                      onClick={togglePasswordVisibility}
-                    >
-                      <img
-                        src={showPassword ? eyeOffIcon : eyeIcon}
-                        alt="비밀번호 보기"
-                        className={styles.eyeIcon}
+      {deleteModal &&
+        createPortal(
+          <div>
+            <div className={styles.overlay} />
+            <div className={styles.deleteModal}>
+              <div className={styles.container}>
+                <div className={styles.deleteHeader}>
+                  <p className={styles.ptage}>삭제 권한 인증</p>
+                  <ModalTopBar
+                    onClose={() => {
+                      setDeleteModal(false);
+                      setPassword("");
+                    }}
+                  />
+                </div>
+                <div className={styles.passwordBox}>
+                  <div>
+                    <p>비밀번호</p>
+                    <div className={styles.passwordWrapper}>
+                      <input
+                        type={showPassword ? "text" : "password"}
+                        placeholder="비밀번호를 입력해 주세요"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        className={styles.input}
                       />
+                      <button
+                        type="button"
+                        className={styles.eyeButton}
+                        onClick={togglePasswordVisibility}
+                      >
+                        <img
+                          src={showPassword ? eyeOffIcon : eyeIcon}
+                          alt="비밀번호 보기"
+                          className={styles.eyeIcon}
+                        />
+                      </button>
+                    </div>
+                  </div>
+                  <div className={styles.deleteBox}>
+                    <button className={styles.deleteBtn} onClick={handleDelete}>
+                      삭제하기
                     </button>
                   </div>
                 </div>
-                <div className={styles.deleteBox}>
-                  <button className={styles.deleteBtn} onClick={handleDelete}>
-                    삭제하기
-                  </button>
+              </div>
+            </div>
+          </div>,
+          document.body
+        )}
+      {editModal &&
+        createPortal(
+          <div>
+            <div className={styles.overlay} />
+            <div className={styles.editModal}>
+              <div className={styles.container}>
+                <div className={styles.editHeader}>
+                  <p className={styles.ptage}>수정 권한 인증</p>
+                  <ModalTopBar
+                    onClose={() => {
+                      setEditModal(false);
+                      setEditPassword("");
+                    }}
+                  />
+                </div>
+                <div className={styles.passwordBox}>
+                  <div>
+                    <p>비밀번호</p>
+                    <div className={styles.passwordWrapper}>
+                      <input
+                        type={showPassword ? "text" : "password"}
+                        placeholder="비밀번호를 입력해 주세요"
+                        value={editPassword}
+                        onChange={(e) => setEditPassword(e.target.value)}
+                        className={styles.input}
+                      />
+                      <button
+                        type="button"
+                        className={styles.eyeButton}
+                        onClick={togglePasswordVisibility}
+                      >
+                        <img
+                          src={showPassword ? eyeOffIcon : eyeIcon}
+                          alt="비밀번호 보기"
+                          className={styles.eyeIcon}
+                        />
+                      </button>
+                    </div>
+                  </div>
+                  <div className={styles.editBox}>
+                    <button
+                      className={styles.editBtn}
+                      onClick={handleEdit}
+                    >
+                      수정하기
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      )}
+          </div>,
+          document.body
+        )}
 
-      {errorModal && (
-        <div>
-          <div className={styles.overlay} />
-          <div className={styles.errorModal}>
-            <div className={styles.errorBox}>
-              <div className={styles.okHeader}>
-                <ModalTopBar
-                  onClose={() => {
+      {errorModal &&
+        createPortal(
+          <div>
+            <div className={styles.overlay} />
+            <div className={styles.errorModal}>
+              <div className={styles.errorHeader}>
+                <div className={styles.backHeader}>
+                  <ModalTopBar
+                    onClose={() => {
+                      setErrorModal(false);
+                      setPassword("");
+                    }}
+                  />
+                  <p>잘못된 비밀번호로 삭제에 실패하셨습니다.</p>
+                </div>
+                <button
+                  className={styles.okBtn}
+                  onClick={() => {
                     setErrorModal(false);
                     setPassword("");
                   }}
-                />
-                <p>잘못된 비밀번호로 삭제에 실패하셨습니다.</p>
+                >
+                  확인
+                </button>
               </div>
-              <button
-                className={styles.okBtn}
-                onClick={() => {
-                  setErrorModal(false);
-                  setPassword("");
-                }}
-              >
-                확인
-              </button>
             </div>
-          </div>
-        </div>
-      )}
+          </div>,
+          document.body
+        )}
     </div>
   );
 };

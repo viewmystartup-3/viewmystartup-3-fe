@@ -97,7 +97,7 @@
   }
 }
 
-.deleteModal {
+.deleteModal, .editModal {
   width: 496px;
   height: 269px;
   position: absolute;
@@ -118,7 +118,7 @@
     flex-direction: column;
     justify-content: space-between;
   
-    .deleteHeader {
+    .deleteHeader, .editHeader {
       height: 32px;
       display: flex;
       justify-content: space-between;
@@ -132,7 +132,7 @@
       }
     }
 
-      .deleteBtn{
+      .deleteBtn , .editBtn{
         width: 194px;
         height: 48px;
         display: flex;
@@ -198,7 +198,7 @@
           height: 20px;
         }
       }
-      .deleteBox{
+      .deleteBox, .editBox{
         width: 100%;
         display: flex;
         justify-content: center;
@@ -335,7 +335,7 @@
     left: 50%;
     z-index: 20;
 
-    .errorBox {
+    .errorHeader, .editHeader {
       width: 331px;
       height: 129px;
       display: flex;
@@ -345,7 +345,7 @@
       gap: 10px;
 
       gap: 24px;
-      .okHeader {
+      .backHeader {
         width: 331px;
         height: 58px;
         p {
