@@ -42,6 +42,7 @@ const InvestmentStatus = () => {
       setLoading(false);
     }
   };
+
   const handleDeleteInvest = async (investorId) => {
     try {
       fetchInvestment();
