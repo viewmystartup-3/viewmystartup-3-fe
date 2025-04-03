@@ -23,7 +23,7 @@ const EditInvestModal = ({
   const [confirmPassword, setConfirmPassword] = useState(""); // 비밀번호 확인 상태
 
   const { id } = useParams(); // URL에서 ID 가져오기
-
+  const {companyid} = useParams()
   // 기업 정보 가져오기
   const fetchCompanyDetails = async () => {
     try {

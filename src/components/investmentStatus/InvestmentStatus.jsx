@@ -21,6 +21,7 @@ const InvestmentStatus = () => {
   const [newModal, setNewModal] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
+  const [activeInvestorId, setActiveInvestorId] = useState(null);
   const itemsPerPage = 5;
 
   const fetchInvestment = async () => {
@@ -86,6 +87,10 @@ const InvestmentStatus = () => {
     setEditModal(false); // 수정 모달 닫기
   };
 
+  const handleToggleOptions = (investorId) => {
+    setActiveInvestorId((prev) => (prev === investorId ? null : investorId));
+  };
+
   return (
     <div className={styles.main}>
       <div className={styles.header}>
@@ -126,6 +131,8 @@ const InvestmentStatus = () => {
                     investor={inv}
                     onEdit={handleEditInvest}
                     onDelete={handleDeleteInvest}
+                    activeInvestorId={activeInvestorId}
+                    onToggleOptions={handleToggleOptions}
                   />
                 </div>
               ))}
