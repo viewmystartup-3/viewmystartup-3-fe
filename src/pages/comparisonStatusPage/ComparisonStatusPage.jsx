@@ -74,11 +74,13 @@ const ComparisonStatusPage = () => {
       <ComparisonList companies={currentPageData} />
 
       {/* 페이지네이션 추가 */}
-      <Pagination
-        currentPage={currentPage}
-        totalPages={totalPages}
-        onPageChange={handlePageChange} // 페이지 변경 함수
-      />
+      <div className={styles.pagePagination}>
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={handlePageChange} // 페이지 변경 함수
+        />
+      </div>
     </div>
   );
 };

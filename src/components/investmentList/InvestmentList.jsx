@@ -13,6 +13,12 @@ const InvestmentList = ({ startups }) => {
     }
   }, [startups]);
 
+  // investmentAmount 값이 있는 항목만 필터링
+  const filteredStartups = startups.filter(
+    (investment) =>
+      investment.investmentAmount != null && investment.investmentAmount > 0
+  );
+
   return (
     <div className={styles.table}>
       <div className={styles.tableHeader}>
@@ -29,9 +35,9 @@ const InvestmentList = ({ startups }) => {
       {/* 투자 목록 렌더링 */}
       <div className={styles.tableContents}>
         {loading ? (
-          <p>로딩 중...</p> // 로딩 중일 때 메시지
-        ) : startups.length > 0 ? (
-          startups.map((investment, index) => (
+          <p>아직 투자 현황이 없어요🫥</p> // 로딩 중일 때 메시지
+        ) : filteredStartups.length > 0 ? (
+          filteredStartups.map((investment, index) => (
             <div className={styles.tableContent} key={investment.id}>
               <p className={styles.ranking}>{index + 1}위</p>
               <Link
