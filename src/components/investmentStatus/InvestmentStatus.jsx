@@ -20,6 +20,8 @@ const InvestmentStatus = () => {
   const [newModal, setNewModal] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
+  const [activeInvestorId, setActiveInvestorId] = useState(null);
+
   const itemsPerPage = 5;
 
   const fetchInvestment = async () => {
@@ -41,13 +43,11 @@ const InvestmentStatus = () => {
   };
   const handleDeleteInvest = async (investorId) => {
     try {
-      fetchInvestment(); 
+      fetchInvestment();
     } catch (e) {
       console.error(e);
     }
   };
-  
-  
 
   useEffect(() => {
     const startIndex = (currentPage - 1) * itemsPerPage;
@@ -74,9 +74,12 @@ const InvestmentStatus = () => {
   const handleInvestSuccess = () => {
     setIsModalOpen(false);
     setIsSuccessModalOpen(true);
-    fetchInvestment()
+    fetchInvestment();
   };
 
+  const handleToggleOptions = (investorId) => {
+    setActiveInvestorId((prev) => (prev === investorId ? null : investorId));
+  };
 
   return (
     <div className={styles.main}>
@@ -118,6 +121,8 @@ const InvestmentStatus = () => {
                     investor={inv}
                     onEdit={handleEditInvest}
                     onDelete={handleDeleteInvest}
+                    activeInvestorId={activeInvestorId}
+                    onToggleOptions={handleToggleOptions}
                   />
                 </div>
               ))}

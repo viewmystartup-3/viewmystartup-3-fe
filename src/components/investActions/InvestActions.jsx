@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react"; // useRef 추가!
 import styles from "./InvestActions.module.scss";
 import listImg from "../../assets/ic_kebab.png";
 import { useParams } from "react-router-dom";
@@ -7,18 +7,26 @@ import { dataUrl } from "../../env";
 import ModalTopBar from "../modals/topBar/ModalTopBar";
 import eyeIcon from "../../assets/btn_visibility_on.png";
 import eyeOffIcon from "../../assets/btn_visibility_off.png";
+import { createPortal } from "react-dom";
 
-const InvestorActions = ({ investor, onEdit, onDelete }) => {
+const InvestorActions = ({
+  investor,
+  onEdit,
+  onDelete,
+  activeInvestorId,
+  onToggleOptions,
+}) => {
   const { id } = useParams();
-  const [showOptions, setShowOptions] = useState(false);
   const [deleteModal, setDeleteModal] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [password, setPassword] = useState("");
   const [errorModal, setErrorModal] = useState(false);
 
+  const isActive = activeInvestorId === investor.id;
+  const buttonRef = useRef(null); // 옵션 버튼 참조
+
   const handleDeleteClick = () => {
     setDeleteModal(true);
-    setShowOptions(false);
   };
 
   const togglePasswordVisibility = () => {
@@ -35,52 +43,68 @@ const InvestorActions = ({ investor, onEdit, onDelete }) => {
         `${dataUrl}/api/companies/${id}/investments/${investor.id}`,
         { data: { password } }
       );
-  
+
       if (response.status === 200) {
         console.log("삭제 성공!");
-        setDeleteModal(false);  
-        setPassword("");        
-        onDelete(investor.id)
+        setDeleteModal(false);
+        setPassword("");
+        onDelete(investor.id);
       }
     } catch (e) {
       console.error(e);
-      if (e.response && (e.response.status === 401 || e.response.status === 403)) {
+      if (
+        e.response &&
+        (e.response.status === 401 || e.response.status === 403)
+      ) {
         setErrorModal(true);
-        setDeleteModal(false);  
+        setDeleteModal(false);
       }
     }
   };
-  
+
+  // 버튼 위치 가져오기
+  const buttonRect = buttonRef.current?.getBoundingClientRect();
 
   return (
     <div className={styles.body}>
       <button
+        ref={buttonRef} // 버튼 위치 참조 추가
         className={styles.optionsButton}
-        onClick={() => setShowOptions((prev) => !prev)}
+        onClick={() => onToggleOptions(investor.id)}
       >
         <img src={listImg} alt="옵션" />
       </button>
 
-      {showOptions && (
-        <div className={styles.optionsList}>
-          <button className={styles.list} onClick={() => onEdit(investor)}>
-            수정하기
-          </button>
-          <button className={styles.list} onClick={handleDeleteClick}>
-            삭제하기
-          </button>
-        </div>
-      )}
+      {isActive &&
+        createPortal(
+          <div
+            className={styles.optionsList}
+            style={{
+              position: "absolute",
+              top: buttonRect
+                ? `${buttonRect.bottom + window.scrollY}px`
+                : "0px", // 버튼 아래로 위치
+              left: buttonRect ? `${buttonRect.left}px` : "0px", // 버튼 왼쪽 정렬
+              zIndex: 9999,
+            }}
+          >
+            <button className={styles.list} onClick={() => onEdit(investor)}>
+              수정하기
+            </button>
+            <button className={styles.list} onClick={handleDeleteClick}>
+              삭제하기
+            </button>
+          </div>,
+          document.body
+        )}
 
       {deleteModal && (
         <div>
           <div className={styles.overlay} />
-
           <div className={styles.deleteModal}>
             <div className={styles.container}>
               <div className={styles.deleteHeader}>
                 <p className={styles.ptage}>삭제 권한 인증</p>
-
                 <ModalTopBar
                   onClose={() => {
                     setDeleteModal(false);
@@ -106,7 +130,7 @@ const InvestorActions = ({ investor, onEdit, onDelete }) => {
                     >
                       <img
                         src={showPassword ? eyeOffIcon : eyeIcon}
-                        alt="Toggle Password Visibility"
+                        alt="비밀번호 보기"
                         className={styles.eyeIcon}
                       />
                     </button>
@@ -122,6 +146,7 @@ const InvestorActions = ({ investor, onEdit, onDelete }) => {
           </div>
         </div>
       )}
+
       {errorModal && (
         <div>
           <div className={styles.overlay} />
@@ -134,13 +159,13 @@ const InvestorActions = ({ investor, onEdit, onDelete }) => {
                     setPassword("");
                   }}
                 />
-
                 <p>잘못된 비밀번호로 삭제에 실패하셨습니다.</p>
               </div>
               <button
                 className={styles.okBtn}
                 onClick={() => {
-                  setErrorModal(false); setPassword("");
+                  setErrorModal(false);
+                  setPassword("");
                 }}
               >
                 확인
