@@ -38,4 +38,18 @@
   cursor: pointer;
   width: 194px;
   height: 48px;
+  line-height: 100%;
+}
+
+@media (max-width: 744px) {
+  .modalContent {
+    width: 326px;
+    height: 161px;
+  }
+  .closeButton {
+    width: 124px;
+    height: 40px;
+    padding: 13px 24px;
+    font: var(--textSSb);
+  }
 }
