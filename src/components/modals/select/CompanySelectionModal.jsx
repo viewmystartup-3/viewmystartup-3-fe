@@ -51,20 +51,6 @@ function CompanySelectionModal({
     };
   }, []);
 
-  // 모달창 바깥을 클릭하면 창 닫힘
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (modalRef.current && !modalRef.current.contains(event.target)) {
-        handleCloseWindow();
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
-
   const handleCompanySelect = (company) => {
     if (title === "나의 기업 선택하기") {
       onSelect(company); // 단일 선택만 즉시 반영
