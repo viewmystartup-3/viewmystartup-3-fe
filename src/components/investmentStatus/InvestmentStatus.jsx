@@ -7,6 +7,7 @@ import Pagination from "../pagination/pagination";
 import InvestorActions from "../investActions/InvestActions";
 import InvestModal from "../investModal/InvestModal";
 import SuccessModal from "../investModal/SuccessModal";
+import EditInvestModal from "../investModal/EditInvestModal";
 
 const InvestmentStatus = () => {
   const { id } = useParams();
@@ -15,7 +16,7 @@ const InvestmentStatus = () => {
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const [selectInvestor, setSelectedInvestor] = useState(null);
+  const [selectedInvestor, setSelectedInvestor] = useState(null);
   const [editModal, setEditModal] = useState(false);
   const [newModal, setNewModal] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -41,13 +42,11 @@ const InvestmentStatus = () => {
   };
   const handleDeleteInvest = async (investorId) => {
     try {
-      fetchInvestment(); 
+      fetchInvestment();
     } catch (e) {
       console.error(e);
     }
   };
-  
-  
 
   useEffect(() => {
     const startIndex = (currentPage - 1) * itemsPerPage;
@@ -74,9 +73,18 @@ const InvestmentStatus = () => {
   const handleInvestSuccess = () => {
     setIsModalOpen(false);
     setIsSuccessModalOpen(true);
-    fetchInvestment()
+    fetchInvestment();
   };
 
+  // 투자자 수정 성공 시 호출되는 함수
+  const handleEditSuccess = (updatedInvestor) => {
+    setAllInvestments((prevInvestments) =>
+      prevInvestments.map((investor) =>
+        investor.id === updatedInvestor.id ? updatedInvestor : investor
+      )
+    );
+    setEditModal(false); // 수정 모달 닫기
+  };
 
   return (
     <div className={styles.main}>
@@ -144,13 +152,14 @@ const InvestmentStatus = () => {
       />
       <SuccessModal isOpen={isSuccessModalOpen} onClose={closeSuccessModal} />
 
-      {/* {editModal && selectInvestor && (
-        <InvestModal
-          isOpen={true}
-          investor={selectInvestor}
-          onClose={() => setEditModal(false)}
-        />
-      )} */}
+      {editModal &&
+        selectedInvestor && ( // selectedInvestor가 있어야 모달이 열림
+          <EditInvestModal
+            isOpen={true}
+            selectedInvestor={selectedInvestor} // 수정된 selectedInvestor 전달
+            onClose={() => setEditModal(false)}
+          />
+        )}
     </div>
   );
 };
