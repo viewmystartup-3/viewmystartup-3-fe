@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo } from "react";
 import styles from "./Table.module.scss";
 import SelectBox from "../selectBox/SelectBox";
 import { basicSortOptions } from "../selectBox/sortOptions";
-import StartupList from "../startupList/StartupList";
+import RawTable from "./RawTable.jsx";
 import axios from "axios";
 import { dataUrl } from "../../env.js";
 
@@ -51,7 +51,10 @@ function RankingCheckTable({ myCompany }) {
         <h4 className={styles.title}>기업 순위 확인하기</h4>
         <SelectBox options={basicSortOptions} onChange={setSortBy} />
       </div>
-      <StartupList startups={rankedCompanies} />
+      <RawTable
+        startups={rankedCompanies}
+        isMyCompanyData={(startup) => startup.id === myCompany?.id}
+      />
     </section>
   );
 }
