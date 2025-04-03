@@ -1,4 +1,5 @@
 import React from "react";
+import xImg from "../../../assets/ic_delete.png"
 import styles from "./ModalTopBar.module.scss";
 
 function ModalTopBar({ children, onClose }) {
@@ -6,7 +7,7 @@ function ModalTopBar({ children, onClose }) {
     <section className={styles.topBar}>
       <h3 className={styles.titleText}>{children}</h3>
       <button className={styles.xButton} onClick={onClose}>
-        X
+        <img src={xImg}/>
       </button>
     </section>
   );
