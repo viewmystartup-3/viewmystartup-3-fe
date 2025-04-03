@@ -3,55 +3,74 @@
   height: 187px;
   border-radius: 8px;
   background-color: var(--gray400);
+  position: relative;
 
-  position: relative; //로고와 글사이 너무먼디???
-}
+  .removeBtn {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none; 
+    color: white;
+    cursor: pointer;
+    padding: 2px;
+    justify-content: center;
+    border-radius: 8px;
 
-.removeBtn {
-  width: 20px;
-  height: 20px;
-  position: absolute;
-  top: 8px;
-  left: 94px;
-  background: none;
-  border: none;
-  color: white;
-  cursor: pointer;
-  padding: 2px;
-  justify-content: center;
-  border-radius: 8px;
+    background-color: var(--black300);
+  }
 
-  background-color: var(--black300);
-}
+  .logoWrapper {
+    width: 126px;
+    gap: 10px;
 
-.logoWrapper {
-  width: 126px;
-  // height: 130px; //높이가 먼거 조정???
-  gap: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto;
+    border-radius: 50%;
+    overflow: hidden;
+  }
 
-  border-radius: 50%;
-  overflow: hidden;
-}
+  .logo {
+    width: 82.96px;
+    height: 82.96px;
+    border-radius: 82.96px;
+    margin-top: 30.52px;
+  }
 
-.logo {
-  width: 82.96px;
-  height: 82.96px;
-  object-fit: contain;
-}
+  .name {
+    font: var(--textM);
+    text-align: center;
+    margin-top: 10px;
+  }
 
-.name {
-  font: var(--textM);
-  text-align: center;
-  margin-top: 10px;
-}
-.category {
-  color: var(--gray200);
-  font: var(--textSM);
-  text-align: center;
-  margin-top: 4px;
+  .category {
+    color: var(--gray200);
+    font: var(--textSM);
+    text-align: center;
+    margin-top: 4px;
+  }
+
+  //모바일용
+  @media (max-width: 744px) {
+    width: 104px;
+    height: 163px;
+    .logo {
+      width: 66.37px;
+      height: 66.37px;
+      border-radius: 66.37px;
+      margin-top: 30.81px;
+      margin-right: 19.32px;
+    }
+    .name {
+      font: var(--textSM);
+    }
+    .category {
+      font: var(--textXsM);
+    }
+  }
 }

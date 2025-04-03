@@ -37,7 +37,7 @@ function MyCompanySection({
         )}
       </div>
 
-      <div>
+      <div> 
         {/* 선택전상태 */}
         {!myCompany ? (
           <div className={style.outerBox}>

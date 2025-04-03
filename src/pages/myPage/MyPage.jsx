@@ -9,8 +9,7 @@ import RankingCheckTable from "../../components/myPageTable/RankingCheckTable";
 function MyPage() {
   const [myCompany, setMyCompany] = useState(null);
   const [compareCompanies, setCompareCompanies] = useState([]);
-  const [showResultTable, setShowResultTable] = useState(false); // 표가 뜨게 하는 state
-  const [showResultTable, setShowResultTable] = useState(false); // 표가 뜨게 하는 state
+  const [showResultTable, setShowResultTable] = useState(false); // 표가 뜨게 하는 state //RankingCheckTable
 
   const showResetButton = myCompany && compareCompanies.length > 0;
 
