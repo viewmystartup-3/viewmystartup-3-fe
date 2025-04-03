@@ -12,6 +12,7 @@ const InvestmentStatusPage = () => {
     "investmentAmount_desc"
   );
   const [investmentData, setInvestmentData] = useState([]); // 전체 투자 데이터 상태
+  const [filteredData, setFilteredData] = useState([]); // 필터링된 투자 데이터 상태
   const [currentPage, setCurrentPage] = useState(1); // 현재 페이지
   const [totalPages, setTotalPages] = useState(1); // 전체 페이지 수
 
@@ -25,7 +26,16 @@ const InvestmentStatusPage = () => {
       .get(`${dataUrl}/api/companies?sort=${selectedSortValue}`)
       .then((res) => {
         setInvestmentData(res.data); // 전체 데이터를 상태에 저장
-        setTotalPages(Math.ceil(res.data.length / itemsPerPage)); // 전체 페이지 수 계산
+
+        // investmentAmount 값이 있는 항목만 필터링
+        const filtered = res.data.filter(
+          (investment) =>
+            investment.investmentAmount != null &&
+            investment.investmentAmount > 0
+        );
+
+        setFilteredData(filtered); // 필터링된 데이터를 상태에 저장
+        setTotalPages(Math.ceil(filtered.length / itemsPerPage)); // 필터링된 데이터로 페이지 수 계산
       })
       .catch((error) => {
         console.error("서버 오류:", error);
@@ -42,7 +52,7 @@ const InvestmentStatusPage = () => {
   const getCurrentPageData = () => {
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
-    return investmentData.slice(startIndex, endIndex); // 해당 페이지 데이터 반환
+    return filteredData.slice(startIndex, endIndex); // 필터링된 데이터만 해당 페이지에 맞게 반환
   };
 
   // SelectBox에서 값이 변경되면 호출되는 함수
@@ -64,15 +74,17 @@ const InvestmentStatusPage = () => {
           />
         </div>
       </div>
-      {/* 투자 데이터 리스트를 InvestmentList로 전달 */}
+      {/* 필터링된 데이터만 InvestmentList로 전달 */}
       <InvestmentList startups={getCurrentPageData()} />
 
       {/* 페이지네이션 추가 */}
-      <Pagination
-        currentPage={currentPage}
-        totalPages={totalPages}
-        onPageChange={handlePageChange}
-      />
+      <div className={styles.pagePagination}>
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={handlePageChange}
+        />
+      </div>
     </div>
   );
 };

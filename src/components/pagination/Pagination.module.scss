@@ -1,10 +1,8 @@
 .pagination {
-  margin: 16px 0 32px 0;
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 8px;
-
   button {
     text-align: center;
     border: none;
@@ -13,8 +11,8 @@
     cursor: pointer;
     color: var(--gray200);
     font: var(--textL);
-    width: 30px;
-    height: 30px;
+    width: 48px;
+    height: 48px;
 
     &:disabled {
       cursor: not-allowed;
@@ -24,6 +22,16 @@
     &.active {
       background-color: var(--brandOrange);
       color: var(--white);
+    }
+  }
+}
+/* 모바일 미디어 쿼리 */
+@media (max-width: 744px) {
+  .pagination {
+    button {
+      width: 32px;
+      height: 32px;
+      font: var(--textS);
     }
   }
 }

@@ -28,7 +28,9 @@
   display: flex;
   gap: 1rem;
 }
-
+.pagePagination {
+  margin-bottom: 20px;
+}
 /* tablet */
 @media (max-width: 1199px) {
   .page {
