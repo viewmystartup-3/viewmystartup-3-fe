@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styles from "./Search.module.scss"; // 스타일 모듈을 import
 import searchIcon from "../../assets/ic_search.png";
+import Hangul from "hangul-js"; // hangul-js 라이브러리 import
 
 const Search = ({
   startups,
@@ -12,29 +13,56 @@ const Search = ({
   const [isFocused, setIsFocused] = useState(false); // focus 상태
   const [searchTerm, setSearchTerm] = useState(""); // 검색어 상태
 
+  // 초성만 추출하는 함수
+  const getInitialConsonants = (text) => {
+    return Hangul.d(text)
+      .map((ch) => ch[0]) // 초성만 추출
+      .join(""); // 초성들을 이어서 하나의 문자열로 반환
+  };
+
   const handleSearchChange = (event) => {
     const value = event.target.value;
     setSearchTerm(value);
 
-    //검색어가 없을 경우 빈 배열을 반환
+    // 검색어가 없을 경우 빈 배열을 반환
     if (value === "") {
       onFilteredData(isModal ? [] : startups);
       return;
     }
 
-    // 검색어에 따라서 데이터를 필터링
+    // 검색어가 초성으로 입력된 경우
+    const searchInitialConsonants = getInitialConsonants(value); // 검색어에서 초성만 추출
+
+    // 데이터를 필터링하는 로직
     const filteredData = startups.filter((startup) => {
       if (companymodal) {
-        return startup.name.toLowerCase().includes(value.toLowerCase());
+        // 모달에서만 초성 검색을 적용
+        const startupNameInitialConsonants = getInitialConsonants(startup.name);
+
+        // 초성 비교 로직을 개선: 입력된 초성들이 기업명 초성의 부분적으로 포함되는지 확인
+        let isMatch = true;
+        let lastIndex = 0; // 초성이 이전 초성 이후에 등장하는지 확인하는 변수
+
+        for (let i = 0; i < searchInitialConsonants.length; i++) {
+          const currentChar = searchInitialConsonants[i];
+          const index = startupNameInitialConsonants.indexOf(
+            currentChar,
+            lastIndex
+          );
+
+          if (index === -1) {
+            isMatch = false; // 부분적으로 포함되지 않으면 매칭 실패
+            break;
+          }
+          lastIndex = index + 1; // 다음 초성은 그 이후부터 검색
+        }
+
+        return isMatch;
       } else {
-        // 기본적으로 name, description, category 등을 모두 필터링
+        // 홈페이지에서의 일반적인 검색 로직
         return (
           startup.name.toLowerCase().includes(value.toLowerCase()) || // 기업명
-          startup.description.toLowerCase().includes(value.toLowerCase()) || // 기업소개
-          startup.category.toLowerCase().includes(value.toLowerCase()) || // 카테고리
-          startup.totalInvestment.toString().includes(value) || // 누적 투자 금액
-          startup.revenue.toString().includes(value) || // 매출액
-          startup.employees.toString().includes(value) // 고용 인원
+          startup.category.toLowerCase().includes(value.toLowerCase()) // 카테고리
         );
       }
     });
@@ -46,7 +74,7 @@ const Search = ({
   // X 버튼 클릭 시 검색어 초기화 및 데이터 초기화
   const clearSearch = () => {
     setSearchTerm(""); // 검색어를 초기화
-    onFilteredData(startups);
+    onFilteredData(startups); // 원본 데이터로 초기화
     onClearSearch(); // 추가적인 초기화 작업이 필요하면 부모 컴포넌트로 전달
   };
 
