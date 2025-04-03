@@ -5,14 +5,29 @@ import style from "./MyPage.module.scss";
 import CompareSection from "./CompareSection";
 import ResultTable from "../../components/myPageTable/ResultTable";
 import RankingCheckTable from "../../components/myPageTable/RankingCheckTable";
+import InvestModal from "../../components/investModal/InvestModal";
+import SuccessModal from "../../components/investModal/SuccessModal";
 
 function MyPage() {
   const [myCompany, setMyCompany] = useState(null);
   const [compareCompanies, setCompareCompanies] = useState([]);
   const [showResultTable, setShowResultTable] = useState(false); // 표가 뜨게 하는 state //RankingCheckTable
+  const [isModalOpen, setIsModalOpen] = useState(false); // InvestModal 상태
+  const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false); // 투자 완료 모달 상태
 
   const showResetButton =
     myCompany && compareCompanies.length > 0 && !showResultTable;
+
+  // 모달 열기
+  const openModal = () => setIsModalOpen(true); // InvestModal 열기
+  const closeModal = () => setIsModalOpen(false); // InvestModal 닫기
+  const closeSuccessModal = () => setIsSuccessModalOpen(false); // 투자 완료 모달 닫기
+
+  // 투자 완료 후 모달 열기
+  const handleInvestSuccess = () => {
+    setIsModalOpen(false);
+    setIsSuccessModalOpen(true);
+  };
 
   //초기화
   const handleReset = () => {
@@ -78,26 +93,29 @@ function MyPage() {
         </div>
       )}
 
-      {/*  TODO: ResultTable 2개 불러오기 */}
+      {/* ResultTable 2개 불러오기 */}
       {showResultTable && (
         <>
           <ResultTable
             myCompany={myCompany}
             compareCompanies={compareCompanies}
           />
-          {/* RankingCheckTable 불러오기
-          <RankingCheckTable myCompany={myCompany} /> */}
+          <RankingCheckTable myCompany={myCompany} />
 
           <div className={style.investBtn}>
-            <RoundButton onClick={() => console.log("투자하기 클릭!")}>
-              나의 기업에 투자하기
-            </RoundButton>
+            <RoundButton onClick={openModal}>나의 기업에 투자하기</RoundButton>
           </div>
         </>
       )}
 
-      {/* RankingCheckTable 불러오기 */}
-      {showResultTable && <RankingCheckTable myCompany={myCompany} />}
+      {/* 투자 모달들 */}
+      <InvestModal
+        isOpen={isModalOpen}
+        onClose={closeModal}
+        onInvestSuccess={handleInvestSuccess}
+      />
+      {/* 투자 완료 모달 */}
+      <SuccessModal isOpen={isSuccessModalOpen} onClose={closeSuccessModal} />
     </main>
   );
 }
