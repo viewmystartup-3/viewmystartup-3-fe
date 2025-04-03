@@ -36,10 +36,6 @@ const InvestorActions = ({
   };
 
   const handleDelete = async () => {
-    if (!investor || !investor.id) {
-      console.error("삭제 실패");
-      return;
-    }
     try {
       const response = await axios.delete(
         `${dataUrl}/api/companies/${id}/investments/${investor.id}`,
@@ -66,34 +62,37 @@ const InvestorActions = ({
 
   const handleEdit = async () => {
     try {
+      console.log(id);
+      console.log(investor.id);
       const response = await axios.post(
-        `${dataUrl}/api/companies/${id}/investments/${investor.id}/password`
-        ,{data: {password}}
+        `${dataUrl}/api/companies/${id}/investments/${investor.id}/password`,
+        { password: editPassword }
       );
 
       if (response.status === 200) {
         setEditModal(false);
         setEditPassword("");
         onEdit(investor);
+        console.log("성공~");
       }
     } catch (e) {
       if (
         e.response &&
         (e.response.status === 401 || e.response.status === 403)
       ) {
+        setEditPassword("");
         setErrorModal(true);
         setEditModal(false);
       }
     }
   };
 
-  // 버튼 위치 가져오기
   const buttonRect = buttonRef.current?.getBoundingClientRect();
 
   return (
     <div className={styles.body}>
       <button
-        ref={buttonRef} // 버튼 위치 참조 추가
+        ref={buttonRef}
         className={styles.optionsButton}
         onClick={() => onToggleOptions(investor.id)}
       >
@@ -108,7 +107,7 @@ const InvestorActions = ({
               position: "absolute",
               top: buttonRect
                 ? `${buttonRect.bottom + window.scrollY}px`
-                : "0px", // 버튼 아래로 위치
+                : "0px",
               left: buttonRect ? `${buttonRect.left}px` : "0px",
             }}
           >
@@ -195,7 +194,9 @@ const InvestorActions = ({
                         type={showPassword ? "text" : "password"}
                         placeholder="비밀번호를 입력해 주세요"
                         value={editPassword}
-                        onChange={(e) => setEditPassword(e.target.value)}
+                        onChange={(e) => {
+                          setEditPassword(e.target.value);
+                        }}
                         className={styles.input}
                       />
                       <button
@@ -212,10 +213,7 @@ const InvestorActions = ({
                     </div>
                   </div>
                   <div className={styles.editBox}>
-                    <button
-                      className={styles.editBtn}
-                      onClick={handleEdit}
-                    >
+                    <button className={styles.editBtn} onClick={handleEdit}>
                       수정하기
                     </button>
                   </div>
