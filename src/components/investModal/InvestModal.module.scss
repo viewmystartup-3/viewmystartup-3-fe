@@ -156,6 +156,12 @@
   height: 20px;
 }
 
+.errorText {
+  color: var(--redError);
+  font-size: 12px;
+  margin-top: 5px;
+}
+
 @media (max-width: 744px) {
   .modalContent {
     overflow-y: auto;

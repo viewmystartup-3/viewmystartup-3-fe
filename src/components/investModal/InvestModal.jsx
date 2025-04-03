@@ -42,6 +42,17 @@ const InvestModal = ({ isOpen, onClose, onInvestSuccess, targetCompany }) => {
   };
 
   const handleInvest = async () => {
+    // 비밀번호와 비밀번호 확인 필드의 비어 있는지 체크
+    setPasswordError("");
+    setConfirmPasswordError("");
+
+    if (!password || !confirmPassword) {
+      if (!password) setPasswordError("비밀번호는 필수 입력사항입니다.");
+      if (!confirmPassword)
+        setConfirmPasswordError("비밀번호 확인은 필수 입력사항입니다.");
+      return;
+    }
+
     if (password !== confirmPassword) {
       alert("비밀번호가 일치하지 않습니다.");
       return;
@@ -70,6 +81,20 @@ const InvestModal = ({ isOpen, onClose, onInvestSuccess, targetCompany }) => {
       onInvestSuccess();
     } catch (error) {
       console.error("Error making investment:", error);
+    }
+  };
+
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+    if (e.target.value) {
+      setPasswordError(""); // 비밀번호가 입력되면 오류 메시지 제거
+    }
+  };
+
+  const handleConfirmPasswordChange = (e) => {
+    setConfirmPassword(e.target.value);
+    if (e.target.value) {
+      setConfirmPasswordError(""); // 비밀번호 확인이 입력되면 오류 메시지 제거
     }
   };
 
@@ -146,7 +171,7 @@ const InvestModal = ({ isOpen, onClose, onInvestSuccess, targetCompany }) => {
                 type={showPassword ? "text" : "password"} // 비밀번호 보이기/숨기기
                 placeholder="비밀번호를 입력해 주세요"
                 value={password}
-                onChange={(e) => setPassword(e.target.value)} // 상태 업데이트
+                onChange={handlePasswordChange} // 비밀번호 변경 시 오류 메시지 제거
                 className={styles.input}
               />
               <button
@@ -161,6 +186,10 @@ const InvestModal = ({ isOpen, onClose, onInvestSuccess, targetCompany }) => {
                 />
               </button>
             </div>
+            {passwordError && (
+              <p className={styles.errorText}>{passwordError}</p>
+            )}{" "}
+            {/* 오류 메시지 */}
           </div>
 
           <div className={styles.formGroup}>
@@ -170,7 +199,7 @@ const InvestModal = ({ isOpen, onClose, onInvestSuccess, targetCompany }) => {
                 type={showConfirmPassword ? "text" : "password"} // 비밀번호 확인도 보이기/숨기기
                 placeholder="비밀번호를 다시 한 번 입력해 주세요"
                 value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)} // 상태 업데이트
+                onChange={handleConfirmPasswordChange} // 비밀번호 확인 변경 시 오류 메시지 제거
                 className={styles.input}
               />
               <button
@@ -185,6 +214,10 @@ const InvestModal = ({ isOpen, onClose, onInvestSuccess, targetCompany }) => {
                 />
               </button>
             </div>
+            {confirmPasswordError && (
+              <p className={styles.errorText}>{confirmPasswordError}</p>
+            )}{" "}
+            {/* 오류 메시지 */}
           </div>
 
           <div className={styles.buttonGroup}>
