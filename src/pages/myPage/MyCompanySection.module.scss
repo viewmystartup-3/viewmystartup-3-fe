@@ -1,7 +1,7 @@
 .wrapper {
   margin: 0 auto;
   width: 1200px;
-  .seungjun {
+  .titleSection {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -13,6 +13,11 @@
       border-radius: 50px;
       margin-bottom: 16px;
       margin-top: 80px;
+    }
+    .reCompareBtn {
+      button {
+        width: 167px;
+      }
     }
   }
   .sectionTitle {
@@ -90,7 +95,7 @@
   //테블릿용
   @media (max-width: 1199px) {
     width: 696px;
-    .seungjun {
+    .titleSection {
       button {
         margin-top: 40px;
       }
@@ -115,16 +120,24 @@
   //모바일용
   @media (max-width: 744px) {
     width: 343px;
-    .seungjun {
+    .titleSection {
       button {
         width: 116px;
         height: 32px;
         padding: 4px 12px;
         margin-top: 32px;
       }
+      .reCompareBtn {
+        button {
+          width: 128px;
+          height: 32px;
+          padding: 4px 12px;
+          margin-top: 32px;
+        }
+      }
     }
     .sectionTitle {
-      font: var(--textB); 
+      font: var(--textB);
       margin-top: 32px;
     }
     .outerBox {
