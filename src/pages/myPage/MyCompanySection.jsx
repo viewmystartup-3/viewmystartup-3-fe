@@ -3,13 +3,18 @@ import style from "./MyCompanySection.module.scss";
 import btnPlus from "../../assets/btn_plus.png";
 import Card from "./Card";
 import { MyCompanyModal } from "../../components/modals/select/Modals";
-import { ResetButton } from "../../components/buttons/Buttons";
+import {
+  ResetButton,
+  RoundSmallButton,
+} from "../../components/buttons/Buttons";
 
 function MyCompanySection({
   myCompany,
   setMyCompany,
   showResetButton,
   onReset,
+  onResetCompareOnly,
+  showResultTable,
 }) {
   const [isModalOpen, setIsModalOpen] = useState(false); // 모달 상태
 
@@ -28,14 +33,20 @@ function MyCompanySection({
 
   return (
     <section className={style.wrapper}>
-      <h2 className={style.sectionTitle}>나의 기업을 선택해 주세요!</h2>
+      <div className={style.titleSection}>
+        <h2 className={style.sectionTitle}>나의 기업을 선택해 주세요!</h2>
 
-      {/* 전체 초기화 버튼 조건부 렌더링 */}
-      {showResetButton && (
-        <div className={style.resetContainer}>
+        {/* 전체 초기화 버튼 조건부 렌더링 */}
+        {showResetButton ? (
           <ResetButton onReset={onReset}>전체 초기화</ResetButton>
-        </div>
-      )}
+        ) : showResultTable && myCompany ? (
+          <div className={style.reCompareBtn}>
+            <RoundSmallButton onClick={onResetCompareOnly}>
+              다른 기업 비교하기
+            </RoundSmallButton>
+          </div>
+        ) : null}
+      </div>
 
       <div>
         {/* 선택전상태 */}

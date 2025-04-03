@@ -1,47 +1,81 @@
 .section {
   margin: 0 auto;
   width: 1200px;
-}
-.sectionTitle {
-  font: var(--textXlB);
-  color: var(--white);
-  margin-top: 40px;
-  span {
-    font: var(--text);
+
+  .sectionTitle {
+    font: var(--textXlB);
     color: var(--white);
+    margin-top: 40px;
+
+    span {
+      font: var(--text);
+      color: var(--white);
+    }
+  } 
+
+  .comparePart {
+    //버튼이 딱 오른쪽으로 안감감
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+
+    button {
+      width: 135px;
+      height: 40px;
+      border-radius: 50px;
+      padding: 8px 24px;
+      margin-top: 40px;
+    }
   }
-}
-.comparePart {
-  //버튼이 딱 오른쪽으로 안감감
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 16px;
 
-  button {
-    width: 135px;
-    height: 40px;
-    border-radius: 50px;
-    padding: 8px 24px;
+  .selectBox {
+    position: relative;
+    width: 1200px;
+    height: 300px;
+    border-radius: 4px;
+    background-color: var(--black300);
+    flex-wrap: wrap;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
   }
-}
-.selectBox {
-  position: relative;
 
-  width: 1200px;
-  height: 300px;
-  border-radius: 4px;
-  background-color: var(--black300);
-  align-items: center;
-  // margin: 16px;
+  .emptyMsg {
+    font: var(--textS);
+    color: var(--gray200);
+    text-align: center;
+  }
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-}
-.emptyMsg {
-  font: var(--textS);
-  color: var(--gray200);
-  text-align: center;
+  //테블릿용
+  @media (max-width: 1199px) {
+    width: 696px;
+
+    .selectBox {
+      width: 696px;
+      height: 240px;
+    }
+  }
+
+  //모바일용
+  @media (max-width: 744px) {
+    width: 343px;
+
+    .sectionTitle {
+      font: var(--textB);
+    }
+    .comparePart {
+      button {
+        width: 100px;
+        height: 32px;
+        padding: 4px 12px;
+      }
+    }
+    .selectBox {
+      width: 343px;
+      height: 348px;
+      gap: 8px;
+    }
+  }
 }
