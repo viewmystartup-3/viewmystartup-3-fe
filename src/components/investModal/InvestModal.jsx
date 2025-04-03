@@ -1,40 +1,37 @@
 import React, { useState, useEffect } from "react";
-
 import styles from "./InvestModal.module.scss";
-import { useParams } from "react-router-dom";
 import axios from "axios";
 import { dataUrl } from "../../env";
 import eyeIcon from "../../assets/btn_visibility_on.png";
 import eyeOffIcon from "../../assets/btn_visibility_off.png";
 import ModalTopBar from "../modals/topBar/ModalTopBar";
+import { useParams } from "react-router-dom";
 
-const InvestModal = ({ isOpen, onClose, onInvestSuccess }) => {
-  const [company, setCompany] = useState(null); // 기업 정보
-  const [confirmPassword, setConfirmPassword] = useState(""); // 비밀번호 확인
+const InvestModal = ({ isOpen, onClose, onInvestSuccess, targetCompany }) => {
+  const { id: urlId } = useParams();
+  const [company, setCompany] = useState(null); // 실제로 표시할 기업 정보
   const [name, setName] = useState(""); // 투자자 이름
   const [amount, setAmount] = useState(""); // 투자 금액
   const [comment, setComment] = useState(""); // 투자 코멘트
+  const [password, setPassword] = useState(""); // 비밀번호 상태
+  const [confirmPassword, setConfirmPassword] = useState(""); // 비밀번호 확인
   const [showPassword, setShowPassword] = useState(false); // 비밀번호 보이기/숨기기
   const [showConfirmPassword, setShowConfirmPassword] = useState(false); // 비밀번호 확인 보이기/숨기기
-  const [password, setPassword] = useState(""); // 비밀번호 상태
-
-  const { id } = useParams(); // URL에서 ID 가져오기
-
-  const fetchCompanyDetails = async () => {
-    try {
-      const response = await axios.get(`${dataUrl}/api/companies/${id}`);
-      setCompany(response.data); // 기업 정보 설정
-    } catch (e) {
-      console.error(e);
-    }
-  };
-
   useEffect(() => {
-    if (id) {
-      console.log("Fetching company with ID:", id);
-      fetchCompanyDetails(); // 기업 정보 가져오기
+    if (targetCompany) {
+      setCompany(targetCompany);
+    } else if (urlId) {
+      const fetchCompany = async () => {
+        try {
+          const res = await axios.get(`${dataUrl}/api/companies/${urlId}`);
+          setCompany(res.data);
+        } catch (e) {
+          console.error(e);
+        }
+      };
+      fetchCompany();
     }
-  }, [id]);
+  }, [targetCompany, urlId]);
 
   const togglePasswordVisibility = () => {
     setShowPassword((prevState) => !prevState); // 비밀번호 표시 상태 토글
@@ -52,7 +49,7 @@ const InvestModal = ({ isOpen, onClose, onInvestSuccess }) => {
 
     try {
       const response = await axios.post(
-        `${dataUrl}/api/companies/${id}/investments`,
+        `${dataUrl}/api/companies/${company.id}/investments`,
         {
           name,
           amount: parseFloat(amount), // 금액을 float으로 변환
@@ -86,7 +83,7 @@ const InvestModal = ({ isOpen, onClose, onInvestSuccess }) => {
     onClose();
   };
 
-  if (!isOpen) return null; // 모달이 열리지 않으면 아무것도 렌더링하지 않음
+  if (!isOpen || !company) return null; // 모달이 열리지 않으면 아무것도 렌더링하지 않음
 
   return (
     <div className={styles.modal}>

@@ -113,6 +113,7 @@ function MyPage() {
         isOpen={isModalOpen}
         onClose={closeModal}
         onInvestSuccess={handleInvestSuccess}
+        targetCompany={myCompany} 
       />
       {/* 투자 완료 모달 */}
       <SuccessModal isOpen={isSuccessModalOpen} onClose={closeSuccessModal} />
