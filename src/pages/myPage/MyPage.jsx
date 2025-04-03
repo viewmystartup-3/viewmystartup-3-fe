@@ -10,6 +10,7 @@ function MyPage() {
   const [myCompany, setMyCompany] = useState(null);
   const [compareCompanies, setCompareCompanies] = useState([]);
   const [showResultTable, setShowResultTable] = useState(false); // 표가 뜨게 하는 state
+  const [showResultTable, setShowResultTable] = useState(false); // 표가 뜨게 하는 state
 
   const showResetButton = myCompany && compareCompanies.length > 0;
 
@@ -28,7 +29,7 @@ function MyPage() {
       return [...prev, company];
     });
   };
-  // 비교 기업 제거 수영가야해ㅐ해해해해해해해
+  // 비교 기업 제거
   const handleRemoveCompareCompany = (id) => {
     setCompareCompanies((prev) => prev.filter((c) => c.id !== id));
   };

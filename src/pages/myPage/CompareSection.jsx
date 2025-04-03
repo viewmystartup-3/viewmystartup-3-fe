@@ -46,8 +46,6 @@ function CompareSection({ compareCompanies, onRemove, onAddCompareCompany }) {
           </div>
         ) : (
           <div className={style.selectBox}>
-            {console.log("🔍 compareCompanies:", compareCompanies)}
-
             {compareCompanies.map((company) => {
               return (
                 <Card

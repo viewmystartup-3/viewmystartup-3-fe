@@ -2,12 +2,27 @@
   margin: 0 auto;
   width: 1200px;
 }
+.seungjun {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  button {
+    width: 149px;
+    height: 40px;
+    padding: 8px 24px;
+    border-radius: 50px;
+    margin-bottom: 16px;
+    margin-top: 80px;
+  }
+}
 .sectionTitle {
   font: var(--textXlB);
   color: var(--white);
   margin-bottom: 16px;
   margin-top: 80px;
 }
+
 .myCard {
   background-color: var(--black300) !important;
 }
@@ -79,15 +94,4 @@
   color: var(--white);
 }
 
-.resetContainer {
-  // text-align: right;
-  left: 1050px;
-  margin-bottom: 16px;
 
-  button {
-    width: 149px;
-    height: 40px;
-    padding: 8px 24px;
-    border-radius: 50px;
-  }
-}
