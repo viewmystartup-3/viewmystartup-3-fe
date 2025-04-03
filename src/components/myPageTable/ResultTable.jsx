@@ -11,25 +11,31 @@ function ResultTable({ myCompany, compareCompanies }) {
   const [loadedData, setLoadedData] = useState([]);
   const [sortBy, setSortBy] = useState("totalInvestment_desc");
 
-  // 기업 ID 목록 최적화
-  const selectedCompanyIds = useMemo(() => {
+  // 기업 목록 불러옴
+  const callCompanies = useMemo(() => {
     if (!myCompany) return [];
-    return [myCompany, ...compareCompanies]
-      .slice(0, 6)
-      .map((company) => company.id);
+
+    // 내 기업이 첫 번째고, 비교 기업을 뒤에 추가함
+    return [myCompany, ...compareCompanies.slice(0, 5)];
   }, [myCompany, compareCompanies]);
+
+  // 기업 목록에서 id 추출
+  const selectedCompanyIds = useMemo(() => {
+    return callCompanies
+      .map((company) => company?.id)
+      .filter((id) => id !== undefined && id !== null); // undefined, null 제거
+  }, [callCompanies]);
 
   useEffect(() => {
     if (selectedCompanyIds.length === 0) return;
 
-    // 데이터 불러옴
+    // 데이터 가져옴
     const fetchData = async () => {
       try {
         const response = await axios.get(`${dataUrl}/api/companies`, {
           params: { sort: sortBy, ids: selectedCompanyIds.join(",") },
         });
 
-        console.log("데이터 넘어오는지 확인:", response.data);
         setLoadedData(response.data);
       } catch (error) {
         console.error(error);
