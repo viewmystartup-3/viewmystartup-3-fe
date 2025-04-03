@@ -33,7 +33,7 @@
   } // 투자,비교 테이블 스타일
 
   .hidden {
-    display: none;
+    display: none !important;
   } // 숨기고 싶은 클래스 히든처리
 }
 

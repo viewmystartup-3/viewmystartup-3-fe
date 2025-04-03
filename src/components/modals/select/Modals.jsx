@@ -25,6 +25,7 @@ export function OtherCompaniesModal({
   onSelect,
   onDeselect,
   onClose,
+  myCompany,
 }) {
   return (
     <CompanySelectionModal
@@ -34,6 +35,7 @@ export function OtherCompaniesModal({
       onSelect={onSelect}
       onDeselect={onDeselect}
       onClose={onClose}
+      myCompany={myCompany}
     />
   );
 }

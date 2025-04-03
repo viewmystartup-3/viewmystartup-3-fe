@@ -17,7 +17,7 @@ const StartupList = ({ startups }) => {
   return (
     <div className={styles.table}>
       <div className={clsx(styles.tableHeaderMT, styles.tableHeader)}>
-        <p className={styles.ranking}>순위</p>
+        <p className={clsx(styles.ranking, styles.hidden)}>순위</p>
         <p className={styles.name}>기업 명</p>
         <p className={styles.description}>기업 소개</p>
         <p className={styles.info}>카테고리</p>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from "react";
-import styles from "./ResultTable.module.scss";
+import styles from "./Table.module.scss";
 import SelectBox from "../selectBox/SelectBox";
 import { basicSortOptions } from "../selectBox/sortOptions";
 import StartupList from "../startupList/StartupList";
@@ -45,6 +45,11 @@ function ResultTable({ myCompany, compareCompanies }) {
     fetchData();
   }, [sortBy, selectedCompanyIds]);
 
+  /*
+  컴포넌트에 스타일 적용
+  */
+
+  // 화면
   return (
     <section className={styles.form}>
       <div className={styles.header}>
