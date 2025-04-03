@@ -64,6 +64,7 @@ const EditInvestModal = ({
       const response = await axios.patch(
         `${dataUrl}/api/companies/${id}/investments/${selectedInvestor.id}`,
         {
+          name: name,
           amount: parseFloat(amount), // 금액 수정
           comment: comment, // 코멘트 수정
           password: password, // 비밀번호 (새로 입력한 비밀번호만 보내기)
@@ -73,7 +74,10 @@ const EditInvestModal = ({
       console.log("Investment updated successfully:", response.data);
 
       // 수정 후 onEditSuccess 호출하여 상태 갱신
-      onEditSuccess(response.data); // 서버에서 반환된 수정된 데이터를 전달
+    
+        onEditSuccess(response.data);
+    
+  
 
       // 상태 초기화
       setName("");
