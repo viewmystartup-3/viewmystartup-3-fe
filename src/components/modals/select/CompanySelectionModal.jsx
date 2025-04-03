@@ -13,6 +13,7 @@ function CompanySelectionModal({
   onSelect, // 회사 선택
   onDeselect, // 회사 해제
   onClose, // 모달 닫기
+  myCompany = null, // "나의 기업"에서 선택한 목록이 "다른 기업"에 뜨지 않게
 }) {
   const [companyList, setCompanyList] = useState([]);
   const [searchResults, setSearchResults] = useState([]);
@@ -31,6 +32,16 @@ function CompanySelectionModal({
 
     fetchData();
   }, []);
+
+  // "나의 기업"에서 선택한 목록이 "다른 기업"에 뜨지 않게(=중복 제거)
+  const filteredResults =
+    title === "비교할 기업 선택하기" && myCompany !== null
+      ? searchResults.filter((company) => {
+          console.log("🔍 비교할 기업 ID:", company.id, typeof company.id);
+          console.log("🔍 나의 기업 ID:", myCompany?.id, typeof myCompany?.id);
+          return company.id !== myCompany.id;
+        })
+      : searchResults;
 
   // 상단 바 x 눌러서 창 닫음
   const handleCloseWindow = () => {
@@ -80,7 +91,7 @@ function CompanySelectionModal({
 
         {titleTypes.map((type) => {
           // 검색창 입력 여부에 따라 "검색 결과"가 (안) 보이게
-          if (type === "result" && searchResults.length === 0) {
+          if (type === "result" && filteredResults.length === 0) {
             return null;
           }
 
@@ -119,7 +130,7 @@ function CompanySelectionModal({
           return (
             <SearchResult
               key={type}
-              companyList={searchResults}
+              companyList={filteredResults}
               titleType={type}
               onSelect={handleCompanySelect}
               onDeselect={onDeselect}

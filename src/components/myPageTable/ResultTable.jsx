@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useMemo } from "react";
-import styles from "./ResultTable.module.scss";
+import styles from "./Table.module.scss";
 import SelectBox from "../selectBox/SelectBox";
 import { basicSortOptions } from "../selectBox/sortOptions";
-import StartupList from "../startupList/StartupList";
+import RawTable from "./RawTable.jsx";
 import axios from "axios";
 import { dataUrl } from "../../env.js";
 
@@ -45,13 +45,22 @@ function ResultTable({ myCompany, compareCompanies }) {
     fetchData();
   }, [sortBy, selectedCompanyIds]);
 
+  /*
+  컴포넌트에 스타일 적용
+  */
+
+  // 화면
   return (
     <section className={styles.form}>
       <div className={styles.header}>
         <h4 className={styles.title}>비교 결과 확인하기</h4>
         <SelectBox options={basicSortOptions} onChange={setSortBy} />
       </div>
-      <StartupList startups={loadedData} />
+      <RawTable
+        startups={loadedData}
+        hideRanking={true}
+        isMyCompanyData={(startup) => startup.id === myCompany.id}
+      />
     </section>
   );
 }

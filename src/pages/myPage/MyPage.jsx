@@ -4,6 +4,7 @@ import MyCompanySection from "./MyCompanySection";
 import style from "./MyPage.module.scss";
 import CompareSection from "./CompareSection";
 import ResultTable from "../../components/myPageTable/ResultTable";
+import RankingCheckTable from "../../components/myPageTable/RankingCheckTable";
 
 function MyPage() {
   const [myCompany, setMyCompany] = useState(null);
@@ -72,6 +73,9 @@ function MyPage() {
           compareCompanies={compareCompanies}
         />
       )}
+
+      {/* RankingCheckTable 불러오기 */}
+      {showResultTable && <RankingCheckTable myCompany={myCompany} />}
     </main>
   );
 }
