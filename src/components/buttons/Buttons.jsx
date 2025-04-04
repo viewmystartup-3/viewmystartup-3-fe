@@ -1,44 +1,36 @@
 import React from "react";
-import { useState } from "react";
 import styles from "./Buttons.module.scss";
 import checkIcon from "../../assets/ic_check.png";
 import icCheckS from "../../assets/ic_check_s.png";
 import { GrRotateLeft } from "react-icons/gr";
 import { clsx } from "clsx";
 
+// 색깔 안 변하는 기본 버튼(RoundSmallButton과 디자인 같고, padding은 RoundButton과 같음)
+export function SimpleButton({ children, onClick }) {
+  return (
+    <button className={styles.simple} onClick={onClick}>
+      {children}
+    </button>
+  );
+}
+
 // 안에 색이 차 있는 둥근 버튼
-export function RoundButton({ children, onClick }) {
-  const [isActive, setIsActive] = useState(false);
-
-  const handleButtonClick = () => {
-    setIsActive((prev) => !prev);
-    if (onClick) onClick();
-  };
-
+export function RoundButton({ children, onClick, isActive = false, disabled }) {
   return (
     <button
       className={clsx(styles.round, isActive && styles.active)}
-      onClick={handleButtonClick}
+      onClick={onClick}
+      disabled={disabled}
     >
       {children}
     </button>
   );
 }
 
-// 둥근 버튼인데 살짝 작음
+// 작고 둥근 버튼
 export function RoundSmallButton({ children, onClick }) {
-  const [isActive, setIsActive] = useState(false);
-
-  const handleButtonClick = () => {
-    setIsActive((prev) => !prev);
-    if (onClick) onClick();
-  };
-
   return (
-    <button
-      className={clsx(styles.roundSmall, isActive && styles.active)}
-      onClick={handleButtonClick}
-    >
+    <button className={styles.roundSmall} onClick={onClick}>
       {children}
     </button>
   );
@@ -46,18 +38,8 @@ export function RoundSmallButton({ children, onClick }) {
 
 // 초기화 버튼
 export function ResetButton({ children, onReset }) {
-  const [isActive, setIsActive] = useState(false);
-
-  const handleButtonClick = () => {
-    setIsActive((prev) => !prev);
-    if (onReset) onReset();
-  };
-
   return (
-    <button
-      className={clsx(styles.restart, isActive && styles.active)}
-      onClick={handleButtonClick}
-    >
+    <button className={styles.restart} onClick={onReset}>
       <GrRotateLeft className={styles.restartIcon} />
       {children}
     </button>

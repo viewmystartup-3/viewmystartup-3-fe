@@ -16,10 +16,10 @@ function SearchResult({
 
   // 페이지 데이터 업데이트
   useEffect(() => {
-    const startIdx = (currentPage - 1) * 10;
-    const endIdx = currentPage * 10;
+    const startIdx = (currentPage - 1) * 5;
+    const endIdx = currentPage * 5;
     setCurrentPageData(companyList.slice(startIdx, endIdx)); // 페이지별 데이터 갱신
-    setTotalPages(Math.ceil(companyList.length / 10)); // 페이지 수 계산
+    setTotalPages(Math.ceil(companyList.length / 5)); // 페이지 수 계산
   }, [companyList, currentPage]); // companyList와 currentPage가 변경될 때마다 실행
 
   // 제목 설정
