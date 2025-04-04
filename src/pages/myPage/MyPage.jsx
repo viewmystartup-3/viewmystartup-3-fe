@@ -92,7 +92,7 @@ function MyPage() {
       />
 
       {/* 나의 기업을 선택하면 비교 영역 노출 */}
-      {myCompany && !showResultTable && (
+      {!showResultTable && (
         <CompareSection
           compareCompanies={compareCompanies}
           onAddCompareCompany={handleAddCompareCompany}
@@ -106,6 +106,7 @@ function MyPage() {
           <RoundButton
             onClick={handleCompareButton}
             disabled={compareCompanies.length === 0}
+            // isActive={compareCompanies.length > 0}
           >
             기업 비교하기
           </RoundButton>
