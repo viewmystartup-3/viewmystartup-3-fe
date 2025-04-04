@@ -8,6 +8,8 @@ import InvestorActions from "../investActions/InvestActions";
 import InvestModal from "../investModal/InvestModal";
 import SuccessModal from "../investModal/SuccessModal";
 import EditInvestModal from "../investModal/EditInvestModal";
+import table from "../../styles/table.module.scss";
+import { SimpleButton } from "../buttons/Buttons";
 
 const InvestmentStatus = () => {
   const { id } = useParams();
@@ -18,7 +20,6 @@ const InvestmentStatus = () => {
   const [totalPages, setTotalPages] = useState(1);
   const [selectedInvestor, setSelectedInvestor] = useState(null);
   const [editModal, setEditModal] = useState(false);
-  const [newModal, setNewModal] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
   const [activeInvestorId, setActiveInvestorId] = useState(null);
@@ -96,46 +97,47 @@ const InvestmentStatus = () => {
     <div className={styles.main}>
       <div className={styles.header}>
         <p className={styles.title}>View My StartUP에서 받은 투자</p>
-        <button className={styles.investBtn} onClick={openModal}>
+        <SimpleButton className={styles.investBtn} onClick={openModal}>
           기업투자하기
-        </button>
+        </SimpleButton>
       </div>
       <div>
-        <div className={styles.listContainer}>
-          {loading ? (
-            <p>로딩 중...</p>
-          ) : investment.length > 0 ? (
+        <div className={table.table}>
+          {investment.length > 0 ? (
             <>
-              <p className={styles.title}>
+              <p className={styles.totalMoney}>
                 총 {allInvestments.reduce((acc, inv) => acc + inv.amount, 0)}억
                 원
               </p>
-              <div className={styles.listHeader}>
-                <p className={styles.into}>투자자 이름</p>
-                <p className={styles.into}>순위</p>
-                <p className={styles.into}>투자 금액</p>
-                <p className={styles.comment}>투자 코멘트</p>
+              <div className={table.listHeader}>
+                <p className={table.listtitle}>투자자 이름</p>
+                <p className={table.listtitle}>순위</p>
+                <p className={table.listtitle}>투자 금액</p>
+                <p className={table.comment}>투자 코멘트</p>
+                <p className={table.column}></p>
               </div>
-              {investment.map((inv, index) => (
-                <div className={styles.container} key={inv.id}>
-                  <p className={styles.into}>{inv.name}</p>
-                  <p className={styles.into}>
-                    {index + 1 + (currentPage - 1) * itemsPerPage}위
-                  </p>
-                  <p className={styles.into}>{inv.amount}억 원</p>
-                  <p className={styles.commentTo}>
-                    {inv.comment || "코멘트 없음"}
-                  </p>
-                  <InvestorActions
-                    className={styles.into}
-                    investor={inv}
-                    onEdit={handleEditInvest}
-                    onDelete={handleDeleteInvest}
-                    activeInvestorId={activeInvestorId}
-                    onToggleOptions={handleToggleOptions}
-                  />
-                </div>
-              ))}
+
+              <div className={table.tableContents}>
+                {investment.map((inv, index) => (
+                  <div className={table.listContent} key={inv.id}>
+                    <p className={table.listtitle}>{inv.name}</p>
+                    <p className={table.listtitle}>
+                      {index + 1 + (currentPage - 1) * itemsPerPage}위
+                    </p>
+                    <p className={table.listtitle}>{inv.amount}억 원</p>
+                    <p className={table.commentTo}>
+                      {inv.comment || "코멘트 없음"}
+                    </p>
+                    <InvestorActions
+                      investor={inv}
+                      onEdit={handleEditInvest}
+                      onDelete={handleDeleteInvest}
+                      activeInvestorId={activeInvestorId}
+                      onToggleOptions={handleToggleOptions}
+                    />
+                  </div>
+                ))}
+              </div>
             </>
           ) : (
             <div className={styles.emptyState}>
