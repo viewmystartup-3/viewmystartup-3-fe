@@ -1,3 +1,12 @@
+/* 버튼 사용 설명
+- Round, RoundSmall:
+  1) 공통: onClick 추가 필요
+  2-1) 클릭하면 버튼이 사라질(다른 페이지로 넘어갈) 때 = disabled 없이 그냥 쓰면 됨
+  2-2) 회색→주황색 색이 바뀔 때 = isDisabled 변수로 조건을 걸고, 버튼의 prop으로 disabled를 줄 것
+
+- 
+ */
+
 import React from "react";
 import { useState } from "react";
 import styles from "./Buttons.module.scss";
@@ -6,19 +15,34 @@ import icCheckS from "../../assets/ic_check_s.png";
 import { GrRotateLeft } from "react-icons/gr";
 import { clsx } from "clsx";
 
+// 색깔 안 변하는 기본 버튼
+export function SimpleButton({ children, onClick }) {
+  const handleButtonClick = () => {
+    if (onClick) onClick();
+  };
+
+  return (
+    <button className={simple} onClick={handleButtonClick}>
+      {children}
+    </button>
+  );
+}
+
 // 안에 색이 차 있는 둥근 버튼
-export function RoundButton({ children, onClick }) {
+export function RoundButton({ children, onClick, disabled }) {
   const [isActive, setIsActive] = useState(false);
 
   const handleButtonClick = () => {
-    setIsActive((prev) => !prev);
-    if (onClick) onClick();
+    if (isActive || disabled) return;
+    setIsActive(true);
+    onClick();
   };
 
   return (
     <button
       className={clsx(styles.round, isActive && styles.active)}
       onClick={handleButtonClick}
+      disabled={isActive}
     >
       {children}
     </button>
@@ -26,18 +50,20 @@ export function RoundButton({ children, onClick }) {
 }
 
 // 둥근 버튼인데 살짝 작음
-export function RoundSmallButton({ children, onClick }) {
+export function RoundSmallButton({ children, onClick, disabled }) {
   const [isActive, setIsActive] = useState(false);
 
   const handleButtonClick = () => {
-    setIsActive((prev) => !prev);
-    if (onClick) onClick();
+    if (isActive || disabled) return;
+    setIsActive(true);
+    onClick();
   };
 
   return (
     <button
       className={clsx(styles.roundSmall, isActive && styles.active)}
       onClick={handleButtonClick}
+      disabled={isActive}
     >
       {children}
     </button>
