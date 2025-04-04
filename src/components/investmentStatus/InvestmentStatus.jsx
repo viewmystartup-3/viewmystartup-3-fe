@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
 import styles from "./InvestmentStatus.module.scss";
-import axios from "axios";
-import { dataUrl } from "../../env";
 import { useParams } from "react-router-dom";
 import Pagination from "../pagination/pagination";
 import InvestorActions from "../investActions/InvestActions";
 import InvestModal from "../investModal/InvestModal";
 import SuccessModal from "../investModal/SuccessModal";
 import EditInvestModal from "../investModal/EditInvestModal";
+import { getInvestmentByCompanyId } from "../../api/investment.api";
 
 const InvestmentStatus = () => {
   const { id } = useParams();
@@ -27,12 +26,8 @@ const InvestmentStatus = () => {
   const fetchInvestment = async () => {
     setLoading(true);
     try {
-      const response = await axios.get(
-        `${dataUrl}/api/companies/${id}/investments`
-      );
-      const sortedInvestments = response.data.sort(
-        (a, b) => b.amount - a.amount
-      );
+      const data = await getInvestmentByCompanyId(id);
+      const sortedInvestments = data.sort((a, b) => b.amount - a.amount);
       setAllInvestments(sortedInvestments);
       setTotalPages(Math.ceil(sortedInvestments.length / itemsPerPage));
     } catch (e) {

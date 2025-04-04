@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import styles from "./CompanyDetails.module.scss";
 import { useParams } from "react-router-dom";
-import axios from "axios";
-import { dataUrl } from "../../env";
 import logo from "../../assets/logo.png";
+import { getCompanyById } from "../../api/company.api";
 
 const CompanyDetails = () => {
   const [company, setCompany] = useState(null);
@@ -11,8 +10,8 @@ const CompanyDetails = () => {
 
   const fetchCompanyDetails = async () => {
     try {
-      const response = await axios.get(`${dataUrl}/api/companies/${id}`);
-      setCompany(response.data);
+      const data = await getCompanyById(id);
+      setCompany(data);
     } catch (e) {
       console.error(e);
     }
