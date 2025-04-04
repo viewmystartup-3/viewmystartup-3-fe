@@ -9,7 +9,6 @@
 // 둥근 버튼 설정 : 공통 속성 + 미디어 쿼리
 @mixin round {
   border-radius: 50px;
-  background-color: var(--black100);
   color: var(--gray200);
   font: var(--textSb);
   border: none;
@@ -17,11 +16,16 @@
 
 .simple {
   @include button;
-  @include round;
   padding: 13px 48px;
   height: 43px;
   background-color: var(--brandOrange);
   color: var(--white);
+  border: none;
+  font: var(--textSb);
+
+  &:active {
+    background-color: var(--black100);
+  }
 }
 
 // 일반 둥근 버튼
@@ -30,6 +34,7 @@
   @include round;
   padding: 13px 48px;
   height: 43px;
+  background-color: var(--black100);
 
   &.active {
     background-color: var(--brandOrange);
@@ -43,11 +48,8 @@
   @include round;
   padding: 13px 24px;
   height: 40px;
-
-  &.active {
-    background-color: var(--brandOrange);
-    color: var(--white);
-  }
+  background-color: var(--brandOrange);
+  color: var(--white);
 }
 
 // 초기화 버튼(안이 차 있는 둥근 버튼)
@@ -56,11 +58,8 @@
   @include round;
   padding: 8px 24px;
   gap: 3px;
-
-  &.active {
-    background-color: var(--brandOrange);
-    color: var(--white);
-  }
+  background-color: var(--brandOrange);
+  color: var(--white);
 }
 
 .restartIcon {

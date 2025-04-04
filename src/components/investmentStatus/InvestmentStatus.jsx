@@ -165,7 +165,7 @@ const InvestmentStatus = () => {
             isOpen={true}
             selectedInvestor={selectedInvestor} // 수정된 selectedInvestor 전달
             onClose={() => setEditModal(false)}
-            onEditSuccess = {handleEditSuccess}
+            onEditSuccess={handleEditSuccess}
           />
         )}
     </div>

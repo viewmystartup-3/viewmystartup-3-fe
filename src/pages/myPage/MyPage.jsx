@@ -59,7 +59,7 @@ function MyPage() {
   };
 
   // 비교하기 버튼 클릭하면 표(ResultTable)보이고 횟수증가
-  const handleCompareButton = async () => {         
+  const handleCompareButton = async () => {
     try {
       //1. API 호출로 선택 카운트 증가
       await axios.post(`${dataUrl}/api/companies/increase-selection`, {
