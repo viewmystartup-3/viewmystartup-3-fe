@@ -6,6 +6,7 @@ import ModalTopBar from "../modals/topBar/ModalTopBar";
 import { useParams } from "react-router-dom";
 import { getCompanyById } from "../../api/company.api";
 import { createInvestment } from "../../api/investment.api";
+import { SimpleButton } from "../buttons/Buttons";
 
 const InvestModal = ({ isOpen, onClose, onInvestSuccess, targetCompany }) => {
   const { id: urlId } = useParams();
@@ -243,9 +244,12 @@ const InvestModal = ({ isOpen, onClose, onInvestSuccess, targetCompany }) => {
             <button className={styles.cancelButton} onClick={handleClose}>
               취소
             </button>
-            <button className={styles.investButton} onClick={handleInvest}>
+            <SimpleButton
+              className={styles.investButton}
+              onClick={handleInvest}
+            >
               투자하기
-            </button>
+            </SimpleButton>
           </div>
         </div>
       </div>
