@@ -7,6 +7,8 @@ import ResultTable from "../../components/myPageTable/ResultTable";
 import RankingCheckTable from "../../components/myPageTable/RankingCheckTable";
 import InvestModal from "../../components/investModal/InvestModal";
 import SuccessModal from "../../components/investModal/SuccessModal";
+import axios from "axios";
+import { dataUrl } from "../../env.js";
 
 function MyPage() {
   const [myCompany, setMyCompany] = useState(null);
@@ -56,9 +58,19 @@ function MyPage() {
     setCompareCompanies((prev) => prev.filter((c) => c.id !== id));
   };
 
-  // 비교하기 버튼 클릭하면 표(ResultTable)가 보기에 함
-  const handleCompareButton = () => {
-    setShowResultTable(true);
+  // 비교하기 버튼 클릭하면 표(ResultTable)보이고 횟수증가
+  const handleCompareButton = async () => {         
+    try {
+      //1. API 호출로 선택 카운트 증가
+      await axios.post(`${dataUrl}/api/companies/increase-selection`, {
+        myCompanyId: myCompany.id,
+        compareCompanyIds: compareCompanies.map((c) => c.id),
+      });
+
+      setShowResultTable(true);
+    } catch (e) {
+      console.error("기업 선택 카운트 증가 실패:", e);
+    }
   };
 
   return (
@@ -113,7 +125,7 @@ function MyPage() {
         isOpen={isModalOpen}
         onClose={closeModal}
         onInvestSuccess={handleInvestSuccess}
-        targetCompany={myCompany} 
+        targetCompany={myCompany}
       />
       {/* 투자 완료 모달 */}
       <SuccessModal isOpen={isSuccessModalOpen} onClose={closeSuccessModal} />
