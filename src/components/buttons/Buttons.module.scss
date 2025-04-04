@@ -4,6 +4,7 @@
   justify-content: center;
   align-items: center;
   white-space: nowrap;
+  cursor: pointer;
 }
 
 // 둥근 버튼 설정 : 공통 속성 + 미디어 쿼리
@@ -17,10 +18,11 @@
 .simple {
   @include button;
   padding: 13px 48px;
-  height: 43px;
+  height: 48px;
   background-color: var(--brandOrange);
   color: var(--white);
   border: none;
+  border-radius: 50px;
   font: var(--textSb);
 
   &:active {
@@ -33,7 +35,7 @@
   @include button;
   @include round;
   padding: 13px 48px;
-  height: 43px;
+  height: 48px;
   background-color: var(--black100);
 
   &.active {
