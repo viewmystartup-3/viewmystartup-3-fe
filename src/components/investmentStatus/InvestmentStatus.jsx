@@ -9,6 +9,8 @@ import EditInvestModal from "../investModal/EditInvestModal";
 import table from "../../styles/table.module.scss";
 import { SimpleButton } from "../buttons/Buttons";
 import { getInvestmentByCompanyId } from "../../api/investment.api";
+import table from "../../styles/table.module.scss";
+import { SimpleButton } from "../buttons/Buttons";
 
 const InvestmentStatus = () => {
   const { id } = useParams();
