@@ -13,19 +13,18 @@ const EditInvestModal = ({
   selectedInvestor,
   onEditSuccess,
 }) => {
-  const [company, setCompany] = useState(null); // 기업 정보
-  const [name, setName] = useState(""); // 투자자 이름
-  const [amount, setAmount] = useState(""); // 투자 금액
-  const [comment, setComment] = useState(""); // 투자 코멘트
+  const [company, setCompany] = useState(null);
+  const [name, setName] = useState("");
+  const [amount, setAmount] = useState("");
+  const [comment, setComment] = useState("");
   const [showPassword, setShowPassword] = useState(false); // 비밀번호 보이기/숨기기
   const [showConfirmPassword, setShowConfirmPassword] = useState(false); // 비밀번호 확인 보이기/숨기기
-  const [password, setPassword] = useState(""); // 비밀번호 상태 (입력 필드로만 사용)
+  const [password, setPassword] = useState(""); // 비밀번호 상태
   const [confirmPassword, setConfirmPassword] = useState(""); // 비밀번호 확인 상태
   const [passwordError, setPasswordError] = useState(""); // 비밀번호 오류 메시지
   const [confirmPasswordError, setConfirmPasswordError] = useState(""); // 비밀번호 확인 오류 메시지
 
-  const { id } = useParams(); // URL에서 ID 가져오기
-  const { companyid } = useParams();
+  const { id } = useParams();
 
   // 기업 정보 가져오기
   const fetchCompanyDetails = async () => {
@@ -43,7 +42,7 @@ const EditInvestModal = ({
       setName(selectedInvestor.name);
       setAmount(selectedInvestor.amount);
       setComment(selectedInvestor.comment);
-      setPassword(""); // 비밀번호는 입력란을 비워두고 사용자가 새로 입력하도록
+      setPassword("");
     }
     fetchCompanyDetails(); // 기업 정보 가져오기
   }, [selectedInvestor, id]);
@@ -81,7 +80,7 @@ const EditInvestModal = ({
     }
 
     if (!isValid) {
-      return; // 유효하지 않으면 투자 진행을 멈춤
+      return; // 유효하지 않으면 투자를 멈춘다
     }
 
     try {
@@ -92,7 +91,7 @@ const EditInvestModal = ({
           name: name,
           amount: parseFloat(amount), // 금액 수정
           comment: comment, // 코멘트 수정
-          password: password, // 비밀번호 (새로 입력한 비밀번호만 보내기)
+          password: password, // 비밀번호 수정
         }
       );
 
@@ -108,7 +107,7 @@ const EditInvestModal = ({
       setPassword(""); // 비밀번호 필드 초기화
       setConfirmPassword(""); // 비밀번호 확인 초기화
 
-      onClose(); // 모달 닫기
+      onClose();
     } catch (error) {
       console.error("Error updating investment:", error);
       alert("투자 정보 수정에 실패했습니다.");
@@ -147,7 +146,6 @@ const EditInvestModal = ({
       <div className={styles.modalContent}>
         <ModalTopBar onClose={handleClose}>투자 정보 수정</ModalTopBar>
         <div className={styles.form}>
-          {/* 투자 기업 정보 섹션 추가 */}
           <p className={styles.companyInfo}>투자 기업 정보</p>
           {company && (
             <div className={styles.company}>
@@ -220,13 +218,12 @@ const EditInvestModal = ({
                 />
               </button>
             </div>
-            {/* 비밀번호 오류 메시지 표시 */}
             {passwordError && (
               <p className={styles.errorMessage}>{passwordError}</p>
             )}
           </div>
 
-          {/* 비밀번호 확인 입력 필드 */}
+          {/* 비밀번호 확인 입력*/}
           <div className={styles.formGroup}>
             <label>비밀번호 확인</label>
             <div className={styles.passwordWrapper}>

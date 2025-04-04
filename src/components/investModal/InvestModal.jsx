@@ -9,16 +9,16 @@ import { useParams } from "react-router-dom";
 
 const InvestModal = ({ isOpen, onClose, onInvestSuccess, targetCompany }) => {
   const { id: urlId } = useParams();
-  const [company, setCompany] = useState(null); // 실제로 표시할 기업 정보
+  const [company, setCompany] = useState(null); // 기업 정보
   const [name, setName] = useState(""); // 투자자 이름
   const [amount, setAmount] = useState(""); // 투자 금액
   const [comment, setComment] = useState(""); // 투자 코멘트
-  const [password, setPassword] = useState(""); // 비밀번호 상태
+  const [password, setPassword] = useState(""); // 비밀번호
   const [confirmPassword, setConfirmPassword] = useState(""); // 비밀번호 확인
   const [showPassword, setShowPassword] = useState(false); // 비밀번호 보이기/숨기기
   const [showConfirmPassword, setShowConfirmPassword] = useState(false); // 비밀번호 확인 보이기/숨기기
-  const [passwordError, setPasswordError] = useState(""); // 비밀번호 오류 메시지 상태
-  const [confirmPasswordError, setConfirmPasswordError] = useState(""); // 비밀번호 확인 오류 메시지 상태
+  const [passwordError, setPasswordError] = useState(""); // 비밀번호 오류 메시지
+  const [confirmPasswordError, setConfirmPasswordError] = useState(""); // 비밀번호 확인 오류 메시지
 
   useEffect(() => {
     if (targetCompany) {
@@ -59,7 +59,7 @@ const InvestModal = ({ isOpen, onClose, onInvestSuccess, targetCompany }) => {
       setConfirmPasswordError("비밀번호 확인은 필수 입력 사항입니다.");
       isValid = false;
     } else {
-      setConfirmPasswordError(""); // 비밀번호 확인 오류 메시지 초기화
+      setConfirmPasswordError("");
     }
 
     // 비밀번호가 일치하지 않으면
@@ -69,7 +69,7 @@ const InvestModal = ({ isOpen, onClose, onInvestSuccess, targetCompany }) => {
     }
 
     if (!isValid) {
-      return; // 유효하지 않으면 투자 진행을 멈춤
+      return; // 유효하지 않으면 투자 진행을 안함
     }
 
     try {
@@ -110,7 +110,7 @@ const InvestModal = ({ isOpen, onClose, onInvestSuccess, targetCompany }) => {
   const handleConfirmPasswordChange = (e) => {
     setConfirmPassword(e.target.value);
     if (e.target.value) {
-      setConfirmPasswordError(""); // 비밀번호 확인이 입력되면 오류 메시지 제거
+      setConfirmPasswordError("");
     }
   };
 
@@ -192,7 +192,7 @@ const InvestModal = ({ isOpen, onClose, onInvestSuccess, targetCompany }) => {
                 onChange={handlePasswordChange} // 상태 업데이트 및 오류 메시지 초기화
                 className={`${styles.input} ${
                   passwordError ? styles.error : ""
-                }`} // 비밀번호 오류 시 테두리 빨간색
+                }`}
               />
               <button
                 type="button"
@@ -200,7 +200,7 @@ const InvestModal = ({ isOpen, onClose, onInvestSuccess, targetCompany }) => {
                 onClick={togglePasswordVisibility}
               >
                 <img
-                  src={showPassword ? eyeOffIcon : eyeIcon} // 아이콘 변경
+                  src={showPassword ? eyeOffIcon : eyeIcon} // 눈 아이콘 변경
                   alt="Toggle Password Visibility"
                   className={styles.eyeIcon}
                 />
@@ -216,13 +216,13 @@ const InvestModal = ({ isOpen, onClose, onInvestSuccess, targetCompany }) => {
             <label>비밀번호 확인</label>
             <div className={styles.passwordWrapper}>
               <input
-                type={showConfirmPassword ? "text" : "password"} // 비밀번호 확인 보이기/숨기기
+                type={showConfirmPassword ? "text" : "password"}
                 placeholder="비밀번호를 다시 한 번 입력해 주세요"
                 value={confirmPassword}
-                onChange={handleConfirmPasswordChange} // 상태 업데이트 및 오류 메시지 초기화
+                onChange={handleConfirmPasswordChange}
                 className={`${styles.input} ${
                   confirmPasswordError ? styles.error : ""
-                }`} // 비밀번호 확인 오류 시 테두리 빨간색
+                }`}
               />
               <button
                 type="button"
@@ -230,7 +230,7 @@ const InvestModal = ({ isOpen, onClose, onInvestSuccess, targetCompany }) => {
                 onClick={toggleConfirmPasswordVisibility}
               >
                 <img
-                  src={showConfirmPassword ? eyeOffIcon : eyeIcon} // 아이콘 변경
+                  src={showConfirmPassword ? eyeOffIcon : eyeIcon}
                   alt="Toggle Confirm Password Visibility"
                   className={styles.eyeIcon}
                 />

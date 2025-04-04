@@ -161,7 +161,9 @@
   font-size: 12px;
   margin-top: 5px;
 }
-
+.input.error {
+  border-color: var(--redError);
+}
 @media (max-width: 744px) {
   .modalContent {
     overflow-y: auto;
