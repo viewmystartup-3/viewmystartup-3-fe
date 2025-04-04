@@ -64,12 +64,14 @@ function MyCompanySection({
           </div>
         ) : (
           <div className={style.selectedBox}>
-            <button
-              className={style.cancelBtn}
-              onClick={() => setMyCompany(null)}
-            >
-              선택 취소
-            </button>
+            {!showResultTable && (
+              <button
+                className={style.cancelBtn}
+                onClick={() => setMyCompany(null)}
+              >
+                선택 취소
+              </button>
+            )}
             <Card
               imageUrl={myCompany.imageUrl}
               name={myCompany.name}
