@@ -43,13 +43,11 @@ const InvestorActions = ({
       );
 
       if (response.status === 200) {
-        console.log("삭제 성공!");
         setDeleteModal(false);
         setPassword("");
         onDelete(investor.id);
       }
     } catch (e) {
-      console.error(e);
       if (
         e.response &&
         (e.response.status === 401 || e.response.status === 403)
@@ -62,8 +60,6 @@ const InvestorActions = ({
 
   const handleEdit = async () => {
     try {
-      console.log(id);
-      console.log(investor.id);
       const response = await axios.post(
         `${dataUrl}/api/companies/${id}/investments/${investor.id}/password`,
         { password: editPassword }
@@ -73,7 +69,6 @@ const InvestorActions = ({
         setEditModal(false);
         setEditPassword("");
         onEdit(investor);
-        console.log("성공~");
       }
     } catch (e) {
       if (

@@ -8,6 +8,7 @@ import InvestorActions from "../investActions/InvestActions";
 import InvestModal from "../investModal/InvestModal";
 import SuccessModal from "../investModal/SuccessModal";
 import EditInvestModal from "../investModal/EditInvestModal";
+import table from "../../styles/table.module.scss"
 
 const InvestmentStatus = () => {
   const { id } = useParams();
@@ -96,46 +97,46 @@ const InvestmentStatus = () => {
       <div className={styles.header}>
         <p className={styles.title}>View My StartUP에서 받은 투자</p>
         <button className={styles.investBtn} onClick={openModal}>
-          {" "}
           기업투자하기
         </button>
       </div>
       <div>
         <div className={styles.listContainer}>
-          {loading ? (
-            <p>로딩 중...</p>
-          ) : investment.length > 0 ? (
+          {investment.length > 0 ? (
             <>
-              <p className={styles.title}>
+              <p className={styles.totalmMoney}>
                 총 {allInvestments.reduce((acc, inv) => acc + inv.amount, 0)}억
                 원
               </p>
               <div className={styles.listHeader}>
-                <p className={styles.into}>투자자 이름</p>
-                <p className={styles.into}>순위</p>
-                <p className={styles.into}>투자 금액</p>
+                <p className={styles.listtitle}>투자자 이름</p>
+                <p className={styles.listtitle}>순위</p>
+                <p className={styles.listtitle}>투자 금액</p>
                 <p className={styles.comment}>투자 코멘트</p>
               </div>
-              {investment.map((inv, index) => (
-                <div className={styles.container} key={inv.id}>
-                  <p className={styles.into}>{inv.name}</p>
-                  <p className={styles.into}>
-                    {index + 1 + (currentPage - 1) * itemsPerPage}위
-                  </p>
-                  <p className={styles.into}>{inv.amount}억 원</p>
-                  <p className={styles.commentTo}>
-                    {inv.comment || "코멘트 없음"}
-                  </p>
-                  <InvestorActions
-                    className={styles.into}
-                    investor={inv}
-                    onEdit={handleEditInvest}
-                    onDelete={handleDeleteInvest}
-                    activeInvestorId={activeInvestorId}
-                    onToggleOptions={handleToggleOptions}
-                  />
-                </div>
-              ))}
+              <div className={styles.containerWrapper}>
+                {investment.map((inv, index) => (
+                  <div className={styles.container1} key={inv.id}>
+                    <div className={styles.container}>
+                      <p className={styles.into}>{inv.name}</p>
+                      <p className={styles.into}>
+                        {index + 1 + (currentPage - 1) * itemsPerPage}위
+                      </p>
+                      <p className={styles.into}>{inv.amount}억 원</p>
+                      <p className={styles.commentTo}>
+                        {inv.comment || "코멘트 없음"}
+                      </p>
+                      <InvestorActions
+                        investor={inv}
+                        onEdit={handleEditInvest}
+                        onDelete={handleDeleteInvest}
+                        activeInvestorId={activeInvestorId}
+                        onToggleOptions={handleToggleOptions}
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
             </>
           ) : (
             <div className={styles.emptyState}>
@@ -165,7 +166,7 @@ const InvestmentStatus = () => {
             isOpen={true}
             selectedInvestor={selectedInvestor} // 수정된 selectedInvestor 전달
             onClose={() => setEditModal(false)}
-            onEditSuccess = {handleEditSuccess}
+            onEditSuccess={handleEditSuccess}
           />
         )}
     </div>

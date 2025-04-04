@@ -20,7 +20,6 @@ const CompanyDetails = () => {
 
   useEffect(() => {
     if (id) {
-      console.log("Fetching company with ID:", id);
       fetchCompanyDetails();
     }
   }, [id]);
