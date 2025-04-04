@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react"; // useRef 추가!
+import React, { useState, useRef } from "react";
 import styles from "./InvestActions.module.scss";
 import listImg from "../../assets/ic_kebab.png";
 import { useParams } from "react-router-dom";
@@ -25,7 +25,7 @@ const InvestorActions = ({
   const [editPassword, setEditPassword] = useState("");
 
   const isActive = activeInvestorId === investor.id;
-  const buttonRef = useRef(null); // 옵션 버튼 참조
+  const buttonRef = useRef(null); 
 
   const handleDeleteClick = () => {
     setDeleteModal(true);

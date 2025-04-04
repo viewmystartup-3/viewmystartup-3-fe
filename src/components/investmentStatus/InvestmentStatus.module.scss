@@ -10,7 +10,8 @@
   margin-top: 30px;
 
   gap: 40px;
-  .totalmMoney {
+  .totalMoney {
+    display: flex;
     margin-top: 20px;
     font: var(--textXlB);
     margin-bottom: 20px;
@@ -174,7 +175,7 @@
   }
 
   @media (max-width: 744px) {
-    .totalmMoney {
+    .totalMoney {
       font: var(--textLB);
       margin-bottom: 20px;
     }

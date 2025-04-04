@@ -8,7 +8,7 @@ import InvestorActions from "../investActions/InvestActions";
 import InvestModal from "../investModal/InvestModal";
 import SuccessModal from "../investModal/SuccessModal";
 import EditInvestModal from "../investModal/EditInvestModal";
-import table from "../../styles/table.module.scss"
+import table from "../../styles/table.module.scss";
 
 const InvestmentStatus = () => {
   const { id } = useParams();
@@ -102,39 +102,39 @@ const InvestmentStatus = () => {
         </button>
       </div>
       <div>
-        <div className={styles.listContainer}>
+        <div className={table.table}>
           {investment.length > 0 ? (
             <>
-              <p className={styles.totalmMoney}>
+              <p className={styles.totalMoney}>
                 총 {allInvestments.reduce((acc, inv) => acc + inv.amount, 0)}억
                 원
               </p>
-              <div className={styles.listHeader}>
-                <p className={styles.listtitle}>투자자 이름</p>
-                <p className={styles.listtitle}>순위</p>
-                <p className={styles.listtitle}>투자 금액</p>
-                <p className={styles.comment}>투자 코멘트</p>
+              <div className={table.listHeader}>
+                <p className={table.listtitle}>투자자 이름</p>
+                <p className={table.listtitle}>순위</p>
+                <p className={table.listtitle}>투자 금액</p>
+                <p className={table.comment}>투자 코멘트</p>
+                <p className={table.column}></p>
               </div>
-              <div className={styles.containerWrapper}>
+
+              <div className={table.tableContents}>
                 {investment.map((inv, index) => (
-                  <div className={styles.container1} key={inv.id}>
-                    <div className={styles.container}>
-                      <p className={styles.into}>{inv.name}</p>
-                      <p className={styles.into}>
-                        {index + 1 + (currentPage - 1) * itemsPerPage}위
-                      </p>
-                      <p className={styles.into}>{inv.amount}억 원</p>
-                      <p className={styles.commentTo}>
-                        {inv.comment || "코멘트 없음"}
-                      </p>
-                      <InvestorActions
-                        investor={inv}
-                        onEdit={handleEditInvest}
-                        onDelete={handleDeleteInvest}
-                        activeInvestorId={activeInvestorId}
-                        onToggleOptions={handleToggleOptions}
-                      />
-                    </div>
+                  <div className={table.listContent} key={inv.id}>
+                    <p className={table.listtitle}>{inv.name}</p>
+                    <p className={table.listtitle}>
+                      {index + 1 + (currentPage - 1) * itemsPerPage}위
+                    </p>
+                    <p className={table.listtitle}>{inv.amount}억 원</p>
+                    <p className={table.commentTo}>
+                      {inv.comment || "코멘트 없음"}
+                    </p>
+                    <InvestorActions
+                      investor={inv}
+                      onEdit={handleEditInvest}
+                      onDelete={handleDeleteInvest}
+                      activeInvestorId={activeInvestorId}
+                      onToggleOptions={handleToggleOptions}
+                    />
                   </div>
                 ))}
               </div>
