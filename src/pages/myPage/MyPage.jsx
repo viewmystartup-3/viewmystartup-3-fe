@@ -9,8 +9,10 @@ import InvestModal from "../../components/investModal/InvestModal";
 import SuccessModal from "../../components/investModal/SuccessModal";
 import axios from "axios";
 import { dataUrl } from "../../env.js";
+import { useNavigate } from "react-router-dom";
 
 function MyPage() {
+  const navigate = useNavigate();
   const [myCompany, setMyCompany] = useState(null);
   const [compareCompanies, setCompareCompanies] = useState([]);
   const [showResultTable, setShowResultTable] = useState(false); // 표가 뜨게 하는 state //RankingCheckTable
@@ -23,7 +25,12 @@ function MyPage() {
   // 모달 열기
   const openModal = () => setIsModalOpen(true); // InvestModal 열기
   const closeModal = () => setIsModalOpen(false); // InvestModal 닫기
-  const closeSuccessModal = () => setIsSuccessModalOpen(false); // 투자 완료 모달 닫기
+  const closeSuccessModal = () => {
+    setIsSuccessModalOpen(false); // 투자 완료 모달 닫기
+    if (myCompany?.id) {
+      navigate(`/companies/${myCompany.id}`);
+    }
+  };
 
   // 투자 완료 후 모달 열기
   const handleInvestSuccess = () => {
@@ -59,7 +66,7 @@ function MyPage() {
   };
 
   // 비교하기 버튼 클릭하면 표(ResultTable)보이고 횟수증가
-  const handleCompareButton = async () => {         
+  const handleCompareButton = async () => {
     try {
       //1. API 호출로 선택 카운트 증가
       await axios.post(`${dataUrl}/api/companies/increase-selection`, {
