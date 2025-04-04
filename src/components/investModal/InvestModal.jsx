@@ -6,6 +6,7 @@ import eyeIcon from "../../assets/btn_visibility_on.png";
 import eyeOffIcon from "../../assets/btn_visibility_off.png";
 import ModalTopBar from "../modals/topBar/ModalTopBar";
 import { useParams } from "react-router-dom";
+import { SimpleButton } from "../buttons/Buttons";
 
 const InvestModal = ({ isOpen, onClose, onInvestSuccess, targetCompany }) => {
   const { id: urlId } = useParams();
@@ -246,9 +247,12 @@ const InvestModal = ({ isOpen, onClose, onInvestSuccess, targetCompany }) => {
             <button className={styles.cancelButton} onClick={handleClose}>
               취소
             </button>
-            <button className={styles.investButton} onClick={handleInvest}>
+            <SimpleButton
+              className={styles.investButton}
+              onClick={handleInvest}
+            >
               투자하기
-            </button>
+            </SimpleButton>
           </div>
         </div>
       </div>
