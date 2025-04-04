@@ -41,6 +41,7 @@ const InvestmentStatus = () => {
       setLoading(false);
     }
   };
+
   const handleDeleteInvest = async (investorId) => {
     try {
       fetchInvestment();
@@ -96,7 +97,6 @@ const InvestmentStatus = () => {
       <div className={styles.header}>
         <p className={styles.title}>View My StartUP에서 받은 투자</p>
         <button className={styles.investBtn} onClick={openModal}>
-          {" "}
           기업투자하기
         </button>
       </div>
@@ -165,7 +165,7 @@ const InvestmentStatus = () => {
             isOpen={true}
             selectedInvestor={selectedInvestor} // 수정된 selectedInvestor 전달
             onClose={() => setEditModal(false)}
-            onEditSuccess = {handleEditSuccess}
+            onEditSuccess={handleEditSuccess}
           />
         )}
     </div>

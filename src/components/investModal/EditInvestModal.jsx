@@ -13,17 +13,19 @@ const EditInvestModal = ({
   selectedInvestor,
   onEditSuccess,
 }) => {
-  const [company, setCompany] = useState(null); // 기업 정보
-  const [name, setName] = useState(""); // 투자자 이름
-  const [amount, setAmount] = useState(""); // 투자 금액
-  const [comment, setComment] = useState(""); // 투자 코멘트
+  const [company, setCompany] = useState(null);
+  const [name, setName] = useState("");
+  const [amount, setAmount] = useState("");
+  const [comment, setComment] = useState("");
   const [showPassword, setShowPassword] = useState(false); // 비밀번호 보이기/숨기기
   const [showConfirmPassword, setShowConfirmPassword] = useState(false); // 비밀번호 확인 보이기/숨기기
-  const [password, setPassword] = useState(""); // 비밀번호 상태 (입력 필드로만 사용)
+  const [password, setPassword] = useState(""); // 비밀번호 상태
   const [confirmPassword, setConfirmPassword] = useState(""); // 비밀번호 확인 상태
+  const [passwordError, setPasswordError] = useState(""); // 비밀번호 오류 메시지
+  const [confirmPasswordError, setConfirmPasswordError] = useState(""); // 비밀번호 확인 오류 메시지
 
-  const { id } = useParams(); // URL에서 ID 가져오기
-  const {companyid} = useParams()
+  const { id } = useParams();
+
   // 기업 정보 가져오기
   const fetchCompanyDetails = async () => {
     try {
@@ -40,7 +42,7 @@ const EditInvestModal = ({
       setName(selectedInvestor.name);
       setAmount(selectedInvestor.amount);
       setComment(selectedInvestor.comment);
-      setPassword(""); // 비밀번호는 입력란을 비워두고 사용자가 새로 입력하도록
+      setPassword("");
     }
     fetchCompanyDetails(); // 기업 정보 가져오기
   }, [selectedInvestor, id]);
@@ -54,9 +56,31 @@ const EditInvestModal = ({
   };
 
   const handleEditInvest = async () => {
+    let isValid = true;
+
+    // 비밀번호와 비밀번호 확인이 비어있을 경우
+    if (!password) {
+      setPasswordError("비밀번호는 필수 입력 사항입니다.");
+      isValid = false;
+    } else {
+      setPasswordError(""); // 비밀번호 오류 메시지 초기화
+    }
+
+    if (!confirmPassword) {
+      setConfirmPasswordError("비밀번호 확인은 필수 입력 사항입니다.");
+      isValid = false;
+    } else {
+      setConfirmPasswordError(""); // 비밀번호 확인 오류 메시지 초기화
+    }
+
+    // 비밀번호가 일치하지 않으면
     if (password !== confirmPassword) {
-      alert("비밀번호가 일치하지 않습니다.");
-      return;
+      setConfirmPasswordError("비밀번호가 일치하지 않습니다.");
+      isValid = false;
+    }
+
+    if (!isValid) {
+      return; // 유효하지 않으면 투자를 멈춘다
     }
 
     try {
@@ -67,17 +91,14 @@ const EditInvestModal = ({
           name: name,
           amount: parseFloat(amount), // 금액 수정
           comment: comment, // 코멘트 수정
-          password: password, // 비밀번호 (새로 입력한 비밀번호만 보내기)
+          password: password, // 비밀번호 수정
         }
       );
 
       console.log("Investment updated successfully:", response.data);
 
       // 수정 후 onEditSuccess 호출하여 상태 갱신
-    
-        onEditSuccess(response.data);
-    
-  
+      onEditSuccess(response.data);
 
       // 상태 초기화
       setName("");
@@ -86,7 +107,7 @@ const EditInvestModal = ({
       setPassword(""); // 비밀번호 필드 초기화
       setConfirmPassword(""); // 비밀번호 확인 초기화
 
-      onClose(); // 모달 닫기
+      onClose();
     } catch (error) {
       console.error("Error updating investment:", error);
       alert("투자 정보 수정에 실패했습니다.");
@@ -99,7 +120,23 @@ const EditInvestModal = ({
     setComment("");
     setPassword(""); // 비밀번호 초기화
     setConfirmPassword(""); // 비밀번호 확인 초기화
+    setPasswordError(""); // 비밀번호 오류 초기화
+    setConfirmPasswordError(""); // 비밀번호 확인 오류 초기화
     onClose();
+  };
+
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+    if (e.target.value) {
+      setPasswordError(""); // 비밀번호 입력 시 오류 메시지 제거
+    }
+  };
+
+  const handleConfirmPasswordChange = (e) => {
+    setConfirmPassword(e.target.value);
+    if (e.target.value) {
+      setConfirmPasswordError(""); // 비밀번호 확인 입력 시 오류 메시지 제거
+    }
   };
 
   if (!isOpen) return null;
@@ -109,7 +146,6 @@ const EditInvestModal = ({
       <div className={styles.modalContent}>
         <ModalTopBar onClose={handleClose}>투자 정보 수정</ModalTopBar>
         <div className={styles.form}>
-          {/* 투자 기업 정보 섹션 추가 */}
           <p className={styles.companyInfo}>투자 기업 정보</p>
           {company && (
             <div className={styles.company}>
@@ -165,8 +201,10 @@ const EditInvestModal = ({
                 type={showPassword ? "text" : "password"}
                 placeholder="새로운 비밀번호를 입력해 주세요"
                 value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className={styles.input}
+                onChange={handlePasswordChange} // 비밀번호 입력 시 오류 메시지 초기화
+                className={`${styles.input} ${
+                  passwordError ? styles.error : ""
+                }`}
               />
               <button
                 type="button"
@@ -180,9 +218,12 @@ const EditInvestModal = ({
                 />
               </button>
             </div>
+            {passwordError && (
+              <p className={styles.errorMessage}>{passwordError}</p>
+            )}
           </div>
 
-          {/* 비밀번호 확인 입력 필드 */}
+          {/* 비밀번호 확인 입력*/}
           <div className={styles.formGroup}>
             <label>비밀번호 확인</label>
             <div className={styles.passwordWrapper}>
@@ -190,8 +231,10 @@ const EditInvestModal = ({
                 type={showConfirmPassword ? "text" : "password"}
                 placeholder="비밀번호를 다시 한 번 입력해 주세요"
                 value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                className={styles.input}
+                onChange={handleConfirmPasswordChange} // 비밀번호 확인 입력 시 오류 메시지 초기화
+                className={`${styles.input} ${
+                  confirmPasswordError ? styles.error : ""
+                }`}
               />
               <button
                 type="button"
@@ -205,6 +248,10 @@ const EditInvestModal = ({
                 />
               </button>
             </div>
+            {/* 비밀번호 확인 오류 메시지 표시 */}
+            {confirmPasswordError && (
+              <p className={styles.errorMessage}>{confirmPasswordError}</p>
+            )}
           </div>
 
           <div className={styles.buttonGroup}>
