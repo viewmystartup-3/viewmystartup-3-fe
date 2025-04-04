@@ -15,6 +15,15 @@
   border: none;
 }
 
+.simple {
+  @include button;
+  @include round;
+  padding: 13px 48px;
+  height: 43px;
+  background-color: var(--brandOrange);
+  color: var(--white);
+}
+
 // 일반 둥근 버튼
 .round {
   @include button;
@@ -107,7 +116,8 @@
 }
 
 @media (max-width: 744px) {
-  .round {
+  .round,
+  .simple {
     font: var(--textSSb);
     padding: 13px 24px;
     width: 135px;
