@@ -27,14 +27,16 @@
   .info {
     width: 153.75px;
   }
+  .resultTable.rawTableInfo {
+    width: 170.75px;
+  }
+  .rankingCheckTable.rawTableInfo {
+    width: 153.75px; /* RankingCheck 테이블에서 사용할 너비 */
+  }
 
   .investmentAndSelection {
     width: 230.63px;
   } // 투자,비교 테이블 스타일
-
-  .hidden {
-    display: none !important;
-  } // 숨기고 싶은 클래스 히든처리
 }
 
 /* 테이블 헤더 스타일 */
@@ -122,6 +124,9 @@
       }
     }
   }
+}
+.tableContent.selectedCompanyColor {
+  background-color: var(--gray300) !important;
 }
 
 /* tablet & mobile */
