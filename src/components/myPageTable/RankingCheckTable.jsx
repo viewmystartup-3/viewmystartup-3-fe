@@ -10,7 +10,6 @@ function RankingCheckTable({ myCompany }) {
   const [loadedData, setLoadedData] = useState([]);
   const [sortBy, setSortBy] = useState("totalInvestment_desc");
 
-  // 기업 데이터 불러오기
   useEffect(() => {
     if (!myCompany) return;
 
@@ -29,7 +28,6 @@ function RankingCheckTable({ myCompany }) {
     fetchData();
   }, [sortBy, myCompany]);
 
-  // "내 기업"을 중심으로 index 추출
   const rankedCompanies = useMemo(() => {
     if (!myCompany || loadedData.length === 0) return [];
 
@@ -44,7 +42,6 @@ function RankingCheckTable({ myCompany }) {
     return loadedData.slice(start, end);
   }, [myCompany, loadedData]);
 
-  // 화면
   return (
     <section className={styles.form}>
       <div className={styles.header}>
@@ -54,6 +51,7 @@ function RankingCheckTable({ myCompany }) {
       <RawTable
         startups={rankedCompanies}
         isMyCompanyData={(startup) => startup.id === myCompany?.id}
+        tableType="rankingCheck" // tableType을 rankingCheck로 설정
       />
     </section>
   );

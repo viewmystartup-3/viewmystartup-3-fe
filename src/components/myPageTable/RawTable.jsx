@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import styles from "./RawTable.module.scss";
+import styles from "../../styles/table.module.scss";
 import temporarilyImg from "../../assets/logo.png";
 import clsx from "clsx";
 import { Link } from "react-router-dom";
@@ -8,32 +8,37 @@ const RawTable = ({
   startups,
   hideRanking = false,
   isMyCompanyData = false,
+  tableType = "default", // 새로운 prop 추가
 }) => {
-  const [loading, setLoading] = useState(true); // 로딩 상태
+  const [loading, setLoading] = useState(true);
 
-  // 데이터가 변경될 때 로딩 상태 갱신
   useEffect(() => {
     if (startups.length > 0) {
       setLoading(false);
     }
-  }, [startups]); // startups가 변경될 때마다 로딩 상태 업데이트
+  }, [startups]);
+
+  // tableType에 따라 스타일 클래스 다르게 적용
+  const tableClass =
+    tableType === "rankingCheck"
+      ? styles.rankingCheckTable
+      : styles.resultTable;
 
   return (
     <div className={styles.table}>
-      <div className={styles.tableHeader}>
+      <div className={clsx(styles.tableHeader, tableClass)}>
         {!hideRanking && <p className={styles.ranking}>순위</p>}
         <p className={styles.name}>기업 명</p>
         <p className={styles.description}>기업 소개</p>
-        <p className={styles.info}>카테고리</p>
-        <p className={styles.info}>누적 투자 금액</p>
-        <p className={styles.info}>매출액</p>
-        <p className={styles.info}>고용 인원</p>
+        <p className={clsx(styles.rawTableInfo, tableClass)}>카테고리</p>
+        <p className={clsx(styles.rawTableInfo, tableClass)}>누적 투자 금액</p>
+        <p className={clsx(styles.rawTableInfo, tableClass)}>매출액</p>
+        <p className={clsx(styles.rawTableInfo, tableClass)}>고용 인원</p>
       </div>
 
-      {/* 스타트업 목록 렌더링 */}
       <div className={styles.tableContents}>
         {loading ? (
-          <div>로딩 중...</div> // 로딩 중일 때 메시지
+          <div>로딩 중...</div>
         ) : startups.length > 0 ? (
           startups.map((startup, index) => {
             const isSelected = isMyCompanyData(startup);
@@ -53,22 +58,30 @@ const RawTable = ({
                   className={styles.nameWrapper}
                 >
                   <img
-                    src={startup.imageUrl || `${temporarilyImg}`}
+                    src={startup.imageUrl || temporarilyImg}
                     alt={startup.name}
                     className={styles.image}
                   />
                   <p className={styles.name}>{startup.name}</p>
                 </Link>
                 <p className={styles.description}>{startup.description}</p>
-                <p className={styles.info}>{startup.category}</p>
-                <p className={styles.info}>{startup.totalInvestment}억 원</p>
-                <p className={styles.info}>{startup.revenue}억 원</p>
-                <p className={styles.info}>{startup.employees}명</p>
+                <p className={clsx(styles.rawTableInfo, tableClass)}>
+                  {startup.category}
+                </p>
+                <p className={clsx(styles.rawTableInfo, tableClass)}>
+                  {startup.totalInvestment}억 원
+                </p>
+                <p className={clsx(styles.rawTableInfo, tableClass)}>
+                  {startup.revenue}억 원
+                </p>
+                <p className={clsx(styles.rawTableInfo, tableClass)}>
+                  {startup.employees}명
+                </p>
               </div>
             );
           })
         ) : (
-          <p>데이터가 없습니다.</p> // 데이터가 없을 때 메시지
+          <p>데이터가 없습니다.</p>
         )}
       </div>
     </div>
