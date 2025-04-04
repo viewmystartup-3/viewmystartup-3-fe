@@ -48,10 +48,10 @@ const ComparisonList = ({ companies }) => {
               <p className={styles.description}>{comparison.description}</p>
               <p className={styles.info}>{comparison.category}</p>
               <p className={styles.investmentAndSelection}>
-                {comparison.comparedCompany}
+                {comparison.selectedCompany}
               </p>
               <p className={styles.investmentAndSelection}>
-                {comparison.selectedCompany}
+                {comparison.comparedCompany}
               </p>
             </div>
           ))

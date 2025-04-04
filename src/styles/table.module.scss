@@ -31,7 +31,7 @@
     width: 170.75px;
   }
   .rankingCheckTable.rawTableInfo {
-    width: 153.75px; /* RankingCheck 테이블에서 사용할 너비 */
+    width: 153.75px;
   }
 
   .investmentAndSelection {
@@ -146,7 +146,12 @@
     .investmentAndSelection {
       width: 116px;
     }
-
+    .resultTable.rawTableInfo {
+      width: 91.5px;
+    }
+    .rankingCheckTable.rawTableInfo {
+      width: 80px;
+    }
     .tableHeader {
       .name {
         width: 150px;
