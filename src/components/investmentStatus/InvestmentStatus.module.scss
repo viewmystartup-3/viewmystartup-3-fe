@@ -4,21 +4,22 @@
   max-width: 1200px;
   flex-direction: column;
   height: auto;
-  padding-left: 24px;
-  padding-right: 24px;
   margin: 0 auto;
-  gap: 32px;
-  .title {
+  margin-top: 30px;
+
+  gap: 40px;
+  .totalMoney {
+    display: flex;
+    margin-top: 20px;
     font: var(--textXlB);
     margin-bottom: 20px;
   }
   .header {
     width: 100%;
-    height: 104px;
+    height: 40;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid var(--gray200);
     gap: 18px;
   }
   .investBtn {
@@ -39,82 +40,21 @@
       background-color: var(--gray500);
     }
   }
-  .listContainer {
-    position: relative;
-    width: 100%;
-    max-width: 100%;
+
+  .emptyState {
+    margin-top: 80px;
     display: flex;
     flex-direction: column;
-    overflow-x: auto;
-    overflow-y: hidden;
-    -webkit-overflow-scrolling: touch;
-    .listHeader {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 39px;
-      color: var(--white);
-      font: var(--textS);
-      text-align: center;
-      padding: 15px 0;
-      border-top: 1px solid var(--gray300);
-      background-color: var(--black100);
-      margin-bottom: 16px;
-    }
-
-    .container {
-      display: flex;
-      align-items: center;
-      height: 64px;
-      color: var(--gray100);
-      font: var(--textSM);
-      text-align: center;
-      border-top: 1px solid var(--gray300);
-      min-width: 100%;
-      background-color: var(--black300);
-    }
-
-    .into {
-      width: 84px;
-    }
-
-    .comment {
-      flex: 1;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .commentTo {
-      flex: 1;
-      padding: 0px 16px;
-      text-align: left;
-      max-width: 884px;
-      max-height: 36px;
-      word-wrap: normal;
-      white-space: normal;
-      overflow-wrap: break-word;
-      display: -webkit-box;
-      align-items: center;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .emptyState {
-      margin-top: 80px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      color: var(--gray200);
-      font: var(--textXs);
-    }
+    align-items: center;
+    justify-content: center;
+    color: var(--gray200);
+    font: var(--textXs);
+    min-height: 200px;
+    width: 100%;
   }
 
   @media (max-width: 744px) {
-    .title {
+    .totalmMoney {
       font: var(--textLB);
       margin-bottom: 20px;
     }
