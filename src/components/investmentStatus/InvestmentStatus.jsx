@@ -8,7 +8,11 @@ import InvestorActions from "../investActions/InvestActions";
 import InvestModal from "../investModal/InvestModal";
 import SuccessModal from "../investModal/SuccessModal";
 import EditInvestModal from "../investModal/EditInvestModal";
+<<<<<<< HEAD
 import table from "../../styles/table.module.scss";
+=======
+import table from "../../styles/table.module.scss"
+>>>>>>> a34c261 (Fix:투자상태 scss 수정)
 
 const InvestmentStatus = () => {
   const { id } = useParams();
@@ -102,6 +106,7 @@ const InvestmentStatus = () => {
         </button>
       </div>
       <div>
+<<<<<<< HEAD
         <div className={table.table}>
           {investment.length > 0 ? (
             <>
@@ -138,6 +143,44 @@ const InvestmentStatus = () => {
                   </div>
                 ))}
               </div>
+=======
+        <div className={styles.listContainer}>
+          {investment.length > 0 ? (
+            <>
+              <p className={styles.totalmMoney}>
+                총 {allInvestments.reduce((acc, inv) => acc + inv.amount, 0)}억
+                원
+              </p>
+              <div className={styles.listHeader}>
+                <p className={styles.listtitle}>투자자 이름</p>
+                <p className={styles.listtitle}>순위</p>
+                <p className={styles.listtitle}>투자 금액</p>
+                <p className={styles.comment}>투자 코멘트</p>
+              </div>
+              <div className={styles.containerWrapper}>
+                {investment.map((inv, index) => (
+                  <div className={styles.container1} key={inv.id}>
+                    <div className={styles.container}>
+                      <p className={styles.into}>{inv.name}</p>
+                      <p className={styles.into}>
+                        {index + 1 + (currentPage - 1) * itemsPerPage}위
+                      </p>
+                      <p className={styles.into}>{inv.amount}억 원</p>
+                      <p className={styles.commentTo}>
+                        {inv.comment || "코멘트 없음"}
+                      </p>
+                      <InvestorActions
+                        investor={inv}
+                        onEdit={handleEditInvest}
+                        onDelete={handleDeleteInvest}
+                        activeInvestorId={activeInvestorId}
+                        onToggleOptions={handleToggleOptions}
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
+>>>>>>> a34c261 (Fix:투자상태 scss 수정)
             </>
           ) : (
             <div className={styles.emptyState}>
