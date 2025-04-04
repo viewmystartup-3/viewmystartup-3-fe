@@ -1,14 +1,13 @@
 import React from "react";
-import styles from "./SuccessModal.module.scss";
+import styles from "./InvestModal.module.scss";
 import ModalTopBar from "../modals/topBar/ModalTopBar";
-
 
 const SuccessModal = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
   return (
-    <div className={styles.successModal}>
-      <div className={styles.modalContent}>
+    <div className={styles.modal}>
+      <div className={styles.successContent}>
         <ModalTopBar
           className={styles.successTopbar}
           onClose={onClose}
