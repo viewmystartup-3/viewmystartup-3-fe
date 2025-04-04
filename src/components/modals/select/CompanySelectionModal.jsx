@@ -87,55 +87,65 @@ function CompanySelectionModal({
           companymodal
         />
 
-        {titleTypes.map((type) => {
-          // 검색창 입력 여부에 따라 "검색 결과"가 (안) 보이게
-          if (type === "result" && filteredResults.length === 0) {
-            return null;
-          }
+        <div className={styles.scroll}>
+          {titleTypes.map((type) => {
+            // 검색창 입력 여부에 따라 "검색 결과"가 (안) 보이게
+            if (type === "result" && filteredResults.length === 0) {
+              return null;
+            }
 
-          // "비교할 기업 선택하기"에서 "선택한 기업"
-          if (type === "selectedCompany") {
-            if (selectedCompanies.length === 0) return null; // 선택한 기업이 없으면 감춰짐
+            // "비교할 기업 선택하기"에서 "선택한 기업"
+            if (type === "selectedCompany") {
+              if (selectedCompanies.length === 0) return null; // 선택한 기업이 없으면 감춰짐
+              return (
+                <SearchResult
+                  key={type}
+                  companyList={selectedCompanies}
+                  titleType={type}
+                  onSelect={handleCompanySelect}
+                  onDeselect={onDeselect}
+                  selectedCompanies={selectedCompanies}
+                  modalTitle={title}
+                  showWarning={selectedCompanies.length >= 5}
+                />
+              );
+            }
+
+            // "나의 기업 선택하기"에서 "최근 비교한 기업"
+            if (type === "latestCompany") {
+              const latestCompanies = companyList.slice(0, 3); // 예시로 최근 3개
+              if (latestCompanies.length === 0) return null; // 최근 비교한 기업이 없으면 감춰짐
+              return (
+                <SearchResult
+                  key={type}
+                  companyList={latestCompanies}
+                  titleType={type}
+                  onSelect={handleCompanySelect}
+                  onDeselect={onDeselect}
+                  modalTitle={title}
+                  selectedCompanies={selectedCompanies}
+                />
+              );
+            }
+
+            // default = 검색 결과
             return (
               <SearchResult
                 key={type}
-                companyList={selectedCompanies}
+                companyList={filteredResults}
                 titleType={type}
                 onSelect={handleCompanySelect}
                 onDeselect={onDeselect}
                 selectedCompanies={selectedCompanies}
+                modalTitle={title}
+                showWarning={
+                  title === "비교할 기업 선택하기" &&
+                  selectedCompanies.length >= 5
+                }
               />
             );
-          }
-
-          // "나의 기업 선택하기"에서 "최근 비교한 기업"
-          if (type === "latestCompany") {
-            const latestCompanies = companyList.slice(0, 3); // 예시로 최근 3개
-            if (latestCompanies.length === 0) return null; // 최근 비교한 기업이 없으면 감춰짐
-            return (
-              <SearchResult
-                key={type}
-                companyList={latestCompanies}
-                titleType={type}
-                onSelect={handleCompanySelect}
-                onDeselect={onDeselect}
-                selectedCompanies={selectedCompanies}
-              />
-            );
-          }
-
-          // default = 검색 결과
-          return (
-            <SearchResult
-              key={type}
-              companyList={filteredResults}
-              titleType={type}
-              onSelect={handleCompanySelect}
-              onDeselect={onDeselect}
-              selectedCompanies={selectedCompanies}
-            />
-          );
-        })}
+          })}
+        </div>
       </main>
     </div>
   );
