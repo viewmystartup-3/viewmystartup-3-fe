@@ -17,6 +17,9 @@ const InvestModal = ({ isOpen, onClose, onInvestSuccess, targetCompany }) => {
   const [confirmPassword, setConfirmPassword] = useState(""); // 비밀번호 확인
   const [showPassword, setShowPassword] = useState(false); // 비밀번호 보이기/숨기기
   const [showConfirmPassword, setShowConfirmPassword] = useState(false); // 비밀번호 확인 보이기/숨기기
+  const [passwordError, setPasswordError] = useState(""); // 비밀번호 오류 메시지 상태
+  const [confirmPasswordError, setConfirmPasswordError] = useState(""); // 비밀번호 확인 오류 메시지 상태
+
   useEffect(() => {
     if (targetCompany) {
       setCompany(targetCompany);
@@ -42,20 +45,31 @@ const InvestModal = ({ isOpen, onClose, onInvestSuccess, targetCompany }) => {
   };
 
   const handleInvest = async () => {
-    // 비밀번호와 비밀번호 확인 필드의 비어 있는지 체크
-    setPasswordError("");
-    setConfirmPasswordError("");
+    let isValid = true;
 
-    if (!password || !confirmPassword) {
-      if (!password) setPasswordError("비밀번호는 필수 입력사항입니다.");
-      if (!confirmPassword)
-        setConfirmPasswordError("비밀번호 확인은 필수 입력사항입니다.");
-      return;
+    // 비밀번호와 비밀번호 확인이 비어있을 경우
+    if (!password) {
+      setPasswordError("비밀번호는 필수 입력 사항입니다.");
+      isValid = false;
+    } else {
+      setPasswordError(""); // 비밀번호 오류 메시지 초기화
     }
 
+    if (!confirmPassword) {
+      setConfirmPasswordError("비밀번호 확인은 필수 입력 사항입니다.");
+      isValid = false;
+    } else {
+      setConfirmPasswordError(""); // 비밀번호 확인 오류 메시지 초기화
+    }
+
+    // 비밀번호가 일치하지 않으면
     if (password !== confirmPassword) {
-      alert("비밀번호가 일치하지 않습니다.");
-      return;
+      setConfirmPasswordError("비밀번호가 일치하지 않습니다.");
+      isValid = false;
+    }
+
+    if (!isValid) {
+      return; // 유효하지 않으면 투자 진행을 멈춤
     }
 
     try {
@@ -84,6 +98,7 @@ const InvestModal = ({ isOpen, onClose, onInvestSuccess, targetCompany }) => {
     }
   };
 
+  // 비밀번호 입력 시 오류 메시지 초기화
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
     if (e.target.value) {
@@ -91,6 +106,7 @@ const InvestModal = ({ isOpen, onClose, onInvestSuccess, targetCompany }) => {
     }
   };
 
+  // 비밀번호 확인 입력 시 오류 메시지 초기화
   const handleConfirmPasswordChange = (e) => {
     setConfirmPassword(e.target.value);
     if (e.target.value) {
@@ -105,6 +121,8 @@ const InvestModal = ({ isOpen, onClose, onInvestSuccess, targetCompany }) => {
     setComment("");
     setPassword("");
     setConfirmPassword("");
+    setPasswordError(""); // 비밀번호 오류 초기화
+    setConfirmPasswordError(""); // 비밀번호 확인 오류 초기화
     onClose();
   };
 
@@ -171,8 +189,10 @@ const InvestModal = ({ isOpen, onClose, onInvestSuccess, targetCompany }) => {
                 type={showPassword ? "text" : "password"} // 비밀번호 보이기/숨기기
                 placeholder="비밀번호를 입력해 주세요"
                 value={password}
-                onChange={handlePasswordChange} // 비밀번호 변경 시 오류 메시지 제거
-                className={styles.input}
+                onChange={handlePasswordChange} // 상태 업데이트 및 오류 메시지 초기화
+                className={`${styles.input} ${
+                  passwordError ? styles.error : ""
+                }`} // 비밀번호 오류 시 테두리 빨간색
               />
               <button
                 type="button"
@@ -186,21 +206,23 @@ const InvestModal = ({ isOpen, onClose, onInvestSuccess, targetCompany }) => {
                 />
               </button>
             </div>
+            {/* 비밀번호 오류 메시지 표시 */}
             {passwordError && (
-              <p className={styles.errorText}>{passwordError}</p>
-            )}{" "}
-            {/* 오류 메시지 */}
+              <p className={styles.errorMessage}>{passwordError}</p>
+            )}
           </div>
 
           <div className={styles.formGroup}>
             <label>비밀번호 확인</label>
             <div className={styles.passwordWrapper}>
               <input
-                type={showConfirmPassword ? "text" : "password"} // 비밀번호 확인도 보이기/숨기기
+                type={showConfirmPassword ? "text" : "password"} // 비밀번호 확인 보이기/숨기기
                 placeholder="비밀번호를 다시 한 번 입력해 주세요"
                 value={confirmPassword}
-                onChange={handleConfirmPasswordChange} // 비밀번호 확인 변경 시 오류 메시지 제거
-                className={styles.input}
+                onChange={handleConfirmPasswordChange} // 상태 업데이트 및 오류 메시지 초기화
+                className={`${styles.input} ${
+                  confirmPasswordError ? styles.error : ""
+                }`} // 비밀번호 확인 오류 시 테두리 빨간색
               />
               <button
                 type="button"
@@ -214,10 +236,10 @@ const InvestModal = ({ isOpen, onClose, onInvestSuccess, targetCompany }) => {
                 />
               </button>
             </div>
+            {/* 비밀번호 확인 오류 메시지 표시 */}
             {confirmPasswordError && (
-              <p className={styles.errorText}>{confirmPasswordError}</p>
-            )}{" "}
-            {/* 오류 메시지 */}
+              <p className={styles.errorMessage}>{confirmPasswordError}</p>
+            )}
           </div>
 
           <div className={styles.buttonGroup}>
