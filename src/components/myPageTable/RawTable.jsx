@@ -37,16 +37,6 @@ const RawTable = ({
         ) : startups.length > 0 ? (
           startups.map((startup, index) => {
             const isSelected = isMyCompanyData(startup);
-            console.log(
-              "스타트업:",
-              startup.name,
-              "선택 여부:",
-              isSelected,
-              "적용 클래스:",
-              clsx(styles.tableContent, {
-                [styles.selectedCompanyColor]: isSelected,
-              })
-            );
 
             return (
               <div

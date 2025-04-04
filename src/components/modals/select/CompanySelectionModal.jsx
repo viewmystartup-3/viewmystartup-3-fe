@@ -37,8 +37,6 @@ function CompanySelectionModal({
   const filteredResults =
     title === "비교할 기업 선택하기" && myCompany !== null
       ? searchResults.filter((company) => {
-          console.log("🔍 비교할 기업 ID:", company.id, typeof company.id);
-          console.log("🔍 나의 기업 ID:", myCompany?.id, typeof myCompany?.id);
           return company.id !== myCompany.id;
         })
       : searchResults;
