@@ -21,9 +21,12 @@ const EditInvestModal = ({
   const [showConfirmPassword, setShowConfirmPassword] = useState(false); // 비밀번호 확인 보이기/숨기기
   const [password, setPassword] = useState(""); // 비밀번호 상태 (입력 필드로만 사용)
   const [confirmPassword, setConfirmPassword] = useState(""); // 비밀번호 확인 상태
+  const [passwordError, setPasswordError] = useState(""); // 비밀번호 오류 메시지
+  const [confirmPasswordError, setConfirmPasswordError] = useState(""); // 비밀번호 확인 오류 메시지
 
   const { id } = useParams(); // URL에서 ID 가져오기
-  const {companyid} = useParams()
+  const { companyid } = useParams();
+
   // 기업 정보 가져오기
   const fetchCompanyDetails = async () => {
     try {
@@ -54,9 +57,31 @@ const EditInvestModal = ({
   };
 
   const handleEditInvest = async () => {
+    let isValid = true;
+
+    // 비밀번호와 비밀번호 확인이 비어있을 경우
+    if (!password) {
+      setPasswordError("비밀번호는 필수 입력 사항입니다.");
+      isValid = false;
+    } else {
+      setPasswordError(""); // 비밀번호 오류 메시지 초기화
+    }
+
+    if (!confirmPassword) {
+      setConfirmPasswordError("비밀번호 확인은 필수 입력 사항입니다.");
+      isValid = false;
+    } else {
+      setConfirmPasswordError(""); // 비밀번호 확인 오류 메시지 초기화
+    }
+
+    // 비밀번호가 일치하지 않으면
     if (password !== confirmPassword) {
-      alert("비밀번호가 일치하지 않습니다.");
-      return;
+      setConfirmPasswordError("비밀번호가 일치하지 않습니다.");
+      isValid = false;
+    }
+
+    if (!isValid) {
+      return; // 유효하지 않으면 투자 진행을 멈춤
     }
 
     try {
@@ -74,10 +99,7 @@ const EditInvestModal = ({
       console.log("Investment updated successfully:", response.data);
 
       // 수정 후 onEditSuccess 호출하여 상태 갱신
-    
-        onEditSuccess(response.data);
-    
-  
+      onEditSuccess(response.data);
 
       // 상태 초기화
       setName("");
@@ -99,7 +121,23 @@ const EditInvestModal = ({
     setComment("");
     setPassword(""); // 비밀번호 초기화
     setConfirmPassword(""); // 비밀번호 확인 초기화
+    setPasswordError(""); // 비밀번호 오류 초기화
+    setConfirmPasswordError(""); // 비밀번호 확인 오류 초기화
     onClose();
+  };
+
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+    if (e.target.value) {
+      setPasswordError(""); // 비밀번호 입력 시 오류 메시지 제거
+    }
+  };
+
+  const handleConfirmPasswordChange = (e) => {
+    setConfirmPassword(e.target.value);
+    if (e.target.value) {
+      setConfirmPasswordError(""); // 비밀번호 확인 입력 시 오류 메시지 제거
+    }
   };
 
   if (!isOpen) return null;
@@ -165,8 +203,10 @@ const EditInvestModal = ({
                 type={showPassword ? "text" : "password"}
                 placeholder="새로운 비밀번호를 입력해 주세요"
                 value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className={styles.input}
+                onChange={handlePasswordChange} // 비밀번호 입력 시 오류 메시지 초기화
+                className={`${styles.input} ${
+                  passwordError ? styles.error : ""
+                }`}
               />
               <button
                 type="button"
@@ -180,6 +220,10 @@ const EditInvestModal = ({
                 />
               </button>
             </div>
+            {/* 비밀번호 오류 메시지 표시 */}
+            {passwordError && (
+              <p className={styles.errorMessage}>{passwordError}</p>
+            )}
           </div>
 
           {/* 비밀번호 확인 입력 필드 */}
@@ -190,8 +234,10 @@ const EditInvestModal = ({
                 type={showConfirmPassword ? "text" : "password"}
                 placeholder="비밀번호를 다시 한 번 입력해 주세요"
                 value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                className={styles.input}
+                onChange={handleConfirmPasswordChange} // 비밀번호 확인 입력 시 오류 메시지 초기화
+                className={`${styles.input} ${
+                  confirmPasswordError ? styles.error : ""
+                }`}
               />
               <button
                 type="button"
@@ -205,6 +251,10 @@ const EditInvestModal = ({
                 />
               </button>
             </div>
+            {/* 비밀번호 확인 오류 메시지 표시 */}
+            {confirmPasswordError && (
+              <p className={styles.errorMessage}>{confirmPasswordError}</p>
+            )}
           </div>
 
           <div className={styles.buttonGroup}>
