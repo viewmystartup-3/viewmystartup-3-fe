@@ -9,6 +9,8 @@ function SearchResult({
   onSelect,
   onDeselect,
   selectedCompanies,
+  modalTitle,
+  showWarning,
 }) {
   const [currentPageData, setCurrentPageData] = useState([]); // 현재 페이지에 해당하는 데이터
   const [currentPage, setCurrentPage] = useState(1); // 현재 페이지
@@ -49,6 +51,15 @@ function SearchResult({
       ) : (
         <p className={styles.text}>검색 결과가 없습니다.</p>
       )}
+
+      {/* 경고 메시지 - 다섯 개 이상 선택x */}
+      {modalTitle === "비교할 기업 선택하기" &&
+        showWarning &&
+        titleType === "result" && (
+          <p className={styles.warningText}>
+            *비교할 기업은 최대 5개까지 선택 가능합니다.
+          </p>
+        )}
 
       {/* 페이지네이션 컴포넌트 */}
       {titleType === "result" && totalPages > 1 && (

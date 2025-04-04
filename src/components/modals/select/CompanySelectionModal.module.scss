@@ -14,16 +14,32 @@
 .container {
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 25px;
   width: 496px;
   background-color: var(--black300);
-  padding: 24px;
+  padding: 30px;
   border-radius: 16px;
   position: relative;
   z-index: 1000;
+  max-height: 90vh;
+  overflow: hidden;
 
   @media (max-width: 744px) {
     width: 343px;
     padding: 16px;
+  }
+}
+.scroll {
+  overflow-y: auto;
+  flex-grow: 1;
+  max-height: calc(90vh - 180px);
+  scrollbar-width: thin;
+
+  &::-webkit-scrollbar {
+    width: 3px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
   }
 }
