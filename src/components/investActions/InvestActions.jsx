@@ -8,6 +8,7 @@ import ModalTopBar from "../modals/topBar/ModalTopBar";
 import eyeIcon from "../../assets/btn_visibility_on.png";
 import eyeOffIcon from "../../assets/btn_visibility_off.png";
 import { createPortal } from "react-dom";
+import { SimpleButton } from "../buttons/Buttons";
 
 const InvestorActions = ({
   investor,
@@ -156,9 +157,9 @@ const InvestorActions = ({
                     </div>
                   </div>
                   <div className={styles.deleteBox}>
-                    <button className={styles.deleteBtn} onClick={handleDelete}>
+                    <SimpleButton className={styles.deleteBtn} onClick={handleDelete}>
                       삭제하기
-                    </button>
+                    </SimpleButton>
                   </div>
                 </div>
               </div>
@@ -208,9 +209,9 @@ const InvestorActions = ({
                     </div>
                   </div>
                   <div className={styles.editBox}>
-                    <button className={styles.editBtn} onClick={handleEdit}>
+                    <SimpleButton className={styles.editBtn} onClick={handleEdit}>
                       수정하기
-                    </button>
+                    </SimpleButton>
                   </div>
                 </div>
               </div>
@@ -234,7 +235,7 @@ const InvestorActions = ({
                   />
                   <p>잘못된 비밀번호로 삭제에 실패하셨습니다.</p>
                 </div>
-                <button
+                <SimpleButton
                   className={styles.okBtn}
                   onClick={() => {
                     setErrorModal(false);
@@ -242,7 +243,7 @@ const InvestorActions = ({
                   }}
                 >
                   확인
-                </button>
+                </SimpleButton>
               </div>
             </div>
           </div>,
