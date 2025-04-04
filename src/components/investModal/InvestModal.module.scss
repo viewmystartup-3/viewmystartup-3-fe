@@ -6,27 +6,51 @@
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
   display: flex;
-  justify-content: center; /* 수평 중앙 */
-  align-items: center; /* 수직 중앙 */
+  justify-content: center;
+  align-items: center;
   z-index: 1000;
+
+  //투자 성공 완료 모달
+  .successContent {
+    background-color: var(--black300);
+    padding: 24px;
+    border-radius: 16px;
+    text-align: center;
+    width: 496px;
+    height: 186px;
+
+    .successText {
+      color: var(--white);
+      font-size: 15px;
+      font-weight: 400;
+      margin-top: 8px;
+      margin-bottom: 32px;
+    }
+
+    .closeButton {
+      font: var(--textSb);
+      padding: 13px 48px;
+      width: 194px;
+      height: 48px;
+      background-color: var(--brandOrange);
+      color: var(--white);
+      border: 1px solid var(--brandOrange);
+      border-radius: 50px;
+      cursor: pointer;
+    }
+  }
 }
 
 .modalContent {
   overflow-y: auto;
-  background-color: var(--black300); /* 어두운 회색 배경 */
-  color: white;
+  background-color: var(--black300);
   border-radius: 16px;
   width: 496px;
   display: flex;
-  flex-direction: column; /* ModalTopBar와 내용이 수직으로 나열되도록 설정 */
+  flex-direction: column;
   padding: 24px;
   box-sizing: border-box;
-  h3 {
-    font-size: 20px;
-    font-weight: 700;
-    line-height: 100%;
-    color: var(--white);
-  }
+  margin-bottom: 30px;
 }
 .companyInfo {
   font: var(--textLB);
@@ -35,8 +59,8 @@
 }
 
 .company {
-  display: flex; /* 수평으로 배치 */
-  align-items: center; /* 세로 중앙 정렬 */
+  display: flex;
+  align-items: center;
   margin-top: 16px;
   margin-bottom: 24px;
 
@@ -52,6 +76,7 @@
   .companyDetail {
     display: flex;
     align-items: center;
+
     .name {
       margin-right: 8px;
       font: var(--textLM);
@@ -128,13 +153,13 @@
 }
 
 .cancelButton {
-  background-color: var(--black300); /* 취소 버튼 색상 (어두운 회색) */
-  color: var(--brandOrange); /* 취소 버튼 텍스트 색상 */
+  background-color: var(--black300);
+  color: var(--brandOrange);
 }
 
 .investButton {
-  background-color: #f05a28; /* 투자하기 버튼 색상 (오렌지) */
-  color: white; /* 투자하기 버튼 텍스트 색상 */
+  background-color: #f05a28;
+  color: var(--white);
 }
 
 .passwordWrapper {
@@ -161,17 +186,16 @@
   font-size: 12px;
   margin-top: 5px;
 }
+
 .input.error {
   border-color: var(--redError);
 }
+
 @media (max-width: 744px) {
   .modalContent {
     overflow-y: auto;
     width: 343px;
     padding: 16px;
-    h3 {
-      font: var(--textB);
-    }
   }
   .form {
     margin-top: 16px;
@@ -195,5 +219,15 @@
     height: 40px;
     font: var(--textSSb);
     padding: 11.5px 37.5px;
+  }
+  .successContent {
+    width: 326px;
+    height: 161px;
+  }
+  .closeButton {
+    width: 124px;
+    height: 40px;
+    padding: 13px 24px;
+    font: var(--textSSb);
   }
 }
