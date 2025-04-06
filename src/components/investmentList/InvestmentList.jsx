@@ -35,7 +35,7 @@ const InvestmentList = ({ startups }) => {
       {/* 투자 목록 렌더링 */}
       <div className={styles.tableContents}>
         {loading ? (
-          <p>아직 투자 현황이 없어요🫥</p> // 로딩 중일 때 메시지
+          <p className={styles.dataMessage}>로딩중...</p> // 로딩 중일 때 메시지
         ) : filteredStartups.length > 0 ? (
           filteredStartups.map((investment, index) => (
             <div className={styles.tableContent} key={investment.id}>
@@ -62,7 +62,7 @@ const InvestmentList = ({ startups }) => {
             </div>
           ))
         ) : (
-          <p>데이터가 없습니다.</p> // 데이터가 없을 때 메시지
+          <p className={styles.dataMessage}>아직 투자 현황이 없어요.</p> // 데이터가 없을 때 메시지
         )}
       </div>
     </div>
