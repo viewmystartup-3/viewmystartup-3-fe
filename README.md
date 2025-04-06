@@ -38,11 +38,17 @@ npm run build   # 빌드 명령어
 ### 이 프로젝트는 다음 기술 스택을 사용하여 개발되었습니다:
 
 <p align="center">
-  <img src="https://img.shields.io/badge/React-61DAFB?style=flat&logo=react&logoColor=black" alt="React" />
+  <img src="https://img.shields.io/badge/npm-CB3837?style=flat&logo=npm&logoColor=white" alt="npm" />
+  <img src="https://img.shields.io/badge/Vite-646CFF?style=flat&logo=vite&logoColor=white" alt="Vite" />
   <img src="https://img.shields.io/badge/Node.js-339933?style=flat&logo=node.js&logoColor=white" alt="Node.js" />
+  <img src="https://img.shields.io/badge/React-61DAFB?style=flat&logo=react&logoColor=black" alt="React" />
+  <img src="https://img.shields.io/badge/React%20Router-CA4245?style=flat&logo=react-router&logoColor=white" alt="React Router" />
   <img src="https://img.shields.io/badge/SCSS-CC6699?style=flat&logo=sass&logoColor=white" alt="SCSS" />
   <img src="https://img.shields.io/badge/CSS%20Modules-000?style=flat&logo=css3&logoColor=white" alt="CSS Modules" />
+  <img src="https://img.shields.io/badge/Git-F05032?style=flat&logo=git&logoColor=white" alt="Git" />
+  <img src="https://img.shields.io/badge/GitHub-181717?style=flat&logo=github&logoColor=white" alt="GitHub" />
 </p>
+
 
 ## 팀원 소개
 <table align="center">
@@ -58,3 +64,11 @@ npm run build   # 빌드 명령어
 </table>
 
 ## 기여 방법
+
+# 👑 김승준
+- 전체 스타트업 목록(홈페이지)페이지 및 스타트업 테이블 제작
+테이블 공통 스타일로 제작, 테이블을 사용하는 비교 현황 페이지, 투자 현황 페이지 및 홈페이지 페이지를 공통 스타일로 제작
+- 비교 현황 페이지 및 비교 현황 테이블 제작
+- 투자 현황 페이지 및 투자 현황 테이블 제작
+- 초성 검색 구현
+- 페이지네이션 구현
