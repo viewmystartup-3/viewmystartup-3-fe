@@ -29,7 +29,7 @@ const ComparisonList = ({ companies }) => {
       {/* 비교 목록 렌더링 */}
       <div className={styles.tableContents}>
         {loading ? (
-          <p>로딩 중...</p> // 로딩 중일 때 메시지
+          <p className={styles.dataMessage}>로딩 중...</p> // 로딩 중일 때 메시지
         ) : companies.length > 0 ? (
           companies.map((comparison, index) => (
             <div className={styles.tableContent} key={comparison.id}>
@@ -56,7 +56,7 @@ const ComparisonList = ({ companies }) => {
             </div>
           ))
         ) : (
-          <p>데이터가 없습니다.</p> // 데이터가 없을 때 메시지
+          <p className={styles.dataMessage}>아직 비교 현황이 없어요.</p> // 데이터가 없을 때 메시지
         )}
       </div>
     </div>

@@ -29,7 +29,7 @@ const StartupList = ({ startups }) => {
       {/* 스타트업 목록 렌더링 */}
       <div className={styles.tableContents}>
         {loading ? (
-          <p>로딩 중...</p> // 로딩 중일 때 메시지
+          <p className={styles.dataMessage}>로딩 중...</p> // 로딩 중일 때 메시지
         ) : startups.length > 0 ? (
           startups.map((startup, index) => (
             <div className={styles.tableContent} key={startup.id}>
@@ -53,7 +53,7 @@ const StartupList = ({ startups }) => {
             </div>
           ))
         ) : (
-          <p>데이터가 없습니다.</p> // 데이터가 없을 때 메시지
+          <p className={styles.dataMessage}>데이터가 없습니다.</p> // 데이터가 없을 때 메시지
         )}
       </div>
     </div>
