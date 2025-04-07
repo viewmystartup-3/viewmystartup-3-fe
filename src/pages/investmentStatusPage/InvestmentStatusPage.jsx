@@ -15,7 +15,24 @@ const InvestmentStatusPage = () => {
   const [currentPage, setCurrentPage] = useState(1); // 현재 페이지
   const [totalPages, setTotalPages] = useState(1); // 전체 페이지 수
 
-  const itemsPerPage = 10; // 페이지당 아이템 수
+  // 페이지당 아이템 수
+  const itemsPerPage = 10;
+
+  // 정렬 함수
+  const sortData = (data, sortValue) => {
+    switch (sortValue) {
+      case "investmentAmount_desc":
+        return data.sort((a, b) => b.investmentAmount - a.investmentAmount);
+      case "investmentAmount_asc":
+        return data.sort((a, b) => a.investmentAmount - b.investmentAmount);
+      case "totalInvestment_desc":
+        return data.sort((a, b) => b.totalInvestment - a.totalInvestment);
+      case "totalInvestment_asc":
+        return data.sort((a, b) => a.totalInvestment - b.totalInvestment);
+      default:
+        return data;
+    }
+  };
 
   // 컴포넌트가 처음 렌더링될 때 데이터를 가져오는 useEffect
   useEffect(() => {
@@ -28,26 +45,20 @@ const InvestmentStatusPage = () => {
             investment.investmentAmount != null &&
             investment.investmentAmount > 0
         );
-        setFilteredData(filtered); // 필터링된 데이터를 상태에 저장
-        setTotalPages(Math.ceil(filtered.length / itemsPerPage)); // 페이지 수 계산
+        const sortedData = sortData(filtered, selectedSortValue); // 정렬된 데이터를 저장
+        setFilteredData(sortedData); // 필터링된 정렬된 데이터를 상태에 저장
+        setTotalPages(Math.ceil(filtered.length / itemsPerPage)); // 필터링된 데이터로 페이지 수 계산
       } catch (e) {
         console.error("서버 오류:", e);
         alert("요청 처리 중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.");
       }
     };
     fetchData();
-  }, [selectedSortValue]);
+  }, [selectedSortValue]); // selectedSortValue가 변경될 때마다 데이터를 다시 가져옴
 
   // 페이지 변경 시 호출되는 함수
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
-  };
-
-  // 현재 페이지에 해당하는 데이터만 가져오는 함수
-  const getCurrentPageData = () => {
-    const startIndex = (currentPage - 1) * itemsPerPage;
-    const endIndex = startIndex + itemsPerPage;
-    return filteredData.slice(startIndex, endIndex); // 필터링된 데이터만 해당 페이지에 맞게 반환
   };
 
   // SelectBox에서 값이 변경되면 호출되는 함수
@@ -65,14 +76,13 @@ const InvestmentStatusPage = () => {
             size="large"
             options={viewMyStartupOptions}
             defaultValue={selectedSortValue}
-            onChange={handleSelectChange}
+            onChange={handleSelectChange} // onChange 핸들러는 InvestmentStatusPage에서 처리
           />
         </div>
       </div>
-      {/* 필터링된 데이터와 전체 투자 데이터를 InvestmentList에 전달 */}
+      {/* 필터링된 데이터와 정렬된 투자 데이터를 InvestmentList에 전달 */}
       <InvestmentList
-        startups={getCurrentPageData()}
-        totalData={filteredData}
+        startups={filteredData} // 필터링되고 정렬된 데이터 전달
         currentPage={currentPage}
         itemsPerPage={itemsPerPage}
       />

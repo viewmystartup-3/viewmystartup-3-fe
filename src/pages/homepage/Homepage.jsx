@@ -57,7 +57,12 @@ const Homepage = () => {
       <div className={styles.pageHeader}>
         <h1 className={styles.headerText}>전체 스타트업 목록</h1>
         <div className={styles.headerComponents}>
-          <Search startups={startupList} onFilteredData={handleFilteredData} />
+          <div className={styles.Search}>
+            <Search
+              startups={startupList} // 전체 기업 목록을 전달
+              onFilteredData={handleFilteredData} // 필터링된 데이터를 처리할 함수를 전달
+            />
+          </div>
           <SelectBox
             size="small"
             options={basicSortOptions}
@@ -66,7 +71,11 @@ const Homepage = () => {
           />
         </div>
       </div>
-      <StartupList startups={startupList} currentPageData={currentPageData} />
+      <StartupList
+        startups={currentPageData}
+        currentPage={currentPage}
+        itemsPerPage={itemsPerPage}
+      />
       <div className={styles.pagePagination}>
         <Pagination
           currentPage={currentPage}
