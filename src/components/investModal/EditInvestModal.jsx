@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import eyeIcon from "../../assets/btn_visibility_on.png";
 import eyeOffIcon from "../../assets/btn_visibility_off.png";
 import ModalTopBar from "../modals/topBar/ModalTopBar";
+import { RoundOutlineButton, SimpleButton } from "../buttons/Buttons";
 import { getCompanyById } from "../../api/company.api";
 import { updateInvestment } from "../../api/investment.api";
 
@@ -263,12 +264,19 @@ const EditInvestModal = ({
           </div>
 
           <div className={styles.buttonGroup}>
-            <button className={styles.cancelButton} onClick={handleClose}>
+            <RoundOutlineButton
+              className={styles.cancelButton}
+              onCancel={handleClose}
+            >
               취소
-            </button>
-            <button className={styles.investButton} onClick={handleEditInvest}>
+            </RoundOutlineButton>
+            <SimpleButton
+              size="mdChange"
+              className={styles.investButton}
+              onClick={handleEditInvest}
+            >
               수정하기
-            </button>
+            </SimpleButton>
           </div>
         </div>
       </div>

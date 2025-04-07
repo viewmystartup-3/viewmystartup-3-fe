@@ -27,16 +27,9 @@
       margin-bottom: 32px;
     }
 
-    .closeButton {
-      font: var(--textSb);
-      padding: 13px 48px;
-      width: 194px;
-      height: 48px;
-      background-color: var(--brandOrange);
-      color: var(--white);
-      border: 1px solid var(--brandOrange);
-      border-radius: 50px;
-      cursor: pointer;
+    .buttonContainer {
+      display: flex;
+      justify-content: center;
     }
   }
 }
@@ -148,27 +141,6 @@ input[type="number"]::-webkit-inner-spin-button {
   display: flex;
   justify-content: center;
   gap: 16px;
-}
-
-.cancelButton,
-.investButton {
-  font: var(--textLSb);
-  padding: 12px 48px;
-  border: 1px solid var(--brandOrange);
-  border-radius: 50px;
-  cursor: pointer;
-  width: 194px;
-  height: 48px;
-}
-
-.cancelButton {
-  background-color: var(--black300);
-  color: var(--brandOrange);
-}
-
-.investButton {
-  background-color: #f05a28;
-  color: var(--white);
 }
 
 .passwordWrapper {

@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./InvestModal.module.scss";
 import ModalTopBar from "../modals/topBar/ModalTopBar";
+import { SimpleButton } from "../buttons/Buttons";
 
 const SuccessModal = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
@@ -13,9 +14,11 @@ const SuccessModal = ({ isOpen, onClose }) => {
           onClose={onClose}
         ></ModalTopBar>
         <p className={styles.successText}>투자가 완료되었어요!</p>
-        <button onClick={onClose} className={styles.closeButton}>
-          확인
-        </button>
+        <div className={styles.buttonContainer}>
+          <SimpleButton size="lg" onClick={onClose}>
+            확인
+          </SimpleButton>
+        </div>
       </div>
     </div>
   );
