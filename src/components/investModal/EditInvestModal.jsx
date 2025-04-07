@@ -232,7 +232,7 @@ const EditInvestModal = ({
             <div className={styles.passwordWrapper}>
               <input
                 type={showConfirmPassword ? "text" : "password"}
-                placeholder="비밀번호를 다시 한 번 입력해 주세요"
+                placeholder="새로운 비밀번호를 다시 한 번 입력해 주세요"
                 value={confirmPassword}
                 onChange={handleConfirmPasswordChange} // 비밀번호 확인 입력 시 오류 메시지 초기화
                 className={`${styles.input} ${

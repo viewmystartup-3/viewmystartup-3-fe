@@ -244,12 +244,9 @@ const InvestModal = ({ isOpen, onClose, onInvestSuccess, targetCompany }) => {
             <button className={styles.cancelButton} onClick={handleClose}>
               취소
             </button>
-            <SimpleButton
-              className={styles.investButton}
-              onClick={handleInvest}
-            >
+            <button className={styles.investButton} onClick={handleInvest}>
               투자하기
-            </SimpleButton>
+            </button>
           </div>
         </div>
       </div>
