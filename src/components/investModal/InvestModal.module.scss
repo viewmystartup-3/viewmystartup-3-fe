@@ -51,7 +51,16 @@
   padding: 24px;
   box-sizing: border-box;
   margin-bottom: 30px;
+  max-height: 80vh;
 }
+
+/* 크롬, Edge 에서 금액 input에 있는 화살표 제거 */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 .companyInfo {
   font: var(--textLB);
   line-height: 100%;
