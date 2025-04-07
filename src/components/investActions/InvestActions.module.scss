@@ -76,27 +76,14 @@
         text-align: center;
       }
     }
-
-    .okBtn {
-      width: 194px;
-      height: 48px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      white-space: nowrap;
-      border-radius: 50px;
-      background-color: var(--brandOrange);
-      color: var(--white);
-      font: var(--text);
-      border: none;
-      padding: 13px 48px;
-      &:active {
-        background-color: var(--gray500);
-      }
-    }
+   
   }
 }
-
+.errorText{
+  color: var(--redError);
+  font-size: 12px;
+  margin-top: 5px;
+}
 .deleteModal, .editModal {
   width: 496px;
   height: 269px;
@@ -158,7 +145,7 @@
       justify-content: space-between;
       gap: 32px;
 
-      p {
+      .textHeader{
         margin: 0;
         font: var(--textL);
         color: var(--white);
@@ -181,6 +168,10 @@
           font: var(--textM);
         }
       }
+      .inputError {
+        border-color: var(--redError);
+      }
+
       .passwordWrapper {
         position: relative;
         .eyeButton {
