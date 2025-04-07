@@ -16,7 +16,6 @@ function CompanySelectionModal({
 }) {
   const [companyList, setCompanyList] = useState([]);
   const [searchResults, setSearchResults] = useState([]);
-  const [latestCompanies, setLatestCompanies] = useState([]);
   const modalRef = useRef(null);
 
   // 데이터 불러오기
@@ -32,24 +31,6 @@ function CompanySelectionModal({
 
     fetchData();
   }, []);
-
-  // 최근 기록 저장(latestCompanies) <- localStorage 방식
-  useEffect(() => {
-    if (title === "나의 기업 선택하기" && myCompany) {
-      const store = JSON.parse(localStorage.getItem("latestCompanies") || "[]");
-
-      // 중복 제거
-      const updated = [
-        myCompany,
-        ...store.filter((company) => company.id !== myCompany.id),
-      ];
-
-      // 최대 3개까지 저장
-      const limited = updated.slice(0, 3);
-
-      localStorage.setItem("latestCompanies", JSON.stringify(limited));
-    }
-  }, [myCompany, title]);
 
   // "나의 기업"에서 선택한 목록이 "다른 기업"에 뜨지 않게(=중복 제거)
   const filteredResults =
