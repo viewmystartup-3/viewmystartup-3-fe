@@ -1,22 +1,24 @@
 import React from "react";
-import styles from "./SuccessModal.module.scss";
+import styles from "./InvestModal.module.scss";
 import ModalTopBar from "../modals/topBar/ModalTopBar";
-
+import { SimpleButton } from "../buttons/Buttons";
 
 const SuccessModal = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
   return (
-    <div className={styles.successModal}>
-      <div className={styles.modalContent}>
+    <div className={styles.modal}>
+      <div className={styles.successContent}>
         <ModalTopBar
           className={styles.successTopbar}
           onClose={onClose}
         ></ModalTopBar>
         <p className={styles.successText}>투자가 완료되었어요!</p>
-        <button onClick={onClose} className={styles.closeButton}>
-          확인
-        </button>
+        <div className={styles.buttonContainer}>
+          <SimpleButton size="lg" onClick={onClose}>
+            확인
+          </SimpleButton>
+        </div>
       </div>
     </div>
   );

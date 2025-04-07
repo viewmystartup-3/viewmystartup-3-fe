@@ -4,6 +4,7 @@ import eyeIcon from "../../assets/btn_visibility_on.png";
 import eyeOffIcon from "../../assets/btn_visibility_off.png";
 import ModalTopBar from "../modals/topBar/ModalTopBar";
 import { useParams } from "react-router-dom";
+import { RoundOutlineButton, SimpleButton } from "../buttons/Buttons";
 import { getCompanyById } from "../../api/company.api";
 import { createInvestment } from "../../api/investment.api";
 
@@ -113,6 +114,7 @@ const InvestModal = ({ isOpen, onClose, onInvestSuccess, targetCompany }) => {
 
   // 모달이 닫힐 때 입력 필드를 초기화
   const handleClose = () => {
+    console.log("handleClose 함수 호출됨");
     setName("");
     setAmount("");
     setComment("");
@@ -240,12 +242,19 @@ const InvestModal = ({ isOpen, onClose, onInvestSuccess, targetCompany }) => {
           </div>
 
           <div className={styles.buttonGroup}>
-            <button className={styles.cancelButton} onClick={handleClose}>
+            <RoundOutlineButton
+              className={styles.cancelButton}
+              onCancel={handleClose}
+            >
               취소
-            </button>
-            <button className={styles.investButton} onClick={handleInvest}>
+            </RoundOutlineButton>
+            <SimpleButton
+              size="mdChange"
+              className={styles.investButton}
+              onClick={handleInvest}
+            >
               투자하기
-            </button>
+            </SimpleButton>
           </div>
         </div>
       </div>

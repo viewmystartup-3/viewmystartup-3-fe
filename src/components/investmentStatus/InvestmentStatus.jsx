@@ -157,15 +157,14 @@ const InvestmentStatus = () => {
       />
       <SuccessModal isOpen={isSuccessModalOpen} onClose={closeSuccessModal} />
 
-      {editModal &&
-        selectedInvestor && ( // selectedInvestor가 있어야 모달이 열림
-          <EditInvestModal
-            isOpen={true}
-            selectedInvestor={selectedInvestor} // 수정된 selectedInvestor 전달
-            onClose={() => setEditModal(false)}
-            onEditSuccess={handleEditSuccess}
-          />
-        )}
+      {editModal && selectedInvestor && (
+        <EditInvestModal
+          isOpen={true}
+          selectedInvestor={selectedInvestor}
+          onClose={() => setEditModal(false)}
+          onEditSuccess={handleEditSuccess}
+        />
+      )}
     </div>
   );
 };

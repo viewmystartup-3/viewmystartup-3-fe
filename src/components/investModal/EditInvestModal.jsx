@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import eyeIcon from "../../assets/btn_visibility_on.png";
 import eyeOffIcon from "../../assets/btn_visibility_off.png";
 import ModalTopBar from "../modals/topBar/ModalTopBar";
+import { RoundOutlineButton, SimpleButton } from "../buttons/Buttons";
 import { getCompanyById } from "../../api/company.api";
 import { updateInvestment } from "../../api/investment.api";
 
@@ -58,29 +59,34 @@ const EditInvestModal = ({
   const handleEditInvest = async () => {
     let isValid = true;
 
-    // 비밀번호와 비밀번호 확인이 비어있을 경우
-    if (!password) {
-      setPasswordError("비밀번호는 필수 입력 사항입니다.");
-      isValid = false;
-    } else {
-      setPasswordError(""); // 비밀번호 오류 메시지 초기화
-    }
+    // 새로운 비밀번호가 입력되지 않았을 때 기존 비밀번호 사용하지 않고, 비밀번호 필드를 생략
+    const finalPassword = password || null;
 
-    if (!confirmPassword) {
+    // 비밀번호를 변경하려는 경우, 확인 과정 추가
+    if (password && !confirmPassword) {
       setConfirmPasswordError("비밀번호 확인은 필수 입력 사항입니다.");
       isValid = false;
-    } else {
-      setConfirmPasswordError(""); // 비밀번호 확인 오류 메시지 초기화
-    }
-
-    // 비밀번호가 일치하지 않으면
-    if (password !== confirmPassword) {
+    } else if (password && password !== confirmPassword) {
       setConfirmPasswordError("비밀번호가 일치하지 않습니다.");
       isValid = false;
+    } else {
+      setConfirmPasswordError(""); // 오류 메시지 초기화
     }
 
     if (!isValid) {
-      return; // 유효하지 않으면 투자를 멈춘다
+      return;
+    }
+
+    // 서버로 보낼 데이터 객체 생성
+    const requestData = {
+      name,
+      amount: parseFloat(amount),
+      comment,
+    };
+
+    // 만약 새로운 비밀번호가 있다면 추가한다.
+    if (finalPassword) {
+      requestData.password = finalPassword;
     }
 
     try {
@@ -107,8 +113,8 @@ const EditInvestModal = ({
       setName("");
       setAmount("");
       setComment("");
-      setPassword(""); // 비밀번호 필드 초기화
-      setConfirmPassword(""); // 비밀번호 확인 초기화
+      setPassword("");
+      setConfirmPassword("");
 
       onClose();
     } catch (error) {
@@ -232,7 +238,7 @@ const EditInvestModal = ({
             <div className={styles.passwordWrapper}>
               <input
                 type={showConfirmPassword ? "text" : "password"}
-                placeholder="비밀번호를 다시 한 번 입력해 주세요"
+                placeholder="새로운 비밀번호를 다시 한 번 입력해 주세요"
                 value={confirmPassword}
                 onChange={handleConfirmPasswordChange} // 비밀번호 확인 입력 시 오류 메시지 초기화
                 className={`${styles.input} ${
@@ -258,12 +264,19 @@ const EditInvestModal = ({
           </div>
 
           <div className={styles.buttonGroup}>
-            <button className={styles.cancelButton} onClick={handleClose}>
+            <RoundOutlineButton
+              className={styles.cancelButton}
+              onCancel={handleClose}
+            >
               취소
-            </button>
-            <button className={styles.investButton} onClick={handleEditInvest}>
+            </RoundOutlineButton>
+            <SimpleButton
+              size="mdChange"
+              className={styles.investButton}
+              onClick={handleEditInvest}
+            >
               수정하기
-            </button>
+            </SimpleButton>
           </div>
         </div>
       </div>
