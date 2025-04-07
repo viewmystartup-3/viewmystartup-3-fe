@@ -17,6 +17,7 @@ function CompanySelectionModal({
 }) {
   const [companyList, setCompanyList] = useState([]);
   const [searchResults, setSearchResults] = useState([]);
+  const [latestCompanies, setLatestCompanies] = useState([]);
   const modalRef = useRef(null);
 
   // 데이터 불러오기
@@ -33,6 +34,24 @@ function CompanySelectionModal({
     fetchData();
   }, []);
 
+  // 최근 기록 저장(latestCompanies) <- localStorage 방식
+  useEffect(() => {
+    if (title === "나의 기업 선택하기" && myCompany) {
+      const store = JSON.parse(localStorage.getItem("latestCompanies") || "[]");
+
+      // 중복 제거
+      const updated = [
+        myCompany,
+        ...store.filter((company) => company.id !== myCompany.id),
+      ];
+
+      // 최대 3개까지 저장
+      const limited = updated.slice(0, 3);
+
+      localStorage.setItem("latestCompanies", JSON.stringify(limited));
+    }
+  }, [myCompany, title]);
+
   // "나의 기업"에서 선택한 목록이 "다른 기업"에 뜨지 않게(=중복 제거)
   const filteredResults =
     title === "비교할 기업 선택하기" && myCompany !== null
@@ -43,7 +62,7 @@ function CompanySelectionModal({
 
   // 상단 바 x 눌러서 창 닫음
   const handleCloseWindow = () => {
-    onClose?.();
+    onClose();
   };
 
   // 모달창 바깥을 클릭하면 창 닫힘
@@ -113,7 +132,10 @@ function CompanySelectionModal({
 
             // "나의 기업 선택하기"에서 "최근 비교한 기업"
             if (type === "latestCompany") {
-              const latestCompanies = companyList.slice(0, 3); // 예시로 최근 3개
+              const latestCompanies = JSON.parse(
+                localStorage.getItem("latestCompanies") || "[]"
+              );
+
               if (latestCompanies.length === 0) return null; // 최근 비교한 기업이 없으면 감춰짐
               return (
                 <SearchResult

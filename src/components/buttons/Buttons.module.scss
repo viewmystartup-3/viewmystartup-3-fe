@@ -4,6 +4,7 @@
   justify-content: center;
   align-items: center;
   white-space: nowrap;
+  cursor: pointer;
 }
 
 // 둥근 버튼 설정 : 공통 속성 + 미디어 쿼리
@@ -17,10 +18,10 @@
 .simple {
   @include button;
   padding: 13px 48px;
-  height: 43px;
   background-color: var(--brandOrange);
   color: var(--white);
   border: none;
+  border-radius: 50px;
   font: var(--textSb);
 
   &:active {
@@ -33,7 +34,7 @@
   @include button;
   @include round;
   padding: 13px 48px;
-  height: 43px;
+  height: 48px;
   background-color: var(--black100);
 
   &.active {
@@ -60,6 +61,7 @@
   gap: 3px;
   background-color: var(--brandOrange);
   color: var(--white);
+  width: 149px;
 }
 
 .restartIcon {
@@ -79,6 +81,7 @@
   @include button;
   @include round;
   @include outline;
+  width: 183px;
   padding: 13px 48px;
   font: var(--textLSb);
 }
@@ -114,6 +117,30 @@
   border: 1px solid var(--gray200);
 }
 
+// 버튼 크기
+.lg {
+  width: 194px;
+  height: 48px;
+}
+
+.md,
+.mdChange {
+  width: 183px;
+  height: 48px;
+}
+
+.sLg {
+  width: 167px;
+}
+
+.sMd {
+  width: 135px;
+}
+
+.sM {
+  width: 131px;
+}
+
 @media (max-width: 744px) {
   .round,
   .simple {
@@ -132,10 +159,12 @@
 
   .restart {
     padding: 4px 12px;
+    width: 116px;
   }
 
   .roundOutline {
     padding: 12px 24px;
+    width: 124px;
   }
 
   .modalButton {
@@ -147,5 +176,23 @@
     &.active {
       padding: 11px 4px;
     }
+  }
+
+  .lg,
+  .mdChange {
+    width: 124px;
+    height: 40px;
+  }
+
+  .sLg {
+    width: 128px;
+  }
+
+  .sMd {
+    width: 100px;
+  }
+
+  .sM {
+    width: 97px;
   }
 }
