@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import styles from "../../styles/page.module.scss";
 import ComparisonList from "../../components/comparisonList/ComparisonList";
 import SelectBox from "../../components/selectBox/SelectBox";
-import { myCompanySelectOptions } from "../../components/selectBox/sortOptions";
-import { dataUrl } from "../../env.js";
+import { myCompanySelectOptions } from "../../sortOptions.js";
 import Pagination from "../../components/pagination/pagination"; // 페이지네이션 컴포넌트 임포트
+import { getAllCompaniesSorted } from "../../api/company.api";
 
 const ComparisonStatusPage = () => {
   const [sortedCompanies, setSortedCompanies] = useState([]); // 정렬된 회사 목록 상태
@@ -17,20 +16,15 @@ const ComparisonStatusPage = () => {
   const [totalPages, setTotalPages] = useState(1); // 총 페이지 수
 
   // axios 요청 함수 (정렬된 회사 목록을 가져오는 함수)
-  const fetchSortedCompanies = (sortValue) => {
-    axios
-      .get(`${dataUrl}/api/companies?sort=${sortValue}`)
-      .then((res) => {
-        console.log("정렬된 회사 목록:", res.data);
-        setSortedCompanies(res.data); // 받아온 데이터로 상태 업데이트
-        setTotalPages(Math.ceil(res.data.length / 10)); // 전체 페이지 수 계산
-      })
-      .catch((error) => {
-        console.error(
-          "정렬된 회사 목록을 가져오는 데 오류가 발생했습니다:",
-          error
-        );
-      });
+  const fetchSortedCompanies = async (sortValue) => {
+    try {
+      const data = await getAllCompaniesSorted(sortValue);
+      console.log("정렬된 회사 목록:", data);
+      setSortedCompanies(data); // 받아온 데이터로 상태 업데이트
+      setTotalPages(Math.ceil(data.length / 10)); // 전체 페이지 수 계산
+    } catch (e) {
+      console.error("정렬된 회사 목록을 가져오는 데 오류가 발생했습니다:", e);
+    }
   };
 
   // SelectBox에서 값이 변경되면 호출되는 함수

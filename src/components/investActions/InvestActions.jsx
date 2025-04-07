@@ -2,12 +2,11 @@ import React, { useState, useRef } from "react"; // useRef 추가!
 import styles from "./InvestActions.module.scss";
 import listImg from "../../assets/ic_kebab.png";
 import { useParams } from "react-router-dom";
-import axios from "axios";
-import { dataUrl } from "../../env";
 import ModalTopBar from "../modals/topBar/ModalTopBar";
 import eyeIcon from "../../assets/btn_visibility_on.png";
 import eyeOffIcon from "../../assets/btn_visibility_off.png";
 import { createPortal } from "react-dom";
+import { checkInvestmentPassword, deleteInvestment } from "../../api/investment.api";
 
 const InvestorActions = ({
   investor,
@@ -39,10 +38,7 @@ const InvestorActions = ({
 
   const handleDelete = async () => {
     try {
-      const response = await axios.delete(
-        `${dataUrl}/api/companies/${id}/investments/${investor.id}`,
-        { data: { password } }
-      );
+      const response = await deleteInvestment(id, investor.id, password);
 
       if (response.status === 200) {
         console.log("삭제 성공!");
@@ -73,10 +69,7 @@ const InvestorActions = ({
     try {
       console.log(id);
       console.log(investor.id);
-      const response = await axios.post(
-        `${dataUrl}/api/companies/${id}/investments/${investor.id}/password`,
-        { password: editPassword }
-      );
+      const response = await checkInvestmentPassword(id, investor.id, editPassword)
 
       if (response.status === 200) {
         setEditModal(false);

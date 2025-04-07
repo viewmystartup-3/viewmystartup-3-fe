@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import styles from "./InvestModal.module.scss"; // 기존 스타일 사용
 import { useParams } from "react-router-dom";
-import axios from "axios";
-import { dataUrl } from "../../env";
 import eyeIcon from "../../assets/btn_visibility_on.png";
 import eyeOffIcon from "../../assets/btn_visibility_off.png";
 import ModalTopBar from "../modals/topBar/ModalTopBar";
+import { getCompanyById } from "../../api/company.api";
+import { updateInvestment } from "../../api/investment.api";
 
 const EditInvestModal = ({
   isOpen,
@@ -29,8 +29,8 @@ const EditInvestModal = ({
   // 기업 정보 가져오기
   const fetchCompanyDetails = async () => {
     try {
-      const response = await axios.get(`${dataUrl}/api/companies/${id}`);
-      setCompany(response.data); // 기업 정보 설정
+      const data = await getCompanyById(id);
+      setCompany(data); // 기업 정보 설정
     } catch (e) {
       console.error(e);
     }
@@ -84,21 +84,24 @@ const EditInvestModal = ({
     }
 
     try {
+      const updatedData = {
+        name,
+        amount: parseFloat(amount), // 금액 수정
+        comment, // 코멘트 수정
+        password, // 비밀번호 수정
+      };
+
       // PATCH 요청을 통해 투자 수정
-      const response = await axios.patch(
-        `${dataUrl}/api/companies/${id}/investments/${selectedInvestor.id}`,
-        {
-          name: name,
-          amount: parseFloat(amount), // 금액 수정
-          comment: comment, // 코멘트 수정
-          password: password, // 비밀번호 수정
-        }
+      const updated = await updateInvestment(
+        id,
+        selectedInvestor.id,
+        updatedData
       );
 
-      console.log("Investment updated successfully:", response.data);
+      console.log("Investment updated successfully:", updated);
 
       // 수정 후 onEditSuccess 호출하여 상태 갱신
-      onEditSuccess(response.data);
+      onEditSuccess(updated);
 
       // 상태 초기화
       setName("");

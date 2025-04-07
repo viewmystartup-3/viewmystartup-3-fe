@@ -3,8 +3,7 @@ import styles from "./CompanySelectionModal.module.scss";
 import ModalTopBar from "../topBar/ModalTopBar";
 import SearchResult from "./SearchResult";
 import Search from "../../search/Search";
-import axios from "axios";
-import { dataUrl } from "../../../env";
+import { getAllCompanies } from "../../../api/company.api";
 
 function CompanySelectionModal({
   title,
@@ -24,8 +23,8 @@ function CompanySelectionModal({
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${dataUrl}/api/companies`);
-        setCompanyList(response.data);
+        const companies = await getAllCompanies();
+        setCompanyList(companies);
       } catch (error) {
         console.error(error);
       }

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { RoundButton } from "../../components/buttons/Buttons";
+import { RoundButton, SimpleButton } from "../../components/buttons/Buttons";
 import MyCompanySection from "./MyCompanySection";
 import style from "./MyPage.module.scss";
 import CompareSection from "./CompareSection";
@@ -7,8 +7,7 @@ import ResultTable from "../../components/myPageTable/ResultTable";
 import RankingCheckTable from "../../components/myPageTable/RankingCheckTable";
 import InvestModal from "../../components/investModal/InvestModal";
 import SuccessModal from "../../components/investModal/SuccessModal";
-import axios from "axios";
-import { dataUrl } from "../../env.js";
+import { increaseCompanyCompareCount } from "../../api/company.api";
 import { useNavigate } from "react-router-dom";
 
 function MyPage() {
@@ -69,11 +68,10 @@ function MyPage() {
   const handleCompareButton = async () => {
     try {
       //1. API 호출로 선택 카운트 증가
-      await axios.post(`${dataUrl}/api/companies/increase-selection`, {
+      await increaseCompanyCompareCount({
         myCompanyId: myCompany.id,
         compareCompanyIds: compareCompanies.map((c) => c.id),
       });
-
       setShowResultTable(true);
     } catch (e) {
       console.error("기업 선택 카운트 증가 실패:", e);
@@ -123,7 +121,9 @@ function MyPage() {
           <RankingCheckTable myCompany={myCompany} />
 
           <div className={style.investBtn}>
-            <RoundButton onClick={openModal}>나의 기업에 투자하기</RoundButton>
+            <SimpleButton onClick={openModal} size="md">
+              나의 기업에 투자하기
+            </SimpleButton>
           </div>
         </>
       )}

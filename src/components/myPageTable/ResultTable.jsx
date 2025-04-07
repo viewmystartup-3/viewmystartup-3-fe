@@ -1,10 +1,9 @@
 import React, { useState, useEffect, useMemo } from "react";
 import styles from "./Table.module.scss";
 import SelectBox from "../selectBox/SelectBox";
-import { basicSortOptions } from "../selectBox/sortOptions";
+import { basicSortOptions } from "../../sortOptions.js";
 import RawTable from "./RawTable.jsx";
-import axios from "axios";
-import { dataUrl } from "../../env.js";
+import { getCompaniesByIdsSorted } from "../../api/company.api.js";
 
 function ResultTable({ myCompany, compareCompanies }) {
   const [loadedData, setLoadedData] = useState([]);
@@ -26,11 +25,8 @@ function ResultTable({ myCompany, compareCompanies }) {
 
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${dataUrl}/api/companies`, {
-          params: { sort: sortBy, ids: selectedCompanyIds.join(",") },
-        });
-
-        setLoadedData(response.data);
+        const data = await getCompaniesByIdsSorted(selectedCompanyIds, sortBy);
+        setLoadedData(data);
       } catch (error) {
         console.error(error);
       }
