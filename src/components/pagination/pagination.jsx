@@ -23,13 +23,13 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
       </button>
 
       {/* 페이지 번호 버튼들 */}
-      {generatePageNumbers().map((page) => (
+      {generatePageNumbers().map((pageNumber) => (
         <button
-          key={page}
-          onClick={() => onPageChange(page)}
-          className={currentPage === page ? styles.active : ""}
+          key={pageNumber}
+          onClick={() => onPageChange(pageNumber)}
+          className={currentPage === pageNumber ? styles.active : ""}
         >
-          {page}
+          {pageNumber}
         </button>
       ))}
 
