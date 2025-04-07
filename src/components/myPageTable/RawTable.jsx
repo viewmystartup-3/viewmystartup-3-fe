@@ -51,7 +51,9 @@ const RawTable = ({
                 key={startup.id}
               >
                 {!hideRanking && (
-                  <p className={styles.ranking}>{index + 1}위</p>
+                  <p className={styles.ranking}>
+                    {startup.actualRanking ? `${startup.actualRanking}위` : "-"}
+                  </p>
                 )}
                 <Link
                   to={`/companies/${startup.id}`}

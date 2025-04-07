@@ -28,18 +28,21 @@ function RankingCheckTable({ myCompany }) {
     fetchData();
   }, [sortBy, myCompany]);
 
+  // 순위 필터링
   const rankedCompanies = useMemo(() => {
     if (!myCompany || loadedData.length === 0) return [];
 
-    const index = loadedData.findIndex(
+    const realIndex = loadedData.findIndex(
       (company) => company.id === myCompany.id
     );
-    if (index === -1) return [];
+    if (realIndex === -1) return [];
 
-    const start = Math.max(0, index - 2);
-    const end = Math.min(loadedData.length, index + 3);
+    const start = Math.max(0, realIndex - 2);
+    const end = Math.min(loadedData.length, realIndex + 3);
 
-    return loadedData.slice(start, end);
+    return loadedData
+      .slice(start, end)
+      .map((company, i) => ({ ...company, actualRanking: start + i + 1 }));
   }, [myCompany, loadedData]);
 
   return (

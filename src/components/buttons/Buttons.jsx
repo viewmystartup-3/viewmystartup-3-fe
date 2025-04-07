@@ -1,3 +1,17 @@
+/* 버튼 크기
+
+== simple ==
+- xlg: 194px -> 135px
+- lg: 194px -> 124px
+- md : 183px (변동x)
+- mdChange : 183px -> 124px
+
+== RoundSmall ==
+- sLg: 167px -> 128px
+- sMd: 135px -> 100px
+- sM: 131px -> 97px
+*/
+
 import React from "react";
 import styles from "./Buttons.module.scss";
 import checkIcon from "../../assets/ic_check.png";
@@ -5,10 +19,10 @@ import icCheckS from "../../assets/ic_check_s.png";
 import { GrRotateLeft } from "react-icons/gr";
 import { clsx } from "clsx";
 
-// 색깔 안 변하는 기본 버튼(RoundSmallButton과 디자인 같고, padding은 RoundButton과 같음)
-export function SimpleButton({ children, onClick }) {
+// 색깔 안 변하는 기본 버튼
+export function SimpleButton({ children, onClick, size = "md" }) {
   return (
-    <button className={styles.simple} onClick={onClick}>
+    <button className={clsx(styles.simple, styles[size])} onClick={onClick}>
       {children}
     </button>
   );
