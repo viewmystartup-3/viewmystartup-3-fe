@@ -27,3 +27,21 @@ export const getInvestmentByCompanyId = async (companyId) => {
   const res = await axios.get(`/companies/${companyId}/investments`);
   return res.data;
 };
+
+//투자 정보 수정 (patch)
+export const updateInvestment = async (companyId, investorId, updatedData) => {
+  const res = await axios.patch(
+    `/companies/${companyId}/investments/${investorId}`,
+    updatedData
+  );
+  return res.data;
+};
+
+//새로운 투자 등록
+export const createInvestment = async (companyId, investmentData) => {
+  const res = await axios.post(
+    `/companies/${companyId}/investments`,
+    investmentData
+  );
+  return res.data;
+};

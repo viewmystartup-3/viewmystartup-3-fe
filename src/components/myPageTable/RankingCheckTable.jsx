@@ -3,8 +3,7 @@ import styles from "./Table.module.scss";
 import SelectBox from "../selectBox/SelectBox";
 import { basicSortOptions } from "../selectBox/sortOptions";
 import RawTable from "./RawTable.jsx";
-import axios from "axios";
-import { dataUrl } from "../../env.js";
+import { getAllCompaniesSorted } from "../../api/company.api.js";
 
 function RankingCheckTable({ myCompany }) {
   const [loadedData, setLoadedData] = useState([]);
@@ -15,11 +14,8 @@ function RankingCheckTable({ myCompany }) {
 
     const fetchData = async () => {
       try {
-        const response = await axios.get(
-          `${dataUrl}/api/companies?sort=${sortBy}`
-        );
-
-        setLoadedData(response.data);
+        const data = await getAllCompaniesSorted(sortBy);
+        setLoadedData(data);
       } catch (error) {
         console.error(error);
       }

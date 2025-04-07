@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import styles from "./InvestModal.module.scss";
-import axios from "axios";
-import { dataUrl } from "../../env";
 import eyeIcon from "../../assets/btn_visibility_on.png";
 import eyeOffIcon from "../../assets/btn_visibility_off.png";
 import ModalTopBar from "../modals/topBar/ModalTopBar";
 import { useParams } from "react-router-dom";
+import { getCompanyById } from "../../api/company.api";
+import { createInvestment } from "../../api/investment.api";
 
 const InvestModal = ({ isOpen, onClose, onInvestSuccess, targetCompany }) => {
   const { id: urlId } = useParams();
@@ -26,8 +26,8 @@ const InvestModal = ({ isOpen, onClose, onInvestSuccess, targetCompany }) => {
     } else if (urlId) {
       const fetchCompany = async () => {
         try {
-          const res = await axios.get(`${dataUrl}/api/companies/${urlId}`);
-          setCompany(res.data);
+          const data = await getCompanyById(urlId);
+          setCompany(data);
         } catch (e) {
           console.error(e);
         }
@@ -73,17 +73,14 @@ const InvestModal = ({ isOpen, onClose, onInvestSuccess, targetCompany }) => {
     }
 
     try {
-      const response = await axios.post(
-        `${dataUrl}/api/companies/${company.id}/investments`,
-        {
-          name,
-          amount: parseFloat(amount), // 금액을 float으로 변환
-          comment,
-          password,
-        }
-      );
+      const newInvestment = await createInvestment(company.id, {
+        name,
+        amount: parseFloat(amount), // 금액을 float으로 변환
+        comment,
+        password,
+      });
 
-      console.log("Investment successful:", response.data);
+      console.log("Investment successful:", newInvestment);
 
       // 투자 후 상태 초기화
       setName("");

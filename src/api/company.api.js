@@ -1,5 +1,25 @@
 import axios from "./axiosInstance.api.js";
 
+//모든 기업 리스트 가져오기
+export const getAllCompanies = async () => {
+  const res = await axios.get("/companies");
+  return res.data;
+};
+
+// 정렬 기준으로 전체 기업 조회
+export const getAllCompaniesSorted = async (sort) => {
+  const res = await axios.get(`/companies?sort=${sort}`);
+  return res.data;
+};
+
+// 여러 ID 기반 기업 목록을 정렬 기준에 따라 조회
+export const getCompaniesByIdsSorted = async (ids, sort) => {
+  const res = await axios.get(`/companies`, {
+    params: { ids: ids.join(","), sort },
+  });
+  return res.data;
+};
+
 // 특정 기업 정보 조회 by id
 export const getCompanyById = async (id) => {
   const res = await axios.get(`/companies/${id}`);
