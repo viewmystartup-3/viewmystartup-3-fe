@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { RoundButton } from "../../components/buttons/Buttons";
+import { RoundButton, SimpleButton } from "../../components/buttons/Buttons";
 import MyCompanySection from "./MyCompanySection";
 import style from "./MyPage.module.scss";
 import CompareSection from "./CompareSection";
@@ -121,7 +121,9 @@ function MyPage() {
           <RankingCheckTable myCompany={myCompany} />
 
           <div className={style.investBtn}>
-            <RoundButton onClick={openModal}>나의 기업에 투자하기</RoundButton>
+            <SimpleButton onClick={openModal} size="md">
+              나의 기업에 투자하기
+            </SimpleButton>
           </div>
         </>
       )}

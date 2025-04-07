@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import style from "./MyCompanySection.module.scss";
 import btnPlus from "../../assets/btn_plus.png";
 import Card from "./Card";
@@ -30,6 +30,24 @@ function MyCompanySection({
     setMyCompany(mappedCompany); // 여기서 선택된 기업 외부 상태에 저장
     setIsModalOpen(false); // 모달 닫기
   };
+
+  // 최근 기록 저장(latestCompanies) <- localStorage 방식
+  useEffect(() => {
+    if (myCompany) {
+      const store = JSON.parse(localStorage.getItem("latestCompanies") || "[]");
+
+      // 중복 제거
+      const updated = [
+        myCompany,
+        ...store.filter((company) => company.id !== myCompany.id),
+      ];
+
+      // 최대 3개까지 저장
+      const limited = updated.slice(0, 3);
+
+      localStorage.setItem("latestCompanies", JSON.stringify(limited));
+    }
+  }, [myCompany]);
 
   return (
     <section className={style.wrapper}>
@@ -87,6 +105,7 @@ function MyCompanySection({
         <MyCompanyModal
           onClose={() => setIsModalOpen(false)}
           onSelect={handleSelectCompany} //myCompanyModal에서 선택한 기업 넘겨줄수 있도록!
+          myCompany={myCompany}
         />
       )}
     </section>
