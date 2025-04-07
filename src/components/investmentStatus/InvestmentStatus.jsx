@@ -93,7 +93,7 @@ const InvestmentStatus = () => {
     <div className={styles.main}>
       <div className={styles.header}>
         <p className={styles.title}>View My StartUP에서 받은 투자</p>
-        <SimpleButton className={styles.investBtn} onClick={openModal}>
+        <SimpleButton size="xlg" className={styles.investBtn} onClick={openModal}>
           기업투자하기
         </SimpleButton>
       </div>

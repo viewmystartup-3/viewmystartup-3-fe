@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react"; // useRef 추가!
+import React, { useState, useRef } from "react";
 import styles from "./InvestActions.module.scss";
 import listImg from "../../assets/ic_kebab.png";
 import { useParams } from "react-router-dom";
@@ -6,7 +6,11 @@ import ModalTopBar from "../modals/topBar/ModalTopBar";
 import eyeIcon from "../../assets/btn_visibility_on.png";
 import eyeOffIcon from "../../assets/btn_visibility_off.png";
 import { createPortal } from "react-dom";
-import { checkInvestmentPassword, deleteInvestment } from "../../api/investment.api";
+import {
+  checkInvestmentPassword,
+  deleteInvestment,
+} from "../../api/investment.api";
+import { SimpleButton } from "../buttons/Buttons";
 
 const InvestorActions = ({
   investor,
@@ -17,47 +21,43 @@ const InvestorActions = ({
 }) => {
   const { id } = useParams();
   const [deleteModal, setDeleteModal] = useState(false);
+  const [editModal, setEditModal] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [password, setPassword] = useState("");
   const [passwordError, setPasswordError] = useState("");
+  const [editPassword, setEditPassword] = useState("");
+  const [editPasswordError, setEditPasswordError] = useState(""); 
   const [errorModal, setErrorModal] = useState(false);
   const [errorType, setErrorType] = useState("");
-  const [editModal, setEditModal] = useState(false);
-  const [editPassword, setEditPassword] = useState("");
 
   const isActive = activeInvestorId === investor.id;
-  const buttonRef = useRef(null); // 옵션 버튼 참조
+  const buttonRef = useRef(null);
 
   const handleDeleteClick = () => {
     setDeleteModal(true);
   };
 
   const togglePasswordVisibility = () => {
-    setShowPassword((prevState) => !prevState);
+    setShowPassword((prev) => !prev);
   };
 
   const handleDelete = async () => {
+    if (!password) {
+      setPasswordError("비밀번호는 필수 입력 사항입니다.");
+      return;
+    } else {
+      setPasswordError("");
+    }
+
     try {
       const response = await deleteInvestment(id, investor.id, password);
-
       if (response.status === 200) {
-        console.log("삭제 성공!");
         setDeleteModal(false);
         setPassword("");
         onDelete(investor.id);
       }
-      if (!password) {
-        setPasswordError("비밀번호는 필수 입력 사항입니다.");
-      } else {
-        setPasswordError(""); // 비밀번호 오류 메시지 초기화
-      }
-      setPassword("");
     } catch (e) {
-      console.error(e);
-      if (
-        e.response &&
-        (e.response.status === 401 || e.response.status === 403)
-      ) {
+      if (e.response && (e.response.status === 401 || e.response.status === 403)) {
         setErrorType("delete");
         setErrorModal(true);
         setDeleteModal(false);
@@ -66,30 +66,24 @@ const InvestorActions = ({
   };
 
   const handleEdit = async () => {
-    try {
-      console.log(id);
-      console.log(investor.id);
-      const response = await checkInvestmentPassword(id, investor.id, editPassword)
+    if (!editPassword) {
+      setEditPasswordError("비밀번호는 필수 입력 사항입니다.");
+      return;
+    } else {
+      setEditPasswordError("");
+    }
 
+    try {
+      const response = await checkInvestmentPassword(id, investor.id, editPassword);
       if (response.status === 200) {
         setEditModal(false);
         setEditPassword("");
         onEdit(investor);
-        console.log("성공~");
       }
-
-      if (!password) {
-        setPasswordError("비밀번호는 필수 입력 사항입니다.");
-      } else {
-        setPasswordError(""); // 비밀번호 오류 메시지 초기화
-      }
-      setPassword("");
     } catch (e) {
-      if (
-        e.response &&
-        (e.response.status === 401 || e.response.status === 403)
-      ) {
+      if (e.response && (e.response.status === 401 || e.response.status === 403)) {
         setEditPassword("");
+        setErrorType("edit");
         setErrorModal(true);
         setEditModal(false);
       }
@@ -114,9 +108,7 @@ const InvestorActions = ({
             className={styles.optionsList}
             style={{
               position: "absolute",
-              top: buttonRect
-                ? `${buttonRect.bottom + window.scrollY}px`
-                : "0px",
+              top: buttonRect ? `${buttonRect.bottom + window.scrollY}px` : "0px",
               left: buttonRect ? `${buttonRect.left}px` : "0px",
             }}
           >
@@ -142,19 +134,20 @@ const InvestorActions = ({
                     onClose={() => {
                       setDeleteModal(false);
                       setPassword("");
+                      setPasswordError("");
                     }}
                   />
                 </div>
                 <div className={styles.passwordBox}>
                   <div>
-                    <p>비밀번호</p>
+                    <p className={styles.textHeader}>비밀번호</p>
                     <div className={styles.passwordWrapper}>
                       <input
                         type={showPassword ? "text" : "password"}
                         placeholder="비밀번호를 입력해 주세요"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
-                        className={styles.input}
+                        className={`${styles.input} ${passwordError ? styles.inputError : ""}`}
                       />
                       <button
                         type="button"
@@ -168,11 +161,18 @@ const InvestorActions = ({
                         />
                       </button>
                     </div>
+                    {passwordError && (
+                      <p className={styles.errorText}>{passwordError}</p>
+                    )}
                   </div>
                   <div className={styles.deleteBox}>
-                    <button className={styles.deleteBtn} onClick={handleDelete}>
+                    <SimpleButton
+                      size="mdChange"
+                      className={styles.deleteBtn}
+                      onClick={handleDelete}
+                    >
                       삭제하기
-                    </button>
+                    </SimpleButton>
                   </div>
                 </div>
               </div>
@@ -180,6 +180,7 @@ const InvestorActions = ({
           </div>,
           document.body
         )}
+
       {editModal &&
         createPortal(
           <div>
@@ -192,21 +193,20 @@ const InvestorActions = ({
                     onClose={() => {
                       setEditModal(false);
                       setEditPassword("");
+                      setEditPasswordError("");
                     }}
                   />
                 </div>
                 <div className={styles.passwordBox}>
                   <div>
-                    <p>비밀번호</p>
+                    <p className={styles.textHeader}>비밀번호</p>
                     <div className={styles.passwordWrapper}>
                       <input
                         type={showPassword ? "text" : "password"}
                         placeholder="비밀번호를 입력해 주세요"
                         value={editPassword}
-                        onChange={(e) => {
-                          setEditPassword(e.target.value);
-                        }}
-                        className={styles.input}
+                        onChange={(e) => setEditPassword(e.target.value)}
+                        className={`${styles.input} ${editPasswordError ? styles.inputError : ""}`}
                       />
                       <button
                         type="button"
@@ -220,11 +220,18 @@ const InvestorActions = ({
                         />
                       </button>
                     </div>
+                    {editPasswordError && (
+                      <p className={styles.errorText}>{editPasswordError}</p>
+                    )}
                   </div>
                   <div className={styles.editBox}>
-                    <button className={styles.editBtn} onClick={handleEdit}>
+                    <SimpleButton
+                      size="mdChange"
+                      className={styles.editBtn}
+                      onClick={handleEdit}
+                    >
                       수정하기
-                    </button>
+                    </SimpleButton>
                   </div>
                 </div>
               </div>
@@ -244,6 +251,7 @@ const InvestorActions = ({
                     onClose={() => {
                       setErrorModal(false);
                       setPassword("");
+                      setEditPassword("");
                     }}
                   />
                   <p>
@@ -252,15 +260,17 @@ const InvestorActions = ({
                       : "잘못된 비밀번호로 수정에 실패하셨습니다."}
                   </p>
                 </div>
-                <button
+                <SimpleButton
+                  size="mdChange"
                   className={styles.okBtn}
                   onClick={() => {
                     setErrorModal(false);
                     setPassword("");
+                    setEditPassword("");
                   }}
                 >
                   확인
-                </button>
+                </SimpleButton>
               </div>
             </div>
           </div>,
