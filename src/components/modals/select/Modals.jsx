@@ -5,13 +5,14 @@ import CompanySelectionModal from "./CompanySelectionModal";
  *
  * 나의 기업 선택 모달
  */
-export function MyCompanyModal({ onSelect, onClose }) {
+export function MyCompanyModal({ onSelect, onClose, myCompany }) {
   return (
     <CompanySelectionModal
       title="나의 기업 선택하기"
       titleTypes={["latestCompany", "result"]}
       onSelect={onSelect}
       onClose={onClose}
+      myCompany={myCompany}
     />
   );
 }
