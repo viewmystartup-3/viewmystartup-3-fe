@@ -93,7 +93,11 @@ const InvestmentStatus = () => {
     <div className={styles.main}>
       <div className={styles.header}>
         <p className={styles.title}>View My StartUP에서 받은 투자</p>
-        <SimpleButton size="xlg" className={styles.investBtn} onClick={openModal}>
+        <SimpleButton
+          size="xlg"
+          className={styles.investBtn}
+          onClick={openModal}
+        >
           기업투자하기
         </SimpleButton>
       </div>
@@ -101,29 +105,29 @@ const InvestmentStatus = () => {
         <div className={table.table}>
           {investment.length > 0 ? (
             <>
-              <p className={styles.totalMoney}>
+              <span className={styles.totalMoney}>
                 총 {allInvestments.reduce((acc, inv) => acc + inv.amount, 0)}억
                 원
-              </p>
+              </span>
               <div className={table.listHeader}>
-                <p className={table.listtitle}>투자자 이름</p>
-                <p className={table.listtitle}>순위</p>
-                <p className={table.listtitle}>투자 금액</p>
-                <p className={table.comment}>투자 코멘트</p>
-                <p className={table.column}></p>
+                <span className={table.listtitle}>투자자 이름</span>
+                <span className={table.listtitle}>순위</span>
+                <span className={table.listtitle}>투자 금액</span>
+                <span className={table.comment}>투자 코멘트</span>
+                <span className={table.column}></span>
               </div>
 
               <div className={table.tableContents}>
                 {investment.map((inv, index) => (
                   <div className={table.listContent} key={inv.id}>
-                    <p className={table.listtitle}>{inv.name}</p>
-                    <p className={table.listtitle}>
+                    <span className={table.listtitle}>{inv.name}</span>
+                    <span className={table.listtitle}>
                       {index + 1 + (currentPage - 1) * itemsPerPage}위
-                    </p>
-                    <p className={table.listtitle}>{inv.amount}억 원</p>
-                    <p className={table.commentTo}>
+                    </span>
+                    <span className={table.listtitle}>{inv.amount}억 원</span>
+                    <span className={table.commentTo}>
                       {inv.comment || "코멘트 없음"}
-                    </p>
+                    </span>
                     <InvestorActions
                       investor={inv}
                       onEdit={handleEditInvest}
@@ -137,8 +141,8 @@ const InvestmentStatus = () => {
             </>
           ) : (
             <div className={styles.emptyState}>
-              <p>아직 투자한 기업이 없어요.</p>
-              <p>버튼을 눌러 기업에 투자해보세요!</p>
+              <span>아직 투자한 기업이 없어요.</span>
+              <span>버튼을 눌러 기업에 투자해보세요!</span>
             </div>
           )}
         </div>

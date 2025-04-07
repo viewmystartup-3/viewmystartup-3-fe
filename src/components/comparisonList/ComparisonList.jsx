@@ -21,22 +21,26 @@ const ComparisonList = ({ companies, totalCompanies, currentPage }) => {
   return (
     <div className={styles.table}>
       <div className={styles.tableHeader}>
-        <p className={styles.ranking}>순위</p>
-        <p className={styles.name}>기업 명</p>
-        <p className={styles.description}>기업 소개</p>
-        <p className={styles.info}>카테고리</p>
-        <p className={styles.investmentAndSelection}>나의 기업 선택 횟수</p>
-        <p className={styles.investmentAndSelection}>비교 기업 선택 횟수</p>
+        <span className={styles.ranking}>순위</span>
+        <span className={styles.name}>기업 명</span>
+        <span className={styles.description}>기업 소개</span>
+        <span className={styles.info}>카테고리</span>
+        <span className={styles.investmentAndSelection}>
+          나의 기업 선택 횟수
+        </span>
+        <span className={styles.investmentAndSelection}>
+          비교 기업 선택 횟수
+        </span>
       </div>
 
       {/* 비교 목록 렌더링 */}
       <div className={styles.tableContents}>
         {loading ? (
-          <p className={styles.dataMessage}>로딩 중...</p> // 로딩 중일 때 메시지
+          <span className={styles.dataMessage}>로딩 중...</span> // 로딩 중일 때 메시지
         ) : companies.length > 0 ? (
           companies.map((comparison, index) => (
             <div className={styles.tableContent} key={comparison.id}>
-              <p className={styles.ranking}>{getRank(index)}위</p>
+              <span className={styles.ranking}>{getRank(index)}위</span>
               <Link
                 to={`/companies/${comparison.id}`}
                 className={styles.nameWrapper}
@@ -46,20 +50,22 @@ const ComparisonList = ({ companies, totalCompanies, currentPage }) => {
                   alt={comparison.name}
                   className={styles.image}
                 />
-                <p className={styles.name}>{comparison.name}</p>
+                <span className={styles.name}>{comparison.name}</span>
               </Link>
-              <p className={styles.description}>{comparison.description}</p>
-              <p className={styles.info}>{comparison.category}</p>
-              <p className={styles.investmentAndSelection}>
+              <span className={styles.description}>
+                {comparison.description}
+              </span>
+              <span className={styles.info}>{comparison.category}</span>
+              <span className={styles.investmentAndSelection}>
                 {comparison.selectedCompany}
-              </p>
-              <p className={styles.investmentAndSelection}>
+              </span>
+              <span className={styles.investmentAndSelection}>
                 {comparison.comparedCompany}
-              </p>
+              </span>
             </div>
           ))
         ) : (
-          <p className={styles.dataMessage}>아직 비교 현황이 없어요.</p> // 데이터가 없을 때 메시지
+          <span className={styles.dataMessage}>아직 비교 현황이 없어요.</span> // 데이터가 없을 때 메시지
         )}
       </div>
     </div>

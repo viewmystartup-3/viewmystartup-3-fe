@@ -31,24 +31,26 @@ const InvestmentList = ({ startups, currentPage, itemsPerPage }) => {
   return (
     <div className={styles.table}>
       <div className={styles.tableHeader}>
-        <p className={styles.ranking}>순위</p>
-        <p className={styles.name}>기업 명</p>
-        <p className={styles.description}>기업 소개</p>
-        <p className={styles.info}>카테고리</p>
-        <p className={styles.investmentAndSelection}>
+        <span className={styles.ranking}>순위</span>
+        <span className={styles.name}>기업 명</span>
+        <span className={styles.description}>기업 소개</span>
+        <span className={styles.info}>카테고리</span>
+        <span className={styles.investmentAndSelection}>
           View My Startup 투자 금액
-        </p>
-        <p className={styles.investmentAndSelection}>실제 누적 투자 금액</p>
+        </span>
+        <span className={styles.investmentAndSelection}>
+          실제 누적 투자 금액
+        </span>
       </div>
 
       {/* 투자 목록 렌더링 */}
       <div className={styles.tableContents}>
         {loading ? (
-          <p className={styles.dataMessage}>로딩중...</p> // 로딩 중일 때 메시지
+          <span className={styles.dataMessage}>로딩중...</span> // 로딩 중일 때 메시지
         ) : currentPageStartups.length > 0 ? (
           currentPageStartups.map((investment, index) => (
             <div className={styles.tableContent} key={investment.id}>
-              <p className={styles.ranking}>{getRank(index)}위</p>{" "}
+              <span className={styles.ranking}>{getRank(index)}위</span>{" "}
               {/* 순위 계산 */}
               <Link
                 to={`/companies/${investment.id}`}
@@ -59,20 +61,22 @@ const InvestmentList = ({ startups, currentPage, itemsPerPage }) => {
                   alt={investment.name}
                   className={styles.image}
                 />
-                <p className={styles.name}>{investment.name}</p>
+                <span className={styles.name}>{investment.name}</span>
               </Link>
-              <p className={styles.description}>{investment.description}</p>
-              <p className={styles.info}>{investment.category}</p>
-              <p className={styles.investmentAndSelection}>
+              <span className={styles.description}>
+                {investment.description}
+              </span>
+              <span className={styles.info}>{investment.category}</span>
+              <span className={styles.investmentAndSelection}>
                 {investment.investmentAmount}억 원
-              </p>
-              <p className={styles.investmentAndSelection}>
+              </span>
+              <span className={styles.investmentAndSelection}>
                 {investment.totalInvestment}억 원
-              </p>
+              </span>
             </div>
           ))
         ) : (
-          <p className={styles.dataMessage}>아직 투자 현황이 없어요.</p>
+          <span className={styles.dataMessage}>아직 투자 현황이 없어요.</span>
         )}
       </div>
     </div>
