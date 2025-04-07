@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import StartupList from "../../components/startupList/StartupList";
 import Search from "../../components/search/Search";
 import styles from "../../styles/page.module.scss";
-import { dataUrl } from "../../env.js";
 import SelectBox from "../../components/selectBox/SelectBox";
-import { basicSortOptions } from "../../components/selectBox/sortOptions.js";
+import { basicSortOptions } from "../../sortOptions.js";
 import Pagination from "../../components/pagination/pagination"; // 페이지네이션 컴포넌트 임포트
+import { getAllCompaniesSorted } from "../../api/company.api.js";
 
 const Homepage = () => {
   const [startupList, setStartupList] = useState([]); // 전체 데이터
@@ -23,10 +22,7 @@ const Homepage = () => {
   // 데이터 가져오기
   const fetchStartupList = async (sortOrder = "totalInvestment_desc") => {
     try {
-      const response = await axios.get(
-        `${dataUrl}/api/companies?sort=${sortOrder}`
-      );
-      const data = response.data;
+      const data = await getAllCompaniesSorted(sortOrder);
       setStartupList(data); // 전체 데이터를 'startupList'에 저장
       setFilteredData(data); // 초기 데이터를 'filteredData'에 저장
       setTotalPages(Math.ceil(data.length / itemsPerPage)); // 전체 페이지 수 계산

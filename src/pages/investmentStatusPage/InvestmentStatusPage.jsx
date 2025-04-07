@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
 import InvestmentList from "../../components/investmentList/InvestmentList";
 import SelectBox from "../../components/selectBox/SelectBox";
-import { viewMyStartupOptions } from "../../components/selectBox/sortOptions";
-import axios from "axios";
-import { dataUrl } from "../../env";
+import { viewMyStartupOptions } from "../../sortOptions";
 import Pagination from "../../components/pagination/pagination";
 import styles from "../../styles/page.module.scss";
+import { getAllCompaniesSorted } from "../../api/company.api";
 
 const InvestmentStatusPage = () => {
   const [selectedSortValue, setSelectedSortValue] = useState(
@@ -22,25 +21,23 @@ const InvestmentStatusPage = () => {
   // 컴포넌트가 처음 렌더링될 때 기본 데이터를 가져오는 useEffect
   useEffect(() => {
     // 초기 정렬 상태에 맞는 데이터를 가져옵니다.
-    axios
-      .get(`${dataUrl}/api/companies?sort=${selectedSortValue}`)
-      .then((res) => {
-        setInvestmentData(res.data); // 전체 데이터를 상태에 저장
-
-        // investmentAmount 값이 있는 항목만 필터링
-        const filtered = res.data.filter(
+    const fetchData = async () => {
+      try {
+        const data = await getAllCompaniesSorted(selectedSortValue);
+        setInvestmentData(data); // 전체 데이터를 상태에 저장
+        const filtered = data.filter(
           (investment) =>
             investment.investmentAmount != null &&
             investment.investmentAmount > 0
         );
-
         setFilteredData(filtered); // 필터링된 데이터를 상태에 저장
         setTotalPages(Math.ceil(filtered.length / itemsPerPage)); // 필터링된 데이터로 페이지 수 계산
-      })
-      .catch((error) => {
-        console.error("서버 오류:", error);
+      } catch (e) {
+        console.error("서버 오류:", e);
         alert("요청 처리 중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.");
-      });
+      }
+    };
+    fetchData();
   }, [selectedSortValue]); // 정렬 기준이 변경될 때마다 데이터를 다시 가져옵니다.
 
   // 페이지 변경 시 호출되는 함수

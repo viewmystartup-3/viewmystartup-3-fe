@@ -6,9 +6,11 @@ export const getAllCompanies = async () => {
   return res.data;
 };
 
-// 정렬 기준으로 전체 기업 조회
-export const getAllCompaniesSorted = async (sort) => {
-  const res = await axios.get(`/companies?sort=${sort}`);
+// 정렬 조건으로 전체 기업 목록 조회 (기본: 누적투자금액 높은순)
+export const getAllCompaniesSorted = async (sort = "totalInvestment_desc") => {
+  const res = await axios.get(`/companies`, {
+    params: { sort },
+  });
   return res.data;
 };
 
@@ -26,6 +28,9 @@ export const getCompanyById = async (id) => {
   return res.data;
 };
 
+/** ----------------------------------
+ *  기업 선택 카운트 증가 관련 API
+ * ----------------------------------*/
 // 나의기업, 비교기업 선택 시 선택 횟수 증가
 //  myCompanyId: 선택된 내 기업 ID
 //  compareCompanyIds: 비교 대상으로 선택된 기업 ID 배열 (최대 5개)

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo } from "react";
 import styles from "./Table.module.scss";
 import SelectBox from "../selectBox/SelectBox";
-import { basicSortOptions } from "../selectBox/sortOptions";
+import { basicSortOptions } from "../../sortOptions";
 import RawTable from "./RawTable.jsx";
 import { getAllCompaniesSorted } from "../../api/company.api.js";
 
