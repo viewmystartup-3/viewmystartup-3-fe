@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import styles from "./CompanyDetails.module.scss";
 import { useParams } from "react-router-dom";
-import logo from "../../assets/logo.png";
 import { getCompanyById } from "../../api/company.api";
+import logo from "../../assets/logo.png";
+import styles from "./CompanyDetails.module.scss";
 
 const CompanyDetails = () => {
   const [company, setCompany] = useState(null);
@@ -19,6 +19,7 @@ const CompanyDetails = () => {
 
   useEffect(() => {
     if (id) {
+      // TODO: 불필요한 console.log 다 지우기
       console.log("Fetching company with ID:", id);
       fetchCompanyDetails();
     }

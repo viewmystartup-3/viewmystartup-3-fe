@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from "react";
-import styles from "./InvestmentStatus.module.scss";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import Pagination from "../pagination/pagination";
-import InvestorActions from "../investActions/InvestActions";
-import InvestModal from "../investModal/InvestModal";
-import SuccessModal from "../investModal/SuccessModal";
-import EditInvestModal from "../investModal/EditInvestModal";
+import { getInvestmentByCompanyId } from "../../api/investment.api";
 import table from "../../styles/table.module.scss";
 import { SimpleButton } from "../buttons/Buttons";
-import { getInvestmentByCompanyId } from "../../api/investment.api";
+import InvestorActions from "../investActions/InvestActions";
+import EditInvestModal from "../investModal/EditInvestModal";
+import InvestModal from "../investModal/InvestModal";
+import SuccessModal from "../investModal/SuccessModal";
+import Pagination from "../pagination/pagination";
+import styles from "./InvestmentStatus.module.scss";
 
 const InvestmentStatus = () => {
   const { id } = useParams();
@@ -46,7 +46,6 @@ const InvestmentStatus = () => {
     }
   };
 
-  //
   useEffect(() => {
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
@@ -78,8 +77,9 @@ const InvestmentStatus = () => {
   // 투자자 수정 성공 시 호출되는 함수
   const handleEditSuccess = (updatedInvestor) => {
     setAllInvestments((prevInvestments) =>
-      prevInvestments.map((investor) =>
-        investor.id === updatedInvestor.id ? updatedInvestor : investor
+      prevInvestments.map(
+        (investor) =>
+          investor.id === updatedInvestor.id ? updatedInvestor : investor // TODO: Optimistic Update(낙관적 업데이트)를 구현하려고 한 거라면 좋지만, 그렇지 않다면 그냥 서버에서 새로운 데이터 받아오기
       )
     );
     setEditModal(false); // 수정 모달 닫기
@@ -89,11 +89,20 @@ const InvestmentStatus = () => {
     setActiveInvestorId((prev) => (prev === investorId ? null : investorId));
   };
 
+  // TODO: 모달을 전역적으로 관리하고 사용하는 방법을 배워 보자
+
+  // TODO: 인라인으로 길게 작성하지 말고 밖으로 빼자
+  const totalAmount = allInvestments.reduce((acc, inv) => acc + inv.amount, 0);
+
   return (
     <div className={styles.main}>
       <div className={styles.header}>
         <p className={styles.title}>View My StartUP에서 받은 투자</p>
-        <SimpleButton size="xlg" className={styles.investBtn} onClick={openModal}>
+        <SimpleButton
+          size="xlg"
+          className={styles.investBtn}
+          onClick={openModal}
+        >
           기업투자하기
         </SimpleButton>
       </div>
@@ -101,10 +110,7 @@ const InvestmentStatus = () => {
         <div className={table.table}>
           {investment.length > 0 ? (
             <>
-              <p className={styles.totalMoney}>
-                총 {allInvestments.reduce((acc, inv) => acc + inv.amount, 0)}억
-                원
-              </p>
+              <p className={styles.totalMoney}>총 {totalAmount}억 원</p>
               <div className={table.listHeader}>
                 <p className={table.listtitle}>투자자 이름</p>
                 <p className={table.listtitle}>순위</p>

@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
-import StartupList from "../../components/startupList/StartupList";
-import Search from "../../components/search/Search";
-import styles from "../../styles/page.module.scss";
-import SelectBox from "../../components/selectBox/SelectBox";
-import { basicSortOptions } from "../../sortOptions.js";
-import Pagination from "../../components/pagination/pagination"; // 페이지네이션 컴포넌트 임포트
+import React, { useEffect, useState } from "react";
 import { getAllCompaniesSorted } from "../../api/company.api.js";
+import Pagination from "../../components/pagination/pagination"; // 페이지네이션 컴포넌트 임포트
+import Search from "../../components/search/Search";
+import SelectBox from "../../components/selectBox/SelectBox";
+import StartupList from "../../components/startupList/StartupList";
+import { basicSortOptions } from "../../sortOptions.js";
+import styles from "../../styles/page.module.scss";
 
 const Homepage = () => {
   const [startupList, setStartupList] = useState([]); // 전체 데이터
@@ -52,6 +52,7 @@ const Homepage = () => {
     currentPage * itemsPerPage
   );
 
+  // TODO: Page 컴포넌트화가 안 되어 있는 게 많이 아쉬움
   return (
     <div className={styles.page}>
       <div className={styles.pageHeader}>

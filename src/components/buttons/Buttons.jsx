@@ -12,12 +12,12 @@
 - sM: 131px -> 97px
 */
 
+import { clsx } from "clsx";
 import React from "react";
-import styles from "./Buttons.module.scss";
+import { GrRotateLeft } from "react-icons/gr";
 import checkIcon from "../../assets/ic_check.png";
 import icCheckS from "../../assets/ic_check_s.png";
-import { GrRotateLeft } from "react-icons/gr";
-import { clsx } from "clsx";
+import styles from "./Buttons.module.scss";
 
 // 색깔 안 변하는 기본 버튼
 export function SimpleButton({ children, onClick, size = "md" }) {

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import styles from "./SelectBox.module.scss";
 import toggle from "../../assets/ic_toggle.png";
+import styles from "./SelectBox.module.scss";
 
 /**
  * <SelectBox />

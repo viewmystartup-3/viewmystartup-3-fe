@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
-import styles from "../../styles/table.module.scss";
-import temporarilyImg from "../../assets/logo.png";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import temporarilyImg from "../../assets/logo.png";
+import styles from "../../styles/table.module.scss";
 
 const ComparisonList = ({ companies, totalCompanies, currentPage }) => {
   const [loading, setLoading] = useState(true); // 로딩 상태
@@ -21,6 +21,7 @@ const ComparisonList = ({ companies, totalCompanies, currentPage }) => {
   return (
     <div className={styles.table}>
       <div className={styles.tableHeader}>
+        {/* p태그는 좀 안 어울린다 */}
         <p className={styles.ranking}>순위</p>
         <p className={styles.name}>기업 명</p>
         <p className={styles.description}>기업 소개</p>
@@ -34,6 +35,7 @@ const ComparisonList = ({ companies, totalCompanies, currentPage }) => {
         {loading ? (
           <p className={styles.dataMessage}>로딩 중...</p> // 로딩 중일 때 메시지
         ) : companies.length > 0 ? (
+          // TODO: company가 갑자기 comparision이 되는 Magic
           companies.map((comparison, index) => (
             <div className={styles.tableContent} key={comparison.id}>
               <p className={styles.ranking}>{getRank(index)}위</p>
