@@ -35,11 +35,11 @@ const Search = ({
 
     // 데이터를 필터링하는 로직
     const filteredData = startups.filter((startup) => {
-      if (companymodal) {
-        // 모달에서만 초성 검색을 적용
+      if (companymodal || value === searchInitialConsonants) {
+        // 회사명 초성 검색 로직 (모달에서만 초성 검색을 적용하는 부분을 수정)
         const startupNameInitialConsonants = getInitialConsonants(startup.name);
 
-        // 초성 비교 로직을 개선: 입력된 초성들이 기업명 초성의 부분적으로 포함되는지 확인
+        // 초성 비교 로직
         let isMatch = true;
         let lastIndex = 0; // 초성이 이전 초성 이후에 등장하는지 확인하는 변수
 
@@ -57,11 +57,12 @@ const Search = ({
           lastIndex = index + 1; // 다음 초성은 그 이후부터 검색
         }
 
-        return isMatch;
+        if (isMatch) return true; // 초성 일치하는 기업명
       } else {
-        // 홈페이지에서의 일반적인 검색 로직
+        // 일반적인 검색 로직 (회사명, 카테고리)
         return (
-          startup.name.toLowerCase().includes(value.toLowerCase()) || // 기업명
+          startup.name.toLowerCase().includes(value.toLowerCase()) || // 기업 명
+          startup.description.toLowerCase().includes(value.toLowerCase()) || // 기업 소개
           startup.category.toLowerCase().includes(value.toLowerCase()) // 카테고리
         );
       }
