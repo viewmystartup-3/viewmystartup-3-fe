@@ -4,7 +4,7 @@ import temporarilyImg from "../../assets/logo.png";
 import clsx from "clsx";
 import { Link } from "react-router-dom";
 
-const StartupList = ({ startups, currentPageData }) => {
+const StartupList = ({ startups, currentPage, itemsPerPage }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -13,14 +13,8 @@ const StartupList = ({ startups, currentPageData }) => {
     }
   }, [startups]);
 
-  // 전체 리스트에서 순위를 계산하는 함수
-  const calculateRanking = (startup) => {
-    // 전체 데이터에서 해당 스타트업의 순위를 찾는다
-    const sortedStartups = [...startups].sort(
-      (a, b) => b.totalInvestment - a.totalInvestment
-    );
-    return sortedStartups.findIndex((s) => s.id === startup.id) + 1;
-  };
+  // 페이지네이션을 고려한 순위 계산
+  const getRank = (index) => (currentPage - 1) * itemsPerPage + index + 1;
 
   return (
     <div className={styles.table}>
@@ -34,13 +28,14 @@ const StartupList = ({ startups, currentPageData }) => {
         <p className={styles.info}>고용 인원</p>
       </div>
 
+      {/* 스타트업 목록 렌더링 */}
       <div className={styles.tableContents}>
         {loading ? (
-          <p className={styles.dataMessage}>로딩 중...</p>
-        ) : currentPageData.length > 0 ? (
-          currentPageData.map((startup) => (
+          <p className={styles.dataMessage}>로딩 중...</p> // 로딩 중일 때 메시지
+        ) : startups.length > 0 ? (
+          startups.map((startup, index) => (
             <div className={styles.tableContent} key={startup.id}>
-              <p className={styles.ranking}>{calculateRanking(startup)}위</p>
+              <p className={styles.ranking}>{getRank(index)}위</p>
               <Link
                 to={`/companies/${startup.id}`}
                 className={styles.nameWrapper}

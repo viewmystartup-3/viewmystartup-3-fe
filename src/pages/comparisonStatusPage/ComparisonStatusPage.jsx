@@ -67,8 +67,8 @@ const ComparisonStatusPage = () => {
       {/* ComparisonList에 데이터와 페이지네이션 상태 전달 */}
       <ComparisonList
         companies={currentPageData}
-        totalCompanies={sortedCompanies}
         currentPage={currentPage}
+        totalCompanies={sortedCompanies.length}
       />
 
       {/* 페이지네이션 추가 */}

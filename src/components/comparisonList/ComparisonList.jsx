@@ -15,16 +15,8 @@ const ComparisonList = ({ companies, totalCompanies, currentPage }) => {
     }
   }, [companies]); // companies 데이터가 변경될 때마다 로딩 상태 갱신
 
-  // 전체 데이터를 기준으로 정렬된 목록에서 순위를 매깁니다.
-  const sortedCompanies = totalCompanies.sort(
-    (a, b) => b.selectedCompany - a.selectedCompany
-  );
-
-  // 현재 페이지에 맞는 데이터 추출
-  const currentPageData = sortedCompanies.slice(
-    (currentPage - 1) * 10,
-    currentPage * 10
-  );
+  // 페이지네이션을 고려한 순위 계산
+  const getRank = (index) => (currentPage - 1) * 10 + index + 1;
 
   return (
     <div className={styles.table}>
@@ -41,12 +33,10 @@ const ComparisonList = ({ companies, totalCompanies, currentPage }) => {
       <div className={styles.tableContents}>
         {loading ? (
           <p className={styles.dataMessage}>로딩 중...</p> // 로딩 중일 때 메시지
-        ) : currentPageData.length > 0 ? (
-          currentPageData.map((comparison, index) => (
+        ) : companies.length > 0 ? (
+          companies.map((comparison, index) => (
             <div className={styles.tableContent} key={comparison.id}>
-              <p className={styles.ranking}>
-                {(currentPage - 1) * 10 + index + 1}위
-              </p>
+              <p className={styles.ranking}>{getRank(index)}위</p>
               <Link
                 to={`/companies/${comparison.id}`}
                 className={styles.nameWrapper}
