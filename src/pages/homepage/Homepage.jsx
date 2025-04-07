@@ -7,10 +7,6 @@ import { dataUrl } from "../../env.js";
 import SelectBox from "../../components/selectBox/SelectBox";
 import { basicSortOptions } from "../../components/selectBox/sortOptions.js";
 import Pagination from "../../components/pagination/pagination"; // 페이지네이션 컴포넌트 임포트
-import {
-  RoundOutlineButton,
-  SimpleButton,
-} from "../../components/buttons/Buttons.jsx";
 
 const Homepage = () => {
   const [startupList, setStartupList] = useState([]); // 전체 데이터
@@ -95,8 +91,6 @@ const Homepage = () => {
           onPageChange={handlePageChange} // 페이지 변경 시 처리할 함수 전달
         />
       </div>
-      <SimpleButton size="mdChange">안녕</SimpleButton>
-      <RoundOutlineButton>나는</RoundOutlineButton>
     </div>
   );
 };
