@@ -20,7 +20,9 @@ const InvestorActions = ({
   const [deleteModal, setDeleteModal] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [password, setPassword] = useState("");
+  const [passwordError, setPasswordError] = useState("");
   const [errorModal, setErrorModal] = useState(false);
+  const [errorType, setErrorType] = useState("");
   const [editModal, setEditModal] = useState(false);
   const [editPassword, setEditPassword] = useState("");
 
@@ -48,12 +50,19 @@ const InvestorActions = ({
         setPassword("");
         onDelete(investor.id);
       }
+      if (!password) {
+        setPasswordError("비밀번호는 필수 입력 사항입니다.");
+      } else {
+        setPasswordError(""); // 비밀번호 오류 메시지 초기화
+      }
+      setPassword("");
     } catch (e) {
       console.error(e);
       if (
         e.response &&
         (e.response.status === 401 || e.response.status === 403)
       ) {
+        setErrorType("delete");
         setErrorModal(true);
         setDeleteModal(false);
       }
@@ -75,6 +84,13 @@ const InvestorActions = ({
         onEdit(investor);
         console.log("성공~");
       }
+
+      if (!password) {
+        setPasswordError("비밀번호는 필수 입력 사항입니다.");
+      } else {
+        setPasswordError(""); // 비밀번호 오류 메시지 초기화
+      }
+      setPassword("");
     } catch (e) {
       if (
         e.response &&
@@ -237,7 +253,11 @@ const InvestorActions = ({
                       setPassword("");
                     }}
                   />
-                  <p>잘못된 비밀번호로 삭제에 실패하셨습니다.</p>
+                  <p>
+                    {errorType === "delete"
+                      ? "잘못된 비밀번호로 삭제에 실패하셨습니다."
+                      : "잘못된 비밀번호로 수정에 실패하셨습니다."}
+                  </p>
                 </div>
                 <button
                   className={styles.okBtn}
