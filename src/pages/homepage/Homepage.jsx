@@ -16,10 +16,8 @@ const Homepage = () => {
     "totalInvestment_desc"
   ); // 선택된 정렬 값
 
-  // 페이지당 아이템 수
   const itemsPerPage = 10;
 
-  // 데이터 가져오기
   const fetchStartupList = async (sortOrder = "totalInvestment_desc") => {
     try {
       const data = await getAllCompaniesSorted(sortOrder);
@@ -31,28 +29,24 @@ const Homepage = () => {
     }
   };
 
-  // 매출액 높은 순으로 필터링하는 함수
   const handleSortChange = (sortOrder) => {
-    setSelectedSortValue(sortOrder); // 선택된 정렬값을 상태로 저장
+    setSelectedSortValue(sortOrder);
     fetchStartupList(sortOrder); // 새로 정렬된 데이터를 가져옴
   };
 
-  // 필터링된 데이터를 상태에 설정하는 함수
   const handleFilteredData = (filteredData) => {
-    setFilteredData(filteredData); // 'Search'에서 필터링된 데이터를 상태로 저장
-    setTotalPages(Math.ceil(filteredData.length / itemsPerPage)); // 필터링된 데이터에 맞게 페이지 수 업데이트
+    setFilteredData(filteredData);
+    setTotalPages(Math.ceil(filteredData.length / itemsPerPage));
   };
 
-  // 페이지 변경 함수
   const handlePageChange = (page) => {
-    setCurrentPage(page); // 현재 페이지 상태 업데이트
+    setCurrentPage(page);
   };
 
   useEffect(() => {
-    fetchStartupList(selectedSortValue); // 컴포넌트가 마운트될 때 기본 정렬로 데이터를 가져옴
-  }, []); // 컴포넌트가 처음 렌더링될 때만 호출
+    fetchStartupList(selectedSortValue);
+  }, []);
 
-  // 현재 페이지에 맞는 데이터를 계산하여 전달
   const currentPageData = filteredData.slice(
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage
@@ -63,28 +57,21 @@ const Homepage = () => {
       <div className={styles.pageHeader}>
         <h1 className={styles.headerText}>전체 스타트업 목록</h1>
         <div className={styles.headerComponents}>
-          <div className={styles.Search}>
-            <Search
-              startups={startupList} // 전체 기업 목록을 전달
-              onFilteredData={handleFilteredData} // 필터링된 데이터를 처리할 함수를 전달
-            />
-          </div>
+          <Search startups={startupList} onFilteredData={handleFilteredData} />
           <SelectBox
             size="small"
             options={basicSortOptions}
-            value={selectedSortValue} // 셀렉트 박스의 현재 값을 상태에서 가져옴
-            onChange={handleSortChange} // 정렬 변경 시 처리할 함수 전달
+            value={selectedSortValue}
+            onChange={handleSortChange}
           />
         </div>
       </div>
-      {/* 스타트업 리스트 컴포넌트 */}
-      <StartupList startups={currentPageData} /> {/* 페이지별 데이터만 전달 */}
-      {/* 페이지네이션 추가 */}
+      <StartupList startups={startupList} currentPageData={currentPageData} />
       <div className={styles.pagePagination}>
         <Pagination
           currentPage={currentPage}
           totalPages={totalPages}
-          onPageChange={handlePageChange} // 페이지 변경 시 처리할 함수 전달
+          onPageChange={handlePageChange}
         />
       </div>
     </div>

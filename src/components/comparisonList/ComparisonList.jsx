@@ -3,7 +3,7 @@ import styles from "../../styles/table.module.scss";
 import temporarilyImg from "../../assets/logo.png";
 import { Link } from "react-router-dom";
 
-const ComparisonList = ({ companies }) => {
+const ComparisonList = ({ companies, totalCompanies, currentPage }) => {
   const [loading, setLoading] = useState(true); // 로딩 상태
 
   // 데이터가 변경될 때 로딩 상태 업데이트
@@ -14,6 +14,17 @@ const ComparisonList = ({ companies }) => {
       setLoading(true);
     }
   }, [companies]); // companies 데이터가 변경될 때마다 로딩 상태 갱신
+
+  // 전체 데이터를 기준으로 정렬된 목록에서 순위를 매깁니다.
+  const sortedCompanies = totalCompanies.sort(
+    (a, b) => b.selectedCompany - a.selectedCompany
+  );
+
+  // 현재 페이지에 맞는 데이터 추출
+  const currentPageData = sortedCompanies.slice(
+    (currentPage - 1) * 10,
+    currentPage * 10
+  );
 
   return (
     <div className={styles.table}>
@@ -30,10 +41,12 @@ const ComparisonList = ({ companies }) => {
       <div className={styles.tableContents}>
         {loading ? (
           <p className={styles.dataMessage}>로딩 중...</p> // 로딩 중일 때 메시지
-        ) : companies.length > 0 ? (
-          companies.map((comparison, index) => (
+        ) : currentPageData.length > 0 ? (
+          currentPageData.map((comparison, index) => (
             <div className={styles.tableContent} key={comparison.id}>
-              <p className={styles.ranking}>{index + 1}위</p>
+              <p className={styles.ranking}>
+                {(currentPage - 1) * 10 + index + 1}위
+              </p>
               <Link
                 to={`/companies/${comparison.id}`}
                 className={styles.nameWrapper}
