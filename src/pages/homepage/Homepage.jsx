@@ -3,9 +3,9 @@ import HomepageTable from "./table/HomepageTable.jsx";
 import Search from "../../components/UI modules/search/Search.jsx";
 import styles from "../../styles/page.module.scss";
 import SelectBox from "../../components/UI modules/selectBox/SelectBox.jsx";
-import { basicSortOptions } from "../../sortOptions.js";
 import Pagination from "../../components/UI modules/pagination/pagination.jsx"; // 페이지네이션 컴포넌트 임포트
 import { getAllCompaniesSorted } from "../../api/company.api.js";
+import { basicSortOptions } from "../../constants/sortOptions.js";
 
 const Homepage = () => {
   const [startupList, setStartupList] = useState([]); // 전체 데이터
@@ -13,12 +13,12 @@ const Homepage = () => {
   const [totalPages, setTotalPages] = useState(1); // 전체 페이지 수
   const [currentPage, setCurrentPage] = useState(1); // 현재 페이지
   const [selectedSortValue, setSelectedSortValue] = useState(
-    "totalInvestment_desc"
+    "realInvestmentAmount_desc"
   ); // 선택된 정렬 값
 
   const itemsPerPage = 10;
 
-  const fetchStartupList = async (sortOrder = "totalInvestment_desc") => {
+  const fetchStartupList = async (sortOrder = "realInvestmentAmount_desc") => {
     try {
       const data = await getAllCompaniesSorted(sortOrder);
       setStartupList(data); // 전체 데이터를 'startupList'에 저장
