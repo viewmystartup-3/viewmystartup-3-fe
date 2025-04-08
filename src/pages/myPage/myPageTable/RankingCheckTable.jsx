@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useMemo } from "react";
-import styles from "./Table.module.scss";
-import SelectBox from "../selectBox/SelectBox";
-import { basicSortOptions } from "../../sortOptions";
+import SelectBox from "./../../../components/selectBox/SelectBox.jsx";
+import { basicSortOptions } from "./../../../sortOptions.js";
 import RawTable from "./RawTable.jsx";
-import { getAllCompaniesSorted } from "../../api/company.api.js";
+import { getAllCompaniesSorted } from "./../../../api/company.api.js";
+import styles from "./Table.module.scss";
 
 function RankingCheckTable({ myCompany }) {
   const [loadedData, setLoadedData] = useState([]);

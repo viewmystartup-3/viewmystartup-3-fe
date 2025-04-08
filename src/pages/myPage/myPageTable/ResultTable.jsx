@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useMemo } from "react";
 import styles from "./Table.module.scss";
-import SelectBox from "../selectBox/SelectBox";
-import { basicSortOptions } from "../../sortOptions.js";
+import SelectBox from "./../../../components/selectBox/SelectBox.jsx";
+import { basicSortOptions } from "./../../../sortOptions.js";
 import RawTable from "./RawTable.jsx";
-import { getCompaniesByIdsSorted } from "../../api/company.api.js";
+import { getCompaniesByIdsSorted } from "./../../../api/company.api.js";
 
 function ResultTable({ myCompany, compareCompanies }) {
   const [loadedData, setLoadedData] = useState([]);
