@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import StartupList from "../../components/startupList/StartupList";
+import StartupList from "./startupList/StartupList";
 import Search from "../../components/search/Search";
 import styles from "../../styles/page.module.scss";
 import SelectBox from "../../components/selectBox/SelectBox";

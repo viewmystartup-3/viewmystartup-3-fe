@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import InvestmentList from "../../components/investmentList/InvestmentList";
+import InvestmentList from "./investmentList/InvestmentList";
 import SelectBox from "../../components/selectBox/SelectBox";
 import { viewMyStartupOptions } from "../../sortOptions";
 import Pagination from "../../components/pagination/pagination";
