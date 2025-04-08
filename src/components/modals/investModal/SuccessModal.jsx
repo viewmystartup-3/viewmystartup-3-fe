@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./InvestModal.module.scss";
-import ModalTopBar from "../modals/topBar/ModalTopBar";
-import { SimpleButton } from "../buttons/Buttons";
+import ModalTopBar from "../topBar/ModalTopBar";
+import { SimpleButton } from "../../buttons/Buttons";
 
 const SuccessModal = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
