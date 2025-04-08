@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useMemo } from "react";
 import styles from "./Table.module.scss";
 import SelectBox from "./../../../components/UI modules/selectBox/SelectBox.jsx";
-import { basicSortOptions } from "./../../../sortOptions.js";
 import RawTable from "./RawTable.jsx";
 import { getCompaniesByIdsSorted } from "./../../../api/company.api.js";
+import { basicSortOptions } from "../../../constants/sortOptions.js";
 
 function ResultTable({ myCompany, compareCompanies }) {
   const [loadedData, setLoadedData] = useState([]);
-  const [sortBy, setSortBy] = useState("totalInvestment_desc");
+  const [sortBy, setSortBy] = useState("realInvestmentAmount_desc");
 
   const callCompanies = useMemo(() => {
     if (!myCompany) return [];

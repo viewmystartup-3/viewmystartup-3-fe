@@ -7,7 +7,7 @@ export const getAllCompanies = async () => {
 };
 
 // 정렬 조건으로 전체 기업 목록 조회 (기본: 누적투자금액 높은순)
-export const getAllCompaniesSorted = async (sort = "totalInvestment_desc") => {
+export const getAllCompaniesSorted = async (sort = "realInvestmentAmount_desc") => {
   const res = await axios.get(`/companies`, {
     params: { sort },
   });

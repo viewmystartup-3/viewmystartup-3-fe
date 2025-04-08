@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import InvestmentTable from "./table/InvestmentTable";
 import SelectBox from "../../components/UI modules/selectBox/SelectBox";
-import { viewMyStartupOptions } from "../../sortOptions";
 import Pagination from "../../components/UI modules/pagination/pagination";
 import styles from "../../styles/page.module.scss";
 import { getAllCompaniesSorted } from "../../api/company.api";
+import { viewMyStartupOptions } from "../../constants/sortOptions.js";
 
 const InvestmentStatusPage = () => {
   const [selectedSortValue, setSelectedSortValue] = useState(
@@ -25,10 +25,10 @@ const InvestmentStatusPage = () => {
         return data.sort((a, b) => b.investmentAmount - a.investmentAmount);
       case "investmentAmount_asc":
         return data.sort((a, b) => a.investmentAmount - b.investmentAmount);
-      case "totalInvestment_desc":
-        return data.sort((a, b) => b.totalInvestment - a.totalInvestment);
-      case "totalInvestment_asc":
-        return data.sort((a, b) => a.totalInvestment - b.totalInvestment);
+      case "realInvestmentAmount_desc":
+        return data.sort((a, b) => b.realInvestmentAmount - a.realInvestmentAmount);
+      case "realInvestmentAmount_asc":
+        return data.sort((a, b) => a.realInvestmentAmount - b.realInvestmentAmount);
       default:
         return data;
     }

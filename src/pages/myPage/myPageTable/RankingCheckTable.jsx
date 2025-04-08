@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useMemo } from "react";
 import SelectBox from "./../../../components/UI modules/selectBox/SelectBox.jsx";
-import { basicSortOptions } from "./../../../sortOptions.js";
 import RawTable from "./RawTable.jsx";
 import { getAllCompaniesSorted } from "./../../../api/company.api.js";
 import styles from "./Table.module.scss";
+import { basicSortOptions } from "../../../constants/sortOptions.js";
 
 function RankingCheckTable({ myCompany }) {
   const [loadedData, setLoadedData] = useState([]);
-  const [sortBy, setSortBy] = useState("totalInvestment_desc");
+  const [sortBy, setSortBy] = useState("realInvestmentAmount_desc");
 
   useEffect(() => {
     if (!myCompany) return;

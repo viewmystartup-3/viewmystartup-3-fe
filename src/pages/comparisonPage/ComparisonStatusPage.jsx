@@ -2,14 +2,14 @@ import React, { useState, useEffect } from "react";
 import styles from "../../styles/page.module.scss";
 import ComparisonTable from "./table/ComparisonTable.jsx";
 import SelectBox from "../../components/UI modules/selectBox/SelectBox.jsx";
-import { myCompanySelectOptions } from "../../sortOptions.js";
 import Pagination from "../../components/UI modules/pagination/pagination.jsx"; // 페이지네이션 컴포넌트 임포트
 import { getAllCompaniesSorted } from "../../api/company.api.js";
+import { myCompanySelectOptions } from "../../constants/sortOptions.js";
 
 const ComparisonStatusPage = () => {
   const [sortedCompanies, setSortedCompanies] = useState([]); // 정렬된 회사 목록 상태
   const [selectedSortValue, setSelectedSortValue] = useState(
-    "selectedCompany_desc"
+    "selectedNumber_desc"
   ); // 선택된 정렬 기준 상태
 
   const [currentPage, setCurrentPage] = useState(1); // 현재 페이지 상태
@@ -59,7 +59,7 @@ const ComparisonStatusPage = () => {
           <SelectBox
             size="large"
             options={myCompanySelectOptions}
-            defaultValue={selectedSortValue}
+            value={selectedSortValue}
             onChange={handleSelectChange} // 셀렉트박스에서 값이 변경되면 호출
           />
         </div>
