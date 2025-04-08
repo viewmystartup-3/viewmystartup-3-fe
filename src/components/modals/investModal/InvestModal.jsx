@@ -138,7 +138,7 @@ const InvestModal = ({ isOpen, onClose, onInvestSuccess, targetCompany }) => {
                 className={styles.image}
               />
               <div className={styles.companyDetail}>
-                <p className={styles.name}>{company.name}</p>
+                <p className={styles.name}>{company.companyName}</p>
 
                 <p className={styles.category}>{company.category}</p>
               </div>
