@@ -40,8 +40,8 @@ const EditInvestModal = ({
   // 투자자 정보 수정하기
   useEffect(() => {
     if (selectedInvestor) {
-      setName(selectedInvestor.name);
-      setAmount(selectedInvestor.amount);
+      setName(selectedInvestor.investorName);
+      setAmount(selectedInvestor.investedAmount);
       setComment(selectedInvestor.comment);
       setPassword("");
     }
@@ -79,30 +79,26 @@ const EditInvestModal = ({
 
     // 서버로 보낼 데이터 객체 생성
     const requestData = {
-      name,
-      amount: parseFloat(amount),
+      investorName: name,
+      investedAmount: parseFloat(amount),
       comment,
     };
 
     // 만약 새로운 비밀번호가 있다면 추가한다.
     if (finalPassword) {
-      requestData.password = finalPassword;
+      requestData.accessCode = finalPassword;
     }
 
     try {
       const updatedData = {
-        name, //투자자 이름 수정
-        amount: parseFloat(amount), // 금액 수정
+        investorName: name, //투자자 이름 수정
+        investedAmount: parseFloat(amount), // 금액 수정
         comment, // 코멘트 수정
-        password, // 비밀번호 수정
+        accessCode: password, // 비밀번호 수정
       };
 
       // PATCH 요청을 통해 투자 수정
-      const updated = await updateInvestment(
-        id,
-        selectedInvestor.id,
-        updatedData
-      );
+      const updated = await updateInvestment(selectedInvestor.id, updatedData);
 
       // 수정 후 onEditSuccess 호출하여 상태 갱신
       onEditSuccess(updated);
@@ -161,7 +157,7 @@ const EditInvestModal = ({
                 className={styles.image}
               />
               <div className={styles.companyDetail}>
-                <p className={styles.name}>{company.name}</p>
+                <p className={styles.name}>{company.companyName}</p>
                 <p className={styles.category}>{company.category}</p>
               </div>
             </div>

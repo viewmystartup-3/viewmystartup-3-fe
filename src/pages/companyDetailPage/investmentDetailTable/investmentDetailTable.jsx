@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
-import styles from "./InvestmentStatus.module.scss";
+import styles from "./investmentDetailTable.module.scss";
 import { useParams } from "react-router-dom";
-import Pagination from "../UI modules/pagination/pagination";
-import InvestorActions from "../investActions/InvestActions";
-import InvestModal from "../modals/investModal/InvestModal";
-import SuccessModal from "../modals/investModal/SuccessModal";
-import EditInvestModal from "../modals/investModal/EditInvestModal";
-import table from "../../styles/table.module.scss";
-import { SimpleButton } from "../buttons/Buttons";
-import { getInvestmentByCompanyId } from "../../api/investment.api";
+import Pagination from "../../../components/UI modules/pagination/pagination";
+import InvestorActions from "./tableModule/tableModule";
+import InvestModal from "../../../components/modals/investModal/InvestModal";
+import SuccessModal from "../../../components/modals/investModal/SuccessModal";
+import EditInvestModal from "../../../components/modals/investModal/EditInvestModal";
+import table from "../../../styles/table.module.scss";
+import { SimpleButton } from "../../../components/buttons/Buttons";
+import { getInvestmentByCompanyId } from "../../../api/investment.api";
 
 const InvestmentStatus = () => {
   const { id } = useParams();
@@ -46,7 +46,6 @@ const InvestmentStatus = () => {
     }
   };
 
-  //
   useEffect(() => {
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
@@ -106,8 +105,12 @@ const InvestmentStatus = () => {
           {investment.length > 0 ? (
             <>
               <span className={styles.totalMoney}>
-                총 {allInvestments.reduce((acc, inv) => acc + inv.amount, 0)}억
-                원
+                총{" "}
+                {allInvestments.reduce(
+                  (acc, inv) => acc + inv.investedAmount,
+                  0
+                )}
+                억 원
               </span>
               <div className={table.listHeader}>
                 <span className={table.listtitle}>투자자 이름</span>
@@ -120,11 +123,13 @@ const InvestmentStatus = () => {
               <div className={table.tableContents}>
                 {investment.map((inv, index) => (
                   <div className={table.listContent} key={inv.id}>
-                    <span className={table.listtitle}>{inv.name}</span>
+                    <span className={table.listtitle}>{inv.investorName}</span>
                     <span className={table.listtitle}>
                       {index + 1 + (currentPage - 1) * itemsPerPage}위
                     </span>
-                    <span className={table.listtitle}>{inv.amount}억 원</span>
+                    <span className={table.listtitle}>
+                      {inv.investedAmount}억 원
+                    </span>
                     <span className={table.commentTo}>
                       {inv.comment || "코멘트 없음"}
                     </span>
