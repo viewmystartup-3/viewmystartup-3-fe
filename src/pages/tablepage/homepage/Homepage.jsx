@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import HomepageTable from "./table/HomepageTable.jsx";
-import Search from "../../components/UI modules/search/Search.jsx";
-import styles from "../../styles/page.module.scss";
-import SelectBox from "../../components/UI modules/selectBox/SelectBox.jsx";
-import Pagination from "../../components/UI modules/pagination/pagination.jsx"; // 페이지네이션 컴포넌트 임포트
-import { getAllCompaniesSorted } from "../../api/company.api.js";
-import { basicSortOptions } from "../../constants/sortOptions.js";
+import Search from "../../../components/UI modules/search/Search.jsx";
+import styles from "../../../styles/page.module.scss";
+import SelectBox from "../../../components/UI modules/selectBox/SelectBox.jsx";
+import Pagination from "../../../components/UI modules/pagination/pagination.jsx"; // 페이지네이션 컴포넌트 임포트
+import { getAllCompaniesSorted } from "../../../api/company.api.js";
+import { basicSortOptions } from "../../../constants/sortOptions.js";
 
 const Homepage = () => {
   const [startupList, setStartupList] = useState([]); // 전체 데이터

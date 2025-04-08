@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import styles from "../../styles/page.module.scss";
+import styles from "../../../styles/page.module.scss";
 import ComparisonTable from "./table/ComparisonTable.jsx";
-import SelectBox from "../../components/UI modules/selectBox/SelectBox.jsx";
-import Pagination from "../../components/UI modules/pagination/pagination.jsx"; // 페이지네이션 컴포넌트 임포트
-import { getAllCompaniesSorted } from "../../api/company.api.js";
-import { myCompanySelectOptions } from "../../constants/sortOptions.js";
+import SelectBox from "../../../components/UI modules/selectBox/SelectBox.jsx";
+import Pagination from "../../../components/UI modules/pagination/pagination.jsx"; // 페이지네이션 컴포넌트 임포트
+import { getAllCompaniesSorted } from "../../../api/company.api.js";
+import { myCompanySelectOptions } from "../../../constants/sortOptions.js";
 
 const ComparisonStatusPage = () => {
   const [sortedCompanies, setSortedCompanies] = useState([]); // 정렬된 회사 목록 상태

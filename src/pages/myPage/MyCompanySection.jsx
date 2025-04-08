@@ -21,7 +21,7 @@ function MyCompanySection({
   const handleSelectCompany = (company) => {
     const mappedCompany = {
       id: company.id,
-      name: company.name,
+      name: company.companyName,
       category: company.category,
       imageUrl: company.imageUrl,
     };
@@ -92,7 +92,7 @@ function MyCompanySection({
             )}
             <Card
               imageUrl={myCompany.imageUrl}
-              name={myCompany.name}
+              name={myCompany.companyName}
               category={myCompany.category}
               className={style.myCard} // ← 스타일 다르게 주고 싶으면 여기서 조절
             />

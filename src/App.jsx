@@ -1,11 +1,11 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Homepage from "./pages/homepage/Homepage";
+import Homepage from "./pages/tablepage/homepage/Homepage";
 import Notfound from "./pages/notfound/Notfound";
 import Layout from "./components/Layout";
 import CompanyDetailPage from "./pages/companyDetailPage/CompanyDetailPage";
-import InvestmentStatusPage from "./pages/investmentPage/InvestmentStatusPage";
-import ComparisonStatusPage from "./pages/comparisonPage/ComparisonStatusPage";
+import InvestmentStatusPage from "./pages/tablepage/investmentPage/InvestmentStatusPage";
+import ComparisonStatusPage from "./pages/tablepage/comparisonPage/ComparisonStatusPage";
 import MyPage from "./pages/myPage/MyPage";
 
 function App() {

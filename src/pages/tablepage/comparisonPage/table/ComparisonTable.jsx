@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import styles from "../../../styles/table.module.scss";
-import temporarilyImg from "../../../assets/logo.png";
+import styles from "../../../../styles/table.module.scss";
+import temporarilyImg from "../../../../assets/logo.png";
 import { Link } from "react-router-dom";
 
 const ComparisonTable = ({ companies, totalCompanies, currentPage }) => {
@@ -50,17 +50,17 @@ const ComparisonTable = ({ companies, totalCompanies, currentPage }) => {
                   alt={comparison.name}
                   className={styles.image}
                 />
-                <span className={styles.name}>{comparison.name}</span>
+                <span className={styles.name}>{comparison.companyName}</span>
               </Link>
               <span className={styles.description}>
                 {comparison.description}
               </span>
               <span className={styles.info}>{comparison.category}</span>
               <span className={styles.investmentAndSelection}>
-                {comparison.selectedCompany}
+                {comparison.selectedNumber}
               </span>
               <span className={styles.investmentAndSelection}>
-                {comparison.comparedCompany}
+                {comparison.comparedNumber}
               </span>
             </div>
           ))

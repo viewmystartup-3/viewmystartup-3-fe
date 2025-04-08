@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import styles from "../../../styles/table.module.scss";
-import temporarilyImg from "../../../assets/logo.png";
+import styles from "../../../../styles/table.module.scss";
+import temporarilyImg from "../../../../assets/logo.png";
 import { Link } from "react-router-dom";
 
 const InvestmentTable = ({ startups, currentPage, itemsPerPage }) => {
@@ -61,7 +61,7 @@ const InvestmentTable = ({ startups, currentPage, itemsPerPage }) => {
                   alt={investment.name}
                   className={styles.image}
                 />
-                <span className={styles.name}>{investment.name}</span>
+                <span className={styles.name}>{investment.companyName}</span>
               </Link>
               <span className={styles.description}>
                 {investment.description}
@@ -71,7 +71,7 @@ const InvestmentTable = ({ startups, currentPage, itemsPerPage }) => {
                 {investment.investmentAmount}억 원
               </span>
               <span className={styles.investmentAndSelection}>
-                {investment.totalInvestment}억 원
+                {investment.realInvestmentAmount}억 원
               </span>
             </div>
           ))
