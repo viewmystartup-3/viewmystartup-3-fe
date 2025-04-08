@@ -10,7 +10,7 @@ function CompareSection({ compareCompanies, onRemove, onAddCompareCompany }) {
   const handleSelectCompany = (company) => {
     const mappedCompany = {
       id: company.id,
-      name: company.companyName,
+      companyName: company.companyName,
       category: company.category,
       imageUrl: company.imageUrl,
     };
@@ -50,7 +50,6 @@ function CompareSection({ compareCompanies, onRemove, onAddCompareCompany }) {
               return (
                 <Card
                   key={company.id}
-                  id={company.id}
                   imageUrl={company.imageUrl}
                   name={company.companyName}
                   category={company.category}

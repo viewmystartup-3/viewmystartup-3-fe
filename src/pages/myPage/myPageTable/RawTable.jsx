@@ -75,13 +75,13 @@ const RawTable = ({
                   {startup.category}
                 </span>
                 <span className={clsx(styles.rawTableInfo, tableClass)}>
-                  {startup.totalInvestment}억 원
+                  {startup.realInvestmentAmount}억 원
                 </span>
                 <span className={clsx(styles.rawTableInfo, tableClass)}>
                   {startup.revenue}억 원
                 </span>
                 <span className={clsx(styles.rawTableInfo, tableClass)}>
-                  {startup.employees}명
+                  {startup.employeesNumber}명
                 </span>
               </div>
             );

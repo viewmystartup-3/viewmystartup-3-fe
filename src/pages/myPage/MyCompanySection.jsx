@@ -21,7 +21,7 @@ function MyCompanySection({
   const handleSelectCompany = (company) => {
     const mappedCompany = {
       id: company.id,
-      name: company.companyName,
+      companyName: company.companyName,
       category: company.category,
       imageUrl: company.imageUrl,
     };
