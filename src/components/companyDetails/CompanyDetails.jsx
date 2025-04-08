@@ -39,7 +39,7 @@ const CompanyDetails = () => {
           />
 
           <div>
-            <p className={styles.name}>{company.name}</p>
+            <p className={styles.name}>{company.companyName}</p>
             <p className={styles.category}>{company.category}</p>
           </div>
         </div>

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import styles from "./InvestmentStatus.module.scss";
 import { useParams } from "react-router-dom";
 import Pagination from "../UI modules/pagination/pagination";
-import InvestorActions from "../investActions/InvestActions";
+import InvestorActions from "../modals/investActions/InvestActions";
 import InvestModal from "../modals/investModal/InvestModal";
 import SuccessModal from "../modals/investModal/SuccessModal";
 import EditInvestModal from "../modals/investModal/EditInvestModal";
@@ -46,7 +46,7 @@ const InvestmentStatus = () => {
     }
   };
 
-  //
+  
   useEffect(() => {
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
@@ -120,7 +120,7 @@ const InvestmentStatus = () => {
               <div className={table.tableContents}>
                 {investment.map((inv, index) => (
                   <div className={table.listContent} key={inv.id}>
-                    <span className={table.listtitle}>{inv.name}</span>
+                    <span className={table.listtitle}>{inv.investorName}</span>
                     <span className={table.listtitle}>
                       {index + 1 + (currentPage - 1) * itemsPerPage}위
                     </span>

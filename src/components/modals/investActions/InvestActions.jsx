@@ -1,16 +1,16 @@
 import React, { useState, useRef } from "react";
 import styles from "./InvestActions.module.scss";
-import listImg from "../../assets/ic_kebab.png";
+import listImg from "../../../assets/ic_kebab.png";
 import { useParams } from "react-router-dom";
-import ModalTopBar from "../modals/topBar/ModalTopBar";
-import eyeIcon from "../../assets/btn_visibility_on.png";
-import eyeOffIcon from "../../assets/btn_visibility_off.png";
+import ModalTopBar from "../../modals/topBar/ModalTopBar";
+import eyeIcon from "../../../assets/btn_visibility_on.png";
+import eyeOffIcon from "../../../assets/btn_visibility_off.png";
 import { createPortal } from "react-dom";
 import {
   checkInvestmentPassword,
   deleteInvestment,
-} from "../../api/investment.api";
-import { SimpleButton } from "../buttons/Buttons";
+} from "../../../api/investment.api";
+import { SimpleButton } from "../../buttons/Buttons";
 
 const InvestorActions = ({
   investor,
@@ -50,7 +50,7 @@ const InvestorActions = ({
     }
 
     try {
-      const response = await deleteInvestment(id, investor.id, password);
+      const response = await deleteInvestment(investor.id, password);
       if (response.status === 200) {
         setDeleteModal(false);
         setPassword("");
@@ -78,7 +78,6 @@ const InvestorActions = ({
 
     try {
       const response = await checkInvestmentPassword(
-        id,
         investor.id,
         editPassword
       );

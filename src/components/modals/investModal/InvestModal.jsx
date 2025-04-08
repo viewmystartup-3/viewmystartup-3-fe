@@ -75,10 +75,10 @@ const InvestModal = ({ isOpen, onClose, onInvestSuccess, targetCompany }) => {
 
     try {
       const newInvestment = await createInvestment(company.id, {
-        name,
-        amount: parseFloat(amount), // 금액을 float으로 변환
+        investorName,
+        investedAmount: parseFloat(amount), // 금액을 float으로 변환
         comment,
-        password,
+        accessCode,
       });
 
       // 투자 후 상태 초기화
