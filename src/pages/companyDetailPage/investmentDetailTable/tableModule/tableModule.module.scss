@@ -84,7 +84,7 @@
   font-size: 12px;
   margin-top: 5px;
 }
-.deleteModal, .editModal {
+.passwordModal {
   width: 496px;
   height: 269px;
   position: absolute;
@@ -105,13 +105,13 @@
     flex-direction: column;
     justify-content: space-between;
   
-    .deleteHeader, .editHeader {
+    .header {
       height: 32px;
       display: flex;
       justify-content: space-between;
       gap: 24px;
 
-      .ptage {
+      .title {
         font: var(--textXlM);
         color: var(--white);
         padding: 0;
@@ -189,7 +189,7 @@
           height: 20px;
         }
       }
-      .deleteBox, .editBox{
+      .actionBox{
         width: 100%;
         display: flex;
         justify-content: center;
@@ -326,7 +326,7 @@
     left: 50%;
     z-index: 20;
 
-    .errorHeader, .editHeader {
+    .errorHeader{
       width: 331px;
       height: 129px;
       display: flex;
@@ -347,24 +347,6 @@
         }
         .backBtn {
           width: 331px;
-        }
-      }
-
-      .okBtn {
-        width: 124px;
-        height: 40px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        white-space: nowrap;
-        border-radius: 50px;
-        background-color: var(--brandOrange);
-        color: var(--white);
-        font: var(--textSSb);
-        border: none;
-        padding: 13px 48px;
-        &:active {
-          background-color: var(--gray500);
         }
       }
     }
