@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import styles from "../../styles/table.module.scss";
-import temporarilyImg from "../../assets/logo.png";
+import styles from "../../../styles/table.module.scss";
+import temporarilyImg from "../../../assets/logo.png";
 import clsx from "clsx";
 import { Link } from "react-router-dom";
 

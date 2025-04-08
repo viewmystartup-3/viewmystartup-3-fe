@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styles from "../../styles/page.module.scss";
-import ComparisonList from "../../components/comparisonList/ComparisonList";
+import ComparisonList from "./comparisonList/ComparisonList.jsx";
 import SelectBox from "../../components/selectBox/SelectBox";
 import { myCompanySelectOptions } from "../../sortOptions.js";
 import Pagination from "../../components/pagination/pagination"; // 페이지네이션 컴포넌트 임포트
