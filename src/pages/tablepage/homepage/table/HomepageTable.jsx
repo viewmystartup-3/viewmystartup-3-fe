@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import styles from "../../../styles/table.module.scss";
-import temporarilyImg from "../../../assets/logo.png";
+import styles from "../../../../styles/table.module.scss";
+import temporarilyImg from "../../../../assets/logo.png";
 import clsx from "clsx";
 import { Link } from "react-router-dom";
 
@@ -45,15 +45,15 @@ const HomepageTable = ({ startups, currentPage, itemsPerPage }) => {
                   alt={startup.name}
                   className={styles.image}
                 />
-                <span className={styles.name}>{startup.name}</span>
+                <span className={styles.name}>{startup.companyName}</span>
               </Link>
               <span className={styles.description}>{startup.description}</span>
               <span className={styles.info}>{startup.category}</span>
               <span className={styles.info}>
-                {startup.totalInvestment}억 원
+                {startup.realInvestmentAmount}억 원
               </span>
               <span className={styles.info}>{startup.revenue}억 원</span>
-              <span className={styles.info}>{startup.employees}명</span>
+              <span className={styles.info}>{startup.employeesNumber}명</span>
             </div>
           ))
         ) : (

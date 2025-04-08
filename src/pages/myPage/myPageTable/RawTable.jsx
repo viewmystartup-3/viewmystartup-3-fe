@@ -63,10 +63,10 @@ const RawTable = ({
                 >
                   <img
                     src={startup.imageUrl || temporarilyImg}
-                    alt={startup.name}
+                    alt={startup.companyName}
                     className={styles.image}
                   />
-                  <span className={styles.name}>{startup.name}</span>
+                  <span className={styles.name}>{startup.companyName}</span>
                 </Link>
                 <span className={styles.description}>
                   {startup.description}

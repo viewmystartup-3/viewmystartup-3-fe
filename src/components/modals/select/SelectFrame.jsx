@@ -32,10 +32,10 @@ function SelectFrame({
           <img
             className={styles.image}
             src={company.imageUrl}
-            alt={company.name}
+            alt={company.companyName}
           />
         </div>
-        <p className={styles.title}>{company.name}</p>
+        <p className={styles.title}>{company.companyName}</p>
         <p className={styles.category}>{company.category}</p>
       </div>
       {titleType === "selectedCompany" ? (

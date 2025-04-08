@@ -10,7 +10,7 @@ function CompareSection({ compareCompanies, onRemove, onAddCompareCompany }) {
   const handleSelectCompany = (company) => {
     const mappedCompany = {
       id: company.id,
-      name: company.name,
+      name: company.companyName,
       category: company.category,
       imageUrl: company.imageUrl,
     };
@@ -52,7 +52,7 @@ function CompareSection({ compareCompanies, onRemove, onAddCompareCompany }) {
                   key={company.id}
                   id={company.id}
                   imageUrl={company.imageUrl}
-                  name={company.name}
+                  name={company.companyName}
                   category={company.category}
                   onRemove={() => onRemove(company.id)}
                 />
