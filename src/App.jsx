@@ -4,8 +4,8 @@ import Homepage from "./pages/homepage/Homepage";
 import Notfound from "./pages/notfound/Notfound";
 import Layout from "./components/Layout";
 import CompanyDetailPage from "./pages/companyDetailPage/CompanyDetailPage";
-import InvestmentStatusPage from "./pages/investmentStatusPage/InvestmentStatusPage";
-import ComparisonStatusPage from "./pages/comparisonStatusPage/ComparisonStatusPage";
+import InvestmentStatusPage from "./pages/investmentPage/InvestmentStatusPage";
+import ComparisonStatusPage from "./pages/comparisonPage/ComparisonStatusPage";
 import MyPage from "./pages/myPage/MyPage";
 
 function App() {

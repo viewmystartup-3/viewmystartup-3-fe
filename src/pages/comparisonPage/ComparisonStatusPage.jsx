@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import styles from "../../styles/page.module.scss";
-import ComparisonList from "./comparisonList/ComparisonList.jsx";
-import SelectBox from "../../components/selectBox/SelectBox";
+import ComparisonTable from "./table/ComparisonTable.jsx";
+import SelectBox from "../../components/UI modules/selectBox/SelectBox.jsx";
 import { myCompanySelectOptions } from "../../sortOptions.js";
-import Pagination from "../../components/pagination/pagination"; // 페이지네이션 컴포넌트 임포트
-import { getAllCompaniesSorted } from "../../api/company.api";
+import Pagination from "../../components/UI modules/pagination/pagination.jsx"; // 페이지네이션 컴포넌트 임포트
+import { getAllCompaniesSorted } from "../../api/company.api.js";
 
 const ComparisonStatusPage = () => {
   const [sortedCompanies, setSortedCompanies] = useState([]); // 정렬된 회사 목록 상태
@@ -64,8 +64,8 @@ const ComparisonStatusPage = () => {
           />
         </div>
       </div>
-      {/* ComparisonList에 데이터와 페이지네이션 상태 전달 */}
-      <ComparisonList
+      {/* ComparisonTable 데이터와 페이지네이션 상태 전달 */}
+      <ComparisonTable
         companies={currentPageData}
         currentPage={currentPage}
         totalCompanies={sortedCompanies.length}

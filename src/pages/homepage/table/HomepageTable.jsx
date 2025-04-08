@@ -4,7 +4,7 @@ import temporarilyImg from "../../../assets/logo.png";
 import clsx from "clsx";
 import { Link } from "react-router-dom";
 
-const StartupList = ({ startups, currentPage, itemsPerPage }) => {
+const HomepageTable = ({ startups, currentPage, itemsPerPage }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -64,4 +64,4 @@ const StartupList = ({ startups, currentPage, itemsPerPage }) => {
   );
 };
 
-export default StartupList;
+export default HomepageTable;

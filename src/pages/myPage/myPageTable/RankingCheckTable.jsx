@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from "react";
-import SelectBox from "./../../../components/selectBox/SelectBox.jsx";
+import SelectBox from "./../../../components/UI modules/selectBox/SelectBox.jsx";
 import { basicSortOptions } from "./../../../sortOptions.js";
 import RawTable from "./RawTable.jsx";
 import { getAllCompaniesSorted } from "./../../../api/company.api.js";

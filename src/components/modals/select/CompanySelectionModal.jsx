@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import styles from "./CompanySelectionModal.module.scss";
 import ModalTopBar from "../topBar/ModalTopBar";
 import SearchResult from "./SearchResult";
-import Search from "../../search/Search";
+import Search from "../../UI modules/search/Search";
 import { getAllCompanies } from "../../../api/company.api";
 
 function CompanySelectionModal({

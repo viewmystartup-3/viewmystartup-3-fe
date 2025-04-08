@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styles from "./Search.module.scss"; // 스타일 모듈을 import
-import searchIcon from "../../assets/ic_search.png";
+import searchIcon from "../../../assets/ic_search.png";
 import Hangul from "hangul-js"; // hangul-js 라이브러리 import
 
 const Search = ({

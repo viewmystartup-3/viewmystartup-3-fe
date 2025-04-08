@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import InvestmentList from "./investmentList/InvestmentList";
-import SelectBox from "../../components/selectBox/SelectBox";
+import InvestmentTable from "./table/InvestmentTable";
+import SelectBox from "../../components/UI modules/selectBox/SelectBox";
 import { viewMyStartupOptions } from "../../sortOptions";
-import Pagination from "../../components/pagination/pagination";
+import Pagination from "../../components/UI modules/pagination/pagination";
 import styles from "../../styles/page.module.scss";
 import { getAllCompaniesSorted } from "../../api/company.api";
 
@@ -80,8 +80,8 @@ const InvestmentStatusPage = () => {
           />
         </div>
       </div>
-      {/* 필터링된 데이터와 정렬된 투자 데이터를 InvestmentList에 전달 */}
-      <InvestmentList
+      {/* 필터링된 데이터와 정렬된 투자 데이터를 InvestmentTable 전달 */}
+      <InvestmentTable
         startups={filteredData} // 필터링되고 정렬된 데이터 전달
         currentPage={currentPage}
         itemsPerPage={itemsPerPage}

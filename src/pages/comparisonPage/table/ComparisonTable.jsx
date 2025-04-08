@@ -3,7 +3,7 @@ import styles from "../../../styles/table.module.scss";
 import temporarilyImg from "../../../assets/logo.png";
 import { Link } from "react-router-dom";
 
-const ComparisonList = ({ companies, totalCompanies, currentPage }) => {
+const ComparisonTable = ({ companies, totalCompanies, currentPage }) => {
   const [loading, setLoading] = useState(true); // 로딩 상태
 
   // 데이터가 변경될 때 로딩 상태 업데이트
@@ -72,4 +72,4 @@ const ComparisonList = ({ companies, totalCompanies, currentPage }) => {
   );
 };
 
-export default ComparisonList;
+export default ComparisonTable;
