@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
-import styles from "./InvestModal.module.scss"; // 기존 스타일 사용
+import styles from "./InvestModal.module.scss";
 import { useParams } from "react-router-dom";
-import eyeIcon from "../../assets/btn_visibility_on.png";
-import eyeOffIcon from "../../assets/btn_visibility_off.png";
-import ModalTopBar from "../modals/topBar/ModalTopBar";
-import { RoundOutlineButton, SimpleButton } from "../buttons/Buttons";
-import { getCompanyById } from "../../api/company.api";
-import { updateInvestment } from "../../api/investment.api";
+import eyeIcon from "../../../assets/btn_visibility_on.png";
+import eyeOffIcon from "../../../assets/btn_visibility_off.png";
+import ModalTopBar from "../topBar/ModalTopBar";
+import { RoundOutlineButton, SimpleButton } from "../../buttons/Buttons";
+import { getCompanyById } from "../../../api/company.api";
+import { updateInvestment } from "../../../api/investment.api";
 
 const EditInvestModal = ({
   isOpen,
@@ -19,7 +19,7 @@ const EditInvestModal = ({
   const [amount, setAmount] = useState("");
   const [comment, setComment] = useState("");
   const [showPassword, setShowPassword] = useState(false); // 비밀번호 보이기/숨기기
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false); // 비밀번호 확인 보이기/숨기기
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [password, setPassword] = useState(""); // 비밀번호 상태
   const [confirmPassword, setConfirmPassword] = useState(""); // 비밀번호 확인 상태
   const [passwordError, setPasswordError] = useState(""); // 비밀번호 오류 메시지
@@ -62,7 +62,7 @@ const EditInvestModal = ({
     // 새로운 비밀번호가 입력되지 않았을 때 기존 비밀번호 사용하지 않고, 비밀번호 필드를 생략
     const finalPassword = password || null;
 
-    // 비밀번호를 변경하려는 경우, 확인 과정 추가
+    // 비밀번호를 변경하려는 경우, 확인 과정
     if (password && !confirmPassword) {
       setConfirmPasswordError("비밀번호 확인은 필수 입력 사항입니다.");
       isValid = false;
@@ -91,7 +91,7 @@ const EditInvestModal = ({
 
     try {
       const updatedData = {
-        name,
+        name, //투자자 이름 수정
         amount: parseFloat(amount), // 금액 수정
         comment, // 코멘트 수정
         password, // 비밀번호 수정
@@ -103,8 +103,6 @@ const EditInvestModal = ({
         selectedInvestor.id,
         updatedData
       );
-
-      console.log("Investment updated successfully:", updated);
 
       // 수정 후 onEditSuccess 호출하여 상태 갱신
       onEditSuccess(updated);
@@ -118,7 +116,6 @@ const EditInvestModal = ({
 
       onClose();
     } catch (error) {
-      console.error("Error updating investment:", error);
       alert("투자 정보 수정에 실패했습니다.");
     }
   };
@@ -144,7 +141,7 @@ const EditInvestModal = ({
   const handleConfirmPasswordChange = (e) => {
     setConfirmPassword(e.target.value);
     if (e.target.value) {
-      setConfirmPasswordError(""); // 비밀번호 확인 입력 시 오류 메시지 제거
+      setConfirmPasswordError("");
     }
   };
 

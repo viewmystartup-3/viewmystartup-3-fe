@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import styles from "./InvestModal.module.scss";
-import eyeIcon from "../../assets/btn_visibility_on.png";
-import eyeOffIcon from "../../assets/btn_visibility_off.png";
-import ModalTopBar from "../modals/topBar/ModalTopBar";
+import eyeIcon from "../../../assets/btn_visibility_on.png";
+import eyeOffIcon from "../../../assets/btn_visibility_off.png";
+import ModalTopBar from "../topBar/ModalTopBar";
 import { useParams } from "react-router-dom";
-import { RoundOutlineButton, SimpleButton } from "../buttons/Buttons";
-import { getCompanyById } from "../../api/company.api";
-import { createInvestment } from "../../api/investment.api";
+import { RoundOutlineButton, SimpleButton } from "../../buttons/Buttons";
+import { getCompanyById } from "../../../api/company.api";
+import { createInvestment } from "../../../api/investment.api";
 
 const InvestModal = ({ isOpen, onClose, onInvestSuccess, targetCompany }) => {
   const { id: urlId } = useParams();
@@ -17,9 +17,9 @@ const InvestModal = ({ isOpen, onClose, onInvestSuccess, targetCompany }) => {
   const [password, setPassword] = useState(""); // 비밀번호
   const [confirmPassword, setConfirmPassword] = useState(""); // 비밀번호 확인
   const [showPassword, setShowPassword] = useState(false); // 비밀번호 보이기/숨기기
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false); // 비밀번호 확인 보이기/숨기기
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [passwordError, setPasswordError] = useState(""); // 비밀번호 오류 메시지
-  const [confirmPasswordError, setConfirmPasswordError] = useState(""); // 비밀번호 확인 오류 메시지
+  const [confirmPasswordError, setConfirmPasswordError] = useState("");
 
   useEffect(() => {
     if (targetCompany) {
@@ -81,8 +81,6 @@ const InvestModal = ({ isOpen, onClose, onInvestSuccess, targetCompany }) => {
         password,
       });
 
-      console.log("Investment successful:", newInvestment);
-
       // 투자 후 상태 초기화
       setName("");
       setAmount("");
@@ -114,14 +112,13 @@ const InvestModal = ({ isOpen, onClose, onInvestSuccess, targetCompany }) => {
 
   // 모달이 닫힐 때 입력 필드를 초기화
   const handleClose = () => {
-    console.log("handleClose 함수 호출됨");
     setName("");
     setAmount("");
     setComment("");
     setPassword("");
     setConfirmPassword("");
     setPasswordError(""); // 비밀번호 오류 초기화
-    setConfirmPasswordError(""); // 비밀번호 확인 오류 초기화
+    setConfirmPasswordError("");
     onClose();
   };
 

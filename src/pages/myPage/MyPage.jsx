@@ -5,8 +5,8 @@ import style from "./MyPage.module.scss";
 import CompareSection from "./CompareSection";
 import ResultTable from "./myPageTable/ResultTable";
 import RankingCheckTable from "./myPageTable/RankingCheckTable";
-import InvestModal from "../../components/investModal/InvestModal";
-import SuccessModal from "../../components/investModal/SuccessModal";
+import InvestModal from "../../components/modals/investModal/InvestModal";
+import SuccessModal from "../../components/modals/investModal/SuccessModal";
 import { increaseCompanyCompareCount } from "../../api/company.api";
 import { useNavigate } from "react-router-dom";
 
