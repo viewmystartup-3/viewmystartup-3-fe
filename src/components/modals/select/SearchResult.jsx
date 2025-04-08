@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "./SearchResult.module.scss";
 import SelectFrame from "./SelectFrame";
-import Pagination from "../../pagination/pagination";
+import Pagination from "../../UI modules/pagination/pagination";
 
 function SearchResult({
   companyList,

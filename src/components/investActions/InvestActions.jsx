@@ -26,7 +26,7 @@ const InvestorActions = ({
   const [password, setPassword] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [editPassword, setEditPassword] = useState("");
-  const [editPasswordError, setEditPasswordError] = useState(""); 
+  const [editPasswordError, setEditPasswordError] = useState("");
   const [errorModal, setErrorModal] = useState(false);
   const [errorType, setErrorType] = useState("");
 
@@ -57,7 +57,10 @@ const InvestorActions = ({
         onDelete(investor.id);
       }
     } catch (e) {
-      if (e.response && (e.response.status === 401 || e.response.status === 403)) {
+      if (
+        e.response &&
+        (e.response.status === 401 || e.response.status === 403)
+      ) {
         setErrorType("delete");
         setErrorModal(true);
         setDeleteModal(false);
@@ -74,14 +77,21 @@ const InvestorActions = ({
     }
 
     try {
-      const response = await checkInvestmentPassword(id, investor.id, editPassword);
+      const response = await checkInvestmentPassword(
+        id,
+        investor.id,
+        editPassword
+      );
       if (response.status === 200) {
         setEditModal(false);
         setEditPassword("");
         onEdit(investor);
       }
     } catch (e) {
-      if (e.response && (e.response.status === 401 || e.response.status === 403)) {
+      if (
+        e.response &&
+        (e.response.status === 401 || e.response.status === 403)
+      ) {
         setEditPassword("");
         setErrorType("edit");
         setErrorModal(true);
@@ -108,7 +118,9 @@ const InvestorActions = ({
             className={styles.optionsList}
             style={{
               position: "absolute",
-              top: buttonRect ? `${buttonRect.bottom + window.scrollY}px` : "0px",
+              top: buttonRect
+                ? `${buttonRect.bottom + window.scrollY}px`
+                : "0px",
               left: buttonRect ? `${buttonRect.left}px` : "0px",
             }}
           >
@@ -147,7 +159,9 @@ const InvestorActions = ({
                         placeholder="비밀번호를 입력해 주세요"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
-                        className={`${styles.input} ${passwordError ? styles.inputError : ""}`}
+                        className={`${styles.input} ${
+                          passwordError ? styles.inputError : ""
+                        }`}
                       />
                       <button
                         type="button"
@@ -206,7 +220,9 @@ const InvestorActions = ({
                         placeholder="비밀번호를 입력해 주세요"
                         value={editPassword}
                         onChange={(e) => setEditPassword(e.target.value)}
-                        className={`${styles.input} ${editPasswordError ? styles.inputError : ""}`}
+                        className={`${styles.input} ${
+                          editPasswordError ? styles.inputError : ""
+                        }`}
                       />
                       <button
                         type="button"

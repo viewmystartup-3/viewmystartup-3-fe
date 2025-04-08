@@ -3,7 +3,7 @@ import styles from "../../../styles/table.module.scss";
 import temporarilyImg from "../../../assets/logo.png";
 import { Link } from "react-router-dom";
 
-const InvestmentList = ({ startups, currentPage, itemsPerPage }) => {
+const InvestmentTable = ({ startups, currentPage, itemsPerPage }) => {
   const [loading, setLoading] = useState(true);
 
   // 데이터가 변경되었을 때 다시 로딩 상태를 관리
@@ -83,4 +83,4 @@ const InvestmentList = ({ startups, currentPage, itemsPerPage }) => {
   );
 };
 
-export default InvestmentList;
+export default InvestmentTable;

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "./InvestmentStatus.module.scss";
 import { useParams } from "react-router-dom";
-import Pagination from "../pagination/pagination";
+import Pagination from "../UI modules/pagination/pagination";
 import InvestorActions from "../investActions/InvestActions";
 import InvestModal from "../investModal/InvestModal";
 import SuccessModal from "../investModal/SuccessModal";

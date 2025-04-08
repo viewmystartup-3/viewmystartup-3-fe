@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import pcLogo from "../../assets/pc_logo.png";
-import mobileLogo from "../../assets/mobile_logo.png";
+import pcLogo from "../../../assets/pc_logo.png";
+import mobileLogo from "../../../assets/mobile_logo.png";
 import styles from "./Header.module.scss";
 
 function Header() {
