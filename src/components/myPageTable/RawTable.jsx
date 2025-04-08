@@ -27,13 +27,15 @@ const RawTable = ({
   return (
     <div className={styles.table}>
       <div className={clsx(styles.tableHeader, tableClass)}>
-        {!hideRanking && <p className={styles.ranking}>순위</p>}
-        <p className={styles.name}>기업 명</p>
-        <p className={styles.description}>기업 소개</p>
-        <p className={clsx(styles.rawTableInfo, tableClass)}>카테고리</p>
-        <p className={clsx(styles.rawTableInfo, tableClass)}>누적 투자 금액</p>
-        <p className={clsx(styles.rawTableInfo, tableClass)}>매출액</p>
-        <p className={clsx(styles.rawTableInfo, tableClass)}>고용 인원</p>
+        {!hideRanking && <span className={styles.ranking}>순위</span>}
+        <span className={styles.name}>기업 명</span>
+        <span className={styles.description}>기업 소개</span>
+        <span className={clsx(styles.rawTableInfo, tableClass)}>카테고리</span>
+        <span className={clsx(styles.rawTableInfo, tableClass)}>
+          누적 투자 금액
+        </span>
+        <span className={clsx(styles.rawTableInfo, tableClass)}>매출액</span>
+        <span className={clsx(styles.rawTableInfo, tableClass)}>고용 인원</span>
       </div>
 
       <div className={styles.tableContents}>
@@ -51,9 +53,9 @@ const RawTable = ({
                 key={startup.id}
               >
                 {!hideRanking && (
-                  <p className={styles.ranking}>
+                  <span className={styles.ranking}>
                     {startup.actualRanking ? `${startup.actualRanking}위` : "-"}
-                  </p>
+                  </span>
                 )}
                 <Link
                   to={`/companies/${startup.id}`}
@@ -64,21 +66,23 @@ const RawTable = ({
                     alt={startup.name}
                     className={styles.image}
                   />
-                  <p className={styles.name}>{startup.name}</p>
+                  <span className={styles.name}>{startup.name}</span>
                 </Link>
-                <p className={styles.description}>{startup.description}</p>
-                <p className={clsx(styles.rawTableInfo, tableClass)}>
+                <span className={styles.description}>
+                  {startup.description}
+                </span>
+                <span className={clsx(styles.rawTableInfo, tableClass)}>
                   {startup.category}
-                </p>
-                <p className={clsx(styles.rawTableInfo, tableClass)}>
+                </span>
+                <span className={clsx(styles.rawTableInfo, tableClass)}>
                   {startup.totalInvestment}억 원
-                </p>
-                <p className={clsx(styles.rawTableInfo, tableClass)}>
+                </span>
+                <span className={clsx(styles.rawTableInfo, tableClass)}>
                   {startup.revenue}억 원
-                </p>
-                <p className={clsx(styles.rawTableInfo, tableClass)}>
+                </span>
+                <span className={clsx(styles.rawTableInfo, tableClass)}>
                   {startup.employees}명
-                </p>
+                </span>
               </div>
             );
           })
