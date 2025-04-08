@@ -11,7 +11,7 @@
   position: relative;
   box-sizing: border-box;
 
-  p {
+  span {
     flex-shrink: 0;
     text-align: center;
     line-height: 100%;
@@ -69,7 +69,7 @@
   z-index: 1;
   margin-bottom: 16px;
 
-  p {
+  span {
     font: var(--textSM);
     color: var(--white);
     padding: 13px 0;
