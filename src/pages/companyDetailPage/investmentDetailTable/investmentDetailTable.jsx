@@ -105,7 +105,7 @@ const InvestmentStatus = () => {
           {investment.length > 0 ? (
             <>
               <span className={styles.totalMoney}>
-                총{" "}
+                총
                 {allInvestments.reduce(
                   (acc, inv) => acc + inv.investedAmount,
                   0
@@ -130,9 +130,9 @@ const InvestmentStatus = () => {
                     <span className={table.listtitle}>
                       {inv.investedAmount}억 원
                     </span>
-                    <span className={table.commentTo}>
+                    <div className={table.commentTo}>
                       {inv.comment || "코멘트 없음"}
-                    </span>
+                    </div>
                     <InvestorActions
                       investor={inv}
                       onEdit={handleEditInvest}
