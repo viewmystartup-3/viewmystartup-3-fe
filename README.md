@@ -61,7 +61,7 @@ npm run build   # 빌드 명령어
       <td align="center"><a href="https://github.com/danikim8"><img src="https://github.com/danikim8.png?size=100" width="100px;" alt=""/><br /><sub><b> 팀원 : 김단이</b></sub></a><br /></td>
       <td align="center"><a href="https://github.com/wooju01"><img src="https://github.com/wooju01.png?size=100" width="100px;" alt=""/><br /><sub><b> 팀원 : 김우주</b></sub></a><br /></td>
       <td align="center"><a href="https://github.com/YSJ0228"><img src="https://github.com/YSJ0228.png?size=100" width="100px;" alt=""/><br /><sub><b> 팀원 : 윤세준</b></sub></a><br /></td>
-      <td align="center"><a href="https://github.com/kr-programmer-sky"><img src="https://github.com/kr-programmer-sky.png?size=100" width="100px;" alt=""/><br /><sub><b> 팀원 : 양성경</b></sub></a><br /></td>
+      <td align="center"><a href="https://github.com/kr-programmer-sky"><img src="https://github.com/writing-sky.png?size=100" width="100px;" alt=""/><br /><sub><b> 팀원 : 양성경</b></sub></a><br /></td>
      <tr/>
   </tbody>
 </table>
