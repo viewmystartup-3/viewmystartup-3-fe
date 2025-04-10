@@ -12,6 +12,9 @@
 3. [기술 스택](#기술-스택)
 4. [팀원 소개](#팀원-소개)
 5. [기여 방법](#기여-방법)
+6. [파일 구조](#파일-구조)
+7. [구현 홈페이지 링크](https://viewmystartup-3.netlify.app/)
+8. [프로젝트 회고록](https://www.canva.com/design/DAGjdYdbk0o/DalB-Je3dGH17HBWO1K0WA/edit)
 
 ## 프로젝트 소개
 
@@ -103,3 +106,46 @@ npm run build   # 빌드 명령어
  - 투자 모달,투자 수정 모달 구현
  - 투자 팝업 구현
  - 비밀번호 암호화
+
+## 파일 구조
+```
+src
+├── api                          # Axios 인스턴스 및 API 통신 함수 정의
+│   ├── axiosInstance.api.js
+│   ├── company.api.js
+│   └── investment.api.js
+│
+├── assets                       # 이미지, 폰트 등 정적 파일
+│
+├── components                   # 공통 UI 컴포넌트
+│   ├── buttons                  # 버튼 관련 컴포넌트
+│   ├── modals                   # 모달 컴포넌트
+│   │   ├── investModal         # 투자 관련 모달
+│   │   └── select              # 회사 선택 및 검색 관련 모달
+│   ├── topBar                   # 모달 상단바 컴포넌트
+│   └── UI modules              # Header, Pagination, Search 등 일반 UI 요소
+│       ├── header
+│       ├── pagination
+│       ├── search
+│       └── selectBox
+│
+├── constants                    # 상수 정의 (ex. 정렬 옵션 등)
+│   └── sortOptions.js
+│
+├── pages                        # 실제 페이지(화면) 단위 컴포넌트
+│   ├── companyDetailPage        # 기업 상세 페이지
+│   ├── investmentDetailTable    # 투자 상세 테이블 페이지
+│   │   └── tableModule         # 에러/비밀번호 모달, 테이블 모듈
+│   ├── myPage                   # 마이페이지
+│   │   └── myPageTable         # 마이페이지 내 테이블 관련 컴포넌트
+│   ├── notfound                 # 404 Not Found 페이지
+│   └── tablepage               # 비교, 홈, 투자 페이지
+│       ├── comparisonPage
+│       ├── homepage
+│       └── investmentPage
+│
+├── styles                       # 전역 스타일 파일
+│
+├── App.jsx                      # 전체 앱 구성 루트 컴포넌트
+└── main.jsx                     # React 앱 진입점
+```
